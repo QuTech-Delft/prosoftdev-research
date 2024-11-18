@@ -1,81 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/01-introduction.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/01-introduction.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/404.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/404.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/CODE_OF_CONDUCT.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/LICENSE.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/aio.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/aio.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/images.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/credits.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/index.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/images.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/01-introduction.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/index.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/404.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/01-introduction.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/CODE_OF_CONDUCT.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/404.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/LICENSE.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/aio.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/images.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/aio.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/index.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/credits.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/instructor-notes.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/images.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/introduction.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/index.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/key-points.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/instructor-notes.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/keypoints.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/introduction.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/profiles.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/key-points.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor/reference.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/keypoints.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/instructor-notes.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/profiles.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/introduction.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/reference.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/key-points.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor/version_control.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/keypoints.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/instructor-notes.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/profiles.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/introduction.html</loc>
   </url>
   <url>
-    <loc>https://carpentries.github.io/workbench-template-rmd/reference.html</loc>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/key-points.html</loc>
+  </url>
+  <url>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/keypoints.html</loc>
+  </url>
+  <url>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/profiles.html</loc>
+  </url>
+  <url>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://QuTech-Delft.github.io/prosoftdev-research/version_control.html</loc>
   </url>
 </urlset>
