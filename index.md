@@ -1,8 +1,11 @@
 ---
 site: sandpaper::sandpaper_site
+title: "Introduction"
 ---
 
-This is a new lesson built with [The Carpentries Workbench][workbench]. 
+
+
+This course has been developed at QuTech and built using [The Carpentries Workbench][workbench]. 
 
 
 [workbench]: https://carpentries.github.io/sandpaper-docs
