@@ -10,3 +10,6 @@ Madicken Munk (eds): "Software Carpentry: Version Control with Git."
 Version 2019.06.1, July 2019,
 https://github.com/swcarpentry/git-novice, 10.5281/zenodo.3264950
 
+F. Grooteman "QSMM - QuTech Software Maturity Model"
+Version 0.6 - Internal QuTech document
+
