@@ -69,17 +69,8 @@ as well.  And it isn't just for software: books,
 papers, small data sets, and anything that changes over time or needs
 to be shared can and should be stored in a version control system.
 
-::::::::::::::::::::::::::::::::::::::::::  prereq
 
-## Prerequisites
-
-In this episode we use Git from the Unix Shell.
-Some previous experience with the shell is expected,
-*but isn't mandatory*.
-
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
+## Automatic Version Control
 
 
 We'll start by exploring how version control can be used
@@ -193,6 +184,19 @@ the same files concurrently.
 
 
 ## Setting Up Git
+
+
+::::::::::::::::::::::::::::::::::::::::::  prereq
+
+## Prerequisites
+
+In this episode we use Git from the Unix Shell.
+Some previous experience with the shell is expected,
+*but isn't mandatory*.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 When we use Git on a new computer for the first time,
 we need to configure a few things. Below are a few examples

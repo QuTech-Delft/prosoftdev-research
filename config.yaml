@@ -66,6 +66,9 @@ contact: 'b.c.popescu@tudelft.nl'
 # Order of episodes in your lesson
 episodes: 
 - version_control.Rmd
+- python-virtual-environmants.Rmd
+- qsmm.Rmd
+- clean-code.Rmd
 - credits.Rmd
 
 # Information for Learners
