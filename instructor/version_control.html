@@ -217,6 +217,7 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#motivation">Motivation</a></li>
+<li><a href="#automatic-version-control">Automatic Version Control</a></li>
 <li><a href="#setting-up-git">Setting Up Git</a></li>
 <li><a href="#creating-a-repository">Creating a Repository</a></li>
         </ul></div><!--/div.accordion-body-->
@@ -228,7 +229,34 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="credits.html">2. Credits</a>
+        <a href="python-virtual-environmants.html">2. Python Virtual Environments</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush4">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading4">
+        <a href="qsmm.html">3. The QuTech Software Maturity Model (QSMM)</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush5">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading5">
+        <a href="clean-code.html">4. Clean Code</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="credits.html">5. Credits</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -277,7 +305,7 @@
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/index.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/credits.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/python-virtual-environmants.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -285,8 +313,8 @@
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: Introduction
         </a>
-        <a class="chapter-link float-end" href="../instructor/credits.html" rel="next">
-          Next: Credits...
+        <a class="chapter-link float-end" href="../instructor/python-virtual-environmants.html" rel="next">
+          Next: Python Virtual...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -373,19 +401,8 @@ it, and most programmers use it for their small jobs as well. And it
 isn’t just for software: books, papers, small data sets, and anything
 that changes over time or needs to be shared can and should be stored in
 a version control system.</p>
-<div id="prerequisites" class="callout prereq">
-<div class="callout-square">
-<i class="callout-icon" data-feather="check"></i>
-</div>
-<div id="prerequisites" class="callout-inner">
-<h3 class="callout-title">Prerequisites</h3>
-<div class="callout-content">
-<p>In this episode we use Git from the Unix Shell. Some previous
-experience with the shell is expected, <em>but isn’t mandatory</em>.</p>
-</div>
-</div>
-</div>
-<p>We’ll start by exploring how version control can be used to keep
+</section><section><h2 class="section-heading" id="automatic-version-control">Automatic Version Control<a class="anchor" aria-label="anchor" href="#automatic-version-control"></a></h2>
+<hr class="half-width"><p>We’ll start by exploring how version control can be used to keep
 track of what one person did and when. Even if you aren’t collaborating
 with other people, automated version control is much better than this
 situation:</p>
@@ -463,7 +480,7 @@ changes?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul><li><p>Recovering the excellent version is only possible if you created
 a copy of the old version of the paper. The danger of losing good
@@ -497,7 +514,19 @@ problems.</p></li>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="setting-up-git">Setting Up Git<a class="anchor" aria-label="anchor" href="#setting-up-git"></a></h2>
-<hr class="half-width"><p>When we use Git on a new computer for the first time, we need to
+<hr class="half-width"><div id="prerequisites" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
+</div>
+<div id="prerequisites" class="callout-inner">
+<h3 class="callout-title">Prerequisites</h3>
+<div class="callout-content">
+<p>In this episode we use Git from the Unix Shell. Some previous
+experience with the shell is expected, <em>but isn’t mandatory</em>.</p>
+</div>
+</div>
+</div>
+<p>When we use Git on a new computer for the first time, we need to
 configure a few things. Below are a few examples of configurations we
 will set as we get started with Git:</p>
 <ul><li>our name and email address,</li>
@@ -858,7 +887,7 @@ in the <code>desserts</code> subdirectory?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>No. Alfredo does not need to make the <code>desserts</code>
 subdirectory a Git repository because the <code>recipes</code>
@@ -907,7 +936,7 @@ single git repository. How can Alfredo undo his last
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Solution – USE WITH CAUTION! </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="section level3">
 <h3 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a></h3>
@@ -967,7 +996,7 @@ any links that you are not going to use.
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/index.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/credits.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/python-virtual-environmants.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -975,8 +1004,8 @@ any links that you are not going to use.
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: Introduction
         </a>
-        <a class="chapter-link float-end" href="../instructor/credits.html" rel="next">
-          Next: Credits...
+        <a class="chapter-link float-end" href="../instructor/python-virtual-environmants.html" rel="next">
+          Next: Python Virtual...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
