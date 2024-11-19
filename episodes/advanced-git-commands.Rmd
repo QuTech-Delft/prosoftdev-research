@@ -41,6 +41,19 @@ title: 'Advanced Git Commands'
     - Discuss what order tasks should be carried out in with your collaborators so that tasks expected to change the same lines won’t be worked on simultaneously
 
 
+## Hands-on Project
+
+- Work in groups of two
+- Create a GitLab project on the TUD GitLab server
+- Assign project roles to each team member
+- Create a shared (text) document representing a joint research paper.
+- Each member works independently on different sections of the document in separate branches.
+- Show how merging can be done without conflicts
+- Start working on the same section creating a conflict
+- show how it can be solved using GitLab merge requests and Git conflict resolution
+
+&nbsp;
+&nbsp;
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
