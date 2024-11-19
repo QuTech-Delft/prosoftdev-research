@@ -7,14 +7,14 @@ QuTech PhD strudents and researches. We firmly believe that adopting professiona
 practices throughout our research organization will yield significant long-term advantages, including:
 
 - Faster onboarding of new PhD students
-- Efficiencies accross the organization through potential software and know-how reuse
+- Efficiencies across the organization through potential software and know-how reuse
 - More transparent and reproducible results for research that relies on in-house built software tools
 
 The course is structured in three parts:
 
-- Lesson 1 covers the basics of version control focusing on Git and GitLab
-- Lesson 2 covers the basics of Python Virtual Environments
-- Lesson 3 covers the basics of "clean code", with a focus on Python and its development tools ecosystem.
+- Episode 1 covers the basics of version control focusing on Git and GitLab
+- Episode 2 covers the basics of Python Virtual Environments
+- Episode 3 covers the basics of "clean code", with a focus on Python and its development tools ecosystem.
 
 This course focuses on practical knowledge that can be immediately applied. It also emphasizes "learning by doing", 
 with several hands-on, interactive assignments designed to help participants practice and apply newly introduced 
@@ -33,6 +33,7 @@ the required software in the following order.
 3. A number of Python tools:
    a. **[PyCharm]** (use the Community Edition)
    b. **[PyLint]**
+   c. **[Coverage.py]** (&ge; 7.3 recommended)
 
 
 
@@ -41,4 +42,5 @@ the required software in the following order.
 [Python]: https://www.python.org/
 [PyCharm]: https://www.jetbrains.com/pycharm/
 [PyLint]: https://pypi.org/project/pylint/
+[Coverage.py]: https://coverage.readthedocs.io/en/latest/
 
