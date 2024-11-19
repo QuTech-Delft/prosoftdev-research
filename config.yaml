@@ -66,6 +66,9 @@ contact: 'b.c.popescu@tudelft.nl'
 # Order of episodes in your lesson
 episodes: 
 - version_control.Rmd
+- basic-git-commands.Rmd
+- gitlab.Rmd
+- advanced-git-commands.Rmd
 - python-virtual-environmants.Rmd
 - qsmm.Rmd
 - clean-code.Rmd

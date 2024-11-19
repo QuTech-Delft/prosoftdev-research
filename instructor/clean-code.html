@@ -118,11 +118,11 @@
   Introduction to Professional Software Development for Researhers
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 62%" class="percentage">
-    62%
+<aside class="col-md-12 lesson-progress"><div style="width: 76%" class="percentage">
+    76%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 62%" aria-valuenow="62" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 76%" aria-valuenow="76" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -215,7 +215,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="python-virtual-environmants.html">2. Python Virtual Environments</a>
+        <a href="basic-git-commands.html">2. Basic Git Commands</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -224,7 +224,34 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="qsmm.html">3. The QuTech Software Maturity Model (QSMM)</a>
+        <a href="gitlab.html">3. GitLab</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush5">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading5">
+        <a href="advanced-git-commands.html">4. Advanced Git Commands</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="python-virtual-environmants.html">5. Python Virtual Environments</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="qsmm.html">6. The QuTech Software Maturity Model (QSMM)</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -236,7 +263,7 @@
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
-        4. Clean Code
+        7. Clean Code
         </span>
       </button>
     </div><!--/div.accordion-header-->
@@ -244,16 +271,19 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#introduction">Introduction</a></li>
+<li><a href="#clean-code-rules">Clean Code Rules</a></li>
+<li><a href="#clean-code-tools">Clean Code Tools</a></li>
+<li><a href="#clean-coderefactoring-exercise">Clean Code/Refactoring Exercise</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
-<div class="accordion accordion-flush" id="accordionFlush6">
+<div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading6">
-        <a href="credits.html">5. Credits</a>
+    <div class="accordion-header" id="flush-heading9">
+        <a href="credits.html">8. Credits</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -317,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Clean Code</h1>
-        <p>Last updated on 2024-11-18 |
+        <p>Last updated on 2024-11-19 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/clean-code.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -330,13 +360,160 @@
         </div>
 
         
+
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
-<hr class="half-width"><p>TBD</p>
-<!--
+<hr class="half-width"><p>Clean code is code that works correctly, it is easy to modify and
+maintain, as well as easy for other to understand.</p>
+<div id="callout1" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Callout</h3>
+<div class="callout-content">
+<p>Clean Code is code that’s easy to read, maintain, understand for
+developers and other teams while improving the quality of their software
+through structure and consistency with performance demands. It lets you
+get the most value and purpose out of your software.</p>
+<p><em><a href="https://www.sonarsource.com/solutions/clean-code/" class="external-link uri">https://www.sonarsource.com/solutions/clean-code/</a></em></p>
+</div>
+</div>
+</div>
+<div id="callout2" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Callout</h3>
+<div class="callout-content">
+<p>What is clean code, anyway? Here are some of its features:</p>
+<ul><li>Clean code is obvious for other programmers.</li>
+<li>Clean code does not contain duplication.</li>
+<li>Clean code contains a minimal number of classes and other moving
+parts.</li>
+<li>Clean code passes all tests.</li>
+<li>Clean code is easier and cheaper to maintain!</li>
+</ul><p><em><a href="https://refactoring.guru/refactoring" class="external-link uri">https://refactoring.guru/refactoring</a></em></p>
+</div>
+</div>
+</div>
+<p>In this episode we will cover the basics of clean code, introduce
+some tools that facilitate writing clean code, and end with a
+refactoring exercise that will allow you to put these concepts into
+practice.</p>
+</section><section><h2 class="section-heading" id="clean-code-rules">Clean Code Rules<a class="anchor" aria-label="anchor" href="#clean-code-rules"></a></h2>
+<hr class="half-width"><p>In this section, we will cover some basic rules that, when followed,
+lead to cleaner code. It’s important to recognize that these rules are
+just the “tip of the iceberg,” as there is much more to explore on this
+topic. However, adhering to these simple guidelines can significantly
+improve the quality of your code. As you grow into a more experienced
+developer and adopt advanced software techniques, it remains valuable to
+stay aligned with “clean code” principles relevant to these practices.
+Clean Code: A Handbook of Agile Software Craftsmanship by Robert C.
+Martin is often regarded as the definitive guide for the clean code
+movement and is highly recommended reading.</p>
+<div class="section level3">
+<h3 id="general-rules">General Rules<a class="anchor" aria-label="anchor" href="#general-rules"></a></h3>
+<ul><li>Follow standard conventions.</li>
+<li>Keep it simple stupid. Simpler is always better. Reduce complexity
+as much as possible.</li>
+<li>Boy scout rule. Leave the campground cleaner than you found it.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="source-code-structure">Source code structure<a class="anchor" aria-label="anchor" href="#source-code-structure"></a></h3>
+<ul><li>Separate concepts vertically.</li>
+<li>Related code should appear vertically dense.</li>
+<li>Declare variables close to their usage.</li>
+<li>Dependent functions should be close.</li>
+<li>Similar functions should be close.</li>
+<li>Place functions in the downward direction.</li>
+<li>Keep lines short.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="names-rules">Names rules<a class="anchor" aria-label="anchor" href="#names-rules"></a></h3>
+<ul><li>Choose descriptive and unambiguous names.</li>
+<li>Use pronounceable names.</li>
+<li>Use searchable names.</li>
+<li>Replace magic numbers with named constants.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="functions-rules">Functions rules<a class="anchor" aria-label="anchor" href="#functions-rules"></a></h3>
+<ul><li>Small</li>
+<li>Do one thing.</li>
+<li>Use descriptive names.</li>
+<li>Prefer fewer arguments.</li>
+<li>Have no side effects.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="comments-rules">Comments rules<a class="anchor" aria-label="anchor" href="#comments-rules"></a></h3>
+<ul><li>Always try to explain yourself in code.</li>
+<li>Don’t be redundant.</li>
+<li>Don’t add obvious noise.</li>
+<li>Use as explanation of intent.</li>
+<li>Use as clarification of code.</li>
+<li>Use as warning of consequences.</li>
+</ul></div>
+</section><section><h2 class="section-heading" id="clean-code-tools">Clean Code Tools<a class="anchor" aria-label="anchor" href="#clean-code-tools"></a></h2>
+<hr class="half-width"><div class="section level3">
+<h3 id="python-coding-conventions">Python Coding Conventions<a class="anchor" aria-label="anchor" href="#python-coding-conventions"></a></h3>
+<ul><li>Introduce <a href="https://peps.python.org/pep-0008/" class="external-link uri">https://peps.python.org/pep-0008/</a>
+</li>
+<li>Advice: select a few rules, and start applying them consistently to
+your code:
+<ul><li>Indentation</li>
+<li>Maximum line length</li>
+<li>Whitespaces in Expressions and statements</li>
+<li>Naming conventions</li>
+</ul></li>
+<li>Expand your rule selection</li>
+</ul></div>
+<div class="section level3">
+<h3 id="linters---pylint">Linters - PyLint<a class="anchor" aria-label="anchor" href="#linters---pylint"></a></h3>
+<ul><li>Introduce PyLint, explain what it does</li>
+<li>Installing and running PyLint</li>
+<li>Run PyLint on a code sample</li>
+</ul></div>
+<div class="section level3">
+<h3 id="modern-development-environments---pycharm">Modern Development Environments - PyCharm<a class="anchor" aria-label="anchor" href="#modern-development-environments---pycharm"></a></h3>
+<ul><li>Introduce PyCharm, show how to setup a Python interpreter for a
+project</li>
+<li>Show how PyCharm is highlighting parts of the code that do not
+follow coding conventions</li>
+<li>Show how PyCharm can help with re-factoring - e.g. changing a
+variable/function name</li>
+</ul></div>
+<div class="section level3">
+<h3 id="unit-tests-and-test-coverage">Unit Tests and Test Coverage<a class="anchor" aria-label="anchor" href="#unit-tests-and-test-coverage"></a></h3>
+<ul><li>Introduced unit tests and PyTest, explain their purpose</li>
+<li>Introduce the concept of test coverage</li>
+<li>Introduce the <em>coverage.py</em> tool
+<ul><li>how to install it</li>
+<li>how to run it</li>
+<li>how to visualize test coverage</li>
+</ul></li>
+</ul></div>
+</section><section><h2 class="section-heading" id="clean-coderefactoring-exercise">Clean Code/Refactoring Exercise<a class="anchor" aria-label="anchor" href="#clean-coderefactoring-exercise"></a></h2>
+<hr class="half-width"><p>Interactive coding exercise which can be done individually or in
+small groups:</p>
+<ul><li>Introduce a small to medium size Python program specifically crafted
+to break all clean code rules outlined in this episode.</li>
+<li>Participants are instructed to run PyLint on this program - the
+score will be extremely low!</li>
+<li>Goal of this exercise is to refactor the code to bring the score
+above 8</li>
+<li>Before starting this process, unit tests should be added.</li>
+<li>Participants should run the <em>coverage.py</em> tool on their tests
+and ensure the critical paths in the code are covered</li>
+<li>Once test coverage is achieved, start re-factoring, applying the
+clean code techniques learned in this episode</li>
+<li>After each refactoring, the unit tests should pass, which ensures
+functionality has not been broken.</li>
+<li>After each refactoring, participants should re-run the linter, and
+see how the code score improves.</li>
+</ul><!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
- -->
-</section></div> <!-- / div.lesson-content -->
+ --></section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/qsmm.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="../instructor/credits.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
@@ -393,8 +570,8 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/clean-code.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/clean-code.html",
-  "dateCreated": "2024-11-18",
-  "dateModified": "2024-11-18",
+  "dateCreated": "2024-11-19",
+  "dateModified": "2024-11-19",
   "datePublished": "2024-11-19"
 }
 
