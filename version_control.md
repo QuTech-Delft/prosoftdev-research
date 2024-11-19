@@ -569,6 +569,9 @@ Therefore, always check your current directory using the command `pwd`.
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
+- Version control is like an unlimited ‘undo’.
+- Version control also allows many people to work in parallel.
+- Use git config with the --global option to configure a user name, email address, editor, and other preferences once per machine.
 - `git init` initializes a repository.
 - Git stores all of its repository data in the `.git` directory.
 
