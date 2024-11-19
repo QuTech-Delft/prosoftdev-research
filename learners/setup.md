@@ -10,11 +10,11 @@ practices throughout our research organization will yield significant long-term 
 - Efficiencies across the organization through potential software and know-how reuse
 - More transparent and reproducible results for research that relies on in-house built software tools
 
-The course is structured in three parts:
+The course is structured in three parts intended to be offered as half-day workshops:
 
-- Episode 1 covers the basics of version control focusing on Git and GitLab
-- Episode 2 covers the basics of Python Virtual Environments
-- Episode 3 covers the basics of "clean code", with a focus on Python and its development tools ecosystem.
+- Part 1 covers the basics of version control focusing on Git and GitLab. It includes Episodes 1, 2, 3, and 4.
+- Episode 2 covers the basics of Python Virtual Environments and introduces the QuTech Software Maturity Model. It includes Episodes 5 and 6.
+- Episode 3 covers the basics of "clean code", with a focus on Python and its development tools ecosystem. In includes Episode 7.
 
 This course focuses on practical knowledge that can be immediately applied. It also emphasizes "learning by doing", 
 with several hands-on, interactive assignments designed to help participants practice and apply newly introduced 
