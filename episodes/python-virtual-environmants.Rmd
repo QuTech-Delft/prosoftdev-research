@@ -541,6 +541,9 @@ We will fix this error in a moment.
 - we provide two programs, one using Python 3.11 advanced features
 - participants should test that more advanced program cannot run in the Python 3.11 environment, but does run in the 3.8 one.
 
+&nbsp;
+&nbsp;
+&nbsp;
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 - "Virtual environments keep Python versions and dependencies required by different projects separate."

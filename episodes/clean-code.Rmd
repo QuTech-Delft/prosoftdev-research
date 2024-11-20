@@ -3,7 +3,23 @@ title: 'Clean Code'
 ---
 ## Introduction
 
-Clean code is code that works correctly, it is easy to modify and maintain, as well as easy for other to understand.
+Imagine you are reading a well-organized book or following a simple recipe.
+Each step is clear, easy to understand, and there's no unnecessary clutter.
+Now imagine the opposite—a messy, confusing set of instructions where you’re
+constantly backtracking to figure out what’s going on.
+**This is the difference between "clean code" and messy code in programming.**
+
+Here are the key ideas behind *Clean Code*:
+- Readable and Understandable
+- Well-Organized
+- Minimal but Effective
+- Easy to Test
+- Follows Good Practices
+
+Why Clean Code Matters:
+•	For Teamwork: Most software projects involve multiple developers. Clean code ensures everyone can collaborate without getting stuck deciphering messy work.
+•	For Longevity: Code often lives longer than you think. Writing clean code saves you time in the future when making updates.
+•	For Quality: Clean code reduces bugs and improves the user experience of the software.
 
 
 ::: callout

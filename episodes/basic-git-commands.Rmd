@@ -333,7 +333,7 @@ but not yet committed.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-### Staging Area
+#### Staging Area
 
 If you think of Git as taking snapshots of changes over the life of a project,
 `git add` specifies *what* will go in a snapshot
@@ -486,7 +486,7 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-## Word-based diffing
+#### Word-based diffing
 
 Sometimes, e.g. in the case of the text documents a line-wise
 diff is too coarse. That is where the `--color-words` option of
@@ -811,6 +811,18 @@ $ git diff me.txt
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- `git status` shows the status of a repository.
+- Files can be stored in a project's working directory (which users see), the staging area (where the next commit is being built up) and the local repository (where commits are permanently recorded).
+- `git add` puts files in the staging area.
+- `git commit` saves the staged content as a new commit in the local repository.
+- Write a commit message that accurately describes your changes.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 
 ## Exploring History
@@ -1367,6 +1379,14 @@ $ git log --patch HEAD~9 *.md
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- `git diff` displays differences between commits.
+- `git restore` recovers old versions of files.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ## Ignoring Things
 
 What if we have files that we do not want Git to track for us,
@@ -1638,13 +1658,6 @@ You can still include some specific exception with the exclamation point operato
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- `git status` shows the status of a repository.
-- Files can be stored in a project's working directory (which users see), the staging area (where the next commit is being built up) and the local repository (where commits are permanently recorded).
-- `git add` puts files in the staging area.
-- `git commit` saves the staged content as a new commit in the local repository.
-- Write a commit message that accurately describes your changes.
-- `git diff` displays differences between commits.
-- `git restore` recovers old versions of files.
 - The .gitignore file is a text file that tells Git which files to track and which to ignore in the repository.
 - You can list specific files or folders to be ignored by Git, or you can include files that would normally be ignored.
 
