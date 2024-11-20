@@ -17,7 +17,7 @@ carpentry: 'incubator'
 # carpentry_description: "Custom Carpentry"
 
 # Overall title for pages.
-title: 'Introduction to Professional Software Development for Researchers'
+title: 'Introduction to Modern Software Engineering Practices'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
 created: 
