@@ -40,7 +40,7 @@ This consists of the following levels:
 ## Goals for Research-Developed Software
 
 - Most software developed by researchers will fall in the Category 1 and 2 in the Software Product Maturity levels.
-Goal is to make it possible to transistion this to Category 3 and 4 if ever needed
+Goal is to make it possible to transition this to Category 3 and 4 if ever needed
 - With respect to process maturity:
     - Goal of this course is to move away researchers from Level 1
     - Level 1 development should only apply to ad-hoc projects, typically developed over at most few days.
