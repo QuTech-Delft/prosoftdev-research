@@ -3,7 +3,7 @@ title: Introduction
 ---
 
 The purpose of this course is to introduce the basics of professional software development to 
-QuTech PhD strudents and researches. We firmly believe that adopting professional software development 
+QuTech PhD students and researchers. We firmly believe that adopting professional software development 
 practices throughout our research organization will yield significant long-term advantages, including:
 
 - Faster onboarding of new PhD students
