@@ -394,7 +394,7 @@
         
 <section id="aio-version_control"><p>Content from <a href="version_control.html">Version Control</a></p>
 <hr>
-<p>Last updated on 2024-11-19 |
+<p>Last updated on 2024-11-20 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/version_control.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
@@ -559,7 +559,7 @@ changes?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ul>
 <li><p>Recovering the excellent version is only possible if you created
@@ -1018,7 +1018,7 @@ in the <code>desserts</code> subdirectory?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>No. Alfredo does not need to make the <code>desserts</code>
 subdirectory a Git repository because the <code>recipes</code>
@@ -1067,7 +1067,7 @@ single git repository. How can Alfredo undo his last
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Solution – USE WITH CAUTION! </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="section level3">
 <h3 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
@@ -1116,10 +1116,6 @@ directory using the command <code>pwd</code>.</p>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
-<li>Version control is like an unlimited ‘undo’.</li>
-<li>Version control also allows many people to work in parallel.</li>
-<li>Use git config with the –global option to configure a user name,
-email address, editor, and other preferences once per machine.</li>
 <li>
 <code>git init</code> initializes a repository.</li>
 <li>Git stores all of its repository data in the <code>.git</code>
@@ -1134,7 +1130,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-basic-git-commands"><p>Content from <a href="basic-git-commands.html">Basic Git Commands</a></p>
 <hr>
-<p>Last updated on 2024-11-19 |
+<p>Last updated on 2024-11-20 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/basic-git-commands.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2049,6 +2045,29 @@ state, use <code>git diff</code>:</p>
 </div>
 </div>
 </div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul>
+<li>
+<code>git status</code> shows the status of a repository.</li>
+<li>Files can be stored in a project’s working directory (which users
+see), the staging area (where the next commit is being built up) and the
+local repository (where commits are permanently recorded).</li>
+<li>
+<code>git add</code> puts files in the staging area.</li>
+<li>
+<code>git commit</code> saves the staged content as a new commit in
+the local repository.</li>
+<li>Write a commit message that accurately describes your changes.</li>
+</ul>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="exploring-history">Exploring History<a class="anchor" aria-label="anchor" href="#exploring-history"></a>
 </h2>
 <hr class="half-width">
@@ -2641,6 +2660,22 @@ both commit messages and the difference between each commit.</p>
 </div>
 </div>
 </div>
+<div id="keypoints2" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul>
+<li>
+<code>git diff</code> displays differences between commits.</li>
+<li>
+<code>git restore</code> recovers old versions of files.</li>
+</ul>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="ignoring-things">Ignoring Things<a class="anchor" aria-label="anchor" href="#ignoring-things"></a>
 </h2>
 <hr class="half-width">
@@ -2934,7 +2969,7 @@ exception with the exclamation point operator.</p>
 </div>
 </div>
 </div>
-<div id="keypoints1" class="callout keypoints">
+<div id="keypoints3" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -2942,21 +2977,6 @@ exception with the exclamation point operator.</p>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
-<li>
-<code>git status</code> shows the status of a repository.</li>
-<li>Files can be stored in a project’s working directory (which users
-see), the staging area (where the next commit is being built up) and the
-local repository (where commits are permanently recorded).</li>
-<li>
-<code>git add</code> puts files in the staging area.</li>
-<li>
-<code>git commit</code> saves the staged content as a new commit in
-the local repository.</li>
-<li>Write a commit message that accurately describes your changes.</li>
-<li>
-<code>git diff</code> displays differences between commits.</li>
-<li>
-<code>git restore</code> recovers old versions of files.</li>
 <li>The .gitignore file is a text file that tells Git which files to
 track and which to ignore in the repository.</li>
 <li>You can list specific files or folders to be ignored by Git, or you
@@ -2971,7 +2991,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-gitlab"><p>Content from <a href="gitlab.html">GitLab</a></p>
 <hr>
-<p>Last updated on 2024-11-19 |
+<p>Last updated on 2024-11-20 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/gitlab.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3041,6 +3061,7 @@ control</li>
 <li>Adding users to a GitLab project</li>
 <li>Creating groups and adding users to groups</li>
 </ul>
+<p>     </p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -3189,7 +3210,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-python-virtual-environmants"><p>Content from <a href="python-virtual-environmants.html">Python Virtual Environments</a></p>
 <hr>
-<p>Last updated on 2024-11-18 |
+<p>Last updated on 2024-11-20 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/python-virtual-environmants.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3852,6 +3873,7 @@ features</li>
 <li>participants should test that more advanced program cannot run in
 the Python 3.11 environment, but does run in the 3.8 one.</li>
 </ul>
+<p>     </p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -4057,7 +4079,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  --></section></section><section id="aio-clean-code"><p>Content from <a href="clean-code.html">Clean Code</a></p>
 <hr>
-<p>Last updated on 2024-11-19 |
+<p>Last updated on 2024-11-20 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/clean-code.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -4066,8 +4088,21 @@ any links that you are not going to use.
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <hr class="half-width">
-<p>Clean code is code that works correctly, it is easy to modify and
-maintain, as well as easy for other to understand.</p>
+<p>Imagine you are reading a well-organized book or following a simple
+recipe. Each step is clear, easy to understand, and there’s no
+unnecessary clutter. Now imagine the opposite—a messy, confusing set of
+instructions where you’re constantly backtracking to figure out what’s
+going on. <strong>This is the difference between “clean code” and messy
+code in programming.</strong></p>
+<p>Here are the key ideas behind <em>Clean Code</em>: - Readable and
+Understandable - Well-Organized - Minimal but Effective - Easy to Test -
+Follows Good Practices</p>
+<p>Why Clean Code Matters: • For Teamwork: Most software projects
+involve multiple developers. Clean code ensures everyone can collaborate
+without getting stuck deciphering messy work. • For Longevity: Code
+often lives longer than you think. Writing clean code saves you time in
+the future when making updates. • For Quality: Clean code reduces bugs
+and improves the user experience of the software.</p>
 <div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -4325,9 +4360,9 @@ Zenodo. <a href="https://doi.org/10.5281/zenodo.6532057" class="external-link ur
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/aio.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/aio.html",
-  "dateCreated": "2024-11-19",
-  "dateModified": "2024-11-19",
-  "datePublished": "2024-11-19"
+  "dateCreated": "2024-11-20",
+  "dateModified": "2024-11-20",
+  "datePublished": "2024-11-20"
 }
 
   </script><script>
