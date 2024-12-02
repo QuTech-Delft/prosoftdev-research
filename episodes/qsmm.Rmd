@@ -4,9 +4,27 @@ title: 'The QuTech Software Maturity Model (QSMM)'
 
 ## Introduction
 
-A software maturity model consists of structured levels that describes how well the behaviors, practices and processes
-of software development an organization can reliably and sustainably produce required outcomes. QSMM is a software maturity
-model specifically tailored for QuTech, based on TNO guidelines. QSMM consists of two sub-models:
+We start this course by introducing the fundamental motivation behind it, which is improving the quality of the software
+produced by QuTech researchers. We strongly believe that high quality research software is an important tool that can
+be used to advance QuTech's research mission, and will yield significant long-term advantages, including:
+
+- Faster onboarding of new PhD students
+- Efficiencies across the organization through potential software and know-how reuse
+- More transparent and reproducible results for research that relies on in-house built software tools
+
+In addition to benefiting QuTech as a whole, mastering sound software development practices can also be very beneficial
+to individual researchers:
+
+- Faster development time, less time spent bug-fixing => more time spent on research
+- Being in control of own code => more fulfilling work experience
+- Potential new opportunities for internships/full time positions
+
+## QSMM
+
+We frame our effort in this course in the context of the QuTech Software Maturity Model (QSMM).A software maturity model
+consists of structured levels that describes how well the behaviors, practices and processes of software development an
+organization can reliably and sustainably produce required outcomes. QSMM is a software maturity model specifically
+tailored for QuTech, based on TNO guidelines. QSMM consists of two sub-models:
 
 - the software product maturity model
 - the software development process maturity model
