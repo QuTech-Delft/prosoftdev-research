@@ -64,13 +64,13 @@ contact: 'b.c.popescu@tudelft.nl'
 # - another-learner.md
 
 # Order of episodes in your lesson
-episodes: 
+episodes:
+- qsmm.Rmd
 - version_control.Rmd
 - basic-git-commands.Rmd
 - gitlab.Rmd
 - advanced-git-commands.Rmd
 - python-virtual-environmants.Rmd
-- qsmm.Rmd
 - clean-code.Rmd
 - credits.Rmd
 
