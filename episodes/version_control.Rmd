@@ -188,7 +188,7 @@ the same files concurrently.
 
 ::::::::::::::::::::::::::::::::::::::::::  prereq
 
-## Prerequisites
+### Prerequisites
 
 In this episode we use Git from the Unix Shell.
 Some previous experience with the shell is expected,
@@ -403,7 +403,7 @@ $ git help
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Creating a Repository
+## Creating a Git Repository
 
 Once Git is configured,
 we can start using it.
@@ -475,7 +475,7 @@ wording of the output might be slightly different.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## Places to Create Git Repositories
+### Places to Create Git Repositories
 
 Along with tracking information about recipes (the project we have already created),
 Alfredo would also like to track information about desserts specifically.
@@ -497,7 +497,7 @@ tracking files stored in the `desserts` subdirectory?
 
 :::::::::::::::  solution
 
-## Solution
+### Solution
 
 No. Alfredo does not need to make the `desserts` subdirectory a Git repository
 because the `recipes` repository will track all files, sub-directories, and
@@ -523,7 +523,7 @@ fatal: Not a git repository (or any of the parent directories): .git
 
 :::::::::::::::::::::::::
 
-## Correcting `git init` Mistakes
+### Correcting `git init` Mistakes
 
 Jimmy explains to Alfredo how a nested repository is redundant and may cause confusion
 down the road. Alfredo would like to go back to a single git repository. How can Alfredo undo
@@ -531,7 +531,7 @@ his last `git init` in the `desserts` subdirectory?
 
 :::::::::::::::  solution
 
-## Solution -- USE WITH CAUTION!
+### Solution -- USE WITH CAUTION!
 
 ### Background
 
@@ -574,5 +574,69 @@ Therefore, always check your current directory using the command `pwd`.
 - Git stores all of its repository data in the `.git` directory.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+## Using Git: Command Line vs. Graphical Tools
+
+It is possible to use Git from ether the command line (e.g. `GitBash`) or through a variety of visual tools, such as
+**[Sourcetree]**, **[TortoiseGit]**, **[SmartGit]**. Furthermore, most modern integrated development environments such
+as **[PyCharm]** and **[VSCode]** provide integrated visual Git tools.
+
+Knowing how to use Git from the command line has definite benefits:
+
+- Helps novice users become more comfortable with Git's underlying structure and commands
+- Gives more precise control at the low level (through command-line options)
+- Understanding the command line equips users with the skills to troubleshoot and solve problems that may not
+be easily addressed with a GUI
+- When searching for online resources on specific Git workflows, most information is available as command line
+instructions; same applies for help/instructions provided by AI Assistants such as ChatGPT, Bard, or Claude
+- GUI tools may change their menus/"look and feel" with new releases, while Git commands/options are much more stable
+
+On the other hands, it is important to understand that visual Git tools can greatly improve the overall developer experience
+as well as increase productivity:
+
+- Graphical Git tools offer an intuitive interface, making it easier for beginners to grasp basic concepts like
+branching, or viewing the repository's history
+- Certain advanced Git workflows, such as merging and solving conflicts become much more efficient and less
+error-prone when performed in a visual environment.
+
+Given all these considerations, one of the goals of this course is to make participants comfortable with using Git
+from the command line, in order to provide them with a solid foundation upon which they can further expand their Git
+knowledge. At the same time, we are encouraging participants to explore Git visual tools. For the more advanced
+Git workflows (e.g. reviewing changes, merging, conflict resolution) we also explain how these workflows can be
+performed using the Git visual tools provided by the PyCharm development environment.
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+Using PyCharm, open the folder containing the Git repository you created earlier in this episode.
+Locate the Git visual controls. Are they intuitive? Do you already recognize any workflows you could perform
+from Pycharm? We will cover some of these visual workflows in the following episodes.
+
+:::::::::::::::  solution
+
+Accessing the Git visual tools in PyCharm is done by right-clicking on a file/folder in the left navigation panel,
+then selecting `Git` from the pop-up menu.
+
+![](fig/pycharm_git_overview.jpg){alt='Accessing Git visual tools in PyCharm'}
+
+:::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Use git from the command line for maximum control over workflows.
+- Using visual tools for certain advanced workflows can increase productivity and reduce errors.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+[Sourcetree]: https://www.sourcetreeapp.com/
+[TortoiseGit]: https://tortoisegit.org/
+[SmartGit]: https://www.syntevo.com/smartgit/
+[PyCharm]: https://www.jetbrains.com/pycharm/
+[VSCode]: https://code.visualstudio.com/
+
 
 
