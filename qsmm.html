@@ -118,11 +118,11 @@
   Introduction to Modern Software Engineering Practices
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 63%" class="percentage">
-    63%
+<aside class="col-md-12 lesson-progress"><div style="width: 0%" class="percentage">
+    0%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 63%" aria-valuenow="63" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 0%" aria-valuenow="0" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -203,11 +203,26 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
-<div class="accordion accordion-flush" id="accordionFlush2">
+<div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading2">
-        <a href="version_control.html">1. Version Control</a>
+    <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
+        <span class="visually-hidden">Current Chapter</span>
+        <span class="current-chapter">
+        1. The QuTech Software Maturity Model (QSMM)
+        </span>
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#introduction">Introduction</a></li>
+<li><a href="#qsmm">QSMM</a></li>
+<li><a href="#software-product-maturity">Software Product Maturity</a></li>
+<li><a href="#software-development-process-maturity">Software Development Process Maturity</a></li>
+<li><a href="#goals-for-research-developed-software">Goals for Research-Developed Software</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -215,7 +230,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="basic-git-commands.html">2. Basic Git Commands</a>
+        <a href="version_control.html">2. Version Control</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -224,7 +239,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="gitlab.html">3. GitLab</a>
+        <a href="basic-git-commands.html">3. Basic Git Commands</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -233,7 +248,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="advanced-git-commands.html">4. Advanced Git Commands</a>
+        <a href="gitlab.html">4. GitLab</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -242,31 +257,17 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="python-virtual-environmants.html">5. Python Virtual Environments</a>
+        <a href="advanced-git-commands.html">5. Advanced Git Commands</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
-<div class="accordion accordion-flush" id="accordionFlushcurrent">
+<div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
-    <div class="accordion-header" id="flush-headingcurrent">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
-        <span class="visually-hidden">Current Chapter</span>
-        <span class="current-chapter">
-        6. The QuTech Software Maturity Model (QSMM)
-        </span>
-      </button>
+    <div class="accordion-header" id="flush-heading7">
+        <a href="python-virtual-environmants.html">6. Python Virtual Environments</a>
     </div><!--/div.accordion-header-->
-
-    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
-      <div class="accordion-body">
-        <ul><li><a href="#introduction">Introduction</a></li>
-<li><a href="#software-product-maturity">Software Product Maturity</a></li>
-<li><a href="#software-development-process-maturity">Software Development Process Maturity</a></li>
-<li><a href="#goals-for-research-developed-software">Goals for Research-Developed Software</a></li>
-        </ul></div><!--/div.accordion-body-->
-    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -331,23 +332,23 @@
         <!-- START: inst/pkgdown/templates/content-instructor.html -->
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link" href="python-virtual-environmants.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="clean-code.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link" href="index.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
+        <a class="chapter-link float-end" href="version_control.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link" href="python-virtual-environmants.html" rel="prev">
+        <a class="chapter-link" href="index.html" rel="prev">
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
-          Previous: Python Virtual
+          Previous: Introduction
         </a>
-        <a class="chapter-link float-end" href="clean-code.html" rel="next">
-          Next: Clean Code...
+        <a class="chapter-link float-end" href="version_control.html" rel="next">
+          Next: Version Control...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The QuTech Software Maturity Model (QSMM)</h1>
-        <p>Last updated on 2024-11-20 |
+        <p>Last updated on 2024-12-02 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/qsmm.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -360,12 +361,32 @@
         
 
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
-<hr class="half-width"><p>A software maturity model consists of structured levels that
-describes how well the behaviors, practices and processes of software
-development an organization can reliably and sustainably produce
-required outcomes. QSMM is a software maturity model specifically
-tailored for QuTech, based on TNO guidelines. QSMM consists of two
-sub-models:</p>
+<hr class="half-width"><p>We start this course by introducing the fundamental motivation behind
+it, which is improving the quality of the software produced by QuTech
+researchers. We strongly believe that high quality research software is
+an important tool that can be used to advance QuTech’s research mission,
+and will yield significant long-term advantages, including:</p>
+<ul><li>Faster onboarding of new PhD students</li>
+<li>Efficiencies across the organization through potential software and
+know-how reuse</li>
+<li>More transparent and reproducible results for research that relies
+on in-house built software tools</li>
+</ul><p>In addition to benefiting QuTech as a whole, mastering sound software
+development practices can also be very beneficial to individual
+researchers:</p>
+<ul><li>Faster development time, less time spent bug-fixing =&gt; more time
+spent on research</li>
+<li>Being in control of own code =&gt; more fulfilling work
+experience</li>
+<li>Potential new opportunities for internships/full time positions</li>
+</ul></section><section><h2 class="section-heading" id="qsmm">QSMM<a class="anchor" aria-label="anchor" href="#qsmm"></a></h2>
+<hr class="half-width"><p>We frame our effort in this course in the context of the QuTech
+Software Maturity Model (QSMM).A software maturity model consists of
+structured levels that describes how well the behaviors, practices and
+processes of software development an organization can reliably and
+sustainably produce required outcomes. QSMM is a software maturity model
+specifically tailored for QuTech, based on TNO guidelines. QSMM consists
+of two sub-models:</p>
 <ul><li>the software product maturity model</li>
 <li>the software development process maturity model</li>
 </ul><p>The purpose of this episode is to explain how software developed by
@@ -469,17 +490,17 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  --></section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link" href="python-virtual-environmants.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="clean-code.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link" href="index.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
+        <a class="chapter-link float-end" href="version_control.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link" href="python-virtual-environmants.html" rel="prev">
+        <a class="chapter-link" href="index.html" rel="prev">
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
-          Previous: Python Virtual
+          Previous: Introduction
         </a>
-        <a class="chapter-link float-end" href="clean-code.html" rel="next">
-          Next: Clean Code...
+        <a class="chapter-link float-end" href="version_control.html" rel="next">
+          Next: Version Control...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -524,9 +545,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/qsmm.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/qsmm.html",
-  "dateCreated": "2024-11-20",
-  "dateModified": "2024-11-20",
-  "datePublished": "2024-11-26"
+  "dateCreated": "2024-12-02",
+  "dateModified": "2024-12-02",
+  "datePublished": "2024-12-02"
 }
 
   </script><script>

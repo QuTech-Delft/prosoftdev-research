@@ -244,7 +244,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="version_control.html">1. Version Control</a>
+        <a href="qsmm.html">1. The QuTech Software Maturity Model (QSMM)</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -256,7 +256,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="basic-git-commands.html">2. Basic Git Commands</a>
+        <a href="version_control.html">2. Version Control</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -268,7 +268,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="gitlab.html">3. GitLab</a>
+        <a href="basic-git-commands.html">3. Basic Git Commands</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -280,7 +280,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="advanced-git-commands.html">4. Advanced Git Commands</a>
+        <a href="gitlab.html">4. GitLab</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -292,7 +292,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="python-virtual-environmants.html">5. Python Virtual Environments</a>
+        <a href="advanced-git-commands.html">5. Advanced Git Commands</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -304,7 +304,7 @@
 <div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading7">
-        <a href="qsmm.html">6. The QuTech Software Maturity Model (QSMM)</a>
+        <a href="python-virtual-environmants.html">6. Python Virtual Environments</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -392,7 +392,203 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         
         
-<section id="aio-version_control"><p>Content from <a href="version_control.html">Version Control</a></p>
+<section id="aio-qsmm"><p>Content from <a href="qsmm.html">The QuTech Software Maturity Model (QSMM)</a></p>
+<hr>
+<p>Last updated on 2024-12-02 |
+
+        <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/qsmm.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<hr class="half-width">
+<p>We start this course by introducing the fundamental motivation behind
+it, which is improving the quality of the software produced by QuTech
+researchers. We strongly believe that high quality research software is
+an important tool that can be used to advance QuTech’s research mission,
+and will yield significant long-term advantages, including:</p>
+<ul>
+<li>Faster onboarding of new PhD students</li>
+<li>Efficiencies across the organization through potential software and
+know-how reuse</li>
+<li>More transparent and reproducible results for research that relies
+on in-house built software tools</li>
+</ul>
+<p>In addition to benefiting QuTech as a whole, mastering sound software
+development practices can also be very beneficial to individual
+researchers:</p>
+<ul>
+<li>Faster development time, less time spent bug-fixing =&gt; more time
+spent on research</li>
+<li>Being in control of own code =&gt; more fulfilling work
+experience</li>
+<li>Potential new opportunities for internships/full time positions</li>
+</ul></section><section><h2 class="section-heading" id="qsmm">QSMM<a class="anchor" aria-label="anchor" href="#qsmm"></a>
+</h2>
+<hr class="half-width">
+<p>We frame our effort in this course in the context of the QuTech
+Software Maturity Model (QSMM).A software maturity model consists of
+structured levels that describes how well the behaviors, practices and
+processes of software development an organization can reliably and
+sustainably produce required outcomes. QSMM is a software maturity model
+specifically tailored for QuTech, based on TNO guidelines. QSMM consists
+of two sub-models:</p>
+<ul>
+<li>the software product maturity model</li>
+<li>the software development process maturity model</li>
+</ul>
+<p>The purpose of this episode is to explain how software developed by
+researchers should fit into these models.</p>
+</section><section><h2 class="section-heading" id="software-product-maturity">Software Product Maturity<a class="anchor" aria-label="anchor" href="#software-product-maturity"></a>
+</h2>
+<hr class="half-width">
+<p>This consists of the following levels:</p>
+<table class="table">
+<colgroup>
+<col width="12%">
+<col width="14%">
+<col width="22%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Category</th>
+<th align="left">Type</th>
+<th align="left">Purpose</th>
+<th align="left">Example</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Prototype</td>
+<td align="left">Software developed for a specific analysis or to
+implement a concept (to generate feedback).</td>
+<td align="left">Small software product, a single (one-off) component
+created by one developer also being the primary user. The software may
+be reused by the developer but is not intended to be used by others and
+is not managed/maintained for the long term.</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Proven</td>
+<td align="left">Software for engineering feasibility demonstrations
+(prove that a technology works) or developed as part of a research
+project or output of a research project.</td>
+<td align="left">Small software product consisting of 1 or few
+components that are used by a limited number of internal users (e.g., a
+project or research group). Long term maintenance is more important
+because the software is distributed wider and has a lifespan longer than
+the setting in which it was developed.</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Mature</td>
+<td align="left">Strategic, business/research objectives driven systems
+internally used over a longer period.</td>
+<td align="left">Small projects delivering reliable software products
+that are used by a group of users and is often mission critical. When
+successful, the user base of an internal product may optionally be
+extended to external users. The software may also be used in hackathons.
+Long term maintenance is needed but organized within the
+user-group.</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">Commercial-like</td>
+<td align="left">Products (operational environment, external
+facing)</td>
+<td align="left">Large projects with complex, public facing software
+products developed within separate software development teams. Long term
+software maintenance is done, often by different software engineers than
+the original developers.</td>
+</tr>
+</tbody>
+</table></section><section><h2 class="section-heading" id="software-development-process-maturity">Software Development Process Maturity<a class="anchor" aria-label="anchor" href="#software-development-process-maturity"></a>
+</h2>
+<hr class="half-width">
+<p>This consists of the following levels:</p>
+<table class="table">
+<colgroup>
+<col width="9%">
+<col width="16%">
+<col width="74%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Level</th>
+<th align="left">Name</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Undefined</td>
+<td align="left">Undefined level, no policies or procedures established
+for the software process. Ad hoc unpredictable software development.
+Poorly controlled and reactive. Success is effort of individuals (local
+heroes).</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Repeatable</td>
+<td align="left">Repeatable level, basic project management established
+for software development (to track cost, functionality, and time).
+Development process decisions made are often reactive and based on
+intuition or experience instead of executing a predefined plan. The
+process is at least documented sufficiently such that repeating the same
+steps may be attempted.</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Mature</td>
+<td align="left">Mature level. Software development process for
+management and engineering is documented. At this level, the software
+development process is defined clearly while at organizational level the
+processes are not standardized.</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">Defined</td>
+<td align="left">Defined level. Software development process for
+management and engineering are integrated in the organization. Projects
+tailor their processes from organization’s standards. The processes are
+qualitative measured and scored.</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">Managed</td>
+<td align="left">Managed level. The quality of the software process is
+quantitatively measured, so it can be evaluated and adjusted when
+necessary.</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">Optimizing</td>
+<td align="left">Optimizing level - continuous process improvement
+(based on data collected as described in the managed level, as well as
+investing in innovation).</td>
+</tr>
+</tbody>
+</table></section><section><h2 class="section-heading" id="goals-for-research-developed-software">Goals for Research-Developed Software<a class="anchor" aria-label="anchor" href="#goals-for-research-developed-software"></a>
+</h2>
+<hr class="half-width">
+<ul>
+<li>Most software developed by researchers will fall in the Category 1
+and 2 in the Software Product Maturity levels. Goal is to make it
+possible to transition this to Category 3 and 4 if ever needed</li>
+<li>With respect to process maturity:
+<ul>
+<li>Goal of this course is to move away researchers from Level 1</li>
+<li>Level 1 development should only apply to ad-hoc projects, typically
+developed over at most few days.</li>
+<li>For any other software development activities, researches should
+strive for at least Level 2, maybe Level 3 practices.</li>
+</ul>
+</li>
+</ul>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ --></section></section><section id="aio-version_control"><p>Content from <a href="version_control.html">Version Control</a></p>
 <hr>
 <p>Last updated on 2024-11-20 |
 
@@ -559,7 +755,7 @@ changes?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ul>
 <li><p>Recovering the excellent version is only possible if you created
@@ -1018,7 +1214,7 @@ in the <code>desserts</code> subdirectory?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>No. Alfredo does not need to make the <code>desserts</code>
 subdirectory a Git repository because the <code>recipes</code>
@@ -1067,7 +1263,7 @@ single git repository. How can Alfredo undo his last
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Solution – USE WITH CAUTION! </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="section level3">
 <h3 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
@@ -1822,7 +2018,7 @@ the last commit made to <code>guacamole.md</code>?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Answer 1 is not descriptive enough, and the purpose of the commit is
 unclear; and answer 2 is redundant to using “git diff” to see what
@@ -1873,7 +2069,7 @@ imperative.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>Would only create a commit if files have already been staged.</li>
@@ -1912,7 +2108,7 @@ changes.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>First we make our changes to the <code>guacamole.md</code> and
 <code>groceries.md</code> files:</p>
@@ -2003,7 +2199,7 @@ state.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>If needed, move out of the <code>recipes</code> folder:</p>
 <div class="codewrapper sourceCode" id="cb64">
@@ -2376,7 +2572,7 @@ version of her Python script called <code>data_cruncher.py</code>?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>The answer is (5)-Both 2 and 4.</p>
 <p>The <code>restore</code> command restores files from the repository,
@@ -2431,7 +2627,7 @@ e.g. 0b1d055).</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>The command <code>git log</code> lists project history with commit
 IDs.</p>
@@ -2493,7 +2689,7 @@ changes to the repository.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7"> Show me the solution </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <p>The answer is 2.</p>
 <p>The changes to the file from the second <code>echo</code> command are
@@ -2557,7 +2753,7 @@ change.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution8" aria-expanded="false" aria-controls="collapseSolution8">
   <h4 class="accordion-header" id="headingSolution8"> Show me the solution </h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
 <div class="accordion-body">
 <p>After adding a change, <code>git restore</code> can not be used
 directly. Let’s look at the output of <code>git status</code>:</p>
@@ -2826,7 +3022,7 @@ nothing to commit, working tree clean</code></pre>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution9" aria-expanded="false" aria-controls="collapseSolution9">
   <h4 class="accordion-header" id="headingSolution9"> Show me the solution </h4>
 </button>
-<div id="collapseSolution9" class="accordion-collapse collapse" data-bs-parent="#accordionSolution9" aria-labelledby="headingSolution9">
+<div id="collapseSolution9" class="accordion-collapse collapse" aria-labelledby="headingSolution9" data-bs-parent="#accordionSolution9">
 <div class="accordion-body">
 <p>If you only want to ignore the contents of
 <code>receipts/plots</code>, you can change your <code>.gitignore</code>
@@ -2867,7 +3063,7 @@ directory except for <code>final.png</code>? Hint: Find out what
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution10" aria-expanded="false" aria-controls="collapseSolution10">
   <h4 class="accordion-header" id="headingSolution10"> Show me the solution </h4>
 </button>
-<div id="collapseSolution10" class="accordion-collapse collapse" data-bs-parent="#accordionSolution10" aria-labelledby="headingSolution10">
+<div id="collapseSolution10" class="accordion-collapse collapse" aria-labelledby="headingSolution10" data-bs-parent="#accordionSolution10">
 <div class="accordion-body">
 <p>You would add the following two lines to your .gitignore:</p>
 <div class="codewrapper">
@@ -2916,7 +3112,7 @@ ignore all <code>.dat</code> files in
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution11" aria-expanded="false" aria-controls="collapseSolution11">
   <h4 class="accordion-header" id="headingSolution11"> Show me the solution </h4>
 </button>
-<div id="collapseSolution11" class="accordion-collapse collapse" data-bs-parent="#accordionSolution11" aria-labelledby="headingSolution11">
+<div id="collapseSolution11" class="accordion-collapse collapse" aria-labelledby="headingSolution11" data-bs-parent="#accordionSolution11">
 <div class="accordion-body">
 <p>Appending <code>receipts/data/market_position/gps/*.dat</code> will
 match every file in <code>receipts/data/market_position/gps</code> that
@@ -2954,7 +3150,7 @@ listing the names of the corresponding folders?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution12" aria-expanded="false" aria-controls="collapseSolution12">
   <h4 class="accordion-header" id="headingSolution12"> Show me the solution </h4>
 </button>
-<div id="collapseSolution12" class="accordion-collapse collapse" data-bs-parent="#accordionSolution12" aria-labelledby="headingSolution12">
+<div id="collapseSolution12" class="accordion-collapse collapse" aria-labelledby="headingSolution12" data-bs-parent="#accordionSolution12">
 <div class="accordion-body">
 <p>In the <code>.gitignore</code> file, write:</p>
 <div class="codewrapper">
@@ -3906,178 +4102,7 @@ replicate someone else’s virtual environment on your machine from the
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-qsmm"><p>Content from <a href="qsmm.html">The QuTech Software Maturity Model (QSMM)</a></p>
-<hr>
-<p>Last updated on 2024-11-20 |
-
-        <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/qsmm.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<div class="text-end">
-          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
-        </div>
-<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
-<hr class="half-width">
-<p>A software maturity model consists of structured levels that
-describes how well the behaviors, practices and processes of software
-development an organization can reliably and sustainably produce
-required outcomes. QSMM is a software maturity model specifically
-tailored for QuTech, based on TNO guidelines. QSMM consists of two
-sub-models:</p>
-<ul>
-<li>the software product maturity model</li>
-<li>the software development process maturity model</li>
-</ul>
-<p>The purpose of this episode is to explain how software developed by
-researchers should fit into these models.</p>
-</section><section><h2 class="section-heading" id="software-product-maturity">Software Product Maturity<a class="anchor" aria-label="anchor" href="#software-product-maturity"></a>
-</h2>
-<hr class="half-width">
-<p>This consists of the following levels:</p>
-<table class="table">
-<colgroup>
-<col width="12%">
-<col width="14%">
-<col width="22%">
-<col width="50%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">Category</th>
-<th align="left">Type</th>
-<th align="left">Purpose</th>
-<th align="left">Example</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1</td>
-<td align="left">Prototype</td>
-<td align="left">Software developed for a specific analysis or to
-implement a concept (to generate feedback).</td>
-<td align="left">Small software product, a single (one-off) component
-created by one developer also being the primary user. The software may
-be reused by the developer but is not intended to be used by others and
-is not managed/maintained for the long term.</td>
-</tr>
-<tr class="even">
-<td align="left">2</td>
-<td align="left">Proven</td>
-<td align="left">Software for engineering feasibility demonstrations
-(prove that a technology works) or developed as part of a research
-project or output of a research project.</td>
-<td align="left">Small software product consisting of 1 or few
-components that are used by a limited number of internal users (e.g., a
-project or research group). Long term maintenance is more important
-because the software is distributed wider and has a lifespan longer than
-the setting in which it was developed.</td>
-</tr>
-<tr class="odd">
-<td align="left">3</td>
-<td align="left">Mature</td>
-<td align="left">Strategic, business/research objectives driven systems
-internally used over a longer period.</td>
-<td align="left">Small projects delivering reliable software products
-that are used by a group of users and is often mission critical. When
-successful, the user base of an internal product may optionally be
-extended to external users. The software may also be used in hackathons.
-Long term maintenance is needed but organized within the
-user-group.</td>
-</tr>
-<tr class="even">
-<td align="left">4</td>
-<td align="left">Commercial-like</td>
-<td align="left">Products (operational environment, external
-facing)</td>
-<td align="left">Large projects with complex, public facing software
-products developed within separate software development teams. Long term
-software maintenance is done, often by different software engineers than
-the original developers.</td>
-</tr>
-</tbody>
-</table></section><section><h2 class="section-heading" id="software-development-process-maturity">Software Development Process Maturity<a class="anchor" aria-label="anchor" href="#software-development-process-maturity"></a>
-</h2>
-<hr class="half-width">
-<p>This consists of the following levels:</p>
-<table class="table">
-<colgroup>
-<col width="9%">
-<col width="16%">
-<col width="74%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">Level</th>
-<th align="left">Name</th>
-<th align="left">Description</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1</td>
-<td align="left">Undefined</td>
-<td align="left">Undefined level, no policies or procedures established
-for the software process. Ad hoc unpredictable software development.
-Poorly controlled and reactive. Success is effort of individuals (local
-heroes).</td>
-</tr>
-<tr class="even">
-<td align="left">2</td>
-<td align="left">Repeatable</td>
-<td align="left">Repeatable level, basic project management established
-for software development (to track cost, functionality, and time).
-Development process decisions made are often reactive and based on
-intuition or experience instead of executing a predefined plan. The
-process is at least documented sufficiently such that repeating the same
-steps may be attempted.</td>
-</tr>
-<tr class="odd">
-<td align="left">3</td>
-<td align="left">Mature</td>
-<td align="left">Mature level. Software development process for
-management and engineering is documented. At this level, the software
-development process is defined clearly while at organizational level the
-processes are not standardized.</td>
-</tr>
-<tr class="even">
-<td align="left">4</td>
-<td align="left">Defined</td>
-<td align="left">Defined level. Software development process for
-management and engineering are integrated in the organization. Projects
-tailor their processes from organization’s standards. The processes are
-qualitative measured and scored.</td>
-</tr>
-<tr class="odd">
-<td align="left">5</td>
-<td align="left">Managed</td>
-<td align="left">Managed level. The quality of the software process is
-quantitatively measured, so it can be evaluated and adjusted when
-necessary.</td>
-</tr>
-<tr class="even">
-<td align="left">6</td>
-<td align="left">Optimizing</td>
-<td align="left">Optimizing level - continuous process improvement
-(based on data collected as described in the managed level, as well as
-investing in innovation).</td>
-</tr>
-</tbody>
-</table></section><section><h2 class="section-heading" id="goals-for-research-developed-software">Goals for Research-Developed Software<a class="anchor" aria-label="anchor" href="#goals-for-research-developed-software"></a>
-</h2>
-<hr class="half-width">
-<ul>
-<li>Most software developed by researchers will fall in the Category 1
-and 2 in the Software Product Maturity levels. Goal is to make it
-possible to transition this to Category 3 and 4 if ever needed</li>
-<li>With respect to process maturity:
-<ul>
-<li>Goal of this course is to move away researchers from Level 1</li>
-<li>Level 1 development should only apply to ad-hoc projects, typically
-developed over at most few days.</li>
-<li>For any other software development activities, researches should
-strive for at least Level 2, maybe Level 3 practices.</li>
-</ul>
-</li>
-</ul>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- --></section></section><section id="aio-clean-code"><p>Content from <a href="clean-code.html">Clean Code</a></p>
+</section></section><section id="aio-clean-code"><p>Content from <a href="clean-code.html">Clean Code</a></p>
 <hr>
 <p>Last updated on 2024-11-20 |
 
@@ -4373,9 +4398,9 @@ Zenodo. <a href="https://doi.org/10.5281/zenodo.6532057" class="external-link ur
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/aio.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/aio.html",
-  "dateCreated": "2024-11-20",
-  "dateModified": "2024-11-26",
-  "datePublished": "2024-11-26"
+  "dateCreated": "2024-12-02",
+  "dateModified": "2024-12-02",
+  "datePublished": "2024-12-02"
 }
 
   </script><script>
