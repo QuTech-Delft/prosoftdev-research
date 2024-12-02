@@ -228,7 +228,8 @@
         <ul><li><a href="#motivation">Motivation</a></li>
 <li><a href="#automatic-version-control">Automatic Version Control</a></li>
 <li><a href="#setting-up-git">Setting Up Git</a></li>
-<li><a href="#creating-a-repository">Creating a Repository</a></li>
+<li><a href="#creating-a-git-repository">Creating a Git Repository</a></li>
+<li><a href="#using-git-command-line-vs.-graphical-tools">Using Git: Command Line vs. Graphical Tools</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -347,7 +348,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Version Control</h1>
-        <p>Last updated on 2024-11-20 |
+        <p>Last updated on 2024-12-02 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/version_control.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -807,7 +808,7 @@ per machine.</li>
 </ul></div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="creating-a-repository">Creating a Repository<a class="anchor" aria-label="anchor" href="#creating-a-repository"></a></h2>
+</section><section><h2 class="section-heading" id="creating-a-git-repository">Creating a Git Repository<a class="anchor" aria-label="anchor" href="#creating-a-git-repository"></a></h2>
 <hr class="half-width"><p>Once Git is configured, we can start using it.</p>
 <p>We will help Alfredo with his new project, create a repository with
 all his recipes.</p>
@@ -1016,6 +1017,91 @@ directory.</li>
 </ul></div>
 </div>
 </div>
+</section><section><h2 class="section-heading" id="using-git-command-line-vs--graphical-tools">Using Git: Command Line vs. Graphical Tools<a class="anchor" aria-label="anchor" href="#using-git-command-line-vs--graphical-tools"></a></h2>
+<hr class="half-width"><p>It is possible to use Git from ether the command line
+(e.g. <code>GitBash</code>) or through a variety of visual tools, such
+as <strong><a href="https://www.sourcetreeapp.com/" class="external-link">Sourcetree</a></strong>,
+<strong><a href="https://tortoisegit.org/" class="external-link">TortoiseGit</a></strong>,
+<strong><a href="https://www.syntevo.com/smartgit/" class="external-link">SmartGit</a></strong>.
+Furthermore, most modern integrated development environments such as
+<strong><a href="https://www.jetbrains.com/pycharm/" class="external-link">PyCharm</a></strong> and
+<strong><a href="https://code.visualstudio.com/" class="external-link">VSCode</a></strong>
+provide integrated visual Git tools.</p>
+<p>Knowing how to use Git from the command line has definite
+benefits:</p>
+<ul><li>Helps novice users become more comfortable with Git’s underlying
+structure and commands</li>
+<li>Gives more precise control at the low level (through command-line
+options)</li>
+<li>Understanding the command line equips users with the skills to
+troubleshoot and solve problems that may not be easily addressed with a
+GUI</li>
+<li>When searching for online resources on specific Git workflows, most
+information is available as command line instructions; same applies for
+help/instructions provided by AI Assistants such as ChatGPT, Bard, or
+Claude</li>
+<li>GUI tools may change their menus/“look and feel” with new releases,
+while Git commands/options are much more stable</li>
+</ul><p>On the other hands, it is important to understand that visual Git
+tools can greatly improve the overall developer experience as well as
+increase productivity:</p>
+<ul><li>Graphical Git tools offer an intuitive interface, making it easier
+for beginners to grasp basic concepts like branching, or viewing the
+repository’s history</li>
+<li>Certain advanced Git workflows, such as merging and solving
+conflicts become much more efficient and less error-prone when performed
+in a visual environment.</li>
+</ul><p>Given all these considerations, one of the goals of this course is to
+make participants comfortable with using Git from the command line, in
+order to provide them with a solid foundation upon which they can
+further expand their Git knowledge. At the same time, we are encouraging
+participants to explore Git visual tools. For the more advanced Git
+workflows (e.g. reviewing changes, merging, conflict resolution) we also
+explain how these workflows can be performed using the Git visual tools
+provided by the PyCharm development environment.</p>
+<div id="challenge4" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Using PyCharm, open the folder containing the Git repository you
+created earlier in this episode. Locate the Git visual controls. Are
+they intuitive? Do you already recognize any workflows you could perform
+from Pycharm? We will cover some of these visual workflows in the
+following episodes.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div class="accordion-body">
+<p>Accessing the Git visual tools in PyCharm is done by right-clicking
+on a file/folder in the left navigation panel, then selecting
+<code>Git</code> from the pop-up menu.</p>
+<figure><img src="../fig/pycharm_git_overview.jpg" alt="Accessing Git visual tools in PyCharm" class="figure mx-auto d-block"></figure></div>
+</div>
+</div>
+</div>
+<div id="keypoints4" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul><li>Use git from the command line for maximum control over
+workflows.</li>
+<li>Using visual tools for certain advanced workflows can increase
+productivity and reduce errors.</li>
+</ul></div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
@@ -1078,7 +1164,7 @@ any links that you are not going to use.
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/version_control.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/version_control.html",
   "dateCreated": "2024-12-02",
-  "dateModified": "2024-11-20",
+  "dateModified": "2024-12-02",
   "datePublished": "2024-12-02"
 }
 
