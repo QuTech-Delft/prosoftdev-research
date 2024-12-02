@@ -576,7 +576,7 @@ Therefore, always check your current directory using the command `pwd`.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-## Using Git: Command Line vs. Graphical Tools
+## Command Line or Graphical Tools?
 
 It is possible to use Git from ether the command line (e.g. `GitBash`) or through a variety of visual tools, such as
 **[Sourcetree]**, **[TortoiseGit]**, **[SmartGit]**. Furthermore, most modern integrated development environments such
@@ -627,7 +627,7 @@ then selecting `Git` from the pop-up menu.
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Use git from the command line for maximum control over workflows.
-- Using visual tools for certain advanced workflows can increase productivity and reduce errors.
+- Using visual tools for some of the advanced Git workflows will increase productivity and reduce errors.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
