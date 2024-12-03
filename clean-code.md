@@ -100,6 +100,19 @@ definitive guide for the clean code movement and is highly recommended reading.
 - Use as clarification of code.
 - Use as warning of consequences.
 
+### Unit Test Rules
+
+- Should follow the **F.I.R.S.T** principles:
+    - **F**ast
+    - **I**ndependent
+    - **R**epeatable
+    - **S**elf-validating
+    - **T**imely
+- Should be as "clean" as the rest of the code!
+- Should be easy to run
+- should be used in conjunction with a test coverage tool
+
+
 ## Clean Code Tools
 
 ### Python Coding Conventions
@@ -127,7 +140,7 @@ definitive guide for the clean code movement and is highly recommended reading.
 
 ### Unit Tests and Test Coverage
 
-- Introduced unit tests and PyTest, explain their purpose
+- Introduce PyTest
 - Introduce the concept of test coverage
 - Introduce the *coverage.py* tool
     - how to install it
