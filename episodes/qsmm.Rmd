@@ -21,7 +21,7 @@ to individual researchers:
 
 ## QSMM
 
-We frame our effort in this course in the context of the QuTech Software Maturity Model (QSMM).A software maturity model
+We frame our effort in this course in the context of the QuTech Software Maturity Model (QSMM). A software maturity model
 consists of structured levels that describes how well the behaviors, practices and processes of software development an
 organization can reliably and sustainably produce required outcomes. QSMM is a software maturity model specifically
 tailored for QuTech, based on TNO guidelines. QSMM consists of two sub-models:
@@ -60,9 +60,9 @@ This consists of the following levels:
 - Most software developed by researchers will fall in the Category 1 and 2 in the Software Product Maturity levels.
 Goal is to make it possible to transition this to Category 3 and 4 if ever needed
 - With respect to process maturity:
-    - Goal of this course is to move away researchers from Level 1
+    - Goal of this course is to move away researchers from Level 1 development processes.
     - Level 1 development should only apply to ad-hoc projects, typically developed over at most few days.
-    - For any other software development activities, researches should strive for at least Level 2, maybe Level 3 practices.
+    - For any other software development activities, researches should strive for at least Level 2, ideally Level 3 practices.
 
 
 
