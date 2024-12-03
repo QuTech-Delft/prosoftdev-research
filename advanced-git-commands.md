@@ -1,5 +1,7 @@
 ---
 title: 'Advanced Git Commands'
+teaching: 30
+exercises: 80
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 

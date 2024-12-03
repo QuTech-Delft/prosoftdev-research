@@ -1,5 +1,7 @@
 ---
 title: "Python Virtual Environments"
+teaching: 30
+exercises: 20
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives

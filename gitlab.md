@@ -1,5 +1,7 @@
 ---
 title: 'GitLab'
+teaching: 20
+exercises: 20
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
