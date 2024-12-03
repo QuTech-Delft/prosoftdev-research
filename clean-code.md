@@ -19,7 +19,14 @@ Here are the key ideas behind **Clean Code**:
 - Easy to Test
 - Follows Good Practices
 
-Why Clean Code Matters:
+&nbsp;
+
+![](fig/clean_vs_messy.jpg){alt='"Clean" vs. "Messy"'}
+
+&nbsp;
+
+
+### Why Clean Code Matters:
 
 - **For Teamwork**: Most software projects involve multiple developers. Clean code ensures everyone can collaborate without getting stuck deciphering messy work.
 - **For Longevity**: Code often lives longer than you think. Writing clean code saves you time in the future when making updates.
@@ -49,6 +56,8 @@ out of your software.
 *https://refactoring.guru/refactoring*
 
 :::
+
+![](fig/clean_code.png){alt='How to measure clean code?'}
 
 In this episode we will cover the basics of clean code, introduce some tools that facilitate writing clean code,
 and end with a refactoring exercise that will allow you to put these concepts into practice.
