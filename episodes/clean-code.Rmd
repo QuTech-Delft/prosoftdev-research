@@ -1,5 +1,7 @@
 ---
 title: 'Clean Code'
+teaching: 80
+exercises: 100
 ---
 ## Introduction
 

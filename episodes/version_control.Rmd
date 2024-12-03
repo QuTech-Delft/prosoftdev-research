@@ -1,7 +1,7 @@
 ---
 title: "Version Control"
-teaching: 10
-exercises: 2
+teaching: 30
+exercises: 30
 ---
 
 
