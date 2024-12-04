@@ -21,3 +21,7 @@ Wojtek Lukaszuk - "Summary of 'Clean code' by Robert C. Martin": https://gist.gi
 Introduction to GitLab
 https://carpentries-incubator.github.io/gitlab-novice/index.html
 
+Robert C. Martin - "Clean Code"
+Most of the code examples shown in the "Clean Code" episode are adapted from examples used in the above book.
+
+

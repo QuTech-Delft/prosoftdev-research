@@ -89,18 +89,288 @@ definitive guide for the clean code movement and is highly recommended reading.
 
 ### Names rules
 
-- Choose descriptive and unambiguous names.
-- Use pronounceable names.
-- Use searchable names.
-- Replace magic numbers with named constants.
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Choose descriptive and unambiguous names
+
+A name of a function/variable should as much as possible reveal the reason why
+that function/variable is necessary, and its intended use. Choosing a good name
+takes time at the start but saves time in the long-run.
+
+If first variable use requires a comment, you are probably using the wrong name:
+
+```python
+# BAD
+d = 8  # elapsed time in days
+
+# GOOD
+elapsed_time_in_days = 8
+```
+
+Choosing names that reveal intend makes code much easier to understand, and will
+save you (and everyone else who will be working with your code) a lot of time in the future:
+
+```python
+# BAD
+def get_them(the_list):
+    list1 = []
+    for x in the_list:
+        if x[2] = 5:
+            list1.append(x)
+    return list1
+
+
+# GOOD
+def get_flagged_cells(game_board):
+    flagged_cells = []
+    for cell in game_board:
+        if cell[STATUS_VALUE] = FLAGGED:
+             flagged_cells.append(x)
+    return flagged_cells
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Use pronounceable names
+
+Unpronounceable names are hard to use in a conversation. If names used in your
+code are pronounceable, you can easily discuss them with your colleagues which
+fosters collaboration.
+
+```python
+# BAD
+def bld_dta_rcrd102(genymdhms, modymdhms):
+    pszqint = "102"
+
+    # continued in the same incomprehensible style
+    # ...
+
+
+# GOOD
+def build_data_record_102(generation_timestamp, modification_timestamp):
+    record_id = "102"
+
+    # much easier to understand and review with your colleagues!
+    # ...
+```
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Use searchable names and replace magic numbers with named constants
+
+Single letter names and "magic numbers" in the code are very difficult to
+locate when you do a text search through your source code. As such, changing them
+can be extremely error-prone. Replacing them with named constants can greatly
+simplify this process:
+
+```python
+# BAD
+def sum_up(t):
+    s = 0
+    ...
+    for j in range(5):
+        s += (t[j] * 4) / 5
+    ...
+
+
+# GOOD
+def sum_work_days_per_week(task_estimate):
+    REAL_DAYS_PER_IDEAL_DAY = 4
+    WORK_DAYS_PER_WEEK = 5
+    NUMBER_OF_TASKS = 5
+    sum = 0
+    ...
+    for j in range(NUMBER_OF_TASKS):
+        real_task_days = task_estimate[j] * REAL_DAYS_PER_IDEAL_DAY
+        real_task_weeks = real_days / WORK_DAYS_PER_WEEK
+        sum += real_task_weeks
+    ...
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 
 ### Functions rules
 
-- Small
-- Do one thing.
-- Use descriptive names.
-- Prefer fewer arguments.
-- Have no side effects.
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Small
+
+A function should be small enough so one could understand it without having to
+do "mental jumps" between various parts of the code. Such "mental jumps" are
+time consuming and tiring. Ideally, the entire function should fit on one screen.
+
+What is easier to read, this:
+
+``` python
+def calibrate_fridge(fridge_data, include_safety_checks):
+    fridge_id = fridge_data.get("id")
+    current_temp = fridge_data.get("current_temperature")
+    target_temp = fridge_data.get("target_temperature")
+    calibration_params = fridge_data.get("calibration_params")
+
+    if include_safety_checks:
+        if current_temp > calibration_params.get("max_safe_temperature"):
+            raise Exception("Unsafe temperature detected during calibration.")
+        if target_temp < calibration_params.get("min_safe_temperature"):
+            raise Exception("Unsafe target temperature detected during calibration.")
+
+    adjustment_factor = calibration_params.get("adjustment_factor", 1.0)
+    adjusted_temp = current_temp + (target_temp - current_temp) * adjustment_factor
+    if adjusted_temp > calibration_params["max_safe_temperature"]:
+        adjusted_temp = calibration_params["max_safe_temperature"]
+    if adjusted_temp < calibration_params["min_safe_temperature"]:
+        adjusted_temp = calibration_params["min_safe_temperature"]
+
+    stabilization_steps = calibration_params.get("stabilization_steps", 10)
+    for step in range(stabilization_steps):
+        correction_factor = 0.1 * (adjusted_temp - target_temp)
+        adjusted_temp -= correction_factor
+
+        if adjusted_temp < target_temp:
+            adjusted_temp += 0.05  # Minor correction if under target
+        elif adjusted_temp > target_temp:
+            adjusted_temp -= 0.05  # Minor correction if above target
+
+        temperature_variance = abs(adjusted_temp - target_temp)
+        if temperature_variance < 0.01:
+            break  # Break early if within small tolerance
+        adjusted_temp -= 0.01 * temperature_variance
+
+    fridge_data["final_temperature"] = adjusted_temp
+
+    telemetry_data = {
+        "fridge_id": fridge_id,
+        "start_temp": current_temp,
+        "end_temp": adjusted_temp,
+        "safety_checks": include_safety_checks
+    }
+
+    print(f"Telemetry data: {telemetry_data}")
+
+    return f"Calibration complete. Final temperature: {adjusted_temp:.2f}"
+```
+
+or this one:
+
+``` python
+
+# Function refactored into smaller functions
+def calibrate_fridge(fridge_data, include_safety_checks):
+    fridge_id = fridge_data.get("id")
+    current_temp = fridge_data.get("current_temperature")
+    target_temp = fridge_data.get("target_temperature")
+    calibration_params = fridge_data.get("calibration_params")
+
+    if include_safety_checks:
+        perform_safety_checks(current_temp, target_temp, calibration_params)
+
+    adjusted_temp = apply_temperature_adjustment(current_temp, target_temp, calibration_params)
+    stabilized_temp = stabilize_temperature(adjusted_temp, target_temp, calibration_params)
+    fridge_data["final_temperature"] = stabilized_temp
+
+    send_telemetry(fridge_id, current_temp, stabilized_temp)
+    return f"Calibration complete. Final temperature: {stabilized_temp:.2f}"
+
+
+def perform_safety_checks(current_temp, target_temp, calibration_params):
+    if current_temp > calibration_params["max_safe_temperature"]:
+        raise Exception("Unsafe temperature: Current temperature exceeds safe limits.")
+
+    if target_temp < calibration_params["min_safe_temperature"]:
+        raise Exception("Unsafe target temperature: Below safe limits.")
+
+
+def apply_temperature_adjustment(current_temp, target_temp, calibration_params):
+    adjustment_factor = calibration_params.get("adjustment_factor", 1.0)
+    adjusted_temp = current_temp + (target_temp - current_temp) * adjustment_factor
+
+    if adjusted_temp > calibration_params["max_safe_temperature"]:
+        adjusted_temp = calibration_params["max_safe_temperature"]
+    if adjusted_temp < calibration_params["min_safe_temperature"]:
+        adjusted_temp = calibration_params["min_safe_temperature"]
+
+    return adjusted_temp
+
+
+def stabilize_temperature(adjusted_temp, target_temp, calibration_params):
+    stabilization_steps = calibration_params.get("stabilization_steps", 10)
+
+    for step in range(stabilization_steps):
+        correction_factor = 0.1 * (adjusted_temp - target_temp)
+        adjusted_temp -= correction_factor
+
+        if adjusted_temp < target_temp:
+            adjusted_temp += 0.05  # Minor correction if under target
+        elif adjusted_temp > target_temp:
+            adjusted_temp -= 0.05  # Minor correction if above target
+
+        temperature_variance = abs(adjusted_temp - target_temp)
+        if temperature_variance < 0.01:
+            break  # Break early if within a small tolerance
+        adjusted_temp -= 0.01 * temperature_variance
+
+    return adjusted_temp
+
+
+def send_telemetry(fridge_id, start_temp, end_temp, safety_checks):
+    telemetry_data = {
+        "fridge_id": fridge_id,
+        "start_temp": start_temp,
+        "end_temp": end_temp,
+    }
+    print(f"Telemetry data: {telemetry_data}")
+
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Do one thing at one level of abstraction
+
+The 'messy' code example above is difficult to comprehend, because the code
+constantly jumps between different levels of abstractions: performing
+low-level calibration and stabilization steps,fetching parameters, throwing
+exceptions, etc.
+
+Instead, 'clean' code should follow the **Stepdown Rule**: the code should read
+like a top-down narrative - so we can read the program like a narrative,
+descending one level of abstraction as we read down the list of functions.
+This is what makes the refactored example so much easier to understand.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Use descriptive names
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Prefer fewer arguments
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Have no side effects
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ### Comments rules
 
