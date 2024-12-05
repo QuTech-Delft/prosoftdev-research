@@ -210,6 +210,8 @@ time consuming and tiring. Ideally, the entire function should fit on one screen
 What is easier to read, this:
 
 ``` python
+
+# Dummy calibration function - operations shown here have no "real life" meaning
 def calibrate_fridge(fridge_data, include_safety_checks):
     fridge_id = fridge_data.get("id")
     current_temp = fridge_data.get("current_temperature")
@@ -354,6 +356,26 @@ This is what makes the refactored example so much easier to understand.
 
 ##### Use descriptive names
 
+This should follow the methodology already discussing under *Name rules*. In addition to this:
+
+- Do not be afraid to use long names - the function name should pretty much describe
+what the function does, to the point where comments become superfluous
+- Spend time thinking of a good name, and change it as soon as you have found a better one
+- Be consistent in your naming: use same phrases, nouns and verbs in your function names
+
+``` python
+# BAD
+def determine_optimal_temperature():
+def derive_calibration_parameters():
+def calculate_reset_interval():
+
+
+# GOOD
+def calculate_optimal_temperature():
+def calculate_calibration_parameters():
+def calculate_reset_interval():
+```
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -362,6 +384,40 @@ This is what makes the refactored example so much easier to understand.
 
 ##### Prefer fewer arguments
 
+- Ideally have 0-2 arguments. A high number of arguments can make functions harder to
+understand, test, and reuse.
+- When multiple related arguments are necessary, encapsulate them in an object or data
+structure to simplify the function signature and improve readability.
+
+```python
+# BAD
+def calibrate_fridge(min_temperature, max_temperature, steps, accuracy, seconds_timeout):
+
+# GOOD
+@dataclass
+class CalibrationParameters:
+    min_temperature: float,
+    max_temperature: float,
+    steps: int,
+    accuracy: float,
+    seconds_timeout: int
+
+def calibrate_fridge(calibration_parameters: CalibrationParameters):
+...
+```
+
+- Functions should avoid boolean or flag arguments, as they often indicate that the function
+is doing more than one thing and violate the *Single Responsibility Principle*
+```python
+# BAD
+def update_fridge_temperature(new_temperature: float, initialize_fridge: bool):
+
+# GOOD
+def initialize_fridge():
+def update_fridge_temperature(new_temperature: float):
+
+```
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -369,17 +425,136 @@ This is what makes the refactored example so much easier to understand.
 
 ##### Have no side effects
 
+- Side effects break the *Single Responsibility Principle*
+- No side effects facilitate parallel execution
+- Side effects can lead to subtle (and occasionally catastrophic) errors!
+
+``` python
+# VERY VERY BAD
+
+def adjust_experiment_parameters(duration_in_seconds, calibration_steps):
+    set_experiment_duration(duration_in_seconds)
+    set_experiment_calibration_steps(calibration_steps)
+    start_experiment()
+```
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ### Comments rules
 
-- Always try to explain yourself in code.
-- Don't be redundant.
-- Don't add obvious noise.
-- Use as explanation of intent.
-- Use as clarification of code.
-- Use as warning of consequences.
+As a general rule, always strive to have the code "explain itself" so comments are
+not necessary. In most cases, *comments are an acceptance of failure*: the code
+itself is not clear enough, so it needs additional explanation in the form of a comment.
+
+``` python
+# BAD
+# Check if the experiment is complete
+if status == 1:
+    handle_completion()
+
+# GOOD
+if is_experiment_complete(status):
+    handle_completion()
+```
+
+#### Bad Comments
+
+In many cases comments are useless, and occasionally straight dangerous:
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Redundant comments
+
+Such comments can be a distraction for the reviewer
+
+``` python
+total = price * quantity  # Multiply price by quantity
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Outdated or misleading comments
+
+``` python
+# BAD
+# This function sorts the list in descending order
+def sort_list(data):
+    return sorted(data, reverse=True)
+
+# GOOD
+def sort_list_ascending(data):
+    return sorted(data)
+
+def sort_list_descending(data):
+    return sorted(data, reverse=True)
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Commented out code
+
+Clutters the source code, and makes it harder to follow the natural flow of your program.
+Use version control instead!
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+#### Good Comments
+
+There are a number of cases when comments can be beneficial:
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Explanation of intent
+
+``` python
+# Use binary search to optimize performance on large datasets
+def find_element(sorted_list, target):
+    return binary_search(sorted_list, target)
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Clarification of code
+
+``` python
+# Flag transactions with an amount greater than 10,000 as "flagged" for manual review.
+# This threshold is set by international banking regulations, specifically the
+# Financial Action Task Force (FATF) Recommendation 10, to prevent money laundering.
+MANUAL_REVIEW_THRESHOLD = 10000
+
+def classify_transactions(transactions):
+    for t in transactions:
+        if t.amount > MANUAL_REVIEW_THRESHOLD:
+            t.status = "flagged"
+        else:
+            t.status = "completed"
+
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Warning of consequences
+
+```
+# WARNING: This function permanently deletes experimental data.
+# Ensure backups are created before calling.
+def delete_experiment_data(experiment_id):
+    database.delete(f"experiment_{experiment_id}")
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ### Unit Test Rules
 
