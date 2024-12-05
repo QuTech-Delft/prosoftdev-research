@@ -347,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Clean Code</h1>
-        <p>Last updated on 2024-12-04 |
+        <p>Last updated on 2024-12-05 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/clean-code.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -591,52 +591,54 @@ function should fit on one screen.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="kw">def</span> calibrate_fridge(fridge_data, include_safety_checks):</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>    fridge_id <span class="op">=</span> fridge_data.get(<span class="st">"id"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    current_temp <span class="op">=</span> fridge_data.get(<span class="st">"current_temperature"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    target_temp <span class="op">=</span> fridge_data.get(<span class="st">"target_temperature"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>    calibration_params <span class="op">=</span> fridge_data.get(<span class="st">"calibration_params"</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    <span class="cf">if</span> include_safety_checks:</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>        <span class="cf">if</span> current_temp <span class="op">&gt;</span> calibration_params.get(<span class="st">"max_safe_temperature"</span>):</span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"Unsafe temperature detected during calibration."</span>)</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>        <span class="cf">if</span> target_temp <span class="op">&lt;</span> calibration_params.get(<span class="st">"min_safe_temperature"</span>):</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"Unsafe target temperature detected during calibration."</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    adjustment_factor <span class="op">=</span> calibration_params.get(<span class="st">"adjustment_factor"</span>, <span class="fl">1.0</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>    adjusted_temp <span class="op">=</span> current_temp <span class="op">+</span> (target_temp <span class="op">-</span> current_temp) <span class="op">*</span> adjustment_factor</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    <span class="cf">if</span> adjusted_temp <span class="op">&gt;</span> calibration_params[<span class="st">"max_safe_temperature"</span>]:</span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>        adjusted_temp <span class="op">=</span> calibration_params[<span class="st">"max_safe_temperature"</span>]</span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>    <span class="cf">if</span> adjusted_temp <span class="op">&lt;</span> calibration_params[<span class="st">"min_safe_temperature"</span>]:</span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>        adjusted_temp <span class="op">=</span> calibration_params[<span class="st">"min_safe_temperature"</span>]</span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>    stabilization_steps <span class="op">=</span> calibration_params.get(<span class="st">"stabilization_steps"</span>, <span class="dv">10</span>)</span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>    <span class="cf">for</span> step <span class="kw">in</span> <span class="bu">range</span>(stabilization_steps):</span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>        correction_factor <span class="op">=</span> <span class="fl">0.1</span> <span class="op">*</span> (adjusted_temp <span class="op">-</span> target_temp)</span>
-<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>        adjusted_temp <span class="op">-=</span> correction_factor</span>
-<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>        <span class="cf">if</span> adjusted_temp <span class="op">&lt;</span> target_temp:</span>
-<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a>            adjusted_temp <span class="op">+=</span> <span class="fl">0.05</span>  <span class="co"># Minor correction if under target</span></span>
-<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>        <span class="cf">elif</span> adjusted_temp <span class="op">&gt;</span> target_temp:</span>
-<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>            adjusted_temp <span class="op">-=</span> <span class="fl">0.05</span>  <span class="co"># Minor correction if above target</span></span>
-<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a></span>
-<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a>        temperature_variance <span class="op">=</span> <span class="bu">abs</span>(adjusted_temp <span class="op">-</span> target_temp)</span>
-<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a>        <span class="cf">if</span> temperature_variance <span class="op">&lt;</span> <span class="fl">0.01</span>:</span>
-<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a>            <span class="cf">break</span>  <span class="co"># Break early if within small tolerance</span></span>
-<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a>        adjusted_temp <span class="op">-=</span> <span class="fl">0.01</span> <span class="op">*</span> temperature_variance</span>
-<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a></span>
-<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a>    fridge_data[<span class="st">"final_temperature"</span>] <span class="op">=</span> adjusted_temp</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># Dummy calibration function - operations shown here have no "real life" meaning</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="kw">def</span> calibrate_fridge(fridge_data, include_safety_checks):</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    fridge_id <span class="op">=</span> fridge_data.get(<span class="st">"id"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>    current_temp <span class="op">=</span> fridge_data.get(<span class="st">"current_temperature"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    target_temp <span class="op">=</span> fridge_data.get(<span class="st">"target_temperature"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    calibration_params <span class="op">=</span> fridge_data.get(<span class="st">"calibration_params"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    <span class="cf">if</span> include_safety_checks:</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>        <span class="cf">if</span> current_temp <span class="op">&gt;</span> calibration_params.get(<span class="st">"max_safe_temperature"</span>):</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"Unsafe temperature detected during calibration."</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>        <span class="cf">if</span> target_temp <span class="op">&lt;</span> calibration_params.get(<span class="st">"min_safe_temperature"</span>):</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"Unsafe target temperature detected during calibration."</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    adjustment_factor <span class="op">=</span> calibration_params.get(<span class="st">"adjustment_factor"</span>, <span class="fl">1.0</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>    adjusted_temp <span class="op">=</span> current_temp <span class="op">+</span> (target_temp <span class="op">-</span> current_temp) <span class="op">*</span> adjustment_factor</span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>    <span class="cf">if</span> adjusted_temp <span class="op">&gt;</span> calibration_params[<span class="st">"max_safe_temperature"</span>]:</span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>        adjusted_temp <span class="op">=</span> calibration_params[<span class="st">"max_safe_temperature"</span>]</span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>    <span class="cf">if</span> adjusted_temp <span class="op">&lt;</span> calibration_params[<span class="st">"min_safe_temperature"</span>]:</span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>        adjusted_temp <span class="op">=</span> calibration_params[<span class="st">"min_safe_temperature"</span>]</span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>    stabilization_steps <span class="op">=</span> calibration_params.get(<span class="st">"stabilization_steps"</span>, <span class="dv">10</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>    <span class="cf">for</span> step <span class="kw">in</span> <span class="bu">range</span>(stabilization_steps):</span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a>        correction_factor <span class="op">=</span> <span class="fl">0.1</span> <span class="op">*</span> (adjusted_temp <span class="op">-</span> target_temp)</span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>        adjusted_temp <span class="op">-=</span> correction_factor</span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>        <span class="cf">if</span> adjusted_temp <span class="op">&lt;</span> target_temp:</span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>            adjusted_temp <span class="op">+=</span> <span class="fl">0.05</span>  <span class="co"># Minor correction if under target</span></span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>        <span class="cf">elif</span> adjusted_temp <span class="op">&gt;</span> target_temp:</span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a>            adjusted_temp <span class="op">-=</span> <span class="fl">0.05</span>  <span class="co"># Minor correction if above target</span></span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a>        temperature_variance <span class="op">=</span> <span class="bu">abs</span>(adjusted_temp <span class="op">-</span> target_temp)</span>
+<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a>        <span class="cf">if</span> temperature_variance <span class="op">&lt;</span> <span class="fl">0.01</span>:</span>
+<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a>            <span class="cf">break</span>  <span class="co"># Break early if within small tolerance</span></span>
+<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a>        adjusted_temp <span class="op">-=</span> <span class="fl">0.01</span> <span class="op">*</span> temperature_variance</span>
 <span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a>    telemetry_data <span class="op">=</span> {</span>
-<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a>        <span class="st">"fridge_id"</span>: fridge_id,</span>
-<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a>        <span class="st">"start_temp"</span>: current_temp,</span>
-<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a>        <span class="st">"end_temp"</span>: adjusted_temp,</span>
-<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a>        <span class="st">"safety_checks"</span>: include_safety_checks</span>
-<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a>    }</span>
-<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a></span>
-<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Telemetry data: </span><span class="sc">{</span>telemetry_data<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a>    fridge_data[<span class="st">"final_temperature"</span>] <span class="op">=</span> adjusted_temp</span>
+<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a></span>
+<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a>    telemetry_data <span class="op">=</span> {</span>
+<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a>        <span class="st">"fridge_id"</span>: fridge_id,</span>
+<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a>        <span class="st">"start_temp"</span>: current_temp,</span>
+<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a>        <span class="st">"end_temp"</span>: adjusted_temp,</span>
+<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a>        <span class="st">"safety_checks"</span>: include_safety_checks</span>
+<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a>    }</span>
 <span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a></span>
-<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Calibration complete. Final temperature: </span><span class="sc">{</span>adjusted_temp<span class="sc">:.2f}</span><span class="ss">"</span></span></code></pre>
+<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Telemetry data: </span><span class="sc">{</span>telemetry_data<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a></span>
+<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Calibration complete. Final temperature: </span><span class="sc">{</span>adjusted_temp<span class="sc">:.2f}</span><span class="ss">"</span></span></code></pre>
 </div>
 <p>or this one:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -738,7 +740,29 @@ the refactored example so much easier to understand.</p>
 <div id="use-descriptive-names" class="callout-inner">
 <h3 class="callout-title">Use descriptive names</h3>
 <div class="callout-content">
-
+<p>This should follow the methodology already discussing under <em>Name
+rules</em>. In addition to this:</p>
+<ul><li>Do not be afraid to use long names - the function name should pretty
+much describe what the function does, to the point where comments become
+superfluous</li>
+<li>Spend time thinking of a good name, and change it as soon as you
+have found a better one</li>
+<li>Be consistent in your naming: use same phrases, nouns and verbs in
+your function names</li>
+</ul><div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># BAD</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="kw">def</span> determine_optimal_temperature():</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="kw">def</span> derive_calibration_parameters():</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="kw">def</span> calculate_reset_interval():</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co"># GOOD</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="kw">def</span> calculate_optimal_temperature():</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="kw">def</span> calculate_calibration_parameters():</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="kw">def</span> calculate_reset_interval():</span></code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -749,7 +773,43 @@ the refactored example so much easier to understand.</p>
 <div id="prefer-fewer-arguments" class="callout-inner">
 <h3 class="callout-title">Prefer fewer arguments</h3>
 <div class="callout-content">
-
+<ul><li>Ideally have 0-2 arguments. A high number of arguments can make
+functions harder to understand, test, and reuse.</li>
+<li>When multiple related arguments are necessary, encapsulate them in
+an object or data structure to simplify the function signature and
+improve readability.</li>
+</ul><div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># BAD</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="kw">def</span> calibrate_fridge(min_temperature, max_temperature, steps, accuracy, seconds_timeout):</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># GOOD</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="kw">class</span> CalibrationParameters:</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>    min_temperature: <span class="bu">float</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>    max_temperature: <span class="bu">float</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>    steps: <span class="bu">int</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>    accuracy: <span class="bu">float</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>    seconds_timeout: <span class="bu">int</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="kw">def</span> calibrate_fridge(calibration_parameters: CalibrationParameters):</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>...</span></code></pre>
+</div>
+<ul><li>Functions should avoid boolean or flag arguments, as they often
+indicate that the function is doing more than one thing and violate the
+<em>Single Responsibility Principle</em>
+</li>
+</ul><div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># BAD</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="kw">def</span> update_fridge_temperature(new_temperature: <span class="bu">float</span>, initialize_fridge: <span class="bu">bool</span>):</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># GOOD</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="kw">def</span> initialize_fridge():</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="kw">def</span> update_fridge_temperature(new_temperature: <span class="bu">float</span>):</span></code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -760,20 +820,162 @@ the refactored example so much easier to understand.</p>
 <div id="have-no-side-effects" class="callout-inner">
 <h3 class="callout-title">Have no side effects</h3>
 <div class="callout-content">
-
+<ul><li>Side effects break the <em>Single Responsibility Principle</em>
+</li>
+<li>No side effects facilitate parallel execution</li>
+<li>Side effects can lead to subtle (and occasionally catastrophic)
+errors!</li>
+</ul><div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># VERY VERY BAD</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="kw">def</span> adjust_experiment_parameters(duration_in_seconds, calibration_steps):</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>    set_experiment_duration(duration_in_seconds)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>    set_experiment_calibration_steps(calibration_steps)</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>    start_experiment()</span></code></pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="section level3">
 <h3 id="comments-rules">Comments rules<a class="anchor" aria-label="anchor" href="#comments-rules"></a></h3>
-<ul><li>Always try to explain yourself in code.</li>
-<li>Don’t be redundant.</li>
-<li>Don’t add obvious noise.</li>
-<li>Use as explanation of intent.</li>
-<li>Use as clarification of code.</li>
-<li>Use as warning of consequences.</li>
-</ul></div>
+<p>As a general rule, always strive to have the code “explain itself” so
+comments are not necessary. In most cases, <em>comments are an
+acceptance of failure</em>: the code itself is not clear enough, so it
+needs additional explanation in the form of a comment.</p>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># BAD</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co"># Check if the experiment is complete</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="cf">if</span> status <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>    handle_completion()</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co"># GOOD</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="cf">if</span> is_experiment_complete(status):</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>    handle_completion()</span></code></pre>
+</div>
+<div class="section level4">
+<h4 id="bad-comments">Bad Comments<a class="anchor" aria-label="anchor" href="#bad-comments"></a></h4>
+<p>In many cases comments are useless, and occasionally straight
+dangerous:</p>
+<div id="redundant-comments" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="redundant-comments" class="callout-inner">
+<h3 class="callout-title">Redundant comments</h3>
+<div class="callout-content">
+<p>Such comments can be a distraction for the reviewer</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>total <span class="op">=</span> price <span class="op">*</span> quantity  <span class="co"># Multiply price by quantity</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outdated-or-misleading-comments" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="outdated-or-misleading-comments" class="callout-inner">
+<h3 class="callout-title">Outdated or misleading comments</h3>
+<div class="callout-content">
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># BAD</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co"># This function sorts the list in descending order</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="kw">def</span> sort_list(data):</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sorted</span>(data, reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co"># GOOD</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="kw">def</span> sort_list_ascending(data):</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sorted</span>(data)</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="kw">def</span> sort_list_descending(data):</span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sorted</span>(data, reverse<span class="op">=</span><span class="va">True</span>)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="commented-out-code" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="commented-out-code" class="callout-inner">
+<h3 class="callout-title">Commented out code</h3>
+<div class="callout-content">
+<p>Clutters the source code, and makes it harder to follow the natural
+flow of your program. Use version control instead!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section level4">
+<h4 id="good-comments">Good Comments<a class="anchor" aria-label="anchor" href="#good-comments"></a></h4>
+<p>There are a number of cases when comments can be beneficial:</p>
+<div id="explanation-of-intent" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="explanation-of-intent" class="callout-inner">
+<h3 class="callout-title">Explanation of intent</h3>
+<div class="callout-content">
+<div class="codewrapper sourceCode" id="cb14">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Use binary search to optimize performance on large datasets</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="kw">def</span> find_element(sorted_list, target):</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>    <span class="cf">return</span> binary_search(sorted_list, target)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="clarification-of-code" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="clarification-of-code" class="callout-inner">
+<h3 class="callout-title">Clarification of code</h3>
+<div class="callout-content">
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Flag transactions with an amount greater than 10,000 as "flagged" for manual review.</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="co"># This threshold is set by international banking regulations, specifically the</span></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co"># Financial Action Task Force (FATF) Recommendation 10, to prevent money laundering.</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>MANUAL_REVIEW_THRESHOLD <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="kw">def</span> classify_transactions(transactions):</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> transactions:</span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>        <span class="cf">if</span> t.amount <span class="op">&gt;</span> MANUAL_REVIEW_THRESHOLD:</span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>            t.status <span class="op">=</span> <span class="st">"flagged"</span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>            t.status <span class="op">=</span> <span class="st">"completed"</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="warning-of-consequences" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="warning-of-consequences" class="callout-inner">
+<h3 class="callout-title">Warning of consequences</h3>
+<div class="callout-content">
+<pre><code># WARNING: This function permanently deletes experimental data.
+# Ensure backups are created before calling.
+def delete_experiment_data(experiment_id):
+    database.delete(f"experiment_{experiment_id}")</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="section level3">
 <h3 id="unit-test-rules">Unit Test Rules<a class="anchor" aria-label="anchor" href="#unit-test-rules"></a></h3>
 <ul><li>Should follow the <strong>F.I.R.S.T</strong> principles:
@@ -909,9 +1111,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/clean-code.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/clean-code.html",
-  "dateCreated": "2024-12-04",
-  "dateModified": "2024-12-04",
-  "datePublished": "2024-12-04"
+  "dateCreated": "2024-12-05",
+  "dateModified": "2024-12-05",
+  "datePublished": "2024-12-05"
 }
 
   </script><script>
