@@ -558,15 +558,122 @@ def delete_experiment_data(experiment_id):
 
 ### Unit Test Rules
 
-- Should follow the **F.I.R.S.T** principles:
-    - **F**ast
-    - **I**ndependent
-    - **R**epeatable
-    - **S**elf-validating
-    - **T**imely
-- Should be as "clean" as the rest of the code!
-- Should be easy to run
-- should be used in conjunction with a test coverage tool
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Tests enable the -ilities!!
+
+**Unit tests keep your code flexible, maintainable, and reusable - they are the key and core of clean code!**
+The reason for this is that **unit tests allow you to change your code without fear of introducing new bugs**.
+If you have enough unit tests with good coverage you can start with a sub-par architecture and "messy" code,
+and move towards "clean" code in small and quick iterations, at each iteration being able to effectively test
+that your changes have not introduced bugs.
+
+**Unit tests enable change!**
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Unit tests should be as clean as the rest of the code
+
+- Tests change as tested code changes!
+- If tests are difficult to evolve then the overall speed one can change the program is slow
+- Unit tests can be a very effective tool to document what a program does
+- Clean tests allow new members of the team quickly understand the expected behaviour of the system without diving
+deeply into the implementation
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Unit tests should follow the **F.I.R.S.T** principles
+
+- **F**ast - so can be run often, so they detect problems early - when they are easy to fix
+- **I**ndependent - they should not depend on each other - so they can be run in any order
+- **R**epeatable - should not depend on anything in the environment - ideally not even on a network connection
+being present! Should be possible to run them offline - so one can work on re-factoring even when offline
+- **S**elf-validating - should return either *True* or *False*. Checking success/failure should be fast!
+- **T**imely - add unit tests as soon as you have written the code, or even *before* (TDD). Forces one to think
+in terms of testing => testable code.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### A unit test should cover a single concept
+
+Having a unit test check multiple parts of the code makes it harder to reason on the cause of the failure. They are
+also not self-validating - if they fail - on which part did they fail?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+Have a look at the unit test below. Is it "clean"? Can you name which of the "clean tests" principles discussed
+so far it breaks? Can you refactor it into "clean" test code?
+
+``` python
+import pytest
+
+def test_math_operations():
+    result = 4 + 5
+    if result == 9:
+        print("Addition passed")
+    else:
+        print("Addition failed")
+
+    result = 3 * 3
+    assert result == 9  # Works, I guess
+
+    division_result = 10 / 2
+    assert division_result == 5, "Division failed"  # Check division, right?
+
+    my_list = [1, 2, 3]
+    assert len(my_list) == 3
+
+    assert division_result == 5
+
+    print("Test completed!")
+
+```
+
+:::::::::::::::  solution
+
+### Solution
+
+The above test breaks many of the "clean" tests and "clean" code principles:
+
+- name does not reflect purpose
+- test does not cover just one aspect of the code, but rather multiple - math operations and a completely un-related list operation
+- redundant assertions - like the one for the division result
+- test is not self-validating - the user needs to monitor the test output to determine success/failure
+- extraneous output - "Test completed!" is unnecessary and distracts the user
+
+Refactored test:
+
+```python
+import pytest
+
+def test_addition():
+    """Test addition operation."""
+    result = 4 + 5
+    assert result == 9
+
+def test_multiplication():
+    """Test multiplication operation."""
+    result = 3 * 3
+    assert result == 9
+
+def test_division():
+    """Test division operation."""
+    result = 10 / 2
+    assert result == 5
+```
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ## Clean Code Tools

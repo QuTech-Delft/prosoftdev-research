@@ -1,7 +1,7 @@
 ---
 title: 'The QuTech Software Maturity Model (QSMM)'
-teaching: 12
-exercises: 0
+teaching: 15
+exercises: 10
 ---
 
 ## Introduction
@@ -62,10 +62,21 @@ This consists of the following levels:
 - Most software developed by researchers will fall in the Category 1 and 2 in the Software Product Maturity levels.
 Goal is to make it possible to transition this to Category 3 and 4 if ever needed
 - With respect to process maturity:
-    - Goal of this course is to move away researchers from Level 1 development processes.
+    - Goal of this course is to make researches aware of development process levels, and the way they should be used
     - Level 1 development should only apply to ad-hoc projects, typically developed over at most few days.
     - For any other software development activities, researches should strive for at least Level 2, ideally Level 3 practices.
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+### Group exercise
+
+- List all libraries, software products that are used within your research group
+- Categorize the components into home made and commercial
+- Why do you pay for a certain commercial product?
+- What level are the homemade libraries in? what level should they be in?
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
