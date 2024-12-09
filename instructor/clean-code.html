@@ -347,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Clean Code</h1>
-        <p>Last updated on 2024-12-05 |
+        <p>Last updated on 2024-12-09 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/clean-code.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -980,22 +980,167 @@ def delete_experiment_data(experiment_id):
 </div>
 <div class="section level3">
 <h3 id="unit-test-rules">Unit Test Rules<a class="anchor" aria-label="anchor" href="#unit-test-rules"></a></h3>
-<ul><li>Should follow the <strong>F.I.R.S.T</strong> principles:
-<ul><li>
-<strong>F</strong>ast</li>
-<li>
-<strong>I</strong>ndependent</li>
-<li>
-<strong>R</strong>epeatable</li>
-<li>
-<strong>S</strong>elf-validating</li>
-<li>
-<strong>T</strong>imely</li>
-</ul></li>
-<li>Should be as “clean” as the rest of the code!</li>
-<li>Should be easy to run</li>
-<li>should be used in conjunction with a test coverage tool</li>
+<div id="tests-enable-the--ilities" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="tests-enable-the--ilities" class="callout-inner">
+<h3 class="callout-title">Tests enable the -ilities!!</h3>
+<div class="callout-content">
+<p><strong>Unit tests keep your code flexible, maintainable, and
+reusable - they are the key and core of clean code!</strong> The reason
+for this is that <strong>unit tests allow you to change your code
+without fear of introducing new bugs</strong>. If you have enough unit
+tests with good coverage you can start with a sub-par architecture and
+“messy” code, and move towards “clean” code in small and quick
+iterations, at each iteration being able to effectively test that your
+changes have not introduced bugs.</p>
+<p><strong>Unit tests enable change!</strong></p>
+</div>
+</div>
+</div>
+<div id="unit-tests-should-be-as-clean-as-the-rest-of-the-code" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="unit-tests-should-be-as-clean-as-the-rest-of-the-code" class="callout-inner">
+<h3 class="callout-title">Unit tests should be as clean as the rest of the code</h3>
+<div class="callout-content">
+<ul><li>Tests change as tested code changes!</li>
+<li>If tests are difficult to evolve then the overall speed one can
+change the program is slow</li>
+<li>Unit tests can be a very effective tool to document what a program
+does</li>
+<li>Clean tests allow new members of the team quickly understand the
+expected behaviour of the system without diving deeply into the
+implementation</li>
 </ul></div>
+</div>
+</div>
+<div id="unit-tests-should-follow-the-f.i.r.s.t-principles" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="unit-tests-should-follow-the-f.i.r.s.t-principles" class="callout-inner">
+<h3 class="callout-title">Unit tests should follow the
+<strong>F.I.R.S.T</strong> principles</h3>
+<div class="callout-content">
+<ul><li>
+<strong>F</strong>ast - so can be run often, so they detect problems
+early - when they are easy to fix</li>
+<li>
+<strong>I</strong>ndependent - they should not depend on each other
+- so they can be run in any order</li>
+<li>
+<strong>R</strong>epeatable - should not depend on anything in the
+environment - ideally not even on a network connection being present!
+Should be possible to run them offline - so one can work on re-factoring
+even when offline</li>
+<li>
+<strong>S</strong>elf-validating - should return either
+<em>True</em> or <em>False</em>. Checking success/failure should be
+fast!</li>
+<li>
+<strong>T</strong>imely - add unit tests as soon as you have written
+the code, or even <em>before</em> (TDD). Forces one to think in terms of
+testing =&gt; testable code.</li>
+</ul></div>
+</div>
+</div>
+<div id="a-unit-test-should-cover-a-single-concept" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="a-unit-test-should-cover-a-single-concept" class="callout-inner">
+<h3 class="callout-title">A unit test should cover a single concept</h3>
+<div class="callout-content">
+<p>Having a unit test check multiple parts of the code makes it harder
+to reason on the cause of the failure. They are also not self-validating
+- if they fail - on which part did they fail?</p>
+</div>
+</div>
+</div>
+<div id="challenge1" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Have a look at the unit test below. Is it “clean”? Can you name which
+of the “clean tests” principles discussed so far it breaks? Can you
+refactor it into “clean” test code?</p>
+<div class="codewrapper sourceCode" id="cb17">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="im">import</span> pytest</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="kw">def</span> test_math_operations():</span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>    result <span class="op">=</span> <span class="dv">4</span> <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>    <span class="cf">if</span> result <span class="op">==</span> <span class="dv">9</span>:</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Addition passed"</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Addition failed"</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>    result <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">3</span></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>    <span class="cf">assert</span> result <span class="op">==</span> <span class="dv">9</span>  <span class="co"># Works, I guess</span></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a>    division_result <span class="op">=</span> <span class="dv">10</span> <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>    <span class="cf">assert</span> division_result <span class="op">==</span> <span class="dv">5</span>, <span class="st">"Division failed"</span>  <span class="co"># Check division, right?</span></span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a>    my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">len</span>(my_list) <span class="op">==</span> <span class="dv">3</span></span>
+<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a>    <span class="cf">assert</span> division_result <span class="op">==</span> <span class="dv">5</span></span>
+<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Test completed!"</span>)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>The above test breaks many of the “clean” tests and “clean” code
+principles:</p>
+<ul><li>name does not reflect purpose</li>
+<li>test does not cover just one aspect of the code, but rather multiple
+- math operations and a completely un-related list operation</li>
+<li>redundant assertions - like the one for the division result</li>
+<li>test is not self-validating - the user needs to monitor the test
+output to determine success/failure</li>
+<li>extraneous output - “Test completed!” is unnecessary and distracts
+the user</li>
+</ul><p>Refactored test:</p>
+<div class="codewrapper sourceCode" id="cb18">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="im">import</span> pytest</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="kw">def</span> test_addition():</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>    <span class="co">"""Test addition operation."""</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>    result <span class="op">=</span> <span class="dv">4</span> <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>    <span class="cf">assert</span> result <span class="op">==</span> <span class="dv">9</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="kw">def</span> test_multiplication():</span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>    <span class="co">"""Test multiplication operation."""</span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>    result <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">3</span></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a>    <span class="cf">assert</span> result <span class="op">==</span> <span class="dv">9</span></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="kw">def</span> test_division():</span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>    <span class="co">"""Test division operation."""</span></span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a>    result <span class="op">=</span> <span class="dv">10</span> <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a>    <span class="cf">assert</span> result <span class="op">==</span> <span class="dv">5</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="clean-code-tools">Clean Code Tools<a class="anchor" aria-label="anchor" href="#clean-code-tools"></a></h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="python-coding-conventions">Python Coding Conventions<a class="anchor" aria-label="anchor" href="#python-coding-conventions"></a></h3>
@@ -1113,9 +1258,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/clean-code.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/clean-code.html",
-  "dateCreated": "2024-12-05",
-  "dateModified": "2024-12-05",
-  "datePublished": "2024-12-05"
+  "dateCreated": "2024-12-09",
+  "dateModified": "2024-12-09",
+  "datePublished": "2024-12-09"
 }
 
   </script><script>
