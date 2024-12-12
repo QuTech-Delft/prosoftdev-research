@@ -89,3 +89,6 @@ profiles:
 # sandpaper and varnish versions) should live
 
 carpentry_description: Lesson Description
+
+#styles:
+#  - custom.css

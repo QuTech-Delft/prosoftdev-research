@@ -2,6 +2,9 @@
 title: 'Clean Code'
 teaching: 80
 exercises: 100
+output:
+html_document:
+  css: mystyle.css
 ---
 ## Introduction
 
@@ -79,13 +82,154 @@ definitive guide for the clean code movement and is highly recommended reading.
 
 ### Source code structure
 
-- Separate concepts vertically.
-- Related code should appear vertically dense.
-- Declare variables close to their usage.
+**The newspaper metaphor**: code should be organized and structured like a well-written
+newspaper article: it should guide the reader from broad, general concepts to more specific
+details. At the top, high-level information—such as the purpose of the code or function
+should be immediately clear, similar to a headline. As the reader delves deeper, they
+encounter progressively detailed logic, analogous to sections and paragraphs expanding
+on the headline. This structure helps developers quickly grasp the overall intent of the
+code before diving into implementation specifics, improving readability and maintainability.
+
+There are a number of source code structure rules that derive from this metaphor:
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Separate concepts vertically; related code should appear vertically dense
+
+```python
+# BAD
+def calculate_total(cart, discount_rate):
+    if not cart:
+        raise ValueError("Cart cannot be empty.")
+    if not (0 <= discount_rate <= 1):
+        raise ValueError("Discount rate must be between 0 and 1.")
+    subtotal = sum(item['price'] * item['quantity'] for item in cart)
+    discount = subtotal * discount_rate
+    total = subtotal - discount
+    return total
+
+# BETTER
+def calculate_total(cart, discount_rate):
+    if not cart:
+        raise ValueError("Cart cannot be empty.")
+    if not (0 <= discount_rate <= 1):
+        raise ValueError("Discount rate must be between 0 and 1.")
+
+    subtotal = sum(item['price'] * item['quantity'] for item in cart)
+    discount = subtotal * discount_rate
+    total = subtotal - discount  # Related code is vertically dense
+
+    return total
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Declare variables close to their usage.
+
+```python
+# BAD
+def calculate_average_grades(students):
+    total_grades = 0
+    count = len(students) if students else 0
+    average_grade = 0
+
+    if not students:
+        raise ValueError("The students list cannot be empty.")
+
+    for student in students:
+        total_grades += student['grade']
+
+    average_grade = total_grades / count
+
+    return average_grade
+
+
+# BETTER
+def calculate_average_grades(students):
+    if not students:
+        raise ValueError("The students list cannot be empty.")
+
+    total_grades = 0
+    for student in students:
+        total_grades += student['grade']
+
+    count = len(students)
+    average_grade = total_grades / count
+
+    return average_grade
+
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Keep lines short
+
+```python
+# VERY BAD
+def get_unique_even_cubed_double_of_positive_numbers(numbers):
+    return list(map(lambda x: round(x**3, 2), filter(lambda x: x % 2 == 0, set(map(lambda y: y * 3, [i for i in numbers if i > 0])))))
+
+
+# GOOD
+def get_unique_even_cubed_tripled_of_positive_numbers(numbers):
+    positive_numbers = [i for i in numbers if i > 0]
+    tripled_numbers = map(lambda y: y * 3, positive_numbers)
+    unique_numbers = set(tripled_numbers)
+    even_numbers = filter(lambda x: x % 2 == 0, unique_numbers)
+
+    return [round(x**3, 2) for x in even_numbers]
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Function placement
+
 - Dependent functions should be close.
 - Similar functions should be close.
 - Place functions in the downward direction.
-- Keep lines short.
+
+
+```python
+def get_unique_even_cubed_tripled_of_positive_numbers(numbers):
+    positive_numbers = filter_positive_numbers(numbers)
+    tripled_numbers = triple_numbers(positive_numbers)
+    unique_numbers = get_unique_numbers(tripled_numbers)
+    even_numbers = get_even_numbers(unique_numbers)
+
+    return even_numbers
+
+
+def filter_positive_numbers(numbers):
+    return [num for num in numbers if num > 0]
+
+
+def triple_numbers(numbers):
+    return [num * 3 for num in numbers]
+
+
+def get_unique_numbers(numbers):
+    return list(set(numbers))
+
+
+def get_even_numbers(numbers):
+    return [num for num in numbers if num % 2 == 0]
+
+
+def cube_numbers(numbers):
+    return [num ** 3 for num in numbers]
+```
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 
 ### Names rules
 
