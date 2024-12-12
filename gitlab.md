@@ -42,6 +42,7 @@ exercises: 20
 - Project visibility
 - Archiving a project
 - Configuring Git to access the GitLab project
+<!-- see  https://github.com/swcarpentry/git-novice/blob/main/episodes/07-github.md -->
 
 ## Collaboration
 
