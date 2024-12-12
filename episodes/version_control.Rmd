@@ -578,7 +578,7 @@ Therefore, always check your current directory using the command `pwd`.
 
 ## Command Line or Graphical Tools?
 
-It is possible to use Git from ether the command line (e.g. `GitBash`) or through a variety of visual tools, such as
+It is possible to use Git from either the command line (e.g. `GitBash`) or through a variety of visual tools, such as
 **[Sourcetree]**, **[TortoiseGit]**, **[SmartGit]**. Furthermore, most modern integrated development environments such
 as **[PyCharm]** and **[VSCode]** provide integrated visual Git tools.
 
@@ -586,7 +586,7 @@ Knowing how to use Git from the command line has definite benefits:
 
 - Helps novice users become more comfortable with Git's underlying structure and commands
 - Gives more precise control at the low level (through command-line options)
-- Understanding the command line equips users with the skills to troubleshoot and solve problems that may not
+- Equips users with the skills to troubleshoot and solve problems that may not
 be easily addressed with a GUI
 - When searching for online resources on specific Git workflows, most information is available as command line
 instructions; same applies for help/instructions provided by AI Assistants such as ChatGPT, Bard, or Claude
