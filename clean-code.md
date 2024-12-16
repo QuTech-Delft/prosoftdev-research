@@ -835,11 +835,142 @@ def test_division():
 
 ### Linters - PyLint
 
-- Introduce PyLint, explain what it does
-- Installing and running PyLint
-- Run PyLint on a code sample
+Pylint is a tool that helps you write cleaner, more reliable Python code by analyzing your code for errors, enforcing
+coding standards, and suggesting improvements. It checks for issues like unused variables, inconsistent naming, or
+missing documentation.
 
-### Modern Development Environments - PyCharm
+Pylint assigns a score to your code, ranging from -10.0 (very poor) to 10.0 (perfect). This score reflects the overall
+quality of your code based on the issues Pylint identifies, weighted by their severity.
+
+Pylint can be easily installed using `pip`:
+
+```bash
+pip install pylint
+```
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Running Pyling on a sample program
+
+```python
+# bad_pylint.py
+import math  # Unused import
+
+
+def addNumbers(a, b): return a + b  # Missing function docstring, bad naming style, bad formatting
+
+
+def divide_numbers(a, b):
+    if b == 0:
+        print("Cannot divide by zero")
+        return None
+    return a / b
+
+
+def compute_area(radius):
+    Pi = 3.14  # Constant should be uppercase (naming convention)
+    area = Pi * radius * radius
+    return area
+
+
+def main():
+    result = addNumbers(5, 10)
+    print("Sum is:", result)
+
+    divide_result = divide_numbers(10, 0)
+    print("Division result:", divide_result)
+
+    radius = 5
+    area = compute_area(radius)
+    print(f"The area of a circle with radius {radius} is {area}")
+
+
+main()
+```
+
+```bash
+$ pylint bad_pylint.py
+************* Module bad_example
+bad_example.py:34:0: C0304: Final newline missing (missing-final-newline)
+bad_example.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+bad_example.py:4:0: C0116: Missing function or method docstring (missing-function-docstring)
+bad_example.py:4:0: C0103: Function name "addNumbers" doesn't conform to snake_case naming style (invalid-name)
+bad_example.py:4:22: C0321: More than one statement on a single line (multiple-statements)
+bad_example.py:7:0: C0116: Missing function or method docstring (missing-function-docstring)
+bad_example.py:14:0: C0116: Missing function or method docstring (missing-function-docstring)
+bad_example.py:20:0: C0116: Missing function or method docstring (missing-function-docstring)
+bad_example.py:1:0: W0611: Unused import math (unused-import)
+
+-----------------------------------
+Your code has been rated at 5.91/10
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+Fix the above warnings to bring the score to a perfect 10!
+
+:::::::::::::::  solution
+
+```python
+"""This module provides basic mathematical operations and area computation."""
+
+
+def add_numbers(a, b):
+    """Adds two numbers and returns the result."""
+    return a + b
+
+
+def divide_numbers(a, b):
+    """Divides two numbers and returns the result.
+
+    Prints an error message if division by zero is attempted.
+    """
+    if b == 0:
+        print("Cannot divide by zero")  # pylint MAY suggest logging here
+        return None
+    return a / b
+
+
+def compute_area(radius):
+    """Computes the area of a circle given its radius."""
+    pi = 3.14  # Use lowercase for variables
+    return pi * radius * radius
+
+
+def main():
+    """Main function to demonstrate the usage of mathematical operations."""
+    result = add_numbers(5, 10)
+    print("Sum is:", result)
+
+    divide_result = divide_numbers(10, 0)
+    print("Division result:", divide_result)
+
+    radius = 5
+    area = compute_area(radius)
+    print(f"The area of a circle with radius {radius} is {area}")
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+```bash
+(test11) bcpopescu@TUD264038:~/projects/examples$ pylint good_pylint.py
+
+-------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 5.91/10, +4.09)
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+### PyCharm and Clean Code
 
 - Introduce PyCharm, show how to setup a Python interpreter for a project
 - Show how PyCharm is highlighting parts of the code that do not follow coding conventions
@@ -847,7 +978,55 @@ def test_division():
 
 ### Unit Tests and Test Coverage
 
-- Introduce PyTest
+`Pytest` is a simple yet powerful tool for testing Python code. You can write tests as regular functions and run
+them easily. As an example consider this simple function:
+
+```python
+# in simple_function.py
+
+def simple_function(a, b):
+    return a + b
+```
+
+With `Pytest`, you can test it by creating anew file `test_simple_function.py`:
+
+```python
+# in test_simple_function.py
+
+from simple_function import simple_function
+
+
+def test_simple_function():
+    assert simple_function(2, 3) == 5
+```
+
+and then running `pytest` from the command line:
+
+```bash
+$ pytest
+============================= test session starts =============================
+platform win32 -- Python 3.11.8, pytest-8.0.2, pluggy-1.4.0
+rootdir: C:\projects\examples
+plugins: anyio-4.3.0, flaky-3.7.0, cov-4.1.0, mock-3.12.0
+collected 1 item
+
+test_simple_function.py .                                                [100%]
+
+============================== 1 passed in 0.02s ==============================
+```
+
+`Pytest` is a built-in python package, so no installation is needed. By default, when running `pytest` from the
+command line, this package will look for any files named `test_*.py` or `*_test.py` in the working directory, and
+from these files run any functions names `test_*`. Inside these functions, you can test functionality using the
+`assert` keyword. A test function is assumed to fail if any `assert` fails, or if the the test function throws an exception.
+Alternatively, the test function succeeds if it completes without any failed asserts or exceptions. After running
+all tests, `Pytest` will display the number of tests that have succeeded and failed.
+
+Alternatively, `Pytest` can be invoked directly from the PyCharm environment as shown below:
+
+![](fig/pytest_pycharm.jpg){alt='Running Pytest from PyCharm'}
+
+
 - Introduce the concept of test coverage
 - Introduce the *coverage.py* tool
     - how to install it
