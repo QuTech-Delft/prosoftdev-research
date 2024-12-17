@@ -888,7 +888,7 @@ def main():
 main()
 ```
 
-```bash
+```text
 $ pylint bad_pylint.py
 ************* Module bad_example
 bad_example.py:34:0: C0304: Final newline missing (missing-final-newline)
@@ -958,7 +958,7 @@ if __name__ == "__main__":
 
 ```
 
-```bash
+```text
 (test11) bcpopescu@TUD264038:~/projects/examples$ pylint good_pylint.py
 
 -------------------------------------------------------------------
