@@ -772,7 +772,7 @@ changes?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul>
 <li><p>Recovering the excellent version is only possible if you created
@@ -1231,7 +1231,7 @@ in the <code>desserts</code> subdirectory?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>No. Alfredo does not need to make the <code>desserts</code>
 subdirectory a Git repository because the <code>recipes</code>
@@ -1280,7 +1280,7 @@ single git repository. How can Alfredo undo his last
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Solution – USE WITH CAUTION! </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="section level3">
 <h3 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
@@ -1404,7 +1404,7 @@ following episodes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>Accessing the Git visual tools in PyCharm is done by right-clicking
 on a file/folder in the left navigation panel, then selecting
@@ -3297,7 +3297,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-gitlab"><p>Content from <a href="gitlab.html">GitLab</a></p>
 <hr>
-<p>Last updated on 2024-12-12 |
+<p>Last updated on 2024-12-17 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/gitlab.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3341,34 +3341,278 @@ any links that you are not going to use.
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <hr class="half-width">
-<ul>
-<li>Explain what the purpose of GitLab is, in the context of version
-control</li>
-<li>Explain the TUD-managed GitLab server and how to access it</li>
-</ul></section><section><h2 class="section-heading" id="navigation">Navigation<a class="anchor" aria-label="anchor" href="#navigation"></a>
+<p><a href="https://about.gitlab.com/" class="external-link">GitLab</a> is a web application
+for managing <a href="https://git-scm.com/" class="external-link">Git</a> repositories. Since
+it is build around Git, it is suitable to manage any project that works
+primarily with plain text files, for example software source code, TeX
+based documents, or meeting notes in Markdown. With its built-in issue
+and wiki systems, it can, in certain cases, even be the right tool for
+managing a project without any files.</p>
+<p>This episode will give you a foundational understanding of GitLab’s
+features, so you can make informed decisions on how to use it as a
+tool.</p>
+<p>TU Delft is running their own self-hosted <a href="https://gitlab.tudelft.nl/" class="external-link">GitLab instance</a>. As a QuTech
+employee, you are entitled to use this TUD GitLab instance; you can
+login to it with your NetID:</p>
+<figure><img src="fig/tud_gitlab.jpg" alt="TUD GitLab Login Page" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="navigation">Navigation<a class="anchor" aria-label="anchor" href="#navigation"></a>
 </h2>
 <hr class="half-width">
-<ul>
-<li>Login into TUD GitLab account</li>
-<li>Use Web GUI to find projects/groups</li>
-</ul></section><section><h2 class="section-heading" id="gitlab-projects">GitLab Projects<a class="anchor" aria-label="anchor" href="#gitlab-projects"></a>
+<p>When we log into GitLab for the first time, we are greeted by a
+welcome page:</p>
+<figure><img src="fig/gitlab_login.jpg" alt="TUD GitLab Login Page" class="figure mx-auto d-block"></figure><p>The “Explore projects” page looks like this:</p>
+<figure><img src="fig/project-explore.png" alt="Explore projects page with tab “Most starred” open. The tab shows a list of projects with icon, name, descriptions, and four statistical values for each entry." class="figure mx-auto d-block"><div class="figcaption">Project overview page</div>
+</figure><p>The first tab, “All”, lists all projects that are visible to you in
+most recently updated order.</p>
+<p>The second tab, “Most starred projects”, also lists all projects, but
+this time ordered most starred first. Users of a GitLab instance can
+“star” a project, which is the equivalent of bookmarking them, as we
+will see shortly.</p>
+<p>The third tab, “Trending”, lists all projects again, but this time
+ordered by activity during the previous months.</p>
+<p>You can use the filter field next to the tab names to search through
+all projects that are visible to you.</p>
+<p>In the next section we will explain how you can create new GitLab
+projects</p>
+</section><section><h2 class="section-heading" id="gitlab-projects">GitLab Projects<a class="anchor" aria-label="anchor" href="#gitlab-projects"></a>
 </h2>
 <hr class="half-width">
-<ul>
-<li>Create a new GitLab project</li>
-<li>Project visibility</li>
-<li>Archiving a project</li>
-<li>Configuring Git to access the GitLab project
-<!-- see  https://github.com/swcarpentry/git-novice/blob/main/episodes/07-github.md -->
-</li>
-</ul></section><section><h2 class="section-heading" id="collaboration">Collaboration<a class="anchor" aria-label="anchor" href="#collaboration"></a>
+<div class="section level3">
+<h3 id="creating-a-project">Creating a Project<a class="anchor" aria-label="anchor" href="#creating-a-project"></a>
+</h3>
+<p>After knowing how to find groups and projects, we want to go from
+passively browsing GitLab to actively using it. We are going to create a
+project and connect a local Git repository to it.</p>
+<p>To create a project, we click on the button with the “+” symbol near
+the top of the side menu on the right and select “New
+project/repository”.</p>
+<p>Multiple options are presented for how to create the new project. In
+this lesson we will only look at, and use, the first option: “Create
+blank project”. So click on that.</p>
+<p>This leads to the following page:</p>
+<figure><img src="fig/create-project.png" alt="Create blank project form" class="figure mx-auto d-block"><div class="figcaption">Create blank project form</div>
+</figure><p>The “Project name” field is for just that, the project name. Its
+value has no other purpose and can be changed at anytime without
+indirect consequences (the direct consequence being, that its name will
+be different). We will call it “Research Diary”.</p>
+<p>As we fill in the project name, a project slug gets suggested in the
+respective field. The project slug is the last part of the project’s,
+and the associated Git repository’s, URL or web address.</p>
+<p>If the user belongs to at least one group, the URL’s middle part can
+be chosen in the drop-down field labeled “Project URL”, which defaults
+to the current user’s username. The default, indicated by the user’s
+name, is the location for a user’s projects (and groups). Other options
+in the drop-down list are the groups in which the current user may
+create projects.</p>
+<div id="project-url-and-project-slug" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="project-url-and-project-slug" class="callout-inner">
+<h3 class="callout-title">Project URL and Project Slug</h3>
+<div class="callout-content">
+<p>The two fields under labels “Project URL” and “Project slug” are the
+only fields in this form for which changing the value later might cause
+problems. They determine the URL under which the project’s pages and the
+project’s Git repository can be found, so changing them later might
+brake links and bookmarks as well as connections from Git repositories
+on other systems, for example on contributors’ machines.</p>
+</div>
+</div>
+</div>
+<p>We ignore the field labeled “Project deployment target
+(optional)”.</p>
+<p>The choice under label “Visibility Level” determines the project’s
+visibility.</p>
+<div id="visiblity" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="visiblity" class="callout-inner">
+<h3 class="callout-title">Visiblity</h3>
+<div class="callout-content">
+<p>GitLab offers three settings for the visibility of a project: public,
+internal, and private. Publicly visible projects can be looked at by
+anyone that can access the GitLab instance, projects with internal
+visibility can be looked at by anyone logged in to the instance, while
+projects with private visibility can only be looked at by its
+members.</p>
+<p>On GitLab.com the visibility “internal” is disabled. Everyone can
+create an account, log in to the instance, and thus could look at any
+project of internal visibility anyway.</p>
+<p>Self-hosted instances might also disable some visibility types. For
+example, the public visibility might be disabled, to prevent users from
+publishing something to the whole internet.</p>
+</div>
+</div>
+</div>
+<p>We choose “Private” for our project’s visibility.</p>
+<p>If, as per default, the checkbox “Initialize repository with a
+README” is checked, the project’s repository will be initialized with a
+commit that adds a file called <code>README.md</code>. Otherwise, a the
+project will start with an empty repository. We will add such a file
+later ourselves, so we uncheck the box.</p>
+<div id="readme" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="readme" class="callout-inner">
+<h3 class="callout-title">README</h3>
+<div class="callout-content">
+<p>A project’s README file usually contains basic information about the
+project: what it contains, how it can be used (for example built or
+installed, if it is a software project), how to contribute, how to get
+help, and licensing information.</p>
+<p>It is common to write README files in Markdown format, indicated by
+the filename suffix <code>.md</code>.</p>
+<p>Platforms like GitLab show the contents of a project’s README file on
+its homepage; if it is in Markdown format, in its rendered form.</p>
+</div>
+</div>
+</div>
+<p>We will ignore any other fields that may be visible depending on the
+GitLab instances configuration.</p>
+<p>After clicking the “Create project” button, GitLab creates the
+project and redirects us to the project’s homepage, which looks similar
+to this:</p>
+<figure><img src="fig/new-project.png" alt="Project homepage for a new project" class="figure mx-auto d-block"><div class="figcaption">Fresh project homepage</div>
+</figure><p>The page is split into the menu on the left and the project overview
+on the right.</p>
+<p>The menu leads to pages related to various properties, processes, and
+content of the project. It is visible on each of these pages. The number
+of menu entries may seem overwhelming, in particular when one notices
+that the entries have sub-entries. However, it is not necessary to know
+what hides behind all these entries to use GitLab. Following this
+lesson, we will get to know parts of what lies behind the entries
+“Manage”, “Plan”, “Code”, “Build”, and “Settings”.</p>
+<p>The project overview shows (from the top): The project’s avatar (or
+icon) and name; a prompt to invite team members (we will cover members
+later on); a statement that our repository is currently empty with
+buttons for several options to add content to it; and finally the
+beginning of the instructions on how to push a local repository to this
+project’s repository to fill it with content. We will follow them in
+just a bit.</p>
+<p>The project overview page will look slightly different, once we have
+content in its repository. We will have another look at the page
+then.</p>
+<div id="change-name-description-visibility-or-avatar" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="change-name-description-visibility-or-avatar" class="callout-inner">
+<h3 class="callout-title">Change Name, Description, Visibility, or Avatar</h3>
+<div class="callout-content">
+<p>Click on the “Settings” sub-menu and select its “General” entry. Set
+the description to “My research diary, a collection of Markdown
+files”.</p>
+<p>The project description appears in many lists and on some pages under
+the project’s name.</p>
+<p>Then change any of the project’s name, visibility, or avatar. Do not
+forget to click the “Save changes” button once you are done.</p>
+<p>This exercise should take about 5 minutes.</p>
+</div>
+</div>
+</div>
+<div id="markdown" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="markdown" class="callout-inner">
+<h3 class="callout-title">Markdown</h3>
+<div class="callout-content">
+<p>Markdown is a markup language like HTML, on which the World Wide Web
+is based, or wikitext, which is used to write Wikipedia’s content. Its
+markup directives, indicating for example that something is a headline
+or a list item, are such that they serve their purpose even in the plain
+text form.</p>
+</div>
+</div>
+</div>
+<p>The project overview page presents us with many options to add
+content to the project’s repository directly in GitLab. We will add our
+first file to the project repository in the next section.</p>
+</div>
+<div class="section level3">
+<h3 id="archiving-a-project">Archiving a Project<a class="anchor" aria-label="anchor" href="#archiving-a-project"></a>
+</h3>
+<p>We just went through the beginning of a GitLab project’s life cycle.
+At its end, if it has one, a project gets archived (or deleted). We will
+now go through the process of archiving a project, without completing
+the procedure.</p>
+<p>Using the menu on the left, we navigate to the project’s “General”
+settings.</p>
+<p>At the bottom of the page, we find a section named “Advanced”. We
+click on the “Expand” button right next to it and scroll down the
+page.</p>
+<p>Notice that some of buttons here are not the usual blue or white, but
+rather red. This indicates that we should be careful about clicking
+them. Things might break or get deleted.</p>
+<p>Scrolling back up, we find a section labeled “Archive Project”.
+Clicking the button will not delete the project. Instead it will be
+placed in a read-only mode. Everything will be preserved but nothing can
+be changed anymore. In addition, the project no longer shows up in
+search results and on the page for exploring projects.</p>
+<p>Most of the time archiving a project is preferable to deleting it, in
+particular when it comes to research projects. <strong>Do not archive
+the project now! We will work with it throughout this
+lesson.</strong></p>
+<p>At the bottom of the page is also a section for deleting a project,
+in case you ever think that is the right thing to do.</p>
+</div>
+</section><section><h2 class="section-heading" id="adding-project-members">Adding Project Members<a class="anchor" aria-label="anchor" href="#adding-project-members"></a>
 </h2>
 <hr class="half-width">
-<ul>
-<li>Project members and roles</li>
-<li>Adding users to a GitLab project</li>
-<li>Creating groups and adding users to groups</li>
-</ul>
+<p>So far, each of you has created a GitLab project that no one but you
+can contribute to; depending on the visibility setting, no one but you
+might be able to even see it.</p>
+<p>Git and GitLab can be and is used for one-person projects. But we
+want our colleagues to contribute to our research diary, when they keep
+tabs on our experiments for us on the weekends. To achieve this, we will
+grant others access to our GitLab project.</p>
+<p>Using the menu on the left side of the project homepage (or nearly
+any other project page), we navigate to the project members page
+hovering over or clicking on “Manage” and then clicking on “Members” in
+the submenu. The project member page should look similar to the
+following screenshot:</p>
+<figure><img src="fig/initial-members.png" alt="Project Members page" class="figure mx-auto d-block"><div class="figcaption">Project members page</div>
+</figure><p>On the page we can see the page title, “Project members”, three
+buttons to the left of the title, and a filterable table of members,
+currently only listing ourselves.</p>
+<p>The table shows our full name and account name, why we are a member
+of this project, what our maximum role is–more on that in a bit–, when
+we got access—at the moment we created the project—, a disabled
+membership expiration date widget, and three dates on our activity.</p>
+<p>For practice we will all add an instructor to our project and remove
+them again right away. Click the button labeled “Invite members”, type
+in the username your instructors provided you with into the search
+field, make sure that “Guest” is selected as a role, and click the
+button labeled “Invite”.</p>
+<p>Your instructor should now be listed next to you in the table. Unlike
+in your row, you can change the role and the expiration date of this new
+entry.</p>
+<p>The role determines what the member is allowed to do in the project.
+An owner has full rights, a guest almost none. GitLab’s handbook gives a
+detailed <a href="https://docs.gitlab.com/ee/user/permissions.html" class="external-link">overview</a> of
+the different roles’ permissions.</p>
+<p>Now, we are going to remove the instructor from your project’s
+members again. Click the three dots on the right in the instructor’s
+row, then click on “Remove member”, and finally click the button of the
+same name in the popup dialog. The page reloads itself and the entry
+vanishes from the table.</p>
+<div id="adding-members" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="adding-members" class="callout-inner">
+<h3 class="callout-title">Adding Members</h3>
+<div class="callout-content">
+<p>Get into pairs and add each other with the role “Maintainer” to your
+projects.</p>
+<p>The “Maintainer” role grants just enough permissions for all the
+collaborative tasks we will practice in this lesson.</p>
+<p>This exercise should take about 5 minutes.</p>
+</div>
+</div>
+</div>
 <p>     </p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -5155,7 +5399,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-clean-code"><p>Content from <a href="clean-code.html">Clean Code</a></p>
 <hr>
-<p>Last updated on 2024-12-16 |
+<p>Last updated on 2024-12-17 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/clean-code.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -6095,7 +6339,7 @@ refactor it into “clean” test code?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The above test breaks many of the “clean” tests and “clean” code
 principles:</p>
@@ -6216,24 +6460,20 @@ based on the issues Pylint identifies, weighted by their severity.</p>
 <span id="cb24-32"><a href="#cb24-32" tabindex="-1"></a></span>
 <span id="cb24-33"><a href="#cb24-33" tabindex="-1"></a>main()</span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb25">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="ex">$</span> pylint bad_pylint.py</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="ex">*************</span> Module bad_example</span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="ex">bad_example.py:34:0:</span> C0304: Final newline missing <span class="er">(</span><span class="ex">missing-final-newline</span><span class="kw">)</span></span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="ex">bad_example.py:1:0:</span> C0114: Missing module docstring <span class="er">(</span><span class="ex">missing-module-docstring</span><span class="kw">)</span></span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="ex">bad_example.py:4:0:</span> C0116: Missing function or method docstring <span class="er">(</span><span class="ex">missing-function-docstring</span><span class="kw">)</span></span>
-<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a><span class="ex">bad_example.py:4:0:</span> C0103: Function name <span class="st">"addNumbers"</span> doesn<span class="st">'t conform to snake_case naming style (invalid-name)</span></span>
-<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="st">bad_example.py:4:22: C0321: More than one statement on a single line (multiple-statements)</span></span>
-<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="st">bad_example.py:7:0: C0116: Missing function or method docstring (missing-function-docstring)</span></span>
-<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a><span class="st">bad_example.py:14:0: C0116: Missing function or method docstring (missing-function-docstring)</span></span>
-<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a><span class="st">bad_example.py:20:0: C0116: Missing function or method docstring (missing-function-docstring)</span></span>
-<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a><span class="st">bad_example.py:1:0: W0611: Unused import math (unused-import)</span></span>
-<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a></span>
-<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a><span class="st">-----------------------------------</span></span>
-<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a><span class="st">Your code has been rated at 5.91/10</span></span></code></pre>
-</div>
+<pre class="text"><code>$ pylint bad_pylint.py
+************* Module bad_example
+bad_example.py:34:0: C0304: Final newline missing (missing-final-newline)
+bad_example.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+bad_example.py:4:0: C0116: Missing function or method docstring (missing-function-docstring)
+bad_example.py:4:0: C0103: Function name "addNumbers" doesn't conform to snake_case naming style (invalid-name)
+bad_example.py:4:22: C0321: More than one statement on a single line (multiple-statements)
+bad_example.py:7:0: C0116: Missing function or method docstring (missing-function-docstring)
+bad_example.py:14:0: C0116: Missing function or method docstring (missing-function-docstring)
+bad_example.py:20:0: C0116: Missing function or method docstring (missing-function-docstring)
+bad_example.py:1:0: W0611: Unused import math (unused-import)
+
+-----------------------------------
+Your code has been rated at 5.91/10</code></pre>
 </div>
 </div>
 </div>
@@ -6253,7 +6493,7 @@ based on the issues Pylint identifies, weighted by their severity.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -6299,14 +6539,10 @@ based on the issues Pylint identifies, weighted by their severity.</p>
 <span id="cb26-39"><a href="#cb26-39" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
 <span id="cb26-40"><a href="#cb26-40" tabindex="-1"></a>    main()</span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb27">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">test11</span><span class="kw">)</span> <span class="ex">bcpopescu@TUD264038:~/projects/examples$</span> pylint good_pylint.py</span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="ex">-------------------------------------------------------------------</span></span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="ex">Your</span> code has been rated at 10.00/10 <span class="er">(</span><span class="ex">previous</span> run: 5.91/10, +4.09<span class="kw">)</span></span></code></pre>
-</div>
+<pre class="text"><code>(test11) bcpopescu@TUD264038:~/projects/examples$ pylint good_pylint.py
+
+-------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 5.91/10, +4.09)</code></pre>
 </div>
 </div>
 </div>
@@ -6485,7 +6721,7 @@ book.</p></section>
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/aio.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/aio.html",
-  "dateCreated": "2024-12-16",
+  "dateCreated": "2024-12-17",
   "dateModified": "2024-12-17",
   "datePublished": "2024-12-17"
 }
