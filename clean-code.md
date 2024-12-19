@@ -822,15 +822,34 @@ def test_division():
 
 ## Clean Code Tools
 
-### Python Coding Conventions
 
-- Introduce https://peps.python.org/pep-0008/
-- Advice: select a few rules, and start applying them consistently to your code:
-    - Indentation
-    - Maximum line length
-    - Whitespaces in Expressions and statements
-    - Naming conventions
-- Expand your rule selection
+### PyCharm and Clean Code
+
+Using a modern development environment, such as PyCharm, can greatly facilitate
+writing clean code. In this section we will go over a few ways this can be accomplished.
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Configuring a Python interpreter for a PyCharm project
+
+For a given PyCharm project it is possible to setup a python interpreter,
+as shown below:
+
+![](fig/pycharm_python_interpreter.jpg){alt='Running Pytest from PyCharm'}
+
+The selected interpreter can be the system-wide one, or one selected from a
+virtual environment. Once a Python interpreter has been configured, PyCharm
+will use it to run code (e.g. `.py` files part of that project), or analyze
+the code and provide useful hints to the developer:
+
+![](fig/pycharm_hints.jpg){alt='Running Pytest from PyCharm'}
+
+The figure above shows Pycharm hints in action: in this case the function `divide_numbers()` has not
+yet been defined. PyCharm then marks the place where the undefined function is invoked in the code
+with red underline, so the developer can quickly spot it. Hovering over the underline provides a
+hint, in this case explaining that the function is undefined.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ### Linters - PyLint
@@ -969,30 +988,20 @@ Your code has been rated at 10.00/10 (previous run: 5.91/10, +4.09)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+<!--
+### Python Coding Conventions
 
-### PyCharm and Clean Code
-
-Using a modern development environment, such as PyCharm, can greatly facilitate
-writing clean code. In this section we will go over a few ways this can be accomplished.
-
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-##### Configuring a Python interpreter for a PyCharm project
-
-For a given PyCharm project it is possible to setup a python interpreter,
-as shown below:
-
-![](fig/pycharm_python_interpreter.jpg){alt='Running Pytest from PyCharm'}
-
-The selected interpreter can be the system-wide one, or one selected from a
-virtual environment. Once a Python interpreter has been configured, PyCharm
-will use it to run code (e.g. `.py` files part of that project), or analyze
-the code and provide useful hints to the developer.
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
+- Introduce https://peps.python.org/pep-0008/
+- Advice: select a few rules, and start applying them consistently to your code:
+    - Indentation
+    - Maximum line length
+    - Whitespaces in Expressions and statements
+    - Naming conventions
+- Expand your rule selection
+-->
 
 
-### Unit Tests and Test Coverage
+### Unit Tests
 
 `Pytest` is a simple yet powerful tool for testing Python code. You can write tests as regular functions and run
 them easily. As an example consider this simple function:
@@ -1043,11 +1052,159 @@ Alternatively, `Pytest` can be invoked directly from the PyCharm environment as 
 ![](fig/pytest_pycharm.jpg){alt='Running Pytest from PyCharm'}
 
 
-- Introduce the concept of test coverage
-- Introduce the *coverage.py* tool
-    - how to install it
-    - how to run it
-    - how to visualize test coverage
+### Test Coverage
+
+**Test coverage** is a way to measure how much of your code is tested by your test cases. It helps you understand how
+well your tests are checking the functionality of your program and ensures that your code behaves as expected.
+
+Think of your code as a map, and your tests as explorers. Test coverage tells you how much of the map has been explored.
+If there are unexplored areas (untested code), they might hide bugs or unexpected behaviors.
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Why Test Coverage is Important
+
+- **Finding Bugs Early:** By ensuring most of your code is tested, you can catch issues early in development.
+- **Improved Confidence:** High test coverage makes you more confident that changes to the code won’t break existing functionality.
+- **Code Quality:** Writing tests often leads to better structured and easier-to-maintain code.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Coverage is a Guide, Not a Goal
+
+While high test coverage is beneficial, **it is not a guarantee that your code is bug-free**. It is possible to have 100%
+coverage and still miss edge cases or logical errors. Focus on writing meaningful tests that cover real-world scenarios.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+### The **coverage.py** Tool
+
+**coverage.py** is a commonly-used Python tool for measuring test coverage. It helps you understand how much of your
+code is executed during tests and identifies untested parts. It is lightweight, easy to use, and integrates well with
+various testing frameworks like pytest.
+
+##### Installing coverage.py
+
+To use *coverage.py* you will need to install it first. This can be easily done using *pip*:
+
+```bash
+pip install coverage
+```
+
+You can then verify the installation:
+
+```bash
+coverage --version
+```
+``` output
+Coverage.py, version 7.4.3 with C extension
+Full documentation is at https://coverage.readthedocs.io/en/7.4.3
+```
+
+##### Running coverage.py
+
+For this section, we will use a simple example, where we are developing a *math_utils.py* library:
+
+```python
+# math_utils.py
+
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b == 0:
+        raise ValueError("Cannot divide by zero")
+    return a / b
+```
+
+which we then test using unit tests in a *test_math_utils.py* file:
+
+```python
+# test_math_utils.py
+
+from math_utils import add, subtract, multiply, divide
+import pytest
+
+def test_add():
+    assert add(2, 3) == 5
+
+def test_subtract():
+    assert subtract(0, 1) == -1
+
+def test_multiply():
+    assert multiply(2, 3) == 6
+
+def test_divide():
+    assert divide(-6, 2) == -3
+```
+
+
+The *coverage.py* tool is typically used in conjunction with a testing framework, such as *pytest*; to use the tool,
+instead of running your tests directly (e.g. with `pytest`), use `coverage run` instead:
+
+```bash
+coverage run -m pytest
+```
+
+```output
+$ coverage run -m pytest
+============================= test session starts =============================
+platform win32 -- Python 3.8.8, pytest-8.1.1, pluggy-1.4.0
+rootdir: C:\projects\programming_course\prosoftdev-research\coverage
+plugins: anyio-4.3.0, flaky-3.8.0, cov-4.1.0, mock-3.12.0
+collected 4 items
+
+test_math_utils.py ....                                                  [100%]
+
+```
+
+Once you have run the *coverage.py* tool, it is possible to generate a coverage report:
+
+```bash
+coverage report
+```
+
+```output
+$ coverage report
+Name                 Stmts   Miss  Cover
+----------------------------------------
+math_utils.py           10      1    90%
+test_math_utils.py      10      0   100%
+----------------------------------------
+TOTAL                   20      1    95%
+
+```
+
+As you can see, in this (simple) case we have achieved a very high coverage ratio with relative ease.
+
+##### Visualizing test coverage
+
+To make the results more user-friendly, *coverage.py* can generate an HTML report.
+
+```bash
+coverage html
+```
+
+This creates a directory named *htmlcov* containing detailed coverage reports. To visualize the report, you
+need to open the *index.html* file in the *htmlcov* directory:
+
+![](fig/coverage_overview.jpg){alt='HTML coverage overview'}
+
+Even more useful, you can drill down to the test coverage of individual files, by clicking on the file name in
+the overview. This shows the test coverage at the level of lines of code:
+
+![](fig/coverage_per_file.jpg){alt='HTML coverage per file'}
+
+By using such visual tools you can quickly zoom on untested parts of your codebase, so that you can add additional tests
+for covering them.
 
 
 ## Clean Code/Refactoring Exercise
