@@ -347,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Clean Code</h1>
-        <p>Last updated on 2024-12-17 |
+        <p>Last updated on 2024-12-19 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/clean-code.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -1258,7 +1258,7 @@ refactor it into “clean” test code?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The above test breaks many of the “clean” tests and “clean” code
 principles:</p>
@@ -1325,12 +1325,12 @@ based on the issues Pylint identifies, weighted by their severity.</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="ex">pip</span> install pylint</span></code></pre>
 </div>
-<div id="running-pyling-on-a-sample-program" class="callout">
+<div id="running-pylint-on-a-sample-program" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="running-pyling-on-a-sample-program" class="callout-inner">
-<h3 class="callout-title">Running Pyling on a sample program</h3>
+<div id="running-pylint-on-a-sample-program" class="callout-inner">
+<h3 class="callout-title">Running Pylint on a sample program</h3>
 <div class="callout-content">
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1402,7 +1402,7 @@ Your code has been rated at 5.91/10</code></pre>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1459,13 +1459,27 @@ Your code has been rated at 10.00/10 (previous run: 5.91/10, +4.09)</code></pre>
 </div>
 <div class="section level3">
 <h3 id="pycharm-and-clean-code">PyCharm and Clean Code<a class="anchor" aria-label="anchor" href="#pycharm-and-clean-code"></a></h3>
-<ul><li>Introduce PyCharm, show how to setup a Python interpreter for a
-project</li>
-<li>Show how PyCharm is highlighting parts of the code that do not
-follow coding conventions</li>
-<li>Show how PyCharm can help with re-factoring - e.g. changing a
-variable/function name</li>
-</ul></div>
+<p>Using a modern development environment, such as PyCharm, can greatly
+facilitate writing clean code. In this section we will go over a few
+ways this can be accomplished.</p>
+<div id="configuring-a-python-interpreter-for-a-pycharm-project" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="configuring-a-python-interpreter-for-a-pycharm-project" class="callout-inner">
+<h3 class="callout-title">Configuring a Python interpreter for a PyCharm project</h3>
+<div class="callout-content">
+<p>For a given PyCharm project it is possible to setup a python
+interpreter, as shown below:</p>
+<figure><img src="fig/pycharm_python_interpreter.jpg" alt="Running Pytest from PyCharm" class="figure mx-auto d-block"></figure><p>The selected interpreter can be the system-wide one, or one selected
+from a virtual environment. Once a Python interpreter has been
+configured, PyCharm will use it to run code (e.g. <code>.py</code> files
+part of that project), or analyze the code and provide useful hints to
+the developer.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="section level3">
 <h3 id="unit-tests-and-test-coverage">Unit Tests and Test Coverage<a class="anchor" aria-label="anchor" href="#unit-tests-and-test-coverage"></a></h3>
 <p><code>Pytest</code> is a simple yet powerful tool for testing Python
@@ -1605,9 +1619,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/clean-code.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/clean-code.html",
-  "dateCreated": "2024-12-17",
-  "dateModified": "2024-12-17",
-  "datePublished": "2024-12-17"
+  "dateCreated": "2024-12-19",
+  "dateModified": "2024-12-19",
+  "datePublished": "2024-12-19"
 }
 
   </script><script>
