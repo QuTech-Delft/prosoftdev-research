@@ -850,7 +850,7 @@ pip install pylint
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-##### Running Pyling on a sample program
+##### Running Pylint on a sample program
 
 ```python
 # bad_pylint.py
@@ -972,9 +972,25 @@ Your code has been rated at 10.00/10 (previous run: 5.91/10, +4.09)
 
 ### PyCharm and Clean Code
 
-- Introduce PyCharm, show how to setup a Python interpreter for a project
-- Show how PyCharm is highlighting parts of the code that do not follow coding conventions
-- Show how PyCharm can help with re-factoring - e.g. changing a variable/function name
+Using a modern development environment, such as PyCharm, can greatly facilitate
+writing clean code. In this section we will go over a few ways this can be accomplished.
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Configuring a Python interpreter for a PyCharm project
+
+For a given PyCharm project it is possible to setup a python interpreter,
+as shown below:
+
+![](fig/pycharm_python_interpreter.jpg){alt='Running Pytest from PyCharm'}
+
+The selected interpreter can be the system-wide one, or one selected from a
+virtual environment. Once a Python interpreter has been configured, PyCharm
+will use it to run code (e.g. `.py` files part of that project), or analyze
+the code and provide useful hints to the developer.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ### Unit Tests and Test Coverage
 
