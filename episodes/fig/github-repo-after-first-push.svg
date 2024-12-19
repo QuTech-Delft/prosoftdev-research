@@ -20,7 +20,7 @@
    xml:space="preserve"
    id="svg4593"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="github-repo-after-first-push.svg"><metadata
+   sodipodi:docname="gitlab-repo-after-first-push.svg"><metadata
      id="metadata4778"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
@@ -126,7 +126,7 @@
                y="21.6"
                font-size="10.8"
                id="tspan4664"
-               style="font-size:10.80000019px;font-family:Consolas">origin https://github.com/alflin/recipes.git</tspan></text>
+               style="font-size:10.80000019px;font-family:Consolas">origin https://gitlab.tudelft.nl/alflin/recipes.git</tspan></text>
 </g><rect
            x="16"
            y="19"
@@ -390,7 +390,7 @@
            x="16"
            id="text4829"
            font-size="13.5"
-           style="font-size:13.5px;font-family:Helvetica">https://github.com/alflin/recipes.git</text>
+           style="font-size:13.5px;font-family:Helvetica">https://gitlab.tudelft.nl/alflin/recipes.git</text>
 <g
            transform="translate(0,250)"
            id="g5055"><g
