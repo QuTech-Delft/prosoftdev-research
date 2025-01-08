@@ -348,7 +348,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>GitLab</h1>
-        <p>Last updated on 2024-12-19 |
+        <p>Last updated on 2025-01-08 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/gitlab.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -578,6 +578,7 @@ text form.</p>
 <p>The project overview page presents us with many options to add
 content to the project’s repository directly in GitLab. We will add our
 first file to the project repository in the next section.</p>
+<p> </p>
 </div>
 <div class="section level3">
 <h3 id="archiving-a-project">Archiving a Project<a class="anchor" aria-label="anchor" href="#archiving-a-project"></a></h3>
@@ -613,9 +614,10 @@ local Git repo. The first step here is to follow the steps described in
 the previous section, and create a new GitLab project called ‘recipes’.
 Initially the Git repo for this GitLab project will be empty, as shown
 in the diagram below:</p>
-<figure><img src="../fig/git-freshly-made-gitlab-repo.svg" alt="The local and remote Git repos" class="figure mx-auto d-block"></figure><div class="section level3">
+<figure><img src="../fig/git-freshly-made-gitlab-repo.svg" alt="The local and remote Git repos" class="figure mx-auto d-block"></figure><p> </p>
+<div class="section level3">
 <h3 id="connecting-the-local-to-remote-repository">Connecting the local to remote repository<a class="anchor" aria-label="anchor" href="#connecting-the-local-to-remote-repository"></a></h3>
-<p>Now we connect the two repositories. We do this by making the GitHub
+<p>Now we connect the two repositories. We do this by making the GitLab
 repository a <a href="reference.html#remote">remote</a> for the local
 repository. Go to the home page of the repository on GitLab, click on
 the blue <code>Code</code> button, and copy the string below the
@@ -647,7 +649,7 @@ the only difference should be your username instead of
 <code>alflin</code>.</p>
 <p><code>origin</code> is a local name used to refer to the remote
 repository. It could be called anything, but <code>origin</code> is a
-convention that is often used by default in git and GitHub, so it’s
+convention that is often used by default in git and GitLab, so it’s
 helpful to stick with this unless there’s a reason not to.</p>
 <p>We can check that the command has worked by running
 <code>git remote -v</code>:</p>
@@ -662,6 +664,7 @@ helpful to stick with this unless there’s a reason not to.</p>
 <pre class="output" tabindex="0"><code>origin   git@gitlab.tudelft.nl:alflin/recipes.git (fetch)
 origin   git@gitlab.tudelft.nl:alflin/recipes.git (push)</code></pre>
 </div>
+<p> </p>
 </div>
 <div class="section level3">
 <h3 id="ssh-background-and-setup">SSH Background and Setup<a class="anchor" aria-label="anchor" href="#ssh-background-and-setup"></a></h3>
@@ -679,10 +682,10 @@ public key, and the other key called the private key is kept private.
 Very descriptive names.</p>
 <p>You can think of the public key as a padlock, and only you have the
 key (the private key) to open it. You use the public key where you want
-a secure method of communication, such as your GitHub account. You give
+a secure method of communication, such as your GitLab account. You give
 this padlock, or public key, to GitLab and say “lock the communications
 to my account with this so that only computers that have my private key
-can unlock communications and send git commands as my GitHub
+can unlock communications and send git commands as my GitLab
 account.”</p>
 <p>What we will do now is the minimum required to set up the SSH keys
 and add the public key to a GitLab account.</p>
@@ -803,11 +806,13 @@ drwxr-xr-x 1 Alfredo   197121   0 Jul 16 14:48 ../
 -rw-r--r-- 1 Alfredo   197121 419 Jul 16 14:48 id_ed25519
 -rw-r--r-- 1 Alfredo   197121 106 Jul 16 14:48 id_ed25519.pub</code></pre>
 </div>
+<p> </p>
 </div>
-<div class="section level5">
-<h5 id="copy-the-public-key-to-github">Copy the public key to GitHub<a class="anchor" aria-label="anchor" href="#copy-the-public-key-to-github"></a></h5>
+</div>
+<div class="section level3">
+<h3 id="copy-the-public-key-to-gitlab">Copy the public key to GitLab<a class="anchor" aria-label="anchor" href="#copy-the-public-key-to-gitlab"></a></h3>
 <p>Now we have a SSH key pair and we can run this command to check if
-GitHub can read our authentication.</p>
+GitLab can read our authentication.</p>
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -861,13 +866,13 @@ the command line.</p>
 </div>
 <p>Good! This output confirms that the SSH key works as intended. We are
 now ready to push our work to the remote repository.</p>
-</div>
+<p> </p>
 </div>
 <div class="section level3">
 <h3 id="push-local-changes-to-a-remote">Push local changes to a remote<a class="anchor" aria-label="anchor" href="#push-local-changes-to-a-remote"></a></h3>
 <p>Now that authentication is setup, we can return to the remote. This
 command will push the changes from our local repository to the
-repository on GitHub:</p>
+repository on GitLab:</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -934,7 +939,7 @@ Already up-to-date.</code></pre>
 </div>
 <p>Pulling has no effect in this case because the two repositories are
 already synchronized. If someone else had pushed some changes to the
-repository on GitHub, though, this command would download them to our
+repository on GitLab, though, this command would download them to our
 local repository.</p>
 </div>
 </section><section><h2 class="section-heading" id="adding-project-members">Adding Project Members<a class="anchor" aria-label="anchor" href="#adding-project-members"></a></h2>
@@ -1076,9 +1081,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/gitlab.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/gitlab.html",
-  "dateCreated": "2024-12-19",
-  "dateModified": "2024-12-19",
-  "datePublished": "2025-01-07"
+  "dateCreated": "2025-01-08",
+  "dateModified": "2025-01-08",
+  "datePublished": "2025-01-08"
 }
 
   </script><script>

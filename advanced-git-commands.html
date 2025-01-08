@@ -254,6 +254,7 @@
       <div class="accordion-body">
         <ul><li><a href="#collaborating">Collaborating</a></li>
 <li><a href="#solving-conflicts">Solving Conflicts</a></li>
+<li><a href="#git-branches">Git Branches</a></li>
 <li><a href="#hands-on-project">Hands-on Project</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
@@ -346,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Advanced Git Commands</h1>
-        <p>Last updated on 2024-12-12 |
+        <p>Last updated on 2025-01-08 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/advanced-git-commands.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -1290,6 +1291,353 @@ started.</p>
 </div>
 </div>
 </div>
+</div>
+</section><section><h2 class="section-heading" id="git-branches">Git Branches<a class="anchor" aria-label="anchor" href="#git-branches"></a></h2>
+<hr class="half-width"><p>When we do <code>git status</code>, Git also tells us that we are
+currently on the <code>main</code> branch of the project. A branch is
+one version of your project (the files in your repository) that can
+contain its own set of commits. We can create a new branch, make changes
+to the code which we then commit to the branch, and, once we are happy
+with those changes, merge them back to the main branch. To see what
+other branches are available, do:</p>
+<div class="codewrapper sourceCode" id="cb57">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a><span class="ex">$</span> git branch</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>* main</code></pre>
+</div>
+<p>At the moment, there is only one branch (<code>main</code>) and hence
+only one version of the code available. When you create a Git repository
+for the first time, by default you only get one version (i.e. branch) -
+<code>main</code>. Let us have a look at why having different branches
+might be useful.</p>
+<p> </p>
+<div class="section level3">
+<h3 id="feature-branch-software-development-workflow">Feature Branch Software Development Workflow<a class="anchor" aria-label="anchor" href="#feature-branch-software-development-workflow"></a></h3>
+<p>While it is technically OK to commit your changes directly to
+<code>main</code> branch, and you may often find yourself doing so for
+some minor changes, the best practice is to use a new branch for each
+separate and self-contained unit/piece of work you want to add to the
+project. This unit of work is also often called a <em>feature</em> and
+the branch where you develop it is called a <em>feature branch</em>.
+Each feature branch should have its own meaningful name - indicating its
+purpose (e.g. “issue23-fix”). If we keep making changes and pushing them
+directly to <code>main</code> branch on GitLab, then anyone who
+downloads our software from there will get all of our work in progress -
+whether or not it is ready to use! So, working on a separate branch for
+each feature you are adding is good for several reasons:</p>
+<ul><li>it enables the main branch to remain stable while you and the team
+explore and test the new code on a feature branch,</li>
+<li>it enables you to keep the untested and not-yet-functional feature
+branch code under version control and backed up,</li>
+<li>you and other team members may work on several features at the same
+time independently from one another, and</li>
+<li>if you decide that the feature is not working or is no longer needed
+- you can easily and safely discard that branch without affecting the
+rest of the code.</li>
+</ul><p>Branches are commonly used as part of a feature-branch workflow,
+shown in the diagram below.</p>
+<figure><img src="fig/git-feature-branch.svg" class="image-with-shadow figure mx-auto d-block" alt="Git feature branch workflow diagram" width="800"></figure><p style="text-align: center;">
+Git feature branches<br> Adapted from
+<a href="https://sillevl.gitbooks.io/git/content/collaboration/workflows/gitflow/" target="_blank" class="external-link">Git
+Tutorial by sillevl</a> (Creative Commons Attribution 4.0 International
+License)
+</p>
+<p>In the software development workflow, we typically have a main branch
+which is the version of the code that is tested, stable and reliable.
+Then, we normally have a development branch (called <code>develop</code>
+or <code>dev</code> by convention) that we use for work-in-progress
+code. As we work on adding new features to the code, we create new
+feature branches that first get merged into <code>develop</code> after a
+thorough testing process. After even more testing - <code>develop</code>
+branch will get merged into <code>main</code>. The points when feature
+branches are merged to <code>develop</code>, and <code>develop</code> to
+<code>main</code> depend entirely on the practice/strategy established
+in the team. For example, for smaller projects (e.g. if you are working
+alone on a project or in a very small team), feature branches sometimes
+get directly merged into <code>main</code> upon testing, skipping the
+<code>develop</code> branch step. In other projects, the merge into
+<code>main</code> happens only at the point of making a new software
+release. Whichever is the case for you, a good rule of thumb is -
+<strong>nothing that is broken should be in
+<code>main</code></strong>.</p>
+<p> </p>
+</div>
+<div class="section level3">
+<h3 id="creating-branches">Creating Branches<a class="anchor" aria-label="anchor" href="#creating-branches"></a></h3>
+<p>Let us create a <code>develop</code> branch to work on:</p>
+<div class="codewrapper sourceCode" id="cb59">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a><span class="ex">$</span> git branch develop</span></code></pre>
+</div>
+<p>This command does not give any output, but if we run
+<code>git branch</code> again, without giving it a new branch name, we
+can see the list of branches we have - including the new one we have
+just made.</p>
+<div class="codewrapper sourceCode" id="cb60">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a><span class="ex">$</span> git branch</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>    develop
+  * main</code></pre>
+</div>
+<p>The <code>*</code> indicates the currently active branch. So how do
+we switch to our new branch? We use the <code>git switch</code> command
+with the name of the branch:</p>
+<div class="codewrapper sourceCode" id="cb62">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb62-1"><a href="#cb62-1" tabindex="-1"></a><span class="ex">$</span> git switch develop</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Switched to branch 'develop'</code></pre>
+</div>
+<div id="create-and-switch-to-branch-shortcut" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="create-and-switch-to-branch-shortcut" class="callout-inner">
+<h3 class="callout-title">Create and Switch to Branch Shortcut</h3>
+<div class="callout-content">
+<p>A shortcut to create a new branch and immediately switch to it:</p>
+<div class="codewrapper sourceCode" id="cb64">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb64-1"><a href="#cb64-1" tabindex="-1"></a><span class="ex">$</span> git switch <span class="at">-c</span> develop</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<p> </p>
+</div>
+<div class="section level3">
+<h3 id="updating-branches">Updating Branches<a class="anchor" aria-label="anchor" href="#updating-branches"></a></h3>
+<p>If we start updating and committing files now, the commits will
+happen on the <code>develop</code> branch and will not affect the
+version of the code in <code>main</code>. We add and commit things to
+<code>develop</code> branch in the same way as we do to
+<code>main</code>.</p>
+<p>Let us make a small modification to <code>guacamole.md</code> and,
+say, change <em>“peel the avocados”</em> to <em>“Peel the avocados”</em>
+to see updating branches in action.</p>
+<p>If we do:</p>
+<div class="codewrapper sourceCode" id="cb65">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>   On branch develop
+   Changes not staged for commit:
+     (use "git add &lt;file&gt;..." to update what will be committed)
+     (use "git restore &lt;file&gt;..." to discard changes in working directory)
+
+   	modified:   guacamole.md
+
+   no changes added to commit (use "git add" and/or "git commit -a")</code></pre>
+</div>
+<p>Git is telling us that we are on branch <code>develop</code> and
+which tracked files have been modified in our working directory.</p>
+<p>We can now <code>add</code> and <code>commit</code> the changes in
+the usual way.</p>
+<div class="codewrapper sourceCode" id="cb67">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a><span class="ex">$</span> git add guacamole.md</span>
+<span id="cb67-2"><a href="#cb67-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Capitalization fix"</span></span></code></pre>
+</div>
+<div id="currently-active-branch" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="currently-active-branch" class="callout-inner">
+<h3 class="callout-title">Currently Active Branch</h3>
+<div class="callout-content">
+<p>Remember, <code>add</code> and <code>commit</code> commands always
+act on the currently active branch. You have to be careful and aware of
+which branch you are working with at any given moment.
+<code>git status</code> can help with that, and you will find yourself
+invoking it very often.</p>
+</div>
+</div>
+</div>
+<p> </p>
+</div>
+<div class="section level3">
+<h3 id="pushing-new-branch-remotely">Pushing New Branch Remotely<a class="anchor" aria-label="anchor" href="#pushing-new-branch-remotely"></a></h3>
+<p>We push the contents of the <code>develop</code> branch to GitLab in
+the same way as we pushed the <code>main</code> branch. However, as we
+have just created this branch locally, it still does not exist in our
+remote repository. You can check that in GitLab by listing all
+branches.</p>
+<figure><img src="fig/gitlab-main-branch.jpg" class="image-with-shadow figure mx-auto d-block" alt="Software project's main branch" width="600"></figure><p>To push a new local branch remotely for the first time, you could use
+the <code>-u</code> flag and the name of the branch you are creating and
+pushing to:</p>
+<div class="codewrapper sourceCode" id="cb68">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a><span class="ex">$</span> git push <span class="at">-u</span> origin develop</span></code></pre>
+</div>
+<div id="git-push-with--u-flag" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="git-push-with--u-flag" class="callout-inner">
+<h3 class="callout-title">Git Push With <code>-u</code> Flag</h3>
+<div class="callout-content">
+<p>Using the <code>-u</code> switch with the <code>git push</code>
+command is a handy shortcut for: (1) creating the new remote branch and
+(2) setting your local branch to automatically track the remote one at
+the same time. You need to use the <code>-u</code> switch only once to
+set up that association between your branch and the remote one
+explicitly. After that you could simply use <code>git push</code>
+without specifying the remote repository, if you wished so. We still
+prefer to explicitly state this information in commands.</p>
+</div>
+</div>
+</div>
+<p>Let us confirm that the new branch <code>develop</code> now exist
+remotely on GitLab too. From your repository main page in GitLab, click
+the branch dropdown menu (currently showing the default branch
+<code>main</code>). You should see your <code>develop</code> branch in
+the list too.</p>
+<figure><img src="fig/gitlab-develop-branch.jpg" class="image-with-shadow figure mx-auto d-block" alt="Software project's develop branch" width="600"></figure><p>You may also have noticed GitLab’s notification about the latest push
+to your <code>develop</code> branch just on top of the repository files
+and branches drop-down menu.</p>
+<p>Now the others can check out the <code>develop</code> branch too and
+continue to develop code on it.</p>
+<p>After the initial push of the new branch, each next time we push to
+it in the usual manner (i.e. without the <code>-u</code> switch):</p>
+<div class="codewrapper sourceCode" id="cb69">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1" tabindex="-1"></a><span class="ex">$</span> git push origin develop</span></code></pre>
+</div>
+<div id="what-is-the-relationship-between-originating-and-new-branches" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="what-is-the-relationship-between-originating-and-new-branches" class="callout-inner">
+<h3 class="callout-title">What is the Relationship Between Originating and New Branches?</h3>
+<div class="callout-content">
+<p>It is natural to think that new branches have a parent/child
+relationship with their originating branch, but in actual Git terms,
+branches themselves do not have parents but single commits do. Any
+commit can have zero parents (a root, or initial, commit), one parent (a
+regular commit), or multiple parents (a merge commit), and using this
+structure, we can build a ‘view’ of branches from a set of commits and
+their relationships. A common way to look at it is that Git branches are
+really only <a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell" class="external-link">lightweight,
+movable pointers to commits</a>. So as a new commit is added to a
+branch, the branch pointer is moved to the new commit.</p>
+<p>What this means is that when you accomplish a merge between two
+branches, Git is able to determine the common ‘commit ancestor’ through
+the commits in a ‘branch’, and use that common ancestor to determine
+which commits need to be merged onto the destination branch. It also
+means that, in theory, you could merge any branch with any other at any
+time… although it may not make sense to do so!</p>
+</div>
+</div>
+</div>
+<p> </p>
+</div>
+<div class="section level3">
+<h3 id="merging-into-main-branch">Merging Into Main Branch<a class="anchor" aria-label="anchor" href="#merging-into-main-branch"></a></h3>
+<p>Once you have tested your changes on the <code>develop</code> branch,
+you will want to merge them onto the <code>main</code> branch. To do so,
+make sure you have committed all your changes on the
+<code>develop</code> branch and then switch to <code>main</code>:</p>
+<div class="codewrapper sourceCode" id="cb70">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a><span class="ex">$</span> git switch main</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Switched to branch 'main'
+Your branch is up to date with 'origin/main'.</code></pre>
+</div>
+<p>To merge the <code>develop</code> branch on top of <code>main</code>
+do:</p>
+<div class="codewrapper sourceCode" id="cb72">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a><span class="ex">$</span> git merge develop</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Updating 80d6975..a96062c
+Fast-forward
+ guacamole.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)</code></pre>
+</div>
+<p>If there are no conflicts, Git will merge the branches without
+complaining and replay all commits from <code>develop</code> on top of
+the last commit from <code>main</code>. If there are merge conflicts
+(e.g. a team collaborator modified the same portion of the same file you
+are working on and checked in their changes before you), the particular
+files with conflicts will be marked and you will need to resolve those
+conflicts and commit the changes before attempting to merge again. Since
+we have no conflicts, we can now push the <code>main</code> branch to
+the remote repository:</p>
+<div class="codewrapper sourceCode" id="cb74">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
+</div>
+<div id="all-branches-are-equal" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="all-branches-are-equal" class="callout-inner">
+<h3 class="callout-title">All Branches Are Equal</h3>
+<div class="callout-content">
+<p>In Git, all branches are equal - there is nothing special about the
+<code>main</code> branch. It is called that by convention and is created
+by default, but it can also be called something else. A good example is
+<code>gh-pages</code> branch which is often the source branch for
+website projects hosted on GitHub (rather than <code>main</code>).</p>
+</div>
+</div>
+</div>
+<div id="keeping-main-branch-stable" class="callout testimonial">
+<div class="callout-square">
+<i class="callout-icon" data-feather="heart"></i>
+</div>
+<div id="keeping-main-branch-stable" class="callout-inner">
+<h3 class="callout-title">Keeping Main Branch Stable</h3>
+<div class="callout-content">
+<p>Good software development practice is to keep the <code>main</code>
+branch stable while you and the team develop and test new
+functionalities on feature branches (which can be done in parallel and
+independently by different team members). The next step is to merge
+feature branches onto the <code>develop</code> branch, where more
+testing can occur to verify that the new features work well with the
+rest of the code (and not just in isolation). We talk more about
+different types of code testing in one of the following episodes.</p>
+</div>
+</div>
+</div>
+<p> </p>
+</div>
+<div class="section level3">
+<h3 id="merge-requests-in-gitlab">Merge Requests in GitLab<a class="anchor" aria-label="anchor" href="#merge-requests-in-gitlab"></a></h3>
+<p>   </p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1306,9 +1654,14 @@ same file.</li>
 <li>The version control system does not allow people to overwrite each
 other’s changes blindly, but highlights conflicts so that they can be
 resolved.</li>
+<li>A branch is one version of your project that can contain its own set
+of commits.</li>
+<li>Feature branches enable us to develop / explore / test new code
+features without affecting the stable <code>main</code> code.</li>
 </ul></div>
 </div>
 </div>
+<p>   </p>
 </div>
 </section><section><h2 class="section-heading" id="hands-on-project">Hands-on Project<a class="anchor" aria-label="anchor" href="#hands-on-project"></a></h2>
 <hr class="half-width"><ul><li>Work in groups of two</li>
@@ -1384,9 +1737,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/advanced-git-commands.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/advanced-git-commands.html",
-  "dateCreated": "2024-12-19",
-  "dateModified": "2024-12-12",
-  "datePublished": "2025-01-07"
+  "dateCreated": "2025-01-08",
+  "dateModified": "2025-01-08",
+  "datePublished": "2025-01-08"
 }
 
   </script><script>
