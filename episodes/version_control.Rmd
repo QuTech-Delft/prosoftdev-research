@@ -223,16 +223,9 @@ which means that any changes pushed to
 another Git host server
 after this lesson will include this information.
 
-For this lesson, we will be interacting with [GitHub](https://github.com/) and so the email address used should be the same as the one used when setting up your GitHub account. If you are concerned about privacy, please review [GitHub's instructions for keeping your email address private][git-privacy].
+For this lesson, we will be interacting with TU Delft [GitLab instance] and so the email address
+used should be your TUD email.
 
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-### Keeping your email private
-
-If you elect to use a private email address with GitHub, then use GitHub's no-reply email address for the `user.email` value. It looks like `ID+username@users.noreply.github.com`. You can look up your own address in your GitHub [email settings](https://github.com/settings/emails).
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -637,6 +630,7 @@ then selecting `Git` from the pop-up menu.
 [SmartGit]: https://www.syntevo.com/smartgit/
 [PyCharm]: https://www.jetbrains.com/pycharm/
 [VSCode]: https://code.visualstudio.com/
+[GitLab instance]: https://gitlab.tudelft.nl/
 
 
 

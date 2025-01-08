@@ -782,7 +782,7 @@ no longer exists.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## A Typical Work Session
+### A Typical Work Session
 
 You sit down at your computer to work on a shared project that is tracked in a
 remote Git repository. During your work session, you take the following
@@ -812,7 +812,7 @@ started.
 
 :::::::::::::::  solution
 
-## Solution
+### Solution
 
 | order | action . . . . . .         | command . . . . . . . . . . . . . . . . . . . |
 | ----- | -------------------------- | --------------------------------------------- |
@@ -827,14 +827,314 @@ started.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Git Branches
+
+When we do `git status`,
+Git also tells us that we are currently on the `main` branch of the project.
+A branch is one version of your project (the files in your repository) that can contain its own set of commits.
+We can create a new branch, make changes to the code which we then commit to the branch,
+and, once we are happy with those changes, merge them back to the main branch.
+To see what other branches are available, do:
+
+```bash
+$ git branch
+```
+
+```output
+* main
+```
+
+At the moment, there is only one branch (`main`) and hence only one version of the code available.
+When you create a Git repository for the first time, by default you only get one version (i.e. branch) - `main`.
+Let us have a look at why having different branches might be useful.
+
+&nbsp;
+
+### Feature Branch Software Development Workflow
+
+While it is technically OK to commit your changes directly to `main` branch,
+and you may often find yourself doing so for some minor changes,
+the best practice is to use a new branch for each separate and self-contained unit/piece of work
+you want to add to the project. This unit of work is also often called a *feature*
+and the branch where you develop it is called a *feature branch*.
+Each feature branch should have its own meaningful name - indicating its purpose (e.g. "issue23-fix").
+If we keep making changes and pushing them directly to `main` branch on GitLab, then anyone who downloads our software
+from there will get all of our work in progress - whether or not it is ready to use!
+So, working on a separate branch for each feature you are adding is good for several reasons:
+
+- it enables the main branch to remain stable while you and the team explore and test the new code on a feature branch,
+- it enables you to keep the untested and not-yet-functional feature branch code under version control and backed up,
+- you and other team members may work on several features at the same time independently from one another, and
+- if you decide that the feature is not working or is no longer needed -
+  you can easily and safely discard that branch without affecting the rest of the code.
+
+Branches are commonly used as part of a feature-branch workflow, shown in the diagram below.
+
+![](fig/git-feature-branch.svg){alt='Git feature branch workflow diagram' .image-with-shadow width="800px"}
+
+<p style="text-align: center;">Git feature branches<br>
+Adapted from <a href="https://sillevl.gitbooks.io/git/content/collaboration/workflows/gitflow/" target="_blank">Git Tutorial by sillevl</a> (Creative Commons Attribution 4.0 International License)</p>
+
+In the software development workflow, we typically have a main branch which is the version of the code that is
+tested, stable and reliable. Then, we normally have a development branch (called `develop` or `dev` by convention)
+that we use for work-in-progress code. As we work on adding new features to the code, we create new feature branches
+that first get merged into `develop` after a thorough testing process. After even more testing - `develop` branch will
+get merged into `main`. The points when feature branches are merged to `develop`,
+and `develop` to `main` depend entirely on the practice/strategy established in the team.
+For example, for smaller projects (e.g. if you are working alone on a project or in a very small team),
+feature branches sometimes get directly merged into `main` upon testing, skipping the `develop` branch step.
+In other projects, the merge into `main` happens only at the point of making a new software release.
+Whichever is the case for you, a good rule of thumb is - **nothing that is broken should be in `main`**.
+
+&nbsp;
+
+### Creating Branches
+
+Let us create a `develop` branch to work on:
+
+```bash
+$ git branch develop
+```
+
+This command does not give any output, but if we run `git branch` again, without giving it a new branch name, we can
+see the list of branches we have - including the new one we have just made.
+
+```bash
+$ git branch
+```
+
+```output
+    develop
+  * main
+```
+
+The `*` indicates the currently active branch. So how do we switch to our new branch?
+We use the `git switch` command with the name of the branch:
+
+```bash
+$ git switch develop
+```
+
+```output
+Switched to branch 'develop'
+```
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Create and Switch to Branch Shortcut
+
+A shortcut to create a new branch and immediately switch to it:
+
+```bash
+$ git switch -c develop
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+&nbsp;
+
+### Updating Branches
+
+If we start updating and committing files now, the commits will happen on the `develop` branch and will not affect the
+version of the code in `main`. We add and commit things to `develop` branch in the same way as we do to `main`.
+
+Let us make a small modification to `guacamole.md` and, say, change *"peel the avocados"* to *"Peel the avocados"*
+to see updating branches in action.
+
+If we do:
+
+```bash
+$ git status
+```
+
+```output
+   On branch develop
+   Changes not staged for commit:
+     (use "git add <file>..." to update what will be committed)
+     (use "git restore <file>..." to discard changes in working directory)
+
+   	modified:   guacamole.md
+
+   no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+Git is telling us that we are on branch `develop` and which tracked files have been modified in our working directory.
+
+We can now `add` and `commit` the changes in the usual way.
+
+```bash
+$ git add guacamole.md
+$ git commit -m "Capitalization fix"
+```
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Currently Active Branch
+
+Remember, `add` and `commit` commands always act on the currently active branch.
+You have to be careful and aware of which branch you are working with at any given moment.
+`git status` can help with that, and you will find yourself invoking it very often.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+&nbsp;
+
+### Pushing New Branch Remotely
+
+We push the contents of the `develop` branch to GitLab in the same way as we pushed the `main` branch.
+However, as we have just created this branch locally, it still does not exist in our remote repository.
+You can check that in GitLab by listing all branches.
+
+![](fig/gitlab-main-branch.jpg){alt="Software project's main branch" .image-with-shadow width="600px"}
+
+To push a new local branch remotely for the first time, you could use the `-u` flag and the name of the branch you are
+creating and pushing to:
+
+```bash
+$ git push -u origin develop
+```
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Git Push With `-u` Flag
+
+Using the `-u` switch with the `git push` command is a handy shortcut for:
+(1) creating the new remote branch and
+(2) setting your local branch to automatically track the remote one at the same time. You need to use the `-u` switch
+only once to set up that association between your branch and the remote one explicitly. After that you could simply
+use `git push` without specifying the remote repository, if you wished so.
+We still prefer to explicitly state this information in commands.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Let us confirm that the new branch `develop` now exist remotely on GitLab too. From your repository main page
+in GitLab, click the branch dropdown menu (currently showing the default branch `main`). You should see your `develop`
+branch in the list too.
+
+![](fig/gitlab-develop-branch.jpg){alt="Software project's develop branch" .image-with-shadow width="600px"}
+
+You may also have noticed GitLab's notification about the latest push to your `develop` branch just
+on top of the repository files and branches drop-down menu.
+
+Now the others can check out the `develop` branch too and continue to develop code on it.
+
+After the initial push of the new branch, each next time we push to it in the usual manner (i.e. without the `-u` switch):
+
+```bash
+$ git push origin develop
+```
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### What is the Relationship Between Originating and New Branches?
+
+It is natural to think that new branches have a parent/child relationship with their originating branch, but in actual
+Git terms, branches themselves do not have parents but single commits do. Any commit can have zero parents
+(a root, or initial, commit), one parent (a regular commit), or multiple parents (a merge commit),
+and using this structure, we can build a 'view' of branches from a set of commits and their relationships.
+A common way to look at it is that Git branches are really only
+[lightweight, movable pointers to commits](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell).
+So as a new commit is added to a branch, the branch pointer is moved to the new commit.
+
+What this means is that when you accomplish a merge between two branches, Git is able to determine the common
+'commit ancestor' through the commits in a 'branch', and use that common ancestor to determine which commits need to be
+merged onto the destination branch. It also means that, in theory, you could merge any branch with any other at any
+time... although it may not make sense to do so!
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+&nbsp;
+
+### Merging Into Main Branch
+
+Once you have tested your changes on the `develop` branch, you will want to merge them onto the `main` branch.
+To do so, make sure you have committed all your changes on the `develop` branch and then switch to `main`:
+
+```bash
+$ git switch main
+```
+
+```output
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+```
+
+To merge the `develop` branch on top of `main` do:
+
+```bash
+$ git merge develop
+```
+
+```output
+Updating 80d6975..a96062c
+Fast-forward
+ guacamole.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+If there are no conflicts, Git will merge the branches without complaining and replay all commits from `develop` on top
+of the last commit from `main`. If there are merge conflicts (e.g. a team collaborator modified the same portion of the
+same file you are working on and checked in their changes before you), the particular files with conflicts will be marked
+and you will need to resolve those conflicts and commit the changes before attempting to merge again.
+Since we have no conflicts, we can now push the `main` branch to the remote repository:
+
+```bash
+$ git push origin main
+```
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### All Branches Are Equal
+
+In Git, all branches are equal - there is nothing special about the `main` branch.
+It is called that by convention and is created by default, but it can also be called something else.
+A good example is `gh-pages` branch which is often the source branch for website projects hosted on GitHub
+(rather than `main`).
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::  testimonial
+
+##### Keeping Main Branch Stable
+
+Good software development practice is to keep the `main` branch stable while you and the team develop and test new
+functionalities on feature branches (which can be done in parallel and independently by different team members).
+The next step is to merge feature branches onto the `develop` branch, where more testing can occur to verify that the
+new features work well with the rest of the code (and not just in isolation). We talk more about different types of
+code testing in one of the following episodes.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+&nbsp;
+
+### Merge Requests in GitLab
+
+
+&nbsp;
+&nbsp;
+
+
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
 - `git clone` copies a remote repository to create a local repository with a remote called `origin` automatically set up.
 - Conflicts occur when two or more people change the same lines of the same file.
 - The version control system does not allow people to overwrite each other's changes blindly, but highlights conflicts so that they can be resolved.
+- A branch is one version of your project that can contain its own set of commits.
+- Feature branches enable us to develop / explore / test new code features without affecting the stable `main` code.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+&nbsp;
+&nbsp;
+
 
 
 ## Hands-on Project
