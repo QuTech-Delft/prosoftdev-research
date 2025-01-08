@@ -224,6 +224,8 @@ serve their purpose even in the plain text form.
 The project overview page presents us with many options to add content to the project’s repository
 directly in GitLab. We will add our first file to the project repository in the next section.
 
+&nbsp;
+
 ### Archiving a Project
 
 We just went through the beginning of a GitLab project’s life cycle.
@@ -267,10 +269,12 @@ this GitLab project will be empty, as shown in the diagram below:
 
 ![](fig/git-freshly-made-gitlab-repo.svg){alt='The local and remote Git repos'}
 
+&nbsp;
+
 ### Connecting the local to remote repository
 
 Now we connect the two repositories.  We do this by making the
-GitHub repository a [remote](../learners/reference.md#remote) for the local repository.
+GitLab repository a [remote](../learners/reference.md#remote) for the local repository.
 Go to the home page of the repository on GitLab, click on the blue `Code` button,
 and copy the string below the `Clone with SSH`
 
@@ -278,7 +282,7 @@ and copy the string below the `Clone with SSH`
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-## HTTPS vs. SSH
+##### HTTPS vs. SSH
 
 We use SSH here because, while it requires some additional configuration, it is a
 security protocol widely used by many applications.  The steps below describe SSH at a
@@ -299,7 +303,7 @@ difference should be your username instead of `alflin`.
 
 `origin` is a local name used to refer to the remote repository. It could be called
 anything, but `origin` is a convention that is often used by default in git
-and GitHub, so it's helpful to stick with this unless there's a reason not to.
+and GitLab, so it's helpful to stick with this unless there's a reason not to.
 
 We can check that the command has worked by running `git remote -v`:
 
@@ -311,6 +315,8 @@ $ git remote -v
 origin   git@gitlab.tudelft.nl:alflin/recipes.git (fetch)
 origin   git@gitlab.tudelft.nl:alflin/recipes.git (push)
 ```
+
+&nbsp;
 
 ### SSH Background and Setup
 
@@ -327,10 +333,10 @@ is publicly known and called the public key, and the other key called the privat
 Very descriptive names.
 
 You can think of the public key as a padlock, and only you have the key (the private key) to open it.
-You use the public key where you want a secure method of communication, such as your GitHub account.
+You use the public key where you want a secure method of communication, such as your GitLab account.
 You give this padlock, or public key, to GitLab and say "lock the communications to my account with
 this so that only computers that have my private key can unlock communications and send git commands
-as my GitHub account."
+as my GitLab account."
 
 What we will do now is the minimum required to set up the SSH keys and add the public key to a GitLab
 account.
@@ -439,10 +445,11 @@ drwxr-xr-x 1 Alfredo   197121   0 Jul 16 14:48 ../
 -rw-r--r-- 1 Alfredo   197121 106 Jul 16 14:48 id_ed25519.pub
 ```
 
+&nbsp;
 
-##### Copy the public key to GitHub
+### Copy the public key to GitLab
 
-Now we have a SSH key pair and we can run this command to check if GitHub can read our authentication.
+Now we have a SSH key pair and we can run this command to check if GitLab can read our authentication.
 
 ```bash
 ssh -T git@gitlab.tudelft.nl
@@ -496,10 +503,12 @@ Welcome to GitLab, @alflin!
 Good! This output confirms that the SSH key works as intended. We are now ready to push our
 work to the remote repository.
 
+&nbsp;
+
 ### Push local changes to a remote
 
 Now that authentication is setup, we can return to the remote.  This command will push the changes from
-our local repository to the repository on GitHub:
+our local repository to the repository on GitLab:
 
 ```bash
 $ git push origin main
@@ -521,6 +530,7 @@ To https://gitlab.tudelft.nl/alflin/recipes.git
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
+
 
 ## Password Managers
 
@@ -564,7 +574,7 @@ Already up-to-date.
 
 Pulling has no effect in this case because the two repositories are already
 synchronized.  If someone else had pushed some changes to the repository on
-GitHub, though, this command would download them to our local repository.
+GitLab, though, this command would download them to our local repository.
 
 
 ## Adding Project Members
