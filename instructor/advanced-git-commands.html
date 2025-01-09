@@ -347,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Advanced Git Commands</h1>
-        <p>Last updated on 2025-01-08 |
+        <p>Last updated on 2025-01-09 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/advanced-git-commands.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -1639,6 +1639,36 @@ different types of code testing in one of the following episodes.</p>
 </div>
 <div class="section level3">
 <h3 id="merge-requests-in-gitlab">Merge Requests in GitLab<a class="anchor" aria-label="anchor" href="#merge-requests-in-gitlab"></a></h3>
+<p>In addition to merging branches through the command line, it is also
+possible to perform a <em>Merge Request</em> in GitLab. To see how this
+works, switch back to the <em>develop</em> branch in the
+<em>recipes</em> repo, and modify the guacamole recipe - by adding one
+extra line for the ‘Instructions’: ‘Add salt’. Commit your changes, and
+push them to GitLab.</p>
+<p>When you reload your GitLab repo main page, you should see that
+GitLab now gives you the option to create a ‘Merge Request’ to merge
+your changes in <em>develop</em> to <em>main</em>:</p>
+<figure><img src="../fig/gitlab-merge-request-button.jpg" class="image-with-shadow figure mx-auto d-block" alt="Merge Request button after pushing to a branch" width="600"></figure><p>When clicking the “Create merge request” button, GitLab will open a
+new Merge Request form:</p>
+<figure><img src="../fig/gitlab-merge-request-form.jpg" class="image-with-shadow figure mx-auto d-block" alt="Merge Request form" width="600"></figure><p>There you can fill details abut this merge, such as the Title and
+Description, as well as some process-related fields, such as the Asignee
+and Reviewer. It is good practice to always have a reviewer for any
+significant code changes. Many large software projects have strict
+governance rules requiring for example at least one reviewer approval
+before merging to the <em>main</em> branch, and it is even possible to
+even configure GitLab to enforce such policies. For now, we advise you
+to setup informal review rules with your colleagues when working on a
+joint project.</p>
+<p>Once a merge request has been created, GitLab provides process
+controls for managing its lifecycle:</p>
+<figure><img src="../fig/gitlab-merge-request-lifecycle.jpg" class="image-with-shadow figure mx-auto d-block" alt="Merge Request Lifecycle" width="600"></figure><p>This form can be accessed from the “Merge requests” menu on the left
+tab. On this form you can perform actions such as: - approve the merge
+request by clicking the “Approve” button. - do the actual (Git) merge by
+clicking the “Merge” button. - review the commits part of this merge
+request in the “Commits” tab - review the code changes part of this
+merge request in the “Changes” tab - comment on code changes, also from
+the “Changes” tab. When making a comment, GitLab notifies the asignee
+for the merge request about the comment via email.</p>
 <p>   </p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -1660,6 +1690,8 @@ resolved.</li>
 of commits.</li>
 <li>Feature branches enable us to develop / explore / test new code
 features without affecting the stable <code>main</code> code.</li>
+<li>GitLab merge requests provide a structured process approach to Git
+branch merging</li>
 </ul></div>
 </div>
 </div>
@@ -1739,9 +1771,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/advanced-git-commands.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/advanced-git-commands.html",
-  "dateCreated": "2025-01-08",
-  "dateModified": "2025-01-08",
-  "datePublished": "2025-01-08"
+  "dateCreated": "2025-01-09",
+  "dateModified": "2025-01-09",
+  "datePublished": "2025-01-09"
 }
 
   </script><script>
