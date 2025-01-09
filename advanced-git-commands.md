@@ -1115,6 +1115,43 @@ code testing in one of the following episodes.
 
 ### Merge Requests in GitLab
 
+In addition to merging branches through the command line, it is also possible to perform a *Merge Request* in GitLab.
+To see how this works, switch back to the *develop* branch in the *recipes* repo, and modify the guacamole recipe -
+by adding one extra line for the 'Instructions': 'Add salt'. Commit your changes, and push them to GitLab.
+
+When you reload your GitLab repo main page, you should see that GitLab now gives you the option to create a
+'Merge Request' to merge your changes in *develop* to *main*:
+
+![](fig/gitlab-merge-request-button.jpg){alt="Merge Request button after pushing to a branch" .image-with-shadow width="600px"}
+
+When clicking the "Create merge request" button, GitLab will open a new Merge Request form:
+
+![](fig/gitlab-merge-request-form.jpg){alt="Merge Request form" .image-with-shadow width="600px"}
+
+There you can fill details abut this merge, such as the Title and Description, as well as some process-related
+fields, such as the Asignee and Reviewer. It is good practice to always have a reviewer for any significant code
+changes. Many large software projects have strict governance rules requiring for example at least one reviewer approval
+before merging to the *main* branch, and it is even possible to even configure GitLab to enforce such policies.
+For now, we advise you to setup informal review rules with your colleagues when working on a joint project.
+
+Once a merge request has been created, GitLab provides process controls for managing its lifecycle:
+
+![](fig/gitlab-merge-request-lifecycle.jpg){alt="Merge Request Lifecycle" .image-with-shadow width="600px"}
+
+This form can be accessed from the "Merge requests" menu on the left tab. On this form you can perform actions such as:
+- approve the merge request by clicking the "Approve" button.
+- do the actual (Git) merge by clicking the "Merge" button.
+- review the commits part of this merge request in the "Commits" tab
+- review the code changes part of this merge request in the "Changes" tab
+- comment on code changes, also from the "Changes" tab. When making a comment, GitLab notifies the asignee for the
+merge request about the comment via email.
+
+
+
+
+
+
+
 
 &nbsp;
 &nbsp;
@@ -1129,6 +1166,7 @@ code testing in one of the following episodes.
 - The version control system does not allow people to overwrite each other's changes blindly, but highlights conflicts so that they can be resolved.
 - A branch is one version of your project that can contain its own set of commits.
 - Feature branches enable us to develop / explore / test new code features without affecting the stable `main` code.
+- GitLab merge requests provide a structured process approach to Git branch merging
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
