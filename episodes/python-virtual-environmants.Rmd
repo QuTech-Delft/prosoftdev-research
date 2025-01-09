@@ -184,6 +184,47 @@ If you are using Windows and invoking `python` command causes your Git Bash term
 need to create an alias for the python executable `python.exe`, as explained in the [troubleshooting section](../common-issues/index.html#python-hangs-in-git-bash).
 :::
 
+## A Motivating Example
+For the rest of this episode, we will use the following (simple) Python program as a motivation on where virtual
+environments may be useful:
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from dateutil import parser
+from datetime import timedelta
+
+# Generate time data using python-dateutil and timedelta
+start_time = parser.parse("2025-01-01T00:00:00")
+time_steps = [start_time + timedelta(minutes=10 * i) for i in range(100)]
+time_values = [t.strftime("%Y-%m-%d %H:%M:%S") for t in time_steps]
+
+print(f"Plotting a sine wave starting at {start_time} in 100 steps of 10 minutes")
+
+# Create the sine wave data using numpy
+x_values = np.linspace(0, 10 * np.pi, 100)  # 100 points from 0 to 10*pi
+y_values = np.sin(x_values)
+
+# Plot the data
+plt.figure(figsize=(10, 6))
+plt.plot(time_values, y_values, label="Sine Wave")
+tick_step = 10
+plt.xticks(range(0, len(time_values), tick_step), time_values[::tick_step], rotation=45)
+
+plt.xlabel("Time")
+plt.ylabel("Sine Value")
+plt.title("Sine Wave Over Time")
+plt.grid(True)
+plt.tight_layout()
+plt.legend()
+plt.show()
+```
+
+On your system, create a new directory *sine_wave*, and copy the above code in a file *plot_sine_wave.py*.
+We want to see what happens if we try to run this program on a system where Python has just been installed,
+and for this, we will create a new Python virtual environment.
+
+
 ## Creating Virtual Environments Using `venv`
 
 Creating a virtual environment with `venv` is done by executing the following command:
@@ -192,9 +233,15 @@ Creating a virtual environment with `venv` is done by executing the following co
 $ python3 -m venv /path/to/new/virtual/environment
 ```
 
-where `/path/to/new/virtual/environment` is a path to a directory where you want to place it -
-conventionally within your software project so they are co-located.
-This will create the target directory for the virtual environment
+In Windows (GitBash), you can do the same with the following command:
+
+```bash
+$  py -3 -m venv /path/to/new/virtual/environment
+```
+
+
+where `/path/to/new/virtual/environment` is a path to a directory where you want to place it - conventionally within
+your software project so they are co-located. This will create the target directory for the virtual environment
 (and any parent directories that don’t exist already).
 
 ::: callout
@@ -214,7 +261,7 @@ and avoid issues that could prove difficult to trace and debug.
 :::
 
 For our project let us create a virtual environment called "venv".
-First, ensure you are within the project root directory, then:
+First, ensure you are within the project root directory (*sine_wave*), then:
 
 ```bash
 $ python3 -m venv venv
@@ -300,15 +347,14 @@ to show what virtual environment you are currently using
 and modify the environment so that running Python will get you
 the particular version of Python configured in your virtual environment.
 
-You can verify you are using your virtual environment's version of Python
-by checking the path using the command `which`:
+You can now verify you are using your virtual environment's version of Python:
 
 ```bash
-(venv) $ which python3
+(venv) $  python --version
 ```
 
 ```output
-/home/alex/python-intermediate-inflammation/venv/bin/python3
+Python 3.12.0
 ```
 
 When you’re done working on your project, you can exit the environment with:
@@ -342,29 +388,37 @@ We continue using `python3` in this material to avoid mistakes,
 but the command `python` may work for you as expected.
 :::
 
-Note that, since our software project is being tracked by Git,
-the newly created virtual environment will show up in version control -
-we will see how to handle it using Git in one of the subsequent episodes.
 
 ## Installing External Packages Using `pip`
 
-We noticed earlier that our code depends on two *external packages/libraries* -
-`numpy` and `matplotlib`.
-In order for the code to run on your machine,
-you need to install these two dependencies into your virtual environment.
+Now that we have a virtual environment, let us try to run the *plot_sine_wave.py* program:
 
-To install the latest version of a package with `pip`
-you use pip's `install` command and specify the package’s name, e.g.:
+```bash
+python plot_sine_wave.py
+```
+```output
+Traceback (most recent call last):
+  File "C:\projects\programming_course\sine_wave\plot_sine_wave.py", line 1, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+```
+
+As we can see in the code ('includes'), our code depends on a number of external libraries -
+`numpy`, `matplotlib`, and `python-dateutil`.
+In order for the code to run on your machine, you need to install these two dependencies into your virtual environment.
+
+To install the latest version of a package with `pip` you use pip's `install` command and specify the package’s name, e.g.:
 
 ```bash
 (venv) $ python3 -m pip install numpy
 (venv) $ python3 -m pip install matplotlib
+(venv) $ python3 -m pip install python-dateutil
 ```
 
 or like this to install multiple packages at once for short:
 
 ```bash
-(venv) $ python3 -m pip install numpy matplotlib
+(venv) $ python3 -m pip install numpy matplotlib python-dateutil
 ```
 
 ::: callout
@@ -382,12 +436,10 @@ module from command line.
 If you run the `python3 -m pip install` command on a package that is already installed,
 `pip` will notice this and do nothing.
 
-To install a specific version of a Python package
-give the package name followed by `==` and the version number,
+To install a specific version of a Python package give the package name followed by `==` and the version number,
 e.g. `python3 -m pip install numpy==1.21.1`.
 
-To specify a minimum version of a Python package,
-you can do `python3 -m pip install numpy>=1.20`.
+To specify a minimum version of a Python package, you can do `python3 -m pip install numpy>=1.20`.
 
 To upgrade a package to the latest version, e.g. `python3 -m pip install --upgrade numpy`.
 
@@ -399,15 +451,14 @@ To display information about a particular installed package do:
 
 ```output
 Name: numpy
-Version: 1.26.2
+Version: 2.2.1
 Summary: Fundamental package for array computing in Python
-Home-page: https://numpy.org
+Home-page:
 Author: Travis E. Oliphant et al.
 Author-email:
-License: Copyright (c) 2005-2023, NumPy Developers.
-All rights reserved.
+License: Copyright (c) 2005-2024, NumPy Developers.
+ All rights reserved.
 ...
-Required-by: contourpy, matplotlib
 ```
 
 To list all packages installed with `pip` (in your current virtual environment):
@@ -418,20 +469,19 @@ To list all packages installed with `pip` (in your current virtual environment):
 
 ```output
 Package         Version
---------------- -------
-contourpy       1.2.0
+--------------- -----------
+contourpy       1.3.1
 cycler          0.12.1
-fonttools       4.45.0
-kiwisolver      1.4.5
-matplotlib      3.8.2
-numpy           1.26.2
-packaging       23.2
-Pillow          10.1.0
-pip             23.0.1
-pyparsing       3.1.1
-python-dateutil 2.8.2
-setuptools      67.6.1
-six             1.16.0
+fonttools       4.55.3
+kiwisolver      1.4.8
+matplotlib      3.10.0
+numpy           2.2.1
+packaging       24.2
+pillow          11.1.0
+pip             23.2.1
+pyparsing       3.2.1
+python-dateutil 2.9.0.post0
+six             1.17.0
 ```
 
 To uninstall a package installed in the virtual environment do: `python3 -m pip uninstall <package-name>`.
@@ -439,10 +489,8 @@ You can also supply a list of packages to uninstall at the same time.
 
 ### Exporting/Importing Virtual Environments Using `pip`
 
-You are collaborating on a project with a team so, naturally,
-you will want to share your environment with your collaborators
-so they can easily 'clone' your software project with all of its dependencies
-and everyone can replicate equivalent virtual environments on their machines.
+You are collaborating on a project with a team so, naturally, you will want to share your environment with your collaborators
+so they can easily 'clone' your software project with all of its dependencies and everyone can replicate equivalent virtual environments on their machines.
 `pip` has a handy way of exporting, saving and sharing virtual environments.
 
 To export your active environment -
@@ -455,22 +503,21 @@ A common convention is to put this list in a `requirements.txt` file:
 ```
 
 ```output
-contourpy==1.2.0
+contourpy==1.3.1
 cycler==0.12.1
-fonttools==4.45.0
-kiwisolver==1.4.5
-matplotlib==3.8.2
-numpy==1.26.2
-packaging==23.2
-Pillow==10.1.0
-pyparsing==3.1.1
-python-dateutil==2.8.2
-six==1.16.0
+fonttools==4.55.3
+kiwisolver==1.4.8
+matplotlib==3.10.0
+numpy==2.2.1
+packaging==24.2
+pillow==11.1.0
+pyparsing==3.2.1
+python-dateutil==2.9.0.post0
+six==1.17.0
 ```
 
 The first of the above commands will create a `requirements.txt` file in your current directory.
-Yours may look a little different,
-depending on the version of the packages you have installed,
+Yours may look a little different, depending on the version of the packages you have installed,
 as well as any differences in the packages that they themselves use.
 
 The `requirements.txt` file can then be committed to a version control system
@@ -507,41 +554,31 @@ Also check out the guide
 :::
 
 ## Running Python Scripts From Command Line
-Congratulations!
-Your environment is now activated and set up
-to run our `inflammation-analysis.py` script from the command line.
+Congratulations! Your environment is now activated and set up to run our `plot_sine_wave.py` program from the command line.
 
-You should already be located in the root of the `python-intermediate-inflammation` directory
-(if not, please navigate to it from the command line now).
-To run the script, type the following command:
+You should already be located in the root of the `sine_wave` directory (if not, please navigate to it from the command line now).
+To run the program, type the following command:
 
 ```bash
-(venv) $ python3 inflammation-analysis.py
+(venv) $ python plot_sine_wave.py
 ```
 
-```output
-usage: inflammation-analysis.py [-h] infiles [infiles ...]
-inflammation-analysis.py: error: the following arguments are required: infiles
-```
+You should now see the following plot:
 
-In the above command, we tell the command line two things:
+![](fig/sine_wave.jpg){alt="Sine Wave Plot" .image-with-shadow width="600px"}
 
-1. to find a Python interpreter
-   (in this case, the one that was configured via the virtual environment), and
-2. to use it to run our script `inflammation-analysis.py`,
-   which resides in the current directory.
 
-As we can see, the Python interpreter ran our script, which threw an error -
-`inflammation-analysis.py: error: the following arguments are required: infiles`.
-It looks like the script expects a list of input files to process,
-so this is expected behaviour since we do not supply any.
-We will fix this error in a moment.
+:::::::::::::::::::::::::::::::::::::::  challenge
 
-## Hands-on Project
+### Multiple Python versions on the same machine
 
-- create two Python virtual environments, one for Python 3.8, the other one for Python 3.11
-- we provide two programs, one using Python 3.11 advanced features
-- participants should test that more advanced program cannot run in the Python 3.11 environment, but does run in the 3.8 one.
+Using virtual environments it is very easy to manage multiple Python versions on the same machine.
+As a challenge, install Python 3.5 on your system, and create a virtual environment specifically for it.
+Then try to run *plot_sine_wave.py* in this new environment. Does it work? Modify the program so it does.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 &nbsp;
 &nbsp;
