@@ -515,14 +515,21 @@ this metaphor:</p>
 <span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="kw">def</span> calculate_total(cart, discount_rate):</span>
 <span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> cart:</span>
 <span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Cart cannot be empty."</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> (<span class="dv">0</span> <span class="op">&lt;=</span> discount_rate <span class="op">&lt;=</span> <span class="dv">1</span>):</span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Discount rate must be between 0 and 1."</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    <span class="co"># --------- Blank line for separation ---------</span></span>
 <span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>    subtotal <span class="op">=</span> <span class="bu">sum</span>(item[<span class="st">'price'</span>] <span class="op">*</span> item[<span class="st">'quantity'</span>] <span class="cf">for</span> item <span class="kw">in</span> cart)</span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>    discount <span class="op">=</span> subtotal <span class="op">*</span> discount_rate</span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>    total <span class="op">=</span> subtotal <span class="op">-</span> discount  <span class="co"># Related code is vertically dense</span></span>
-<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>    <span class="cf">return</span> total</span></code></pre>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> (<span class="dv">0</span> <span class="op">&lt;=</span> discount_rate <span class="op">&lt;=</span> <span class="dv">1</span>):</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Discount rate must be between 0 and 1."</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>    <span class="co"># --------- Blank line for separation ---------</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>    subtotal <span class="op">=</span> <span class="bu">sum</span>(item[<span class="st">'price'</span>] <span class="op">*</span> item[<span class="st">'quantity'</span>] <span class="cf">for</span> item <span class="kw">in</span> cart)</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>    discount <span class="op">=</span> subtotal <span class="op">*</span> discount_rate</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>    total <span class="op">=</span> subtotal <span class="op">-</span> discount  <span class="co"># Related code is vertically dense</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>    <span class="co"># --------- Blank line for separation ---------</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>    <span class="cf">return</span> total</span></code></pre>
 </div>
 </div>
 </div>
@@ -1291,7 +1298,7 @@ refactor it into “clean” test code?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The above test breaks many of the “clean” tests and “clean” code
 principles:</p>
@@ -1451,7 +1458,7 @@ Your code has been rated at 5.91/10</code></pre>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
