@@ -94,8 +94,8 @@ This leads to the following page:
 
 The “Project name” field is for just that, the project name. Its value has no
 other purpose and can be changed at anytime without indirect consequences (the
-direct consequence being, that its name will be different). We will call it
-“Research Diary”.
+direct consequence being, that its name will be different). Following the example in the previous episodes,
+we will call it “recipes”.
 
 As we fill in the project name, a project slug gets suggested in the respective
 field. The project slug is the last part of the project’s, and the associated
@@ -170,7 +170,7 @@ instances configuration.
 After clicking the “Create project” button, GitLab creates the project and
 redirects us to the project’s homepage, which looks similar to this:
 
-![Fresh project homepage](fig/new-project.png){alt='Project homepage for a new project'}
+![Fresh project homepage](fig/new_project.jpg){alt='Project homepage for a new project'}
 
 The page is split into the menu on the left and the project overview on the
 right.
@@ -197,7 +197,7 @@ its repository. We will have another look at the page then.
 ##### Change Name, Description, Visibility, or Avatar
 
 Click on the “Settings” sub-menu and select its “General” entry.
-Set the description to “My research diary, a collection of Markdown files”.
+Set the description to something meaningful, such as “A collection of simple recipes”.
 
 The project description appears in many lists and on some pages under the
 project’s name.
@@ -584,8 +584,7 @@ contribute to; depending on the visibility setting, no one but you might be able
 to even see it.
 
 Git and GitLab can be and is used for one-person projects. But we want our
-colleagues to contribute to our research diary, when they keep tabs on our
-experiments for us on the weekends. To achieve this, we will grant others access
+colleagues to contribute to our recipes collection. To achieve this, we will grant others access
 to our GitLab project.
 
 Using the menu on the left side of the project homepage (or nearly any other

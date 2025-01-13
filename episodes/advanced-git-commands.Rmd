@@ -64,7 +64,7 @@ repository with the same name.
 To clone the Owner's repo into her `projects` folder, the Collaborator enters:
 
 ```bash
-$ git clone git@github.com:alflin/recipes.git ~/projects/alflin-recipes
+$ git clone git@gitlab.tudelft.nl:alflin/recipes.git ~/projects/alflin-recipes
 ```
 
 Replace 'alflin' with the Owner's username.
@@ -106,7 +106,7 @@ $ git commit -m "Add ingredients for hummus"
  create mode 100644 hummus.md
 ```
 
-Then push the change to the *Owner's repository* on GitHub:
+Then push the change to the *Owner's repository* on GitLab:
 
 ```bash
 $ git push origin main
@@ -158,8 +158,8 @@ associated with a repository. Here are some of the most useful ones:
 - `git remote remove [name]` removes a remote. Note that it doesn't affect the
   remote repository at all - it just removes the link to it from the local repo.
 - `git remote set-url [name] [newurl]` changes the URL that is associated
-  with the remote. This is useful if it has moved, e.g. to a different GitHub
-  account, or from GitHub to a different hosting service. Or, if we made a typo when
+  with the remote. This is useful if it has moved, e.g. to a different GitLab
+  account, or from GitLab to a different hosting service. Or, if we made a typo when
   adding it!
 - `git remote rename [oldname] [newname]` changes the local alias by which a remote
   is known - its name. For example, one could use this to change `upstream` to `alfred`.
@@ -192,7 +192,7 @@ Fast-forward
 ```
 
 Now the three repositories (Owner's local, Collaborator's local, and Owner's on
-GitHub) are back in sync.
+GitLab) are back in sync.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -205,7 +205,7 @@ our changes. The basic collaborative workflow would be:
 - update your local repo with `git pull origin main`,
 - make your changes and stage them with `git add`,
 - commit your changes with `git commit -m`, and
-- upload the changes to GitHub with `git push origin main`
+- upload the changes to GitLab with `git push origin main`
 
 It is better to make many commits with smaller changes rather than
 of one commit with massive changes: small commits are easier to
@@ -277,7 +277,7 @@ and then the author can address the comment using the same GitLab web interface.
 
 Some backup software can keep a history of the versions of your files. They also
 allows you to recover specific versions. How is this functionality different from version control?
-What are some of the benefits of using version control, Git and GitHub?
+What are some of the benefits of using version control, Git and GitLab?
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -325,7 +325,7 @@ $ cat guacamole.md
 * put one avocado into a bowl.
 ```
 
-and then push the change to GitHub:
+and then push the change to GitLab:
 
 ```bash
 $ git add guacamole.md
@@ -353,9 +353,7 @@ To gitlab.tudelft.nl:alflin/recipes.git
    29aba7c..dabb4c8  main -> main
 ```
 
-Now let's have the owner
-make a different change to their copy
-*without* updating from GitHub:
+Now let's have the owner make a different change to their copy *without* updating from GitLab:
 
 ```bash
 $ nano guacamole.md
@@ -384,14 +382,14 @@ $ git commit -m "Add first step"
  1 file changed, 1 insertion(+)
 ```
 
-but Git won't let us push it to GitHub:
+but Git won't let us push it to GitLab:
 
 ```bash
 $ git push origin main
 ```
 
 ```output
-To https://github.com/alflin/recipes.git
+To https://gitlab.tudelft.nl/alflin/recipes.git
  ! [rejected]        main -> main (fetch first)
 error: failed to push some refs to 'https://gitlab.tudelft.nl:alflin/recipes.git'
 hint: Updates were rejected because the remote contains work that you do
@@ -469,7 +467,7 @@ $ cat guacamole.md
 
 Our change is preceded by `<<<<<<< HEAD`.
 Git has then inserted `=======` as a separator between the conflicting changes
-and marked the end of the content downloaded from GitHub with `>>>>>>>`.
+and marked the end of the content downloaded from GitLab with `>>>>>>>`.
 (The string of letters and digits after that marker
 identifies the commit we've just downloaded.)
 
@@ -515,14 +513,14 @@ Changes to be committed:
 ```
 
 ```bash
-$ git commit -m "Merge changes from GitHub"
+$ git commit -m "Merge changes from GitLab"
 ```
 
 ```output
-[main 2abf2b1] Merge changes from GitHub
+[main 2abf2b1] Merge changes from GitLab
 ```
 
-Now we can push our changes to GitHub:
+Now we can push our changes to GitLab:
 
 ```bash
 $ git push origin main
@@ -670,7 +668,7 @@ $ git push origin main
 ```
 
 ```output
-To https://github.com/alflin/recipes.git
+To https://gitlab.tudelft.nl/alflin/recipes.git
  ! [rejected]        main -> main (fetch first)
 error: failed to push some refs to 'https://gitlab.tudelft.nl:alflin/recipes.git'
 hint: Updates were rejected because the remote contains work that you do
