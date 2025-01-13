@@ -6,6 +6,29 @@ output:
 html_document:
   css: mystyle.css
 ---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
+- What is "Clean Code" and why is it important?
+- What are the most important "Clean Code" rules?
+- What tools can I use to improve my code quality towards the "Clean Code" ideal?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Understand the importance of Clean Code
+- Understand some of the fundamental Clean Code rules related to:
+    - Code structure
+    - Naming conventions
+    - Functions
+    - Comments
+    - Unit tests
+- Become familiar with the most important tools that can facilitate writing Clean Code
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ## Introduction
 
 Imagine you are reading a well-organized book or following a simple recipe.
