@@ -23,51 +23,36 @@ exercises: 20
 ## Introduction
 Python applications often use external libraries that don’t come as part of the standard Python distribution.
 This means that you will have to use a *package manager* tool to install them on your system.
-Applications will also sometimes need a
-specific version of an external library
-(e.g. because they were written to work with feature, class,
-or function that may have been updated in more recent versions),
-or a specific version of Python interpreter.
-This means that each Python application you work with may require a different setup
+Applications will also sometimes need a specific version of an external library (e.g. because they were written to
+work with feature, class, or function that may have been updated in more recent versions), or a specific version of
+Python interpreter. This means that each Python application you work with may require a different setup
 and a set of dependencies so it is useful to be able to keep these configurations
-separate to avoid confusion between projects.
-The solution for this problem is to create a self-contained
-**virtual environment** per project,
-which contains a particular version of Python installation
+separate to avoid confusion between projects. The solution for this problem is to create a self-contained
+**virtual environment** per project, which contains a particular version of Python installation
 plus a number of additional external libraries.
 
 Virtual environments are not just a feature of Python -
-most modern programming languages use a similar mechanism to isolate libraries or dependencies
-for a specific project, making it easier to develop, run, test and share code with others.
-Some examples include Bundler for Ruby, Conan for C++, or Maven with classpath for Java.
-This can also be achieved with more generic package managers like Spack,
-which is used extensively in HPC settings to resolve complex dependencies.
-In this episode, we learn how to set up a virtual environment to develop our code
-and manage our external dependencies.
+most modern programming languages use a similar mechanism to isolate libraries or dependencies for a specific project,
+making it easier to develop, run, test and share code with others. Some examples include Bundler for Ruby, Conan for
+C++, or Maven with classpath for Java. This can also be achieved with more generic package managers like Spack,
+which is used extensively in HPC settings to resolve complex dependencies. In this episode, we learn how to set up a
+virtual environment to develop our code and manage our external dependencies.
 
 ## Python Virtual Environments
 
 So what exactly are virtual environments, and why use them?
 
 A Python virtual environment helps us create an **isolated working copy** of a software project
-that uses a specific version of Python interpreter
-together with specific versions of a number of external libraries
-installed into that virtual environment.
-Python virtual environments are implemented as
-directories with a particular structure within software projects,
-containing links to specified dependencies
-allowing isolation from other software projects on your machine that may require
-different versions of Python or external libraries.
+that uses a specific version of Python interpreter together with specific versions of a number of external libraries
+installed into that virtual environment. Python virtual environments are implemented as directories with a particular
+structure within software projects, containing links to specified dependencies allowing isolation from other software
+projects on your machine that may require different versions of Python or external libraries.
 
-As more external libraries are added to your Python project over time,
-you can add them to its specific virtual environment
-and avoid a great deal of confusion by having
-separate (smaller) virtual environments for each project
+As more external libraries are added to your Python project over time, you can add them to its specific virtual
+environment and avoid a great deal of confusion by having separate (smaller) virtual environments for each project
 rather than one huge global environment with potential package version clashes.
-Another big motivator for using virtual environments is
-that they make sharing your code with others much easier
-(as we will see shortly).
-Here are some typical scenarios where
+Another big motivator for using virtual environments is that they make sharing your code with others much easier
+(as we will see shortly). Here are some typical scenarios where
 the use of virtual environments is highly recommended (almost unavoidable):
 
 - You have an older project that only works under Python 2.
@@ -87,8 +72,7 @@ the use of virtual environments is highly recommended (almost unavoidable):
   'isolate' your code while testing the new feature.
 
 You do not have to worry too much about specific versions of external libraries
-that your project depends on most of the time.
-Virtual environments also enable you to always use
+that your project depends on most of the time. Virtual environments also enable you to always use
 the latest available version without specifying it explicitly.
 They also enable you to use a specific older version of a package for your project, should you need to.
 
@@ -110,18 +94,14 @@ There are several commonly used command line tools for managing Python virtual e
   (also included as part of the Anaconda Python distribution often used by the scientific community)
 - `poetry`, a modern Python packaging tool which handles virtual environments automatically
 
-While there are pros and cons for using each of the above,
-all will do the job of managing Python virtual environments for you
-and it may be a matter of personal preference which one you go for.
-In this course, we will use `venv` to create and manage our virtual environment
-(which is the preferred way for Python 3.3+).
+While there are pros and cons for using each of the above, all will do the job of managing Python virtual environments
+for you and it may be a matter of personal preference which one you go for. In this course, we will use `venv` to
+create and manage our virtual environment (which is the preferred way for Python 3.3+).
 The upside is that `venv` virtual environments created from the command line are
-also recognised and picked up automatically by PyCharm IDE,
-as we will see in the next episode.
+also recognised and picked up automatically by PyCharm IDE, as we will see in the next episode.
 
-Part of managing your (virtual) working environment involves
-installing, updating and removing external packages on your system.
-The Python package manager tool `pip` is most commonly used for this -
+Part of managing your (virtual) working environment involves installing, updating and removing external packages on
+your system. The Python package manager tool `pip` is most commonly used for this -
 it interacts and obtains the packages from the central repository called
 [Python Package Index (PyPI)](https://pypi.org/).
 `pip` can now be used with all Python distributions (including Anaconda).
@@ -130,39 +110,30 @@ it interacts and obtains the packages from the central repository called
 ### A Note on `Anaconda` and `conda`
 Anaconda is an open source Python distribution commonly used for scientific programming -
 it conveniently installs Python, package and environment management `conda`,
-and a  number of commonly used scientific computing packages
-so you do not have to obtain them separately.
+and a  number of commonly used scientific computing packages so you do not have to obtain them separately.
 `conda` is an independent command line tool
 (available separately from the Anaconda distribution too) with dual functionality:
 (1) it is a package manager that helps you find Python packages
 from remote package repositories and install them on your system, and
-(2) it is also a virtual environment manager.
-So, you can use `conda` for both tasks instead of using `venv` and `pip`.
+(2) it is also a virtual environment manager. So, you can use `conda` for both tasks instead of using `venv` and `pip`.
 :::
 
 ### Many Tools for the Job
 
-Installing and managing Python distributions,
-external libraries and virtual environments is, well, complex.
-There is an abundance of tools for each task,
-each with its advantages and disadvantages,
-and there are different ways to achieve the same effect
-(and even different ways to install the same tool!).
+Installing and managing Python distributions, external libraries and virtual environments is, well, complex.
+There is an abundance of tools for each task, each with its advantages and disadvantages,
+and there are different ways to achieve the same effect (and even different ways to install the same tool!).
 Note that each Python distribution comes with its own version of `pip` -
 and if you have several Python versions installed you have to be extra careful to
 use the correct `pip` to manage external packages for that Python version.
 
 `venv` and `pip` are considered the *de facto* standards for virtual environment
-and package management for Python 3.
-However, the advantages of using Anaconda and `conda` are that
+and package management for Python 3. However, the advantages of using Anaconda and `conda` are that
 you get (most of the) packages needed for scientific code development included with the distribution.
-If you are only collaborating with others who are also using Anaconda,
-you may find that `conda` satisfies all your needs.
-It is good, however, to be aware of all these tools, and use them accordingly.
-As you become more familiar with them you will realise that
-equivalent tools work in a similar way even though the command syntax may be different
-(and that there are equivalent tools for other programming languages too
-to which your knowledge can be ported).
+If you are only collaborating with others who are also using Anaconda, you may find that `conda` satisfies all your
+needs. It is good, however, to be aware of all these tools, and use them accordingly. As you become more familiar with
+them you will realise that equivalent tools work in a similar way even though the command syntax may be different
+(and that there are equivalent tools for other programming languages too to which your knowledge can be ported).
 
 ![](../fig/python-environment-hell.png)
 <p style="text-align: center;"> Python Environment Hell <br>
@@ -248,15 +219,12 @@ your software project so they are co-located. This will create the target direct
 ### What is `-m` Flag in `python3` Command?
 The Python `-m` flag means "module" and tells the Python interpreter to treat what follows `-m`
 as the name of a module and not as a single, executable program with the same name.
-Some modules (such as `venv` or `pip`) have main entry points
-and the `-m` flag can be used to invoke them on the command line via the `python` command.
-The main difference between running such modules as standalone programs
-(e.g. executing "venv" by running the `venv` command directly)
-versus using `python3 -m` command seems to be that
+Some modules (such as `venv` or `pip`) have main entry points and the `-m` flag can be used to invoke them on the
+command line via the `python` command. The main difference between running such modules as standalone programs
+(e.g. executing "venv" by running the `venv` command directly) versus using `python3 -m` command seems to be that
 with latter you are in full control of which Python module will be invoked
 (the one that came with your environment's Python interpreter vs.
-some other version you may have on your system).
-This makes it a more reliable way to set things up correctly
+some other version you may have on your system). This makes it a more reliable way to set things up correctly
 and avoid issues that could prove difficult to trace and debug.
 :::
 
@@ -298,23 +266,18 @@ containing:
 ### Naming Virtual Environments
 What is a good name to use for a virtual environment?
 
-Using "venv" or ".venv" as the name for an environment
-and storing it within the project's directory seems to be the recommended way -
-this way when you come across such a subdirectory within a software project,
+Using "venv" or ".venv" as the name for an environment and storing it within the project's directory seems to be the
+recommended way - this way when you come across such a subdirectory within a software project,
 by convention you know it contains its virtual environment details.
 
 A slight downside is that all different virtual environments on your machine
-then use the same name
-and the current one is determined by the context of the path you are currently located in.
-A (non-conventional) alternative is
-to use your project name for the name of the virtual environment,
+then use the same name and the current one is determined by the context of the path you are currently located in.
+A (non-conventional) alternative is to use your project name for the name of the virtual environment,
 with the downside that there is nothing to indicate that such a directory contains a virtual environment.
 
-In our case, we have settled to use the name "venv" instead of ".venv"
-since it is not a hidden directory and we want it to be displayed by the command line
-when listing directory contents
-(the "." in its name that would, by convention, make it hidden).
-In the future, you will decide what naming convention works best for you.
+In our case, we have settled to use the name "venv" instead of ".venv" since it is not a hidden directory and we want
+it to be displayed by the command line when listing directory contents (the "." in its name that would, by convention,
+make it hidden). In the future, you will decide what naming convention works best for you.
 Here are some references for each of the naming conventions:
 
 - [The Hitchhiker's Guide to Python](https://docs.python-guide.org/dev/virtualenvs/)
@@ -333,19 +296,16 @@ $ source venv/bin/activate
 (venv) $
 ```
 
-On Windows, recall that we have `Scripts` directory instead of `bin`
-and activating a virtual environment is done as:
+On Windows, recall that we have `Scripts` directory instead of `bin` and activating a virtual environment is done as:
 
 ```bash
 $ source venv/Scripts/activate
 (venv) $
 ```
 
-Activating the virtual environment will change your command line’s prompt
-to show what virtual environment you are currently using
-(indicated by its name in round brackets at the start of the prompt),
-and modify the environment so that running Python will get you
-the particular version of Python configured in your virtual environment.
+Activating the virtual environment will change your command line’s prompt to show what virtual environment you are
+currently using (indicated by its name in round brackets at the start of the prompt), and modify the environment
+so that running Python will get you the particular version of Python configured in your virtual environment.
 
 You can now verify you are using your virtual environment's version of Python:
 
@@ -535,13 +495,10 @@ For example, one of your project's dependencies has just released a new version
 (dependency version number update),
 you need an additional package for data analysis (adding a new dependency)
 or you have found a better package and no longer need the older package
-(adding a new and removing an old dependency).
-What you need to do in this case
+(adding a new and removing an old dependency). What you need to do in this case
 (apart from installing the new and removing the packages that are no longer needed
-from your virtual environment)
-is update the contents of the `requirements.txt` file accordingly
-by re-issuing `pip freeze` command
-and propagate the updated `requirements.txt` file to your collaborators
+from your virtual environment) is update the contents of the `requirements.txt` file accordingly
+by re-issuing `pip freeze` command and propagate the updated `requirements.txt` file to your collaborators
 via your code sharing platform (e.g. GitHub).
 
 ::: callout

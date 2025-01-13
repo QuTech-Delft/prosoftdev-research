@@ -2,9 +2,8 @@
 title: 'Clean Code'
 teaching: 80
 exercises: 100
-output:
 html_document:
-  css: mystyle.css
+    highlight: tango
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
@@ -135,12 +134,19 @@ def calculate_total(cart, discount_rate):
 def calculate_total(cart, discount_rate):
     if not cart:
         raise ValueError("Cart cannot be empty.")
+
+    # --------- Blank line for separation ---------
+
     if not (0 <= discount_rate <= 1):
         raise ValueError("Discount rate must be between 0 and 1.")
+
+    # --------- Blank line for separation ---------
 
     subtotal = sum(item['price'] * item['quantity'] for item in cart)
     discount = subtotal * discount_rate
     total = subtotal - discount  # Related code is vertically dense
+
+    # --------- Blank line for separation ---------
 
     return total
 ```
