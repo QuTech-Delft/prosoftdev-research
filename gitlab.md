@@ -81,8 +81,7 @@ After knowing how to find groups and projects, we want to go from passively
 browsing GitLab to actively using it. We are going to create a project and
 connect a local Git repository to it.
 
-To create a project, we click on the button with the “+” symbol near the top of the side menu on
-the right and select “New project/repository”.
+To create a project, we click on the "New project" button on the upper-right corner of the right tab.
 
 Multiple options are presented for how to create the new project. In this lesson
 we will only look at, and use, the first option: “Create blank project”. So
