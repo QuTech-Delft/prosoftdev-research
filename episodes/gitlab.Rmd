@@ -4,13 +4,6 @@ teaching: 20
 exercises: 20
 ---
 
-<style type="text/css">
-.main-container {
-  max-width: 100% !important;
-  margin: auto;
-}
-</style>
-
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - What is GitLab?
