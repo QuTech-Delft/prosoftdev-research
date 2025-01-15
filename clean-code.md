@@ -118,8 +118,16 @@ There are a number of source code structure rules that derive from this metaphor
 
 ##### Separate concepts vertically; related code should appear vertically dense
 
+Goal here is to make use of visual clustering, so that parts of the code that "belong" together become obvious
+without having to dive deep into the actual code.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+##### Refactor the code below by following this guideline
+
 ```python
-# BAD
 def calculate_total(cart, discount_rate):
     if not cart:
         raise ValueError("Cart cannot be empty.")
@@ -129,8 +137,11 @@ def calculate_total(cart, discount_rate):
     discount = subtotal * discount_rate
     total = subtotal - discount
     return total
+```
 
-# BETTER
+:::::::::::::::  solution
+
+```python
 def calculate_total(cart, discount_rate):
     if not cart:
         raise ValueError("Cart cannot be empty.")
@@ -148,15 +159,25 @@ def calculate_total(cart, discount_rate):
     return total
 ```
 
+:::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
 ##### Declare variables close to their usage.
 
+Follows the same principle that closely related code constructs should be in close visual proximity.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+##### Refactor the code below by following this guideline
+
 ```python
-# BAD
 def calculate_average_grades(students):
     total_grades = 0
     count = len(students) if students else 0
@@ -171,9 +192,11 @@ def calculate_average_grades(students):
     average_grade = total_grades / count
 
     return average_grade
+```
 
+:::::::::::::::  solution
 
-# BETTER
+```python
 def calculate_average_grades(students):
     if not students:
         raise ValueError("The students list cannot be empty.")
@@ -189,7 +212,10 @@ def calculate_average_grades(students):
 
 ```
 
+:::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -377,10 +403,13 @@ A function should be small enough so one could understand it without having to
 do "mental jumps" between various parts of the code. Such "mental jumps" are
 time consuming and tiring. Ideally, the entire function should fit on one screen.
 
-What is easier to read, this:
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+##### Refactor the code below by breaking it into smaller functions
 
 ``` python
-
 # Dummy calibration function - operations shown here have no "real life" meaning
 def calibrate_fridge(fridge_data, include_safety_checks):
     fridge_id = fridge_data.get("id")
@@ -430,10 +459,9 @@ def calibrate_fridge(fridge_data, include_safety_checks):
     return f"Calibration complete. Final temperature: {adjusted_temp:.2f}"
 ```
 
-or this one:
+:::::::::::::::  solution
 
 ``` python
-
 # Function refactored into smaller functions
 def calibrate_fridge(fridge_data, include_safety_checks):
     fridge_id = fridge_data.get("id")
@@ -502,6 +530,8 @@ def send_telemetry(fridge_id, start_temp, end_temp, safety_checks):
 
 ```
 
+:::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -533,18 +563,27 @@ what the function does, to the point where comments become superfluous
 - Spend time thinking of a good name, and change it as soon as you have found a better one
 - Be consistent in your naming: use same phrases, nouns and verbs in your function names
 
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+##### Refactor the function names below so they are consistent
+
 ``` python
-# BAD
 def determine_optimal_temperature():
 def derive_calibration_parameters():
 def calculate_reset_interval():
+```
 
+:::::::::::::::  solution
 
-# GOOD
+``` python
 def calculate_optimal_temperature():
 def calculate_calibration_parameters():
 def calculate_reset_interval():
 ```
+
+:::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
