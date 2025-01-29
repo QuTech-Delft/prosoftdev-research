@@ -204,6 +204,28 @@ so that our filesystem doesn't become cluttered
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+#### Practice using graphical Git tools
+
+Using the graphical Git tools in PyCharm repeat the basic Git commands explained so far:
+
+- Add a new file to the "recipes" repo
+- Check which files are not yet committed
+- Commit the file
+
+:::::::::::::::  solution
+
+#### Solution
+
+![](fig/pycharm_git_add.jpg){alt='Adding a file to a Git repo using PyCharm'}
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 Now suppose Alfredo adds more information to the file.
 (Again, we'll edit with `nano` and then `cat` the file to show its contents;
 you may use a different editor, and don't need to `cat`.)
@@ -240,16 +262,11 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
-The last line is the key phrase:
-"no changes added to commit".
-We have changed this file,
-but we haven't told Git we will want to save those changes
-(which we do with `git add`)
-nor have we saved them (which we do with `git commit`).
-So let's do that now. It is good practice to always review
-our changes before saving them. We do this using `git diff`.
-This shows us the differences between the current state
-of the file and the most recently saved version:
+The last line is the key phrase: "no changes added to commit".
+We have changed this file, but we haven't told Git we will want to save those changes
+(which we do with `git add`) nor have we saved them (which we do with `git commit`).
+So let's do that now. It is good practice to always review our changes before saving them. We do this using `git diff`.
+This shows us the differences between the current state of the file and the most recently saved version:
 
 ```bash
 $ git diff
@@ -320,19 +337,12 @@ $ git commit -m "Add basic guacamole's ingredients"
 Git insists that we add files to the set we want to commit
 before actually committing anything. This allows us to commit our
 changes in stages and capture changes in logical portions rather than
-only large batches.
-For example,
-suppose we're adding a few citations to relevant research to our thesis.
-We might want to commit those additions,
-and the corresponding bibliography entries,
-but *not* commit some of our work drafting the conclusion
-(which we haven't finished yet).
+only large batches. For example, suppose we're adding a few citations to relevant research to our thesis.
+We might want to commit those additions, and the corresponding bibliography entries,
+but *not* commit some of our work drafting the conclusion (which we haven't finished yet).
 
-To allow for this,
-Git has a special *staging area*
-where it keeps track of things that have been added to
-the current [changeset](../learners/reference.md#changeset)
-but not yet committed.
+To allow for this, Git has a special *staging area* where it keeps track of things that have been added to
+the current [changeset](../learners/reference.md#changeset) but not yet committed.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -401,8 +411,7 @@ index 315bf3a..b36abfd 100644
 
 So far, so good:
 we've replaced one line (shown with a `-` in the first column) with a new line
-(shown with a `+` in the first column).
-Now let's put that change in the staging area
+(shown with a `+` in the first column). Now let's put that change in the staging area
 and see what `git diff` reports:
 
 ```bash
@@ -436,9 +445,7 @@ index 315bf3a..b36abfd 100644
  ## Instructions
 ```
 
-it shows us the difference between
-the last committed change
-and what's in the staging area.
+it shows us the difference between the last committed change and what's in the staging area.
 Let's save our changes:
 
 ```bash
@@ -761,55 +768,30 @@ $ git commit -m "Write prices for ingredients and their source"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-#### `bio` Repository
+#### Practice using graphical Git tools
 
-- Create a new Git repository on your computer called `bio`.
-- Write a three-line biography for yourself in a file called `me.txt`,
-  commit your changes
-- Modify one line, add a fourth line
-- Display the differences
-  between its updated state and its original state.
+Using the graphical Git tools in PyCharm repeat the basic Git commands explained so far:
+
+- In the "recipes" repo, modify the `guacamole.md` recipe.
+- Visually inspect what has been changed in the file.
+- Commit the file, and visually inspect the Git commit log.
 
 :::::::::::::::  solution
 
 #### Solution
 
-If needed, move out of the `recipes` folder:
+Visually diff-ing in PyCharm:
+&nbsp;
+![](fig/pycharm_git_diff.jpg){alt='Git diff using PyCharm'}
 
-```bash
-$ cd ..
-```
+&nbsp;
+&nbsp;
+Visually inspecting commit logs:
 
-Create a new folder called `bio` and 'move' into it:
-
-```bash
-$ mkdir bio
-$ cd bio
-```
-
-Initialise git:
-
-```bash
-$ git init
-```
-
-Create your biography file `me.txt` using `nano` or another text editor.
-Once in place, add and commit it to the repository:
-
-```bash
-$ git add me.txt
-$ git commit -m "Add biography file"
-```
-
-Modify the file as described (modify one line, add a fourth line).
-To display the differences
-between its updated state and its original state, use `git diff`:
-
-```bash
-$ git diff me.txt
-```
+![](fig/pycharm_git_hist.jpg){alt='Exploring Git repo history using PyCharm'}
 
 :::::::::::::::::::::::::
 
