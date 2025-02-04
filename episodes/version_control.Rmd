@@ -28,14 +28,11 @@ exercises: 30
 
 ## Motivation
 
-Jimmy and Alfredo have been hired by Ratatouille restaurant (a special
-restaurant from Euphoric State University) to investigate if it
-is possible to make the best recipes archive ever.  They want to
-be able to work on indexing the prices at the same time, but they have run into
-problems doing this in the past.  If they take turns, each one will
-spend a lot of time waiting for the other to finish, but if they work
-on their own copies and email changes back and forth things will be
-lost, overwritten, or duplicated.
+Jimmy and Alfredo have been hired by Ratatouille restaurant (a special restaurant from Euphoric State University) to
+investigate if it is possible to make the best recipes archive ever. They want to be able to work on indexing the prices
+at the same time, but they have run into problems doing this in the past. If they take turns, each one will spend a lot
+of time waiting for the other to finish, but if they work on their own copies and email changes back and forth things
+will be lost, overwritten, or duplicated.
 
 A colleague suggests using [version control](learners/reference.md#version-control) to
 manage their work. Version control is better than mailing files back and forth:
@@ -55,19 +52,14 @@ manage their work. Version control is better than mailing files back and forth:
   system automatically notifies users whenever there's a conflict between one
   person's work and another's.
 
-Teams are not the only ones to benefit from version control: lone
-researchers can benefit immensely.  Keeping a record of what was
-changed, when, and why is extremely useful for all researchers if they
-ever need to come back to the project later on (e.g., a year later,
-when memory has faded).
+Teams are not the only ones to benefit from version control: lone researchers can benefit immensely. Keeping a record
+of what was changed, when, and why is extremely useful for all researchers if they ever need to come back to the project
+later on (e.g., a year later, when memory has faded).
 
-Version control is the lab notebook of the digital world: it's what
-professionals use to keep track of what they've done and to
-collaborate with other people.  Every large software development
-project relies on it, and most programmers use it for their small jobs
-as well.  And it isn't just for software: books,
-papers, small data sets, and anything that changes over time or needs
-to be shared can and should be stored in a version control system.
+Version control is the lab notebook of the digital world: it's what professionals use to keep track of what they've done
+and to collaborate with other people.  Every large software development project relies on it, and most programmers use
+it for their small jobs as well.  And it isn't just for software: books, papers, small data sets, and anything that
+changes over time or needs to be shared can and should be stored in a version control system.
 
 
 ## Automatic Version Control
@@ -109,14 +101,11 @@ incorporate two sets of changes into the same base document.
 
 ![](fig/merge.svg){alt='A diagram that shows the merging of two different document versions into one document that contains all of the changes from both versions'}
 
-A version control system is a tool that keeps track of these changes for us,
-effectively creating different versions of our files. It allows us to decide
-which changes will be made to the next version (each record of these changes is
-called a [commit](../learners/reference.md#commit)), and keeps useful metadata
-about them. The complete history of commits for a particular project and their
-metadata make up a [repository](../learners/reference.md#repository).
-Repositories can be kept in sync across different computers, facilitating
-collaboration among different people.
+A version control system is a tool that keeps track of these changes for us, effectively creating different versions of
+our files. It allows us to decide which changes will be made to the next version (each record of these changes is
+called a [commit](../learners/reference.md#commit)), and keeps useful metadata about them. The complete history of
+commits for a particular project and their metadata make up a [repository](../learners/reference.md#repository).
+Repositories can be kept in sync across different computers, facilitating collaboration among different people.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -130,8 +119,7 @@ limitations in their capabilities.
 More modern systems, such as Git and [Mercurial](https://swcarpentry.github.io/hg-novice/),
 are *distributed*, meaning that they do not need a centralized server to host the repository.
 These modern systems also include powerful merging tools that make it possible for
-multiple authors to work on
-the same files concurrently.
+multiple authors to work on the same files concurrently.
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -152,22 +140,17 @@ the same files concurrently.
 
 ### Solution
 
-- Recovering the excellent version is only possible if you created a copy
-  of the old version of the paper. The danger of losing good versions
-  often leads to the problematic workflow illustrated in the PhD Comics
+- Recovering the excellent version is only possible if you created a copy of the old version of the paper.
+  The danger of losing good versions often leads to the problematic workflow illustrated in the PhD Comics
   cartoon at the top of this page.
 
-- Collaborative writing with traditional word processors is cumbersome.
-  Either every collaborator has to work on a document sequentially
-  (slowing down the process of writing), or you have to send out a
-  version to all collaborators and manually merge their comments into
-  your document. The 'track changes' or 'record changes' option can
-  highlight changes for you and simplifies merging, but as soon as you
-  accept changes you will lose their history. You will then no longer
-  know who suggested that change, why it was suggested, or when it was
+- Collaborative writing with traditional word processors is cumbersome. Either every collaborator has to work on a
+  document sequentially (slowing down the process of writing), or you have to send out a version to all collaborators
+  and manually merge their comments into your document. The 'track changes' or 'record changes' option can
+  highlight changes for you and simplifies merging, but as soon as you accept changes you will lose their history.
+  You will then no longer know who suggested that change, why it was suggested, or when it was
   merged into the rest of the document. Even online word processors like
-  Google Docs or Microsoft Office Online do not fully resolve these
-  problems.
+  Google Docs or Microsoft Office Online do not fully resolve these problems.
   
   
 
@@ -183,23 +166,33 @@ the same files concurrently.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-## Setting Up Git
+## Introducing Git
 
+In this section we will move away from the general discussion on version control systems, and focus on
+one modern such system - namely *Git* - which over the past ten years has emerged as the de-facto standard in this
+area. One of the main goals of this course is to make you very comfortable with using git, which we believe will
+greatly help you towards the goal of making robust and reproducible research software. If you want to know more
+about how *git* has emerged as the dominant version control system, there are a few interesting articles on
+its history [here](https://www.geeksforgeeks.org/history-of-git/),
+[here](https://www.welcometothejungle.com/en/articles/btc-history-git), and
+[here](https://en.wikipedia.org/wiki/Git)
+
+
+### Setting Up Git
 
 ::::::::::::::::::::::::::::::::::::::::::  prereq
 
 ### Prerequisites
 
-In this episode we use Git from the Unix Shell.
-Some previous experience with the shell is expected,
+- In this episode we use Git from the Unix Shell. Some previous experience with the shell is expected,
 *but isn't mandatory*.
-
+- It is also assumed that you have already installed *Git* on your system. If this is not the case, please do
+this now, by following the download/installation instructions [here](https://https://git-scm.com/)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-When we use Git on a new computer for the first time,
-we need to configure a few things. Below are a few examples
+When we use Git on a new computer for the first time, we need to configure a few things. Below are a few examples
 of configurations we will set as we get started with Git:
 
 - our name and email address,
@@ -208,7 +201,7 @@ of configurations we will set as we get started with Git:
 
 On a command line, Git commands are written as `git verb options`,
 where `verb` is what we actually want to do and `options` is additional optional information which may be needed for the `verb`. So here is how
-Alfredo sets up his new laptop:
+Alfredo sets up *git* on his new laptop:
 
 ```bash
 $ git config --global user.name "Alfredo Linguini"
@@ -216,12 +209,11 @@ $ git config --global user.email "a.linguini@ratatouille.fr"
 ```
 
 Please use your own name and email address instead of Alfredo's. This user name and email will be associated with your subsequent Git activity,
-which means that any changes pushed to
+which means that any changes pushed to Git platforms, such as
 [GitHub](https://github.com/),
 [BitBucket](https://bitbucket.org/),
 [GitLab](https://gitlab.com/) or
-another Git host server
-after this lesson will include this information.
+any other Git host server after this lesson will include this information.
 
 For this lesson, we will be interacting with TU Delft [GitLab instance] and so the email address
 used should be your TUD email.
@@ -232,17 +224,14 @@ used should be your TUD email.
 ### Line Endings
 
 As with other keys, when you press <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd> on your keyboard,
-your computer encodes this input as a character.
-Different operating systems use different character(s) to represent the end of a line.
-(You may also hear these referred to as newlines or line breaks.)
-Because Git uses these characters to compare files,
-it may cause unexpected issues when editing a file on different machines.
+your computer encodes this input as a character. Different operating systems use different character(s) to represent
+the end of a line. (You may also hear these referred to as newlines or line breaks.) Because Git uses these characters
+to compare files, it may cause unexpected issues when editing a file on different machines.
 Though it is beyond the scope of this lesson, you can read more about this issue
 [in the Pro Git book](https://www.git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_core_autocrlf).
 
 You can change the way Git recognizes and encodes line endings
-using the `core.autocrlf` command to `git config`.
-The following settings are recommended:
+using the `core.autocrlf` command to `git config`. The following settings are recommended:
 
 On macOS and Linux:
 
@@ -303,18 +292,16 @@ $ git config --global init.defaultBranch main
 
 ### Default Git branch naming
 
-Source file changes are associated with a "branch."
-For new learners in this lesson, it's enough to know that branches exist, and this lesson uses one branch.  
-By default, Git will create a branch called `master`
-when you create a new repository with `git init` (as explained in the next Episode). This term evokes
+Source file changes are associated with a "branch." For new learners in this lesson, it's enough to know that branches
+exist, and this lesson uses one branch. By default, Git will create a branch called `main` when you create a new
+repository with `git init` (as explained in the next Episode). This term evokes
 the racist practice of human slavery and the
 [software development community](https://github.com/github/renaming)  has moved to adopt
 more inclusive language.
 
-In 2020, most Git code hosting services transitioned to using `main` as the default
-branch. As an example, any new repository that is opened in GitHub and GitLab default
-to `main`.  However, Git has not yet made the same change.  As a result, local repositories
-must be manually configured have the same main branch name as most cloud services.
+In 2020, most Git code hosting services transitioned to using `main` as the default branch. As an example, any new
+repository that is opened in GitHub and GitLab default to `main`. However, Git has not yet made the same change.
+As a result, local repositories must be manually configured have the same main branch name as most cloud services.
 
 For versions of Git prior to 2.28, the change can be made on an individual repository level.  The
 command for this is in the next episode.  Note that if this value is unset in your local Git
@@ -338,16 +325,14 @@ issues, it's safer to view the configuration with:
 $ git config --list
 ```
 
-And if necessary, change your configuration using the
-same commands to choose another editor or update your email address.
-This can be done as many times as you want.
+And if necessary, change your configuration using the same commands to choose another editor or update your email
+address. This can be done as many times as you want.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
 ### Proxy
 
-In some networks you need to use a
-[proxy](https://en.wikipedia.org/wiki/Proxy_server). If this is the case, you
+In some networks you need to use a [proxy](https://en.wikipedia.org/wiki/Proxy_server). If this is the case, you
 may also need to tell Git about the proxy:
 
 ```bash
@@ -387,7 +372,6 @@ $ git help
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-[git-privacy]: https://help.github.com/articles/keeping-your-email-address-private/
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
@@ -418,15 +402,12 @@ Then we tell Git to make `recipes` a [repository](../learners/reference.md#repos
 $ git init
 ```
 
-It is important to note that `git init` will create a repository that
-can include subdirectories and their files---there is no need to create
-separate repositories nested within the `recipes` repository, whether
-subdirectories are present from the beginning or added later. Also, note
-that the creation of the `recipes` directory and its initialization as a
-repository are completely separate processes.
+It is important to note that `git init` will create a repository that can include subdirectories and their
+files---there is no need to create separate repositories nested within the `recipes` repository, whether
+subdirectories are present from the beginning or added later. Also, note that the creation of the `recipes` directory
+and its initialization as a repository are completely separate processes.
 
-If we use `ls` to show the directory's contents,
-it appears that nothing has changed:
+If we use `ls` to show the directory's contents, it appears that nothing has changed:
 
 ```bash
 $ ls
@@ -443,10 +424,9 @@ $ ls -a
 .	..	.git
 ```
 
-Git uses this special subdirectory to store all the information about the project,
-including the tracked files and sub-directories located within the project's directory.
-If we ever delete the `.git` subdirectory,
-we will lose the project's history.
+Git uses this special subdirectory to store all the information about the project, including the tracked files and
+sub-directories located within the project's directory. If we ever delete the `.git` subdirectory,
+we will lose the project's version control history.
 
 We can now start using one of the most important git commands, which is particularly helpful to beginners. `git status` tells us the status of our project, and better,
 a list of changes in the project and options on what to do with those changes. We can use it as often as we want, whenever we want to understand what is going on.
@@ -463,16 +443,14 @@ No commits yet
 nothing to commit (create/copy files and use "git add" to track)
 ```
 
-If you are using a different version of `git`, the exact
-wording of the output might be slightly different.
+If you are using a different version of `git`, the exact wording of the output might be slightly different.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ### Places to Create Git Repositories
 
-Along with tracking information about recipes (the project we have already created),
-Alfredo would also like to track information about desserts specifically.
-Alfredo creates a `desserts` project inside his `recipes`
+Along with tracking information about recipes (the project we have already created), Alfredo would also like to track
+information about desserts specifically. Alfredo creates a `desserts` project inside his `recipes`
 project with the following sequence of commands:
 
 ```bash
@@ -492,19 +470,14 @@ tracking files stored in the `desserts` subdirectory?
 
 ### Solution
 
-No. Alfredo does not need to make the `desserts` subdirectory a Git repository
-because the `recipes` repository will track all files, sub-directories, and
-subdirectory files under the `recipes` directory.  Thus, in order to track
-all information about desserts, Alfredo only needed to add the `desserts` subdirectory
-to the `recipes` directory.
+No. Alfredo does not need to make the `desserts` subdirectory a Git repository because the `recipes` repository will
+track all files, sub-directories, and subdirectory files under the `recipes` directory.  Thus, in order to track
+all information about desserts, Alfredo only needed to add the `desserts` subdirectory to the `recipes` directory.
 
-Additionally, Git repositories can interfere with each other if they are "nested":
-the outer repository will try to version-control
-the inner repository. Therefore, it's best to create each new Git
-repository in a separate directory. To be sure that there is no conflicting
-repository in the directory, check the output of `git status`. If it looks
-like the following, you are good to go to create a new repository as shown
-above:
+Additionally, Git repositories can interfere with each other if they are "nested": the outer repository will try
+to version-control the inner repository. Therefore, it's best to create each new Git repository in a separate directory.
+To be sure that there is no conflicting repository in the directory, check the output of `git status`. If it looks
+like the following, you are good to go to create a new repository as shown above:
 
 ```bash
 $ git status
@@ -518,9 +491,8 @@ fatal: Not a git repository (or any of the parent directories): .git
 
 ### Correcting `git init` Mistakes
 
-Jimmy explains to Alfredo how a nested repository is redundant and may cause confusion
-down the road. Alfredo would like to go back to a single git repository. How can Alfredo undo
-his last `git init` in the `desserts` subdirectory?
+Jimmy explains to Alfredo how a nested repository is redundant and may cause confusion down the road. Alfredo would
+like to go back to a single git repository. How can Alfredo undo his last `git init` in the `desserts` subdirectory?
 
 :::::::::::::::  solution
 
@@ -536,23 +508,20 @@ that are not tracked by Git can easily be removed like any other "ordinary" file
 $ rm filename
 ```
 
-Similarly a directory can be removed using `rm -r dirname`.
-If the files or folder being removed in this fashion are tracked by Git, then their removal
-becomes another change that we will need to track, as we will see in the next episode.
+Similarly a directory can be removed using `rm -r dirname`. If the files or folder being removed in this fashion are
+tracked by Git, then their removal becomes another change that we will need to track, as we will see in the next episode.
 
 ### Solution
 
-Git keeps all of its files in the `.git` directory.
-To recover from this little mistake, Alfredo can remove the `.git`
+Git keeps all of its files in the `.git` directory. To recover from this little mistake, Alfredo can remove the `.git`
 folder in the desserts subdirectory by running the following command from inside the `recipes` directory:
 
 ```bash
 $ rm -rf desserts/.git
 ```
 
-But be careful! Running this command in the wrong directory will remove
-the entire Git history of a project you might want to keep.
-In general, deleting files and directories using `rm` from the command line cannot be reversed.
+But be careful! Running this command in the wrong directory will remove the entire Git history of a project you might
+want to keep. In general, deleting files and directories using `rm` from the command line cannot be reversed.
 Therefore, always check your current directory using the command `pwd`.
 
 
@@ -579,14 +548,13 @@ Knowing how to use Git from the command line has definite benefits:
 
 - Helps novice users become more comfortable with Git's underlying structure and commands
 - Gives more precise control at the low level (through command-line options)
-- Equips users with the skills to troubleshoot and solve problems that may not
-be easily addressed with a GUI
+- Equips users with the skills to troubleshoot and solve problems that may not be easily addressed with a GUI
 - When searching for online resources on specific Git workflows, most information is available as command line
-instructions; same applies for help/instructions provided by AI Assistants such as ChatGPT, Bard, or Claude
+instructions; same applies for help/instructions provided by AI Assistants such as ChatGPT, Gemini, or Claude
 - GUI tools may change their menus/"look and feel" with new releases, while Git commands/options are much more stable
 
-On the other hands, it is important to understand that visual Git tools can greatly improve the overall developer experience
-as well as increase productivity:
+On the other hands, it is important to understand that visual Git tools can greatly improve the overall developer
+experience as well as increase productivity:
 
 - Graphical Git tools offer an intuitive interface, making it easier for beginners to grasp basic concepts like
 branching, or viewing the repository's history
