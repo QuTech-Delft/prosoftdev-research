@@ -346,7 +346,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Basic Git Commands</h1>
-        <p>Last updated on 2025-01-29 |
+        <p>Last updated on 2025-02-05 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/basic-git-commands.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -396,22 +396,22 @@ messages.</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="tracking-changes">Tracking Changes<a class="anchor" aria-label="anchor" href="#tracking-changes"></a></h2>
-<hr class="half-width"><p>First let’s make sure we’re still in the right directory. You should
-be in the <code>recipes</code> directory.</p>
+<hr class="half-width"><p>In this episode we will continue working with the
+<code>recipes</code> repository you have created in the previous
+episode. First let’s make sure we’re still in the right directory. You
+should be in the <code>recipes</code> directory.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> cd ~/Desktop/recipes</span></code></pre>
 </div>
 <p>Let’s create a file called <code>guacamole.md</code> that contains
-the basic structure to have a recipe. We’ll use <code>nano</code> to
-edit the file; you can use whatever editor you like. In particular, this
-does not have to be the <code>core.editor</code> you set globally
-earlier. But remember, the steps to create create or edit a new file
-will depend on the editor you choose (it might not be nano). For a
-refresher on text editors, check out <a href="https://swcarpentry.github.io/shell-novice/03-create.html#which-editor" class="external-link">“Which
-Editor?”</a> in <a href="https://swcarpentry.github.io/shell-novice/" class="external-link">The Unix Shell</a>
-lesson.</p>
+the basic structure to have a recipe. We will use <code>nano</code> to
+edit the file, but feel free to use another text editor if you prefer.
+In particular, this does not have to be the <code>core.editor</code> you
+set globally earlier. But remember, the steps to create create or edit a
+new file will depend on the editor you choose (it might not be
+nano).</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1684,10 +1684,10 @@ staging area.</p>
 <p>So, when <code>git commit -m "My opinions about the red sauce"</code>
 is executed, the version of <code>ketchup.md</code> committed to the
 repository is the one from the staging area and has only one line.</p>
-<p>At this time, the working copy still has the second line (and</p>
-<p><code>git status</code> will show that the file is modified).
-However, <code>git restore ketchup.md</code> replaces the working copy
-with the most recently committed version of <code>ketchup.md</code>. So,
+<p>At this time, the working copy still has the second line (and
+<code>git status</code> will show that the file is modified). However,
+<code>git restore ketchup.md</code> replaces the working copy with the
+most recently committed version of <code>ketchup.md</code>. So,
 <code>cat ketchup.md</code> will output</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1797,46 +1797,47 @@ nothing to commit, working tree clean</code></pre>
 </div>
 </div>
 </div>
-<div id="explore-and-summarize-histories" class="callout discussion">
+<div id="practice-using-graphical-git-tools-2" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="explore-and-summarize-histories" class="callout-inner">
-<h3 class="callout-title">Explore and Summarize Histories</h3>
+<div id="practice-using-graphical-git-tools-2" class="callout-inner">
+<h3 class="callout-title">Practice using graphical Git tools</h3>
 <div class="callout-content">
-<p>Exploring history is an important part of Git, and often it is a
-challenge to find the right commit ID, especially if the commit is from
-several months ago.</p>
-<p>Imagine the <code>recipes</code> project has more than 50 files. You
-would like to find a commit that modifies some specific text in
-<code>guacamole.md</code>. When you type <code>git log</code>, a very
-long list appeared. How can you narrow down the search?</p>
-<p>Recall that the <code>git diff</code> command allows us to explore
-one specific file, e.g., <code>git diff guacamole.md</code>. We can
-apply a similar idea here.</p>
-<div class="codewrapper sourceCode" id="cb100">
+<p>Using the graphical Git tools in PyCharm repeat the basic Git
+commands explained so far:</p>
+<ol style="list-style-type: decimal"><li>Revert un-staged changes in the <code>guacamole.md</code>
+recipe.</li>
+<li>Revert the <code>guacamole.md</code> recipe to an earlier commit -
+<code>HEAD~2</code>.</li>
+<li>Examine changes between <code>HEAD~1</code> and
+<code>HEAD~5</code>.</li>
+</ol></div>
+</div>
+</div>
+<div id="accordionSolution10" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution10" aria-expanded="false" aria-controls="collapseSolution10">
+  <h4 class="accordion-header" id="headingSolution10"> Show me the solution </h4>
+</button>
+<div id="collapseSolution10" class="accordion-collapse collapse" aria-labelledby="headingSolution10" data-bs-parent="#accordionSolution10">
+<div class="accordion-body">
+<ol style="list-style-type: decimal"><li>Discarding un-staged changes with PyCharm:   <img src="../fig/pycharm_git_rollback.jpg" alt="Git rollback using PyCharm" class="figure"></li>
+</ol><p>         </p>
+<ol start="2" style="list-style-type: decimal"><li>“Revert the <code>guacamole.md</code> recipe to an earlier commit -
+<code>HEAD~2</code>”:</li>
+</ol><div class="codewrapper sourceCode" id="cb100">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" tabindex="-1"></a><span class="ex">$</span> git log guacamole.md</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" tabindex="-1"></a><span class="ex">$</span> git restore <span class="at">-s</span> HEAD~2 guacamole.md</span></code></pre>
 </div>
-<p>Unfortunately some of these commit messages are very ambiguous, e.g.,
-<code>update files</code>. How can you search through these files?</p>
-<p>Both <code>git diff</code> and <code>git log</code> are very useful
-and they summarize a different part of the history for you. Is it
-possible to combine both? Let’s try the following:</p>
-<div class="codewrapper sourceCode" id="cb101">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a><span class="ex">$</span> git log <span class="at">--patch</span> guacamole.md</span></code></pre>
-</div>
-<p>You should get a long list of output, and you should be able to see
-both commit messages and the difference between each commit.</p>
-<p>Question: What does the following command do?</p>
-<div class="codewrapper sourceCode" id="cb102">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb102-1"><a href="#cb102-1" tabindex="-1"></a><span class="ex">$</span> git log <span class="at">--patch</span> HEAD~9 <span class="pp">*</span>.md</span></code></pre>
-</div>
+<p>This was actually a tricky question! PyCharm does not provide a
+direct GUI option to revert a file to a specific Git revision. This is
+one example of GUI tools limitations, which shows the importance of
+understanding and mastering Git from the command line.</p>
+<p>         </p>
+<ol start="3" style="list-style-type: decimal"><li>Comparing two Git revisions:</li>
+</ol><figure><img src="../fig/pycharm_git_compare_revisions.jpg" alt="Comparing two Git revisions using PyCharm" class="figure mx-auto d-block"></figure></div>
 </div>
 </div>
 </div>
@@ -1858,17 +1859,17 @@ both commit messages and the difference between each commit.</p>
 <hr class="half-width"><p>What if we have files that we do not want Git to track for us, like
 backup files created by our editor or intermediate files created during
 data analysis? Let’s create a few dummy files:</p>
-<div class="codewrapper sourceCode" id="cb103">
+<div class="codewrapper sourceCode" id="cb101">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb103-1"><a href="#cb103-1" tabindex="-1"></a><span class="ex">$</span> mkdir receipts</span>
-<span id="cb103-2"><a href="#cb103-2" tabindex="-1"></a><span class="ex">$</span> touch a.png b.png c.png receipts/a.jpg receipts/b.jpg</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a><span class="ex">$</span> mkdir receipts</span>
+<span id="cb101-2"><a href="#cb101-2" tabindex="-1"></a><span class="ex">$</span> touch a.png b.png c.png receipts/a.jpg receipts/b.jpg</span></code></pre>
 </div>
 <p>and see what Git says:</p>
-<div class="codewrapper sourceCode" id="cb104">
+<div class="codewrapper sourceCode" id="cb102">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb102-1"><a href="#cb102-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1889,11 +1890,11 @@ space. What’s worse, having them all listed could distract us from
 changes that actually matter, so let’s tell Git to ignore them.</p>
 <p>We do this by creating a file in the root directory of our project
 called <code>.gitignore</code>:</p>
-<div class="codewrapper sourceCode" id="cb106">
+<div class="codewrapper sourceCode" id="cb104">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a><span class="ex">$</span> nano .gitignore</span>
-<span id="cb106-2"><a href="#cb106-2" tabindex="-1"></a><span class="ex">$</span> cat .gitignore</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a><span class="ex">$</span> nano .gitignore</span>
+<span id="cb104-2"><a href="#cb104-2" tabindex="-1"></a><span class="ex">$</span> cat .gitignore</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1907,10 +1908,10 @@ receipts/</code></pre>
 track them.)</p>
 <p>Once we have created this file, the output of <code>git status</code>
 is much cleaner:</p>
-<div class="codewrapper sourceCode" id="cb108">
+<div class="codewrapper sourceCode" id="cb106">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1928,12 +1929,12 @@ nothing added to commit but untracked files present (use "git add" to track)</co
 it, but everyone we’re sharing our repository with will probably want to
 ignore the same things that we’re ignoring. Let’s add and commit
 <code>.gitignore</code>:</p>
-<div class="codewrapper sourceCode" id="cb110">
+<div class="codewrapper sourceCode" id="cb108">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb110-1"><a href="#cb110-1" tabindex="-1"></a><span class="ex">$</span> git add .gitignore</span>
-<span id="cb110-2"><a href="#cb110-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Ignore png files and the receipts folder."</span></span>
-<span id="cb110-3"><a href="#cb110-3" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a><span class="ex">$</span> git add .gitignore</span>
+<span id="cb108-2"><a href="#cb108-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Ignore png files and the receipts folder."</span></span>
+<span id="cb108-3"><a href="#cb108-3" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1943,10 +1944,10 @@ nothing to commit, working tree clean</code></pre>
 </div>
 <p>As a bonus, using <code>.gitignore</code> helps us avoid accidentally
 adding files to the repository that we don’t want to track:</p>
-<div class="codewrapper sourceCode" id="cb112">
+<div class="codewrapper sourceCode" id="cb110">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb112-1"><a href="#cb112-1" tabindex="-1"></a><span class="ex">$</span> git add a.png</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb110-1"><a href="#cb110-1" tabindex="-1"></a><span class="ex">$</span> git add a.png</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1959,10 +1960,10 @@ Use -f if you really want to add them.</code></pre>
 <code>git add -f</code> to force Git to add something. For example,
 <code>git add -f a.csv</code>. We can also always see the status of
 ignored files if we want:</p>
-<div class="codewrapper sourceCode" id="cb114">
+<div class="codewrapper sourceCode" id="cb112">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb114-1"><a href="#cb114-1" tabindex="-1"></a><span class="ex">$</span> git status <span class="at">--ignored</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb112-1"><a href="#cb112-1" tabindex="-1"></a><span class="ex">$</span> git status <span class="at">--ignored</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1986,23 +1987,23 @@ nothing to commit, working tree clean</code></pre>
 <h3 class="callout-title">Ignoring Nested Files</h3>
 <div class="callout-content">
 <p>Given a directory structure that looks like:</p>
-<div class="codewrapper sourceCode" id="cb116">
+<div class="codewrapper sourceCode" id="cb114">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb116-1"><a href="#cb116-1" tabindex="-1"></a><span class="ex">receipts/data</span></span>
-<span id="cb116-2"><a href="#cb116-2" tabindex="-1"></a><span class="ex">receipts/plots</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb114-1"><a href="#cb114-1" tabindex="-1"></a><span class="ex">receipts/data</span></span>
+<span id="cb114-2"><a href="#cb114-2" tabindex="-1"></a><span class="ex">receipts/plots</span></span></code></pre>
 </div>
 <p>How would you ignore only <code>receipts/plots</code> and not
 <code>receipts/data</code>?</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution10" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution11" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution10" aria-expanded="false" aria-controls="collapseSolution10">
-  <h4 class="accordion-header" id="headingSolution10"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution11" aria-expanded="false" aria-controls="collapseSolution11">
+  <h4 class="accordion-header" id="headingSolution11"> Show me the solution </h4>
 </button>
-<div id="collapseSolution10" class="accordion-collapse collapse" aria-labelledby="headingSolution10" data-bs-parent="#accordionSolution10">
+<div id="collapseSolution11" class="accordion-collapse collapse" aria-labelledby="headingSolution11" data-bs-parent="#accordionSolution11">
 <div class="accordion-body">
 <p>If you only want to ignore the contents of
 <code>receipts/plots</code>, you can change your <code>.gitignore</code>
@@ -2016,11 +2017,6 @@ following line to your .gitignore:</p>
 <p>This line will ensure only the contents of
 <code>receipts/plots</code> is ignored, and not the contents of
 <code>receipts/data</code>.</p>
-<p>As with most programming issues, there are a few alternative ways
-that one may ensure this ignore rule is followed. The “Ignoring Nested
-Files: Variation” exercise has a slightly different directory structure
-that presents an alternative solution. Further, the discussion page has
-more detail on ignore rules.</p>
 </div>
 </div>
 </div>
@@ -2038,12 +2034,12 @@ directory except for <code>final.png</code>? Hint: Find out what
 </div>
 </div>
 </div>
-<div id="accordionSolution11" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution12" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution11" aria-expanded="false" aria-controls="collapseSolution11">
-  <h4 class="accordion-header" id="headingSolution11"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution12" aria-expanded="false" aria-controls="collapseSolution12">
+  <h4 class="accordion-header" id="headingSolution12"> Show me the solution </h4>
 </button>
-<div id="collapseSolution11" class="accordion-collapse collapse" aria-labelledby="headingSolution11" data-bs-parent="#accordionSolution11">
+<div id="collapseSolution12" class="accordion-collapse collapse" aria-labelledby="headingSolution12" data-bs-parent="#accordionSolution12">
 <div class="accordion-body">
 <p>You would add the following two lines to your .gitignore:</p>
 <div class="codewrapper">
@@ -2071,14 +2067,14 @@ will be ignored.</p>
 <div class="callout-content">
 <p>Assuming you have an empty .gitignore file, and given a directory
 structure that looks like:</p>
-<div class="codewrapper sourceCode" id="cb119">
+<div class="codewrapper sourceCode" id="cb117">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb119-1"><a href="#cb119-1" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/a.dat</span></span>
-<span id="cb119-2"><a href="#cb119-2" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/b.dat</span></span>
-<span id="cb119-3"><a href="#cb119-3" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/c.dat</span></span>
-<span id="cb119-4"><a href="#cb119-4" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/info.txt</span></span>
-<span id="cb119-5"><a href="#cb119-5" tabindex="-1"></a><span class="ex">receipts/plots</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb117-1"><a href="#cb117-1" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/a.dat</span></span>
+<span id="cb117-2"><a href="#cb117-2" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/b.dat</span></span>
+<span id="cb117-3"><a href="#cb117-3" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/c.dat</span></span>
+<span id="cb117-4"><a href="#cb117-4" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/info.txt</span></span>
+<span id="cb117-5"><a href="#cb117-5" tabindex="-1"></a><span class="ex">receipts/plots</span></span></code></pre>
 </div>
 <p>What’s the shortest <code>.gitignore</code> rule you could write to
 ignore all <code>.dat</code> files in
@@ -2087,12 +2083,12 @@ ignore all <code>.dat</code> files in
 </div>
 </div>
 </div>
-<div id="accordionSolution12" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution13" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution12" aria-expanded="false" aria-controls="collapseSolution12">
-  <h4 class="accordion-header" id="headingSolution12"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution13" aria-expanded="false" aria-controls="collapseSolution13">
+  <h4 class="accordion-header" id="headingSolution13"> Show me the solution </h4>
 </button>
-<div id="collapseSolution12" class="accordion-collapse collapse" aria-labelledby="headingSolution12" data-bs-parent="#accordionSolution12">
+<div id="collapseSolution13" class="accordion-collapse collapse" aria-labelledby="headingSolution13" data-bs-parent="#accordionSolution13">
 <div class="accordion-body">
 <p>Appending <code>receipts/data/market_position/gps/*.dat</code> will
 match every file in <code>receipts/data/market_position/gps</code> that
@@ -2112,25 +2108,25 @@ ignored.</p>
 <div class="callout-content">
 <p>Let us assume you have many <code>.csv</code> files in different
 subdirectories of your repository. For example, you might have:</p>
-<div class="codewrapper sourceCode" id="cb120">
+<div class="codewrapper sourceCode" id="cb118">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb120-1"><a href="#cb120-1" tabindex="-1"></a><span class="ex">results/a.csv</span></span>
-<span id="cb120-2"><a href="#cb120-2" tabindex="-1"></a><span class="ex">data/experiment_1/b.csv</span></span>
-<span id="cb120-3"><a href="#cb120-3" tabindex="-1"></a><span class="ex">data/experiment_2/c.csv</span></span>
-<span id="cb120-4"><a href="#cb120-4" tabindex="-1"></a><span class="ex">data/experiment_2/variation_1/d.csv</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb118-1"><a href="#cb118-1" tabindex="-1"></a><span class="ex">results/a.csv</span></span>
+<span id="cb118-2"><a href="#cb118-2" tabindex="-1"></a><span class="ex">data/experiment_1/b.csv</span></span>
+<span id="cb118-3"><a href="#cb118-3" tabindex="-1"></a><span class="ex">data/experiment_2/c.csv</span></span>
+<span id="cb118-4"><a href="#cb118-4" tabindex="-1"></a><span class="ex">data/experiment_2/variation_1/d.csv</span></span></code></pre>
 </div>
 <p>How do you ignore all the <code>.csv</code> files, without explicitly
 listing the names of the corresponding folders?</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution13" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution14" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution13" aria-expanded="false" aria-controls="collapseSolution13">
-  <h4 class="accordion-header" id="headingSolution13"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution14" aria-expanded="false" aria-controls="collapseSolution14">
+  <h4 class="accordion-header" id="headingSolution14"> Show me the solution </h4>
 </button>
-<div id="collapseSolution13" class="accordion-collapse collapse" aria-labelledby="headingSolution13" data-bs-parent="#accordionSolution13">
+<div id="collapseSolution14" class="accordion-collapse collapse" aria-labelledby="headingSolution14" data-bs-parent="#accordionSolution14">
 <div class="accordion-body">
 <p>In the <code>.gitignore</code> file, write:</p>
 <div class="codewrapper">
@@ -2220,9 +2216,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/basic-git-commands.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/basic-git-commands.html",
-  "dateCreated": "2025-01-29",
-  "dateModified": "2025-01-29",
-  "datePublished": "2025-02-04"
+  "dateCreated": "2025-02-05",
+  "dateModified": "2025-02-05",
+  "datePublished": "2025-02-05"
 }
 
   </script><script>

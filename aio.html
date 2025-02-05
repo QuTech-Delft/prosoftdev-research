@@ -608,7 +608,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-version_control"><p>Content from <a href="version_control.html">Version Control</a></p>
 <hr>
-<p>Last updated on 2025-01-29 |
+<p>Last updated on 2025-02-05 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/version_control.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -772,7 +772,7 @@ changes?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ul>
 <li><p>Recovering the excellent version is only possible if you created
@@ -809,9 +809,22 @@ problems.</p></li>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="setting-up-git">Setting Up Git<a class="anchor" aria-label="anchor" href="#setting-up-git"></a>
+</section><section><h2 class="section-heading" id="introducing-git">Introducing Git<a class="anchor" aria-label="anchor" href="#introducing-git"></a>
 </h2>
 <hr class="half-width">
+<p>In this section we will move away from the general discussion on
+version control systems, and focus on one modern such system - namely
+<em>Git</em> - which over the past ten years has emerged as the de-facto
+standard in this area. One of the main goals of this course is to make
+you very comfortable with using git, which we believe will greatly help
+you towards the goal of making robust and reproducible research
+software. If you want to know more about how <em>git</em> has emerged as
+the dominant version control system, there are a few interesting
+articles on its history <a href="https://www.geeksforgeeks.org/history-of-git/" class="external-link">here</a>, <a href="https://www.welcometothejungle.com/en/articles/btc-history-git" class="external-link">here</a>,
+and <a href="https://en.wikipedia.org/wiki/Git" class="external-link">here</a></p>
+<div class="section level3">
+<h3 id="setting-up-git">Setting Up Git<a class="anchor" aria-label="anchor" href="#setting-up-git"></a>
+</h3>
 <div id="prerequisites" class="callout prereq">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check"></i>
@@ -819,8 +832,15 @@ problems.</p></li>
 <div id="prerequisites" class="callout-inner">
 <h3 class="callout-title">Prerequisites</h3>
 <div class="callout-content">
-<p>In this episode we use Git from the Unix Shell. Some previous
-experience with the shell is expected, <em>but isn’t mandatory</em>.</p>
+<ul>
+<li>In this episode we use Git from the Unix Shell. Some previous
+experience with the shell is expected, <em>but isn’t
+mandatory</em>.</li>
+<li>It is also assumed that you have already installed <em>Git</em> on
+your system. If this is not the case, please do this now, by following
+the download/installation instructions <a href="https://https://git-scm.com/" class="external-link">here</a>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -837,7 +857,7 @@ project).</li>
 <code>git verb options</code>, where <code>verb</code> is what we
 actually want to do and <code>options</code> is additional optional
 information which may be needed for the <code>verb</code>. So here is
-how Alfredo sets up his new laptop:</p>
+how Alfredo sets up <em>git</em> on his new laptop:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -846,7 +866,8 @@ how Alfredo sets up his new laptop:</p>
 </div>
 <p>Please use your own name and email address instead of Alfredo’s. This
 user name and email will be associated with your subsequent Git
-activity, which means that any changes pushed to <a href="https://github.com/" class="external-link">GitHub</a>, <a href="https://bitbucket.org/" class="external-link">BitBucket</a>, <a href="https://gitlab.com/" class="external-link">GitLab</a> or another Git host server after
+activity, which means that any changes pushed to Git platforms, such as
+<a href="https://github.com/" class="external-link">GitHub</a>, <a href="https://bitbucket.org/" class="external-link">BitBucket</a>, <a href="https://gitlab.com/" class="external-link">GitLab</a> or any other Git host server after
 this lesson will include this information.</p>
 <p>For this lesson, we will be interacting with TU Delft <a href="https://gitlab.tudelft.nl/" class="external-link">GitLab instance</a> and so the email
 address used should be your TUD email.</p>
@@ -995,11 +1016,10 @@ he will eventually use.</p>
 <div class="callout-content">
 <p>Source file changes are associated with a “branch.” For new learners
 in this lesson, it’s enough to know that branches exist, and this lesson
-uses one branch.<br>
-By default, Git will create a branch called <code>master</code> when you
-create a new repository with <code>git init</code> (as explained in the
-next Episode). This term evokes the racist practice of human slavery and
-the <a href="https://github.com/github/renaming" class="external-link">software development
+uses one branch. By default, Git will create a branch called
+<code>main</code> when you create a new repository with
+<code>git init</code> (as explained in the next Episode). This term
+evokes the racist practice of human slavery and the <a href="https://github.com/github/renaming" class="external-link">software development
 community</a> has moved to adopt more inclusive language.</p>
 <p>In 2020, most Git code hosting services transitioned to using
 <code>main</code> as the default branch. As an example, any new
@@ -1106,6 +1126,7 @@ per machine.</li>
 </div>
 </div>
 </div>
+</div>
 </section><section><h2 class="section-heading" id="creating-a-git-repository">Creating a Git Repository<a class="anchor" aria-label="anchor" href="#creating-a-git-repository"></a>
 </h2>
 <hr class="half-width">
@@ -1159,7 +1180,7 @@ called <code>.git</code>:</p>
 <p>Git uses this special subdirectory to store all the information about
 the project, including the tracked files and sub-directories located
 within the project’s directory. If we ever delete the <code>.git</code>
-subdirectory, we will lose the project’s history.</p>
+subdirectory, we will lose the project’s version control history.</p>
 <p>We can now start using one of the most important git commands, which
 is particularly helpful to beginners. <code>git status</code> tells us
 the status of our project, and better, a list of changes in the project
@@ -1215,7 +1236,7 @@ in the <code>desserts</code> subdirectory?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>No. Alfredo does not need to make the <code>desserts</code>
 subdirectory a Git repository because the <code>recipes</code>
@@ -1264,7 +1285,7 @@ single git repository. How can Alfredo undo his last
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Solution – USE WITH CAUTION! </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="section level3">
 <h3 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
@@ -1344,7 +1365,7 @@ options)</li>
 may not be easily addressed with a GUI</li>
 <li>When searching for online resources on specific Git workflows, most
 information is available as command line instructions; same applies for
-help/instructions provided by AI Assistants such as ChatGPT, Bard, or
+help/instructions provided by AI Assistants such as ChatGPT, Gemini, or
 Claude</li>
 <li>GUI tools may change their menus/“look and feel” with new releases,
 while Git commands/options are much more stable</li>
@@ -1388,7 +1409,7 @@ following episodes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>Accessing the Git visual tools in PyCharm is done by right-clicking
 on a file/folder in the left navigation panel, then selecting
@@ -1420,7 +1441,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-basic-git-commands"><p>Content from <a href="basic-git-commands.html">Basic Git Commands</a></p>
 <hr>
-<p>Last updated on 2025-01-29 |
+<p>Last updated on 2025-02-05 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/basic-git-commands.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1468,22 +1489,22 @@ messages.</li>
 <section><h2 class="section-heading" id="tracking-changes">Tracking Changes<a class="anchor" aria-label="anchor" href="#tracking-changes"></a>
 </h2>
 <hr class="half-width">
-<p>First let’s make sure we’re still in the right directory. You should
-be in the <code>recipes</code> directory.</p>
+<p>In this episode we will continue working with the
+<code>recipes</code> repository you have created in the previous
+episode. First let’s make sure we’re still in the right directory. You
+should be in the <code>recipes</code> directory.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> cd ~/Desktop/recipes</span></code></pre>
 </div>
 <p>Let’s create a file called <code>guacamole.md</code> that contains
-the basic structure to have a recipe. We’ll use <code>nano</code> to
-edit the file; you can use whatever editor you like. In particular, this
-does not have to be the <code>core.editor</code> you set globally
-earlier. But remember, the steps to create create or edit a new file
-will depend on the editor you choose (it might not be nano). For a
-refresher on text editors, check out <a href="https://swcarpentry.github.io/shell-novice/03-create.html#which-editor" class="external-link">“Which
-Editor?”</a> in <a href="https://swcarpentry.github.io/shell-novice/" class="external-link">The Unix Shell</a>
-lesson.</p>
+the basic structure to have a recipe. We will use <code>nano</code> to
+edit the file, but feel free to use another text editor if you prefer.
+In particular, this does not have to be the <code>core.editor</code> you
+set globally earlier. But remember, the steps to create create or edit a
+new file will depend on the editor you choose (it might not be
+nano).</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2788,10 +2809,10 @@ staging area.</p>
 <p>So, when <code>git commit -m "My opinions about the red sauce"</code>
 is executed, the version of <code>ketchup.md</code> committed to the
 repository is the one from the staging area and has only one line.</p>
-<p>At this time, the working copy still has the second line (and</p>
-<p><code>git status</code> will show that the file is modified).
-However, <code>git restore ketchup.md</code> replaces the working copy
-with the most recently committed version of <code>ketchup.md</code>. So,
+<p>At this time, the working copy still has the second line (and
+<code>git status</code> will show that the file is modified). However,
+<code>git restore ketchup.md</code> replaces the working copy with the
+most recently committed version of <code>ketchup.md</code>. So,
 <code>cat ketchup.md</code> will output</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2901,45 +2922,56 @@ nothing to commit, working tree clean</code></pre>
 </div>
 </div>
 </div>
-<div id="explore-and-summarize-histories" class="callout discussion">
+<div id="practice-using-graphical-git-tools-2" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="explore-and-summarize-histories" class="callout-inner">
-<h3 class="callout-title">Explore and Summarize Histories</h3>
+<div id="practice-using-graphical-git-tools-2" class="callout-inner">
+<h3 class="callout-title">Practice using graphical Git tools</h3>
 <div class="callout-content">
-<p>Exploring history is an important part of Git, and often it is a
-challenge to find the right commit ID, especially if the commit is from
-several months ago.</p>
-<p>Imagine the <code>recipes</code> project has more than 50 files. You
-would like to find a commit that modifies some specific text in
-<code>guacamole.md</code>. When you type <code>git log</code>, a very
-long list appeared. How can you narrow down the search?</p>
-<p>Recall that the <code>git diff</code> command allows us to explore
-one specific file, e.g., <code>git diff guacamole.md</code>. We can
-apply a similar idea here.</p>
+<p>Using the graphical Git tools in PyCharm repeat the basic Git
+commands explained so far:</p>
+<ol style="list-style-type: decimal">
+<li>Revert un-staged changes in the <code>guacamole.md</code>
+recipe.</li>
+<li>Revert the <code>guacamole.md</code> recipe to an earlier commit -
+<code>HEAD~2</code>.</li>
+<li>Examine changes between <code>HEAD~1</code> and
+<code>HEAD~5</code>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="accordionSolution10" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution10" aria-expanded="false" aria-controls="collapseSolution10">
+  <h4 class="accordion-header" id="headingSolution10"> Show me the solution </h4>
+</button>
+<div id="collapseSolution10" class="accordion-collapse collapse" aria-labelledby="headingSolution10" data-bs-parent="#accordionSolution10">
+<div class="accordion-body">
+<ol style="list-style-type: decimal">
+<li>Discarding un-staged changes with PyCharm:   <img src="fig/pycharm_git_rollback.jpg" alt="Git rollback using PyCharm" class="figure">
+</li>
+</ol>
+<p>         </p>
+<ol start="2" style="list-style-type: decimal">
+<li>“Revert the <code>guacamole.md</code> recipe to an earlier commit -
+<code>HEAD~2</code>”:</li>
+</ol>
 <div class="codewrapper sourceCode" id="cb100">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" tabindex="-1"></a><span class="ex">$</span> git log guacamole.md</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" tabindex="-1"></a><span class="ex">$</span> git restore <span class="at">-s</span> HEAD~2 guacamole.md</span></code></pre>
 </div>
-<p>Unfortunately some of these commit messages are very ambiguous, e.g.,
-<code>update files</code>. How can you search through these files?</p>
-<p>Both <code>git diff</code> and <code>git log</code> are very useful
-and they summarize a different part of the history for you. Is it
-possible to combine both? Let’s try the following:</p>
-<div class="codewrapper sourceCode" id="cb101">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a><span class="ex">$</span> git log <span class="at">--patch</span> guacamole.md</span></code></pre>
-</div>
-<p>You should get a long list of output, and you should be able to see
-both commit messages and the difference between each commit.</p>
-<p>Question: What does the following command do?</p>
-<div class="codewrapper sourceCode" id="cb102">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb102-1"><a href="#cb102-1" tabindex="-1"></a><span class="ex">$</span> git log <span class="at">--patch</span> HEAD~9 <span class="pp">*</span>.md</span></code></pre>
+<p>This was actually a tricky question! PyCharm does not provide a
+direct GUI option to revert a file to a specific Git revision. This is
+one example of GUI tools limitations, which shows the importance of
+understanding and mastering Git from the command line.</p>
+<p>         </p>
+<ol start="3" style="list-style-type: decimal">
+<li>Comparing two Git revisions:</li>
+</ol>
+<figure><img src="fig/pycharm_git_compare_revisions.jpg" alt="Comparing two Git revisions using PyCharm" class="figure mx-auto d-block"></figure>
 </div>
 </div>
 </div>
@@ -2966,17 +2998,17 @@ both commit messages and the difference between each commit.</p>
 <p>What if we have files that we do not want Git to track for us, like
 backup files created by our editor or intermediate files created during
 data analysis? Let’s create a few dummy files:</p>
-<div class="codewrapper sourceCode" id="cb103">
+<div class="codewrapper sourceCode" id="cb101">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb103-1"><a href="#cb103-1" tabindex="-1"></a><span class="ex">$</span> mkdir receipts</span>
-<span id="cb103-2"><a href="#cb103-2" tabindex="-1"></a><span class="ex">$</span> touch a.png b.png c.png receipts/a.jpg receipts/b.jpg</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a><span class="ex">$</span> mkdir receipts</span>
+<span id="cb101-2"><a href="#cb101-2" tabindex="-1"></a><span class="ex">$</span> touch a.png b.png c.png receipts/a.jpg receipts/b.jpg</span></code></pre>
 </div>
 <p>and see what Git says:</p>
-<div class="codewrapper sourceCode" id="cb104">
+<div class="codewrapper sourceCode" id="cb102">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb102-1"><a href="#cb102-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2997,11 +3029,11 @@ space. What’s worse, having them all listed could distract us from
 changes that actually matter, so let’s tell Git to ignore them.</p>
 <p>We do this by creating a file in the root directory of our project
 called <code>.gitignore</code>:</p>
-<div class="codewrapper sourceCode" id="cb106">
+<div class="codewrapper sourceCode" id="cb104">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a><span class="ex">$</span> nano .gitignore</span>
-<span id="cb106-2"><a href="#cb106-2" tabindex="-1"></a><span class="ex">$</span> cat .gitignore</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a><span class="ex">$</span> nano .gitignore</span>
+<span id="cb104-2"><a href="#cb104-2" tabindex="-1"></a><span class="ex">$</span> cat .gitignore</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3015,10 +3047,10 @@ receipts/</code></pre>
 track them.)</p>
 <p>Once we have created this file, the output of <code>git status</code>
 is much cleaner:</p>
-<div class="codewrapper sourceCode" id="cb108">
+<div class="codewrapper sourceCode" id="cb106">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3036,12 +3068,12 @@ nothing added to commit but untracked files present (use "git add" to track)</co
 it, but everyone we’re sharing our repository with will probably want to
 ignore the same things that we’re ignoring. Let’s add and commit
 <code>.gitignore</code>:</p>
-<div class="codewrapper sourceCode" id="cb110">
+<div class="codewrapper sourceCode" id="cb108">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb110-1"><a href="#cb110-1" tabindex="-1"></a><span class="ex">$</span> git add .gitignore</span>
-<span id="cb110-2"><a href="#cb110-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Ignore png files and the receipts folder."</span></span>
-<span id="cb110-3"><a href="#cb110-3" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a><span class="ex">$</span> git add .gitignore</span>
+<span id="cb108-2"><a href="#cb108-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Ignore png files and the receipts folder."</span></span>
+<span id="cb108-3"><a href="#cb108-3" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3051,10 +3083,10 @@ nothing to commit, working tree clean</code></pre>
 </div>
 <p>As a bonus, using <code>.gitignore</code> helps us avoid accidentally
 adding files to the repository that we don’t want to track:</p>
-<div class="codewrapper sourceCode" id="cb112">
+<div class="codewrapper sourceCode" id="cb110">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb112-1"><a href="#cb112-1" tabindex="-1"></a><span class="ex">$</span> git add a.png</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb110-1"><a href="#cb110-1" tabindex="-1"></a><span class="ex">$</span> git add a.png</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3067,10 +3099,10 @@ Use -f if you really want to add them.</code></pre>
 <code>git add -f</code> to force Git to add something. For example,
 <code>git add -f a.csv</code>. We can also always see the status of
 ignored files if we want:</p>
-<div class="codewrapper sourceCode" id="cb114">
+<div class="codewrapper sourceCode" id="cb112">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb114-1"><a href="#cb114-1" tabindex="-1"></a><span class="ex">$</span> git status <span class="at">--ignored</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb112-1"><a href="#cb112-1" tabindex="-1"></a><span class="ex">$</span> git status <span class="at">--ignored</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3094,23 +3126,23 @@ nothing to commit, working tree clean</code></pre>
 <h3 class="callout-title">Ignoring Nested Files</h3>
 <div class="callout-content">
 <p>Given a directory structure that looks like:</p>
-<div class="codewrapper sourceCode" id="cb116">
+<div class="codewrapper sourceCode" id="cb114">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb116-1"><a href="#cb116-1" tabindex="-1"></a><span class="ex">receipts/data</span></span>
-<span id="cb116-2"><a href="#cb116-2" tabindex="-1"></a><span class="ex">receipts/plots</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb114-1"><a href="#cb114-1" tabindex="-1"></a><span class="ex">receipts/data</span></span>
+<span id="cb114-2"><a href="#cb114-2" tabindex="-1"></a><span class="ex">receipts/plots</span></span></code></pre>
 </div>
 <p>How would you ignore only <code>receipts/plots</code> and not
 <code>receipts/data</code>?</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution10" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution11" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution10" aria-expanded="false" aria-controls="collapseSolution10">
-  <h4 class="accordion-header" id="headingSolution10"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution11" aria-expanded="false" aria-controls="collapseSolution11">
+  <h4 class="accordion-header" id="headingSolution11"> Show me the solution </h4>
 </button>
-<div id="collapseSolution10" class="accordion-collapse collapse" aria-labelledby="headingSolution10" data-bs-parent="#accordionSolution10">
+<div id="collapseSolution11" class="accordion-collapse collapse" aria-labelledby="headingSolution11" data-bs-parent="#accordionSolution11">
 <div class="accordion-body">
 <p>If you only want to ignore the contents of
 <code>receipts/plots</code>, you can change your <code>.gitignore</code>
@@ -3124,11 +3156,6 @@ following line to your .gitignore:</p>
 <p>This line will ensure only the contents of
 <code>receipts/plots</code> is ignored, and not the contents of
 <code>receipts/data</code>.</p>
-<p>As with most programming issues, there are a few alternative ways
-that one may ensure this ignore rule is followed. The “Ignoring Nested
-Files: Variation” exercise has a slightly different directory structure
-that presents an alternative solution. Further, the discussion page has
-more detail on ignore rules.</p>
 </div>
 </div>
 </div>
@@ -3146,12 +3173,12 @@ directory except for <code>final.png</code>? Hint: Find out what
 </div>
 </div>
 </div>
-<div id="accordionSolution11" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution12" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution11" aria-expanded="false" aria-controls="collapseSolution11">
-  <h4 class="accordion-header" id="headingSolution11"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution12" aria-expanded="false" aria-controls="collapseSolution12">
+  <h4 class="accordion-header" id="headingSolution12"> Show me the solution </h4>
 </button>
-<div id="collapseSolution11" class="accordion-collapse collapse" aria-labelledby="headingSolution11" data-bs-parent="#accordionSolution11">
+<div id="collapseSolution12" class="accordion-collapse collapse" aria-labelledby="headingSolution12" data-bs-parent="#accordionSolution12">
 <div class="accordion-body">
 <p>You would add the following two lines to your .gitignore:</p>
 <div class="codewrapper">
@@ -3179,14 +3206,14 @@ will be ignored.</p>
 <div class="callout-content">
 <p>Assuming you have an empty .gitignore file, and given a directory
 structure that looks like:</p>
-<div class="codewrapper sourceCode" id="cb119">
+<div class="codewrapper sourceCode" id="cb117">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb119-1"><a href="#cb119-1" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/a.dat</span></span>
-<span id="cb119-2"><a href="#cb119-2" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/b.dat</span></span>
-<span id="cb119-3"><a href="#cb119-3" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/c.dat</span></span>
-<span id="cb119-4"><a href="#cb119-4" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/info.txt</span></span>
-<span id="cb119-5"><a href="#cb119-5" tabindex="-1"></a><span class="ex">receipts/plots</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb117-1"><a href="#cb117-1" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/a.dat</span></span>
+<span id="cb117-2"><a href="#cb117-2" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/b.dat</span></span>
+<span id="cb117-3"><a href="#cb117-3" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/c.dat</span></span>
+<span id="cb117-4"><a href="#cb117-4" tabindex="-1"></a><span class="ex">receipts/data/market_position/gps/info.txt</span></span>
+<span id="cb117-5"><a href="#cb117-5" tabindex="-1"></a><span class="ex">receipts/plots</span></span></code></pre>
 </div>
 <p>What’s the shortest <code>.gitignore</code> rule you could write to
 ignore all <code>.dat</code> files in
@@ -3195,12 +3222,12 @@ ignore all <code>.dat</code> files in
 </div>
 </div>
 </div>
-<div id="accordionSolution12" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution13" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution12" aria-expanded="false" aria-controls="collapseSolution12">
-  <h4 class="accordion-header" id="headingSolution12"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution13" aria-expanded="false" aria-controls="collapseSolution13">
+  <h4 class="accordion-header" id="headingSolution13"> Show me the solution </h4>
 </button>
-<div id="collapseSolution12" class="accordion-collapse collapse" aria-labelledby="headingSolution12" data-bs-parent="#accordionSolution12">
+<div id="collapseSolution13" class="accordion-collapse collapse" aria-labelledby="headingSolution13" data-bs-parent="#accordionSolution13">
 <div class="accordion-body">
 <p>Appending <code>receipts/data/market_position/gps/*.dat</code> will
 match every file in <code>receipts/data/market_position/gps</code> that
@@ -3220,25 +3247,25 @@ ignored.</p>
 <div class="callout-content">
 <p>Let us assume you have many <code>.csv</code> files in different
 subdirectories of your repository. For example, you might have:</p>
-<div class="codewrapper sourceCode" id="cb120">
+<div class="codewrapper sourceCode" id="cb118">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb120-1"><a href="#cb120-1" tabindex="-1"></a><span class="ex">results/a.csv</span></span>
-<span id="cb120-2"><a href="#cb120-2" tabindex="-1"></a><span class="ex">data/experiment_1/b.csv</span></span>
-<span id="cb120-3"><a href="#cb120-3" tabindex="-1"></a><span class="ex">data/experiment_2/c.csv</span></span>
-<span id="cb120-4"><a href="#cb120-4" tabindex="-1"></a><span class="ex">data/experiment_2/variation_1/d.csv</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb118-1"><a href="#cb118-1" tabindex="-1"></a><span class="ex">results/a.csv</span></span>
+<span id="cb118-2"><a href="#cb118-2" tabindex="-1"></a><span class="ex">data/experiment_1/b.csv</span></span>
+<span id="cb118-3"><a href="#cb118-3" tabindex="-1"></a><span class="ex">data/experiment_2/c.csv</span></span>
+<span id="cb118-4"><a href="#cb118-4" tabindex="-1"></a><span class="ex">data/experiment_2/variation_1/d.csv</span></span></code></pre>
 </div>
 <p>How do you ignore all the <code>.csv</code> files, without explicitly
 listing the names of the corresponding folders?</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution13" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution14" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution13" aria-expanded="false" aria-controls="collapseSolution13">
-  <h4 class="accordion-header" id="headingSolution13"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution14" aria-expanded="false" aria-controls="collapseSolution14">
+  <h4 class="accordion-header" id="headingSolution14"> Show me the solution </h4>
 </button>
-<div id="collapseSolution13" class="accordion-collapse collapse" aria-labelledby="headingSolution13" data-bs-parent="#accordionSolution13">
+<div id="collapseSolution14" class="accordion-collapse collapse" aria-labelledby="headingSolution14" data-bs-parent="#accordionSolution14">
 <div class="accordion-body">
 <p>In the <code>.gitignore</code> file, write:</p>
 <div class="codewrapper">
@@ -4250,7 +4277,7 @@ has changed with command line? And on GitLab?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>On the command line, the Collaborator can use
 <code>git fetch origin main</code> to get the remote changes into the
@@ -4684,7 +4711,7 @@ non-textual file that is stored in version control?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Let’s try it. Suppose Alfredo takes a picture of its guacamole and
 calls it <code>guacamole.jpg</code>.</p>
@@ -4927,7 +4954,7 @@ started.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <table class="table">
 <colgroup>
@@ -7803,9 +7830,9 @@ book.</p></section>
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/aio.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/aio.html",
-  "dateCreated": "2025-01-29",
-  "dateModified": "2025-02-04",
-  "datePublished": "2025-02-04"
+  "dateCreated": "2025-02-05",
+  "dateModified": "2025-02-05",
+  "datePublished": "2025-02-05"
 }
 
   </script><script>
