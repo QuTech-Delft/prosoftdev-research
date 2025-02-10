@@ -29,27 +29,43 @@ exercises: 30
 ## Motivation
 
 Jimmy and Alfredo have been hired by Ratatouille restaurant (a special restaurant from Euphoric State University) to
-investigate if it is possible to make the best recipes archive ever. They want to be able to work on indexing the prices
-at the same time, but they have run into problems doing this in the past. If they take turns, each one will spend a lot
-of time waiting for the other to finish, but if they work on their own copies and email changes back and forth things
-will be lost, overwritten, or duplicated.
+investigate if it is possible to make the best recipes archive ever. Before even starting, they make a plan of how they
+want to accomplish this task, and come up with the following requirements:
+
+- The want to be able to work on recipes at the same time, with minimal coordination, and make sure they do not
+overwrite each other's changes.
+- The want to be able to look back at the history of a recipe, and see who has added what to that recipe.
+- They also would like to be able, at any time, to go back to an older version of any recipe.
 
 A colleague suggests using [version control](learners/reference.md#version-control) to
-manage their work. Version control is better than mailing files back and forth:
+manage their work. Alfredo and Luigi look at what version control systems are available, and end up choosing `Git`,
+since it is widely used - it is pretty much the de-facto standard in this area. Throughout this course we will
+follow Luigi and Alfredo on their journey learning and using Git.
 
-- Nothing that is committed to version control is ever lost, unless
-  you work really, really hard at losing it. Since all old versions of
-  files are saved, it's always possible to go back in time to see
-  exactly who wrote what on a particular day, or what version of a
-  program was used to generate a particular set of results.
 
-- As we have this record of who made what changes when, we know who to ask
-  if we have questions later on, and, if needed, revert to a previous
-  version, much like the "undo" feature in an editor.
+## Automatic Version Control
 
-- When several people collaborate in the same project, it's possible to
-  accidentally overlook or overwrite someone's changes. The version control
-  system automatically notifies users whenever there's a conflict between one
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+### What Is Automatic Version Control?
+
+Automatic version control is a system that tracks changes to files over time, allowing multiple people to collaborate,
+revert to previous versions, and maintain a history of modifications. It is commonly used in software development to
+manage  source code, but it can also be used for documents, configurations, and other digital assets.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Using version control has many benefits, the most important being:
+
+- Nothing that is committed to version control is ever lost, unless you work really, really hard at losing it. Since
+  all old versions of files are saved, it's always possible to go back in time to see exactly who wrote what on a
+  particular day, or what version of a program was used to generate a particular set of results.
+
+- As we have this record of who made what changes when, we know who to ask if we have questions later on, and, if
+  needed, revert to a previous version, much like the "undo" feature in an editor.
+
+- When several people collaborate in the same project, it's possible to accidentally overlook or overwrite someone's
+  changes. The version control system automatically notifies users whenever there's a conflict between one
   person's work and another's.
 
 Teams are not the only ones to benefit from version control: lone researchers can benefit immensely. Keeping a record
@@ -61,14 +77,8 @@ and to collaborate with other people.  Every large software development project 
 it for their small jobs as well.  And it isn't just for software: books, papers, small data sets, and anything that
 changes over time or needs to be shared can and should be stored in a version control system.
 
-
-## Automatic Version Control
-
-
-We'll start by exploring how version control can be used
-to keep track of what one person did and when.
-Even if you aren't collaborating with other people,
-automated version control is much better than this situation:
+We'll start by exploring how version control can be used to keep track of what one person did and when.
+Even if you aren't collaborating with other people, automated version control is much better than this situation:
 
 !["notFinal.doc" by Jorge Cham, <https://www.phdcomics.com>](fig/phd101212s.png){alt='Comic: a PhD student sends "FINAL.doc" to their supervisor, but after several increasingly intense and frustrating rounds of comments and revisions they end up with a file named "FINAL_rev.22.comments49.corrections.10.#@$%WHYDIDCOMETOGRADSCHOOL????.doc"'}
 
@@ -80,11 +90,9 @@ Word's
 Google Docs' [version history](https://support.google.com/docs/answer/190843?hl=en), or
 LibreOffice's [Recording and Displaying Changes](https://help.libreoffice.org/Common/Recording_and_Displaying_Changes).
 
-Version control systems start with a base version of the document and
-then record changes you make each step of the way. You can
-think of it as a recording of your progress: you can rewind to start at the base
-document and play back each change you made, eventually arriving at your
-more recent version.
+Version control systems start with a base version of the document and then record changes you make each step of the way.
+You can think of it as a recording of your progress: you can rewind to start at the base document and play back each
+change you made, eventually arriving at your more recent version.
 
 ![](fig/play-changes.svg){alt='A diagram demonstrating how a single document grows as the result of sequential changes'}
 
@@ -101,7 +109,7 @@ incorporate two sets of changes into the same base document.
 
 ![](fig/merge.svg){alt='A diagram that shows the merging of two different document versions into one document that contains all of the changes from both versions'}
 
-A version control system is a tool that keeps track of these changes for us, effectively creating different versions of
+It is the version control system that keeps track of these changes for us, by effectively creating different versions of
 our files. It allows us to decide which changes will be made to the next version (each record of these changes is
 called a [commit](../learners/reference.md#commit)), and keeps useful metadata about them. The complete history of
 commits for a particular project and their metadata make up a [repository](../learners/reference.md#repository).
@@ -200,8 +208,8 @@ of configurations we will set as we get started with Git:
 - and that we want to use these settings globally (i.e. for every project).
 
 On a command line, Git commands are written as `git verb options`,
-where `verb` is what we actually want to do and `options` is additional optional information which may be needed for the `verb`. So here is how
-Alfredo sets up *git* on his new laptop:
+where `verb` is what we actually want to do and `options` is additional optional information which may be needed for the `verb`.
+So here is how Alfredo sets up *git* on his new laptop:
 
 ```bash
 $ git config --global user.name "Alfredo Linguini"
@@ -267,7 +275,8 @@ Alfredo also has to set his favorite text editor, following this table:
 | Vim                                   | `$ git config --global core.editor "vim"`                      | 
 | VS Code                               | `$ git config --global core.editor "code --wait"`                      | 
 
-It is possible to reconfigure the text editor for Git whenever you want to change it.
+It is possible to reconfigure the text editor for Git whenever you want to change it. For now, let's
+select `vim` as our editor, unless you have a strong preference for something else.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -312,20 +321,13 @@ configuration, the `init.defaultBranch` value defaults to `master`.
 The five commands we just ran above only need to be run once: the flag `--global` tells Git
 to use the settings for every project, in your user account, on this computer.
 
-Let's review those settings and test our `core.editor` right away:
-
-```bash
-$ git config --global --edit
-```
-
-Let's close the file without making any additional changes.  Remember, since typos in the config file will cause
-issues, it's safer to view the configuration with:
+Let's review those settings with the `list` command:
 
 ```bash
 $ git config --list
 ```
 
-And if necessary, change your configuration using the same commands to choose another editor or update your email
+If necessary, you change your configuration using the same commands to choose another editor or update your email
 address. This can be done as many times as you want.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -382,8 +384,7 @@ $ git help
 
 ## Creating a Git Repository
 
-Once Git is configured,
-we can start using it.
+Once Git is configured, we can start using it.
 
 We will help Alfredo with his new project, create a repository with all his recipes.
 
