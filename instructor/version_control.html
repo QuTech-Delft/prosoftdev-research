@@ -348,7 +348,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Version Control</h1>
-        <p>Last updated on 2025-02-05 |
+        <p>Last updated on 2025-02-10 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/version_control.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -396,15 +396,40 @@ flag.</li>
 <section><h2 class="section-heading" id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a></h2>
 <hr class="half-width"><p>Jimmy and Alfredo have been hired by Ratatouille restaurant (a
 special restaurant from Euphoric State University) to investigate if it
-is possible to make the best recipes archive ever. They want to be able
-to work on indexing the prices at the same time, but they have run into
-problems doing this in the past. If they take turns, each one will spend
-a lot of time waiting for the other to finish, but if they work on their
-own copies and email changes back and forth things will be lost,
-overwritten, or duplicated.</p>
-<p>A colleague suggests using <a href="reference.html#version-control">version control</a> to manage
-their work. Version control is better than mailing files back and
-forth:</p>
+is possible to make the best recipes archive ever. Before even starting,
+they make a plan of how they want to accomplish this task, and come up
+with the following requirements:</p>
+<ul><li>The want to be able to work on recipes at the same time, with
+minimal coordination, and make sure they do not overwrite each other’s
+changes.</li>
+<li>The want to be able to look back at the history of a recipe, and see
+who has added what to that recipe.</li>
+<li>They also would like to be able, at any time, to go back to an older
+version of any recipe.</li>
+</ul><p>A colleague suggests using <a href="reference.html#version-control">version control</a> to manage
+their work. Alfredo and Luigi look at what version control systems are
+available, and end up choosing <code>Git</code>, since it is widely used
+- it is pretty much the de-facto standard in this area. Throughout this
+course we will follow Luigi and Alfredo on their journey learning and
+using Git.</p>
+</section><section><h2 class="section-heading" id="automatic-version-control">Automatic Version Control<a class="anchor" aria-label="anchor" href="#automatic-version-control"></a></h2>
+<hr class="half-width"><div id="what-is-automatic-version-control" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="what-is-automatic-version-control" class="callout-inner">
+<h3 class="callout-title">What Is Automatic Version Control?</h3>
+<div class="callout-content">
+<p>Automatic version control is a system that tracks changes to files
+over time, allowing multiple people to collaborate, revert to previous
+versions, and maintain a history of modifications. It is commonly used
+in software development to manage source code, but it can also be used
+for documents, configurations, and other digital assets.</p>
+</div>
+</div>
+</div>
+<p>Using version control has many benefits, the most important
+being:</p>
 <ul><li><p>Nothing that is committed to version control is ever lost, unless
 you work really, really hard at losing it. Since all old versions of
 files are saved, it’s always possible to go back in time to see exactly
@@ -429,8 +454,7 @@ it, and most programmers use it for their small jobs as well. And it
 isn’t just for software: books, papers, small data sets, and anything
 that changes over time or needs to be shared can and should be stored in
 a version control system.</p>
-</section><section><h2 class="section-heading" id="automatic-version-control">Automatic Version Control<a class="anchor" aria-label="anchor" href="#automatic-version-control"></a></h2>
-<hr class="half-width"><p>We’ll start by exploring how version control can be used to keep
+<p>We’ll start by exploring how version control can be used to keep
 track of what one person did and when. Even if you aren’t collaborating
 with other people, automated version control is much better than this
 situation:</p>
@@ -456,10 +480,10 @@ the same document.</p>
 <figure><img src="../fig/versions.svg" alt="A diagram with one source document that has been modified in two different ways to produce two different versions of the document" class="figure mx-auto d-block"></figure><p>Unless multiple users make changes to the same section of the
 document - a <a href="reference.html#conflict">conflict</a> - you can
 incorporate two sets of changes into the same base document.</p>
-<figure><img src="../fig/merge.svg" alt="A diagram that shows the merging of two different document versions into one document that contains all of the changes from both versions" class="figure mx-auto d-block"></figure><p>A version control system is a tool that keeps track of these changes
-for us, effectively creating different versions of our files. It allows
-us to decide which changes will be made to the next version (each record
-of these changes is called a <a href="reference.html#commit">commit</a>), and keeps useful metadata
+<figure><img src="../fig/merge.svg" alt="A diagram that shows the merging of two different document versions into one document that contains all of the changes from both versions" class="figure mx-auto d-block"></figure><p>It is the version control system that keeps track of these changes
+for us, by effectively creating different versions of our files. It
+allows us to decide which changes will be made to the next version (each
+record of these changes is called a <a href="reference.html#commit">commit</a>), and keeps useful metadata
 about them. The complete history of commits for a particular project and
 their metadata make up a <a href="reference.html#repository">repository</a>. Repositories can be
 kept in sync across different computers, facilitating collaboration
@@ -508,7 +532,7 @@ changes?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul><li><p>Recovering the excellent version is only possible if you created
 a copy of the old version of the paper. The danger of losing good
@@ -665,7 +689,8 @@ table:</p>
 </tr><tr class="odd"><td align="left">VS Code</td>
 <td align="left"><code>$ git config --global core.editor "code --wait"</code></td>
 </tr></tbody></table><p>It is possible to reconfigure the text editor for Git whenever you
-want to change it.</p>
+want to change it. For now, let’s select <code>vim</code> as our editor,
+unless you have a strong preference for something else.</p>
 <div id="exiting-vim" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -723,22 +748,13 @@ configuration, the <code>init.defaultBranch</code> value defaults to
 <p>The five commands we just ran above only need to be run once: the
 flag <code>--global</code> tells Git to use the settings for every
 project, in your user account, on this computer.</p>
-<p>Let’s review those settings and test our <code>core.editor</code>
-right away:</p>
+<p>Let’s review those settings with the <code>list</code> command:</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> <span class="at">--edit</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--list</span></span></code></pre>
 </div>
-<p>Let’s close the file without making any additional changes. Remember,
-since typos in the config file will cause issues, it’s safer to view the
-configuration with:</p>
-<div class="codewrapper sourceCode" id="cb6">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--list</span></span></code></pre>
-</div>
-<p>And if necessary, change your configuration using the same commands
+<p>If necessary, you change your configuration using the same commands
 to choose another editor or update your email address. This can be done
 as many times as you want.</p>
 <div id="proxy" class="callout">
@@ -750,18 +766,18 @@ as many times as you want.</p>
 <div class="callout-content">
 <p>In some networks you need to use a <a href="https://en.wikipedia.org/wiki/Proxy_server" class="external-link">proxy</a>. If this is
 the case, you may also need to tell Git about the proxy:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> http.proxy proxy-url</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> https.proxy proxy-url</span></code></pre>
+</div>
+<p>To disable the proxy, use</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> http.proxy proxy-url</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> https.proxy proxy-url</span></code></pre>
-</div>
-<p>To disable the proxy, use</p>
-<div class="codewrapper sourceCode" id="cb8">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> <span class="at">--unset</span> http.proxy</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> <span class="at">--unset</span> https.proxy</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> <span class="at">--unset</span> http.proxy</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> <span class="at">--unset</span> https.proxy</span></code></pre>
 </div>
 </div>
 </div>
@@ -777,21 +793,21 @@ the case, you may also need to tell Git about the proxy:</p>
 <code>git</code> command, you can access the relevant list of options
 typing <code>git &lt;command&gt; -h</code> or access the corresponding
 Git manual by typing <code>git &lt;command&gt; --help</code>, e.g.:</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">-h</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--help</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">-h</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--help</span></span></code></pre>
 </div>
 <p>While viewing the manual, remember the <code>:</code> is a prompt
 waiting for commands and you can press <kbd>Q</kbd> to exit the
 manual.</p>
 <p>More generally, you can get the list of available <code>git</code>
 commands and further resources of the Git manual typing:</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">$</span> git help</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">$</span> git help</span></code></pre>
 </div>
 </div>
 </div>
@@ -817,19 +833,19 @@ all his recipes.</p>
 <p>First, let’s create a new directory in the <code>Desktop</code>
 folder for our work and then change the current working directory to the
 newly created one:</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">$</span> cd ~/Desktop</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="ex">$</span> mkdir recipes</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="ex">$</span> cd recipes</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">$</span> cd ~/Desktop</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="ex">$</span> mkdir recipes</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="ex">$</span> cd recipes</span></code></pre>
 </div>
 <p>Then we tell Git to make <code>recipes</code> a <a href="reference.html#repository">repository</a> -- a place where Git can
 store versions of our files:</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="ex">$</span> git init</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">$</span> git init</span></code></pre>
 </div>
 <p>It is important to note that <code>git init</code> will create a
 repository that can include subdirectories and their files—there is no
@@ -840,18 +856,18 @@ the beginning or added later. Also, note that the creation of the
 are completely separate processes.</p>
 <p>If we use <code>ls</code> to show the directory’s contents, it
 appears that nothing has changed:</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">$</span> ls</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="ex">$</span> ls</span></code></pre>
 </div>
 <p>But if we add the <code>-a</code> flag to show everything, we can see
 that Git has created a hidden directory within <code>recipes</code>
 called <code>.git</code>:</p>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -867,10 +883,10 @@ is particularly helpful to beginners. <code>git status</code> tells us
 the status of our project, and better, a list of changes in the project
 and options on what to do with those changes. We can use it as often as
 we want, whenever we want to understand what is going on.</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -895,16 +911,16 @@ already created), Alfredo would also like to track information about
 desserts specifically. Alfredo creates a <code>desserts</code> project
 inside his <code>recipes</code> project with the following sequence of
 commands:</p>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">$</span> cd ~/Desktop    <span class="co"># return to Desktop directory</span></span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="ex">$</span> cd recipes      <span class="co"># go into recipes directory, which is already a Git repository</span></span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span>           <span class="co"># ensure the .git subdirectory is still present in the recipes directory</span></span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="ex">$</span> mkdir desserts <span class="co"># make a sub-directory recipes/desserts</span></span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="ex">$</span> cd desserts    <span class="co"># go into desserts subdirectory</span></span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="ex">$</span> git init        <span class="co"># make the desserts subdirectory a Git repository</span></span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span>           <span class="co"># ensure the .git subdirectory is present indicating we have created a new Git repository</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="ex">$</span> cd ~/Desktop    <span class="co"># return to Desktop directory</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="ex">$</span> cd recipes      <span class="co"># go into recipes directory, which is already a Git repository</span></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span>           <span class="co"># ensure the .git subdirectory is still present in the recipes directory</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="ex">$</span> mkdir desserts <span class="co"># make a sub-directory recipes/desserts</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="ex">$</span> cd desserts    <span class="co"># go into desserts subdirectory</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="ex">$</span> git init        <span class="co"># make the desserts subdirectory a Git repository</span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span>           <span class="co"># ensure the .git subdirectory is present indicating we have created a new Git repository</span></span></code></pre>
 </div>
 <p>Is the <code>git init</code> command, run inside the
 <code>desserts</code> subdirectory, required for tracking files stored
@@ -917,7 +933,7 @@ in the <code>desserts</code> subdirectory?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>No. Alfredo does not need to make the <code>desserts</code>
 subdirectory a Git repository because the <code>recipes</code>
@@ -933,10 +949,10 @@ separate directory. To be sure that there is no conflicting repository
 in the directory, check the output of <code>git status</code>. If it
 looks like the following, you are good to go to create a new repository
 as shown above:</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -966,7 +982,7 @@ single git repository. How can Alfredo undo his last
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Solution – USE WITH CAUTION! </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="section level3">
 <h3 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a></h3>
@@ -974,10 +990,10 @@ single git repository. How can Alfredo undo his last
 But we have not learned yet how to tell Git to track a particular file;
 we will learn this in the next episode. Files that are not tracked by
 Git can easily be removed like any other “ordinary” files with</p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">$</span> rm filename</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">$</span> rm filename</span></code></pre>
 </div>
 <p>Similarly a directory can be removed using
 <code>rm -r dirname</code>. If the files or folder being removed in this
@@ -990,10 +1006,10 @@ that we will need to track, as we will see in the next episode.</p>
 recover from this little mistake, Alfredo can remove the
 <code>.git</code> folder in the desserts subdirectory by running the
 following command from inside the <code>recipes</code> directory:</p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-rf</span> desserts/.git</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-rf</span> desserts/.git</span></code></pre>
 </div>
 <p>But be careful! Running this command in the wrong directory will
 remove the entire Git history of a project you might want to keep. In
@@ -1080,7 +1096,7 @@ following episodes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>Accessing the Git visual tools in PyCharm is done by right-clicking
 on a file/folder in the left navigation panel, then selecting
@@ -1164,9 +1180,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/version_control.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/version_control.html",
-  "dateCreated": "2025-02-05",
-  "dateModified": "2025-02-05",
-  "datePublished": "2025-02-05"
+  "dateCreated": "2025-02-10",
+  "dateModified": "2025-02-10",
+  "datePublished": "2025-02-10"
 }
 
   </script><script>
