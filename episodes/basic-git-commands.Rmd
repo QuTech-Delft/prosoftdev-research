@@ -7,7 +7,6 @@ exercises: 30
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - How do I record changes in Git?
-- How do I check the status of my version control repository?
 - How do I record notes about what changes I made and why?
 - How can I identify old versions of files?
 - How do I review my changes?
@@ -28,7 +27,7 @@ exercises: 30
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Tracking Changes
+## The Modify-Add-Commit Cycle
 In this episode we will continue working with the `recipes` repository you have created in the previous episode.
 First let's make sure we're still in the right directory. You should be in the `recipes` directory.
 

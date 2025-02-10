@@ -30,7 +30,7 @@ and a basic understanding of using Linux/Unix command line interfaces.
 This setup document will walk you through the process of installing or upgrading
 the required software in the following order.
 
-1. **[Git]** (&ge; 2.38 recommended)
+1. **[Git]** (&ge; 2.45 recommended)
 2. **[Python]** (3.12 recommended)
 3. A number of Python tools:
    a. **[PyCharm]** (use the Community Edition)
