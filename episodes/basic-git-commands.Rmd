@@ -816,6 +816,7 @@ index df0654a..b36abfd 100644
 +* lime
 +* salt
  ## Instructions
+ +An ill-considered change
 ```
 
 We could also use `git show` which shows us what changes we made at an older commit as well as the commit message,
