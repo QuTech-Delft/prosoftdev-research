@@ -93,14 +93,38 @@ In this section, we will cover some basic rules that, when followed, lead to cle
 that these rules are just the "tip of the iceberg," as there is much more to explore on this topic. However, adhering to
 these simple guidelines can significantly improve the quality of your code. As you grow into a more experienced developer
 and adopt advanced software techniques, it remains valuable to stay aligned with "clean code" principles relevant to
-these practices. Clean Code: A Handbook of Agile Software Craftsmanship by Robert C. Martin is often regarded as the
+these practices. **Clean Code: A Handbook of Agile Software Craftsmanship** by Robert C. Martin is often regarded as the
 definitive guide for the clean code movement and is highly recommended reading.
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Working with code samples
+
+In this workshop you will be presented many small code samples (snippets); sometimes you will
+be asked to re-factor them. To keep things neat, we advise keep all these samples
+in separate source files (e.g. `example01.py`, `example02.py`, etc.) and place them under a
+common `clean_code` directory. Furthermore, to ensure isolation, you should also create a
+separate virtual environment for all the coding in this workshop:
+
+```bash
+$ mkdir clean_code
+$ cd clean_code
+$ python -m venv venv
+$ source venv/bin/activate
+(venv) $
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ### General Rules
 
-- Follow standard conventions.
+- Follow standard conventions. Find a standard that suits you, and stick to it! For example:
+    - [PEP 8 – Style Guide for Python Code](https://peps.python.org/pep-0008/)
+    - [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
 - Keep it simple stupid. Simpler is always better. Reduce complexity as much as possible.
 - Boy scout rule. Leave the campground cleaner than you found it.
+
 
 ### Source code structure
 
@@ -167,7 +191,7 @@ def calculate_total(cart, discount_rate):
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-##### Declare variables close to their usage.
+##### Declare/initialize variables close to their usage.
 
 Follows the same principle that closely related code constructs should be in close visual proximity.
 
@@ -317,10 +341,13 @@ def get_them(the_list):
 
 
 # GOOD
+STATUS_FIELD = 2
+FLAGGED = 5
+
 def get_flagged_cells(game_board):
     flagged_cells = []
     for cell in game_board:
-        if cell[STATUS_VALUE] = FLAGGED:
+        if cell[STATUS_FIELD] = FLAGGED:
              flagged_cells.append(x)
     return flagged_cells
 ```
@@ -476,7 +503,7 @@ def calibrate_fridge(fridge_data, include_safety_checks):
     stabilized_temp = stabilize_temperature(adjusted_temp, target_temp, calibration_params)
     fridge_data["final_temperature"] = stabilized_temp
 
-    send_telemetry(fridge_id, current_temp, stabilized_temp)
+    display_telemetry(fridge_id, current_temp, stabilized_temp)
     return f"Calibration complete. Final temperature: {stabilized_temp:.2f}"
 
 
@@ -500,27 +527,28 @@ def apply_temperature_adjustment(current_temp, target_temp, calibration_params):
     return adjusted_temp
 
 
-def stabilize_temperature(adjusted_temp, target_temp, calibration_params):
+def stabilize_temperature(initial_temp, target_temp, calibration_params):
     stabilization_steps = calibration_params.get("stabilization_steps", 10)
+    stabilized_temp = initial_temp
 
     for step in range(stabilization_steps):
-        correction_factor = 0.1 * (adjusted_temp - target_temp)
-        adjusted_temp -= correction_factor
+        correction_factor = 0.1 * (stabilized_temp - target_temp)
+        stabilized_temp -= correction_factor
 
-        if adjusted_temp < target_temp:
-            adjusted_temp += 0.05  # Minor correction if under target
-        elif adjusted_temp > target_temp:
-            adjusted_temp -= 0.05  # Minor correction if above target
+        if stabilized_temp < target_temp:
+            stabilized_temp += 0.05  # Minor correction if under target
+        elif stabilized_temp > target_temp:
+            stabilized_temp -= 0.05  # Minor correction if above target
 
-        temperature_variance = abs(adjusted_temp - target_temp)
+        temperature_variance = abs(stabilized_temp - target_temp)
         if temperature_variance < 0.01:
             break  # Break early if within a small tolerance
-        adjusted_temp -= 0.01 * temperature_variance
+        stabilized_temp -= 0.01 * temperature_variance
 
-    return adjusted_temp
+    return stabilized_temp
 
 
-def send_telemetry(fridge_id, start_temp, end_temp, safety_checks):
+def display_telemetry(fridge_id, start_temp, end_temp, safety_checks):
     telemetry_data = {
         "fridge_id": fridge_id,
         "start_temp": start_temp,
@@ -537,17 +565,16 @@ def send_telemetry(fridge_id, start_temp, end_temp, safety_checks):
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-##### Do one thing at one level of abstraction
+##### **Single Responsibility Principle**: Do one thing at one level of abstraction
 
-The 'messy' code example above is difficult to comprehend, because the code
-constantly jumps between different levels of abstractions: performing
-low-level calibration and stabilization steps,fetching parameters, throwing
-exceptions, etc.
+The "messy" code example above is difficult to comprehend because the code constantly jumps between different levels
+of abstractions: performing low-level calibration and stabilization steps, fetching parameters, throwing
+exceptions, etc. This goes against the so-called *Single Responsibility Principle* - which is a well-known rule in
+object-oriented programming and software engineering - stating that a class or a function should only do one thing.
 
-Instead, 'clean' code should follow the **Stepdown Rule**: the code should read
-like a top-down narrative - so we can read the program like a narrative,
-descending one level of abstraction as we read down the list of functions.
-This is what makes the refactored example so much easier to understand.
+This is easy to achieve if "clean" functions should also follow our earlier "newspaper article" paradigm: the code should read
+like a top-down story - so we can read the program like a narrative, descending one level of abstraction as we read
+down the list of functions. This is what makes the refactored example so much easier to understand.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -690,7 +717,7 @@ total = price * quantity  # Multiply price by quantity
 
 ``` python
 # BAD
-# This function sorts the list in descending order
+# This function sorts the list in ascending order
 def sort_list(data):
     return sorted(data, reverse=True)
 
@@ -766,6 +793,9 @@ def delete_experiment_data(experiment_id):
 
 
 ### Unit Test Rules
+
+Unit tests verify the functionality of individual components or functions in a program. They help detect bugs early by
+isolating and testing small code units. Typically, they are written using testing frameworks like `Pytest` or `PyUnit`.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -866,17 +896,14 @@ Refactored test:
 import pytest
 
 def test_addition():
-    """Test addition operation."""
     result = 4 + 5
     assert result == 9
 
 def test_multiplication():
-    """Test multiplication operation."""
     result = 3 * 3
     assert result == 9
 
 def test_division():
-    """Test division operation."""
     result = 10 / 2
     assert result == 5
 ```
@@ -885,27 +912,40 @@ def test_division():
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- Do not follow the clean code rules blindly; always keep in mind the guiding principles!
+- Do not try to write perfect clean code at once; instead, start with "normal code" and try to continuously improve it!
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ## Clean Code Tools
 
 
 ### PyCharm and Clean Code
 
 Using a modern development environment, such as PyCharm, can greatly facilitate
-writing clean code. In this section we will go over a few ways this can be accomplished.
+writing clean code. Correctly configured, PyCharm can give you very useful hints on the style and content
+of your code, which can greatly facilitate refactoring towards clean code. PyCharm can also do some refactoring
+for you - for example changing the name of a function or variable - PyCharm will ensure the name is changed
+consistently throughout the code - which is much less error prone than doing it by hand.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
 ##### Configuring a Python interpreter for a PyCharm project
 
-For a given PyCharm project it is possible to setup a python interpreter,
-as shown below:
+For a given PyCharm project it is possible to setup a python interpreter, as shown below:
 
 ![](fig/pycharm_python_interpreter.jpg){alt='Running Pytest from PyCharm'}
 
-The selected interpreter can be the system-wide one, or one selected from a
-virtual environment. Once a Python interpreter has been configured, PyCharm
-will use it to run code (e.g. `.py` files part of that project), or analyze
-the code and provide useful hints to the developer:
+Newer versions of PyCharm will automatically select the Python interpreter from a virtual environment if the environment
+uses the default naming convention (e.g. `venv`) and is located in the project directory.
+
+The selected interpreter can be the system-wide one, or one selected from a virtual environment.
+
+Once a Python interpreter has been configured, PyCharm will use it to run code (e.g. `.py` files part of that project),
+or analyze the code and provide useful hints to the developer:
 
 ![](fig/pycharm_hints.jpg){alt='Running Pytest from PyCharm'}
 
@@ -924,12 +964,14 @@ coding standards, and suggesting improvements. It checks for issues like unused 
 missing documentation.
 
 Pylint assigns a score to your code, ranging from -10.0 (very poor) to 10.0 (perfect). This score reflects the overall
-quality of your code based on the issues Pylint identifies, weighted by their severity.
+quality of your code based on the issues Pylint identifies, weighted by their severity. Pylint also outputs each
+location in your code where it has found issues that reduce your score, together with a short explanation of the problem
+it has found. You can use this output to guide your code refactoring, which eventually should lead to cleaner code.
 
 Pylint can be easily installed using `pip`:
 
 ```bash
-pip install pylint
+python -m pip install pylint
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -973,7 +1015,7 @@ main()
 ```
 
 ```text
-$ pylint bad_pylint.py
+$ python -m pylint bad_pylint.py
 ************* Module bad_example
 bad_example.py:34:0: C0304: Final newline missing (missing-final-newline)
 bad_example.py:1:0: C0114: Missing module docstring (missing-module-docstring)
@@ -1053,22 +1095,48 @@ Your code has been rated at 10.00/10 (previous run: 5.91/10, +4.09)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-<!--
-### Python Coding Conventions
+:::::::::::::::::::::::::::::::::::::::::  callout
 
-- Introduce https://peps.python.org/pep-0008/
-- Advice: select a few rules, and start applying them consistently to your code:
-    - Indentation
-    - Maximum line length
-    - Whitespaces in Expressions and statements
-    - Naming conventions
-- Expand your rule selection
--->
+##### Instructing Pylint to ignore certain rules
+
+Pylint is a great tool, but sometimes you may want to ignore some of its advices - for example when they may not be
+suitable for the overall coding style you have chosen for your project, or when certain rule does not make sense for
+a given function/file in your project.
+
+Disabling a Pylint rule for a specific function is very simple - just add a comment next to that function definition,
+like this:
+
+```python
+def my_function():  # pylint: disable=missing-function-docstring
+    pass
+```
+
+To disable that rule for the entire file, add the same comment at the top of the file:
+
+```python
+# pylint: disable=missing-function-docstring
+```
+
+It is also possible to create custom Pylint configuration files for your project, as explained in the
+[documentation](https://pylint.pycqa.org/en/stable/user_guide/configuration/index.html?utm_source=)
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-### Unit Tests
+### Pytest - a simple yet powerful unit test framework
 
-`Pytest` is a simple yet powerful tool for testing Python code. You can write tests as regular functions and run
+We have already discussed the importance of unit tests in the context of clean code. Unit tests become even more
+powerful in facilitating change when they are used together with unit test frameworks. Such frameworks make
+it very easy to write and execute unit tests, and typically integrate smoothly with modern IDEs such as PyCharm.
+`Pytest` is a simple yet powerful such framework, specifically designed for testing Python code.
+
+`Pytest` is an external Python package, so before we can use it, we need to install it via `pip`:
+
+```bash
+$ python -m pip install pytest
+```
+
+With `Pytest` installed, you can write tests as regular functions and run
 them easily. As an example consider this simple function:
 
 ```python
@@ -1078,7 +1146,7 @@ def simple_function(a, b):
     return a + b
 ```
 
-With `Pytest`, you can test it by creating anew file `test_simple_function.py`:
+With `Pytest`, you can test it by creating a new file `test_simple_function.py`:
 
 ```python
 # in test_simple_function.py
@@ -1093,7 +1161,7 @@ def test_simple_function():
 and then running `pytest` from the command line:
 
 ```bash
-$ pytest
+$ python -m pytest
 ============================= test session starts =============================
 platform win32 -- Python 3.11.8, pytest-8.0.2, pluggy-1.4.0
 rootdir: C:\projects\examples
@@ -1105,7 +1173,8 @@ test_simple_function.py .                                                [100%]
 ============================== 1 passed in 0.02s ==============================
 ```
 
-`Pytest` is a built-in python package, so no installation is needed. By default, when running `pytest` from the
+
+By default, when running `pytest` from the
 command line, this package will look for any files named `test_*.py` or `*_test.py` in the working directory, and
 from these files run any functions names `test_*`. Inside these functions, you can test functionality using the
 `assert` keyword. A test function is assumed to fail if any `assert` fails, or if the the test function throws an exception.
@@ -1155,13 +1224,13 @@ various testing frameworks like pytest.
 To use *coverage.py* you will need to install it first. This can be easily done using *pip*:
 
 ```bash
-pip install coverage
+python -m pip install coverage
 ```
 
 You can then verify the installation:
 
 ```bash
-coverage --version
+python -m coverage --version
 ```
 ``` output
 Coverage.py, version 7.4.3 with C extension
@@ -1216,11 +1285,11 @@ The *coverage.py* tool is typically used in conjunction with a testing framework
 instead of running your tests directly (e.g. with `pytest`), use `coverage run` instead:
 
 ```bash
-coverage run -m pytest
+python -m coverage run -m pytest test_math_utils.py
 ```
 
 ```output
-$ coverage run -m pytest
+$ python -m coverage run -m pytest test_math_utils.py
 ============================= test session starts =============================
 platform win32 -- Python 3.8.8, pytest-8.1.1, pluggy-1.4.0
 rootdir: C:\projects\programming_course\prosoftdev-research\coverage
@@ -1234,18 +1303,18 @@ test_math_utils.py ....                                                  [100%]
 Once you have run the *coverage.py* tool, it is possible to generate a coverage report:
 
 ```bash
-coverage report
+python -m coverage report -m
 ```
 
 ```output
-$ coverage report
-Name                 Stmts   Miss  Cover
-----------------------------------------
-math_utils.py           10      1    90%
-test_math_utils.py      10      0   100%
-----------------------------------------
-TOTAL                   20      1    95%
+$ python -m coverage report -m
 
+Name                 Stmts   Miss  Cover   Missing
+--------------------------------------------------
+math_utils.py           10      1    90%   14
+test_math_utils.py      10      0   100%
+--------------------------------------------------
+TOTAL                   20      1    95%
 ```
 
 As you can see, in this (simple) case we have achieved a very high coverage ratio with relative ease.
@@ -1255,7 +1324,7 @@ As you can see, in this (simple) case we have achieved a very high coverage rati
 To make the results more user-friendly, *coverage.py* can generate an HTML report.
 
 ```bash
-coverage html
+python -m coverage html
 ```
 
 This creates a directory named *htmlcov* containing detailed coverage reports. To visualize the report, you
@@ -1272,20 +1341,156 @@ By using such visual tools you can quickly zoom on untested parts of your codeba
 for covering them.
 
 
-## Clean Code/Refactoring Exercise
+## Final Project
 
-Interactive coding exercise which can be done individually or in small groups:
+In this last hour of the last workshop of this course, you will get the chance to apply most of the material covered
+in this course in a final project. For this final project we will be using this Python program, which is an expanded
+version of a challenge you have already seen earlier in this course:
 
-- Introduce a small to medium size Python program specifically crafted to break all clean code rules outlined in this episode.
-- Participants are instructed to run PyLint on this program - the score will be extremely low!
-- Goal of this exercise is to refactor the code to bring the score above 8
-- Before starting this process, unit tests should be added.
-- Participants should run the *coverage.py* tool on their tests and ensure the critical paths in the code are covered
-- Once test coverage is achieved, start re-factoring, applying the clean code techniques learned in this episode
-- After each refactoring, the unit tests should pass, which ensures functionality has not been broken.
-- After each refactoring, participants should re-run the linter, and see how the code score improves.
+```python
+import numpy as np
 
 
+# Dummy calibration function - operations shown here have no "real life" meaning
+def calibrate_fridge(fridge_data, include_safety_checks):
+    fridge_id = fridge_data.get("id")
+    current_temp = fridge_data.get("current_temperature")
+    target_temp = fridge_data.get("target_temperature")
+    calibration_params = fridge_data.get("calibration_params")
+    experiment_params = fridge_data.get("experiment_params")
+
+    if include_safety_checks:
+        if current_temp > calibration_params.get("max_safe_temperature"):
+            raise Exception("Unsafe temperature detected during calibration.")
+        if target_temp < calibration_params.get("min_safe_temperature"):
+            raise Exception("Unsafe target temperature detected during calibration.")
+
+    adjustment_factor = calibration_params.get("adjustment_factor", 1.0)
+    adjusted_temp = current_temp + (target_temp - current_temp) * adjustment_factor
+    if adjusted_temp > calibration_params["max_safe_temperature"]:
+        adjusted_temp = calibration_params["max_safe_temperature"]
+    if adjusted_temp < calibration_params["min_safe_temperature"]:
+        adjusted_temp = calibration_params["min_safe_temperature"]
+
+    stabilization_steps = calibration_params.get("stabilization_steps", 10)
+    operating_temperature = adjusted_temp
+    for step in range(stabilization_steps):
+        correction_factor = 0.1 * (operating_temperature - target_temp)
+        operating_temperature -= correction_factor
+
+        if operating_temperature < target_temp:
+            operating_temperature += 0.05  # Minor correction if under target
+        elif operating_temperature > target_temp:
+            operating_temperature -= 0.05  # Minor correction if above target
+
+        temperature_variance = abs(operating_temperature - target_temp)
+        if temperature_variance < 0.01:
+            break  # Break early if within small tolerance
+        operating_temperature -= 0.01 * temperature_variance
+
+    telemetry_data = {
+        "fridge_id": fridge_id,
+        "adjusted_temp": adjusted_temp,
+        "safety_checks": include_safety_checks,
+        "operating_temperature": operating_temperature
+    }
+
+    # Experiment calibration logic
+    scaling_factor = experiment_params.get("scaling_factor", 1.2)
+    offset_value = experiment_params.get("offset_value", 3)
+    smoothing_coefficient = experiment_params.get("smoothing_coefficient", 0.8)
+    window_size = experiment_params.get("window_size", 5)
+    modulation_factor = experiment_params.get("modulation_factor", 0.05)
+    experiment_data = fridge_data.get("experiment_data", [])
+
+    if len(experiment_data) != 20:
+        raise ValueError("Calibration data must have exactly 20 readings")
+
+    experiment_data = np.array(experiment_data)
+    scaled_data = experiment_data * scaling_factor - offset_value
+    smoothed_data = np.convolve(scaled_data, np.ones(window_size) / window_size, mode='valid')
+    adjusted_data = smoothed_data * (1 + modulation_factor * np.sin(smoothed_data))
+    experiment_temperature_adjustment = np.tanh(
+        np.average(adjusted_data, weights=np.linspace(1, 2, len(adjusted_data))) / 10)
+
+    experiment_temperature = operating_temperature + experiment_temperature_adjustment
+
+    experiment_outputs = {
+        "mean_before_adjustment": np.mean(experiment_data),
+        "std_dev_before_adjustment": np.std(experiment_data),
+        "mean_after_adjustment": np.mean(adjusted_data),
+        "experiment_temperature_adjustment": experiment_temperature_adjustment,
+        "calibration_factor": scaling_factor * smoothing_coefficient / (1 + abs(modulation_factor)),
+        "experiment_temperature": experiment_temperature
+    }
+
+    return telemetry_data, experiment_outputs
+
+
+def main():
+    fridge_data = {
+        "id": "fridge123",
+        "current_temperature": 5.0,
+        "target_temperature": 2.85,
+        "calibration_params": {
+            "max_safe_temperature": 6.8,
+            "min_safe_temperature": 2.1,
+            "adjustment_factor": 1.05,
+            "stabilization_steps": 10
+        },
+        "experiment_params": {
+            "scaling_factor": 1.1,
+            "offset_value": 2,
+            "smoothing_coefficient": 0.9,
+            "window_size": 3,
+            "modulation_factor": 0.03
+        },
+        "experiment_data": [10.1, -6.8, 9.8, -10.3, -9.9, 12.0, 10.1, 10.2, 10.1, 9.7, -15.1,
+                            8.1, 1-1.2, 10.3, 10.0, 10.1, 7.2, 9.8, 9.9, -9.7]
+    }
+
+    include_safety_checks = True
+
+    # Run the function
+    telemetry_data, experiment_outputs = calibrate_fridge(fridge_data, include_safety_checks)
+
+    # Print results
+    print("Telemetry Data:", telemetry_data)
+    print("Experiment Outputs:", experiment_outputs)
+
+# Run main function
+if __name__ == "__main__":
+    main()
+
+
+```
+Given this code, the challenge/final project of this course is the following:
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+##### Final Project
+
+1. The code shown above is available [here](https://gitlab.tudelft.nl/bcpopescu/imsep_final_project/)
+    - clone this repo on your local machine
+    - create a separate branch `final_project_<username>` where you will do your work
+2. In your local working directory for this project, create a new Python 3.12 virtual environment
+and activate it.
+3. Install all necessary packages and run the calibration function
+4. Start creating unit tests for the calibration function. Assume the calibration function *as given* is correct.
+5. Run the unit tests, and check the code coverage; keep adding unit tests until you have a very high code
+coverage - you should aim for 100%!
+6. Run your code through `pylint`. Note the issues `pylint` identifies in your code, and its initial score.
+7. Start refactoring the code - taking into account `pylint's` findings, and applying all techniques you have
+learned in this workshop.
+    - Make a plan of what you want to refactor, and in which order.
+    - Use the PyCharm refactoring tools to help you speed up this process.
+    - Work in small steps; after each refactoring step re-run the unit tests and make sure they pass!
+    - If tests start to fail - fix them; if you get stuck, use git to restore your code to a version
+    where the tests were passing, and re-start from there.
+    - After each successful refactoring step commit your changes to git.
+    - After each refactoring step, re-run `pylint` and notice how your score is improving.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
