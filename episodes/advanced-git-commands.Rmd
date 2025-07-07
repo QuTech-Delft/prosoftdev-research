@@ -14,13 +14,11 @@ exercises: 80
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Clone a remote repository.
-- Collaborate by pushing to a common repository.
-- Describe the basic collaborative workflow.
-- Explain what conflicts are and when they can occur.
-- Resolve conflicts resulting from a merge.
+- Describe the basic collaborative workflow: pushing changes to a common repository.
+- Explain what conflicts are, when they can occur, and how we can sole them.
+- Look at Git branches, and show how they can be managed/merged through GitLab *merge requests*.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ## Collaborating
 
@@ -43,24 +41,16 @@ won't need to give anyone access on GitLab, because both 'partners' are you.
 
 ### Adding collaborators to your GitLab repo
 
-The Owner needs to give the Collaborator access. In your project page on GitLab, click the "Manage"
-menu on the left panel, then select the "Members" option. On the new "Project members" page
-(see screenshot below), click on the "Invite members" button, and then fill in the
-Collaborator's details as shown below.
-
-![](fig/gitlab_add_member.jpg){alt='Adding a new member to your GitLab project'}
-
-Once the Collaborator has been added to the project, they will receive an email
-instructing them how to accept the invitation and access the project
+In case you have not done this already, revisit what you have just learned in the last hour and add
+your Collaborator to your GitLab recipes project, giving them a "Maintainer" role, which should give them
+enough rights to complete all the collaborative workflows we will practice today.
 
 ### Cloning a remote GitLab repo
 
-Next, the Collaborator needs to download a copy of the Owner's repository to her
-machine. This is called "cloning a repo".
+Next, the Collaborator needs to download a copy of the Owner's repository to her machine. This is called "cloning a repo".
 
-The Collaborator doesn't want to overwrite her own version of `recipes.git`, so
-needs to clone the Owner's repository to a different location than her own
-repository with the same name.
+The Collaborator doesn't want to overwrite her own version of `recipes.git`, so needs to clone the Owner's repository
+to a different location than her own repository with the same name.
 
 To clone the Owner's repo into her `projects` folder, the Collaborator enters:
 
@@ -68,19 +58,26 @@ To clone the Owner's repo into her `projects` folder, the Collaborator enters:
 $ git clone git@gitlab.tudelft.nl:alflin/recipes.git ~/projects/alflin-recipes
 ```
 
+```output
+Cloning into 'recipes'...
+remote: Enumerating objects: 18, done.
+remote: Counting objects: 100% (18/18), done.
+remote: Compressing objects: 100% (15/15), done.
+remote: Total 18 (delta 4), reused 0 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (18/18), 4.17 KiB | 2.09 MiB/s, done.
+Resolving deltas: 100% (4/4), done.
+```
+
 Replace 'alflin' with the Owner's username.
 
-If you choose to clone without the clone path
-(`~/projects/alflin-recipes`) specified at the end,
-you will clone inside your own recipes folder!
-Make sure to navigate to the `projects` folder first.
+If you choose to clone without the clone path (`~/projects/alflin-recipes`) specified at the end, you will clone inside
+your own recipes folder! Make sure to navigate to the `projects` folder first.
 
 ![](fig/gitlab-collaboration.svg){alt='A diagram showing that "git clone" can create a copy of a remote GitLab repository, allowing a second person to create their own local repository that they can make changes to.'}
 
 ### Making changes
 
-The Collaborator can now make a change in her clone of the Owner's repository,
-exactly the same way as we've been doing before:
+The Collaborator can now make a change in her clone of the Owner's repository, exactly the same way as we've been doing before:
 
 ```bash
 $ cd ~/projects/alflin-recipes
@@ -124,49 +121,11 @@ To gitlab.tudelft.nl:alflin/recipes.git
    9272da5..29aba7c  main -> main
 ```
 
-Note that we didn't have to create a remote called `origin`: Git uses this
-name by default when we clone a repository.  (This is why `origin` was a
-sensible choice earlier when we were setting up remotes by hand.)
+Note that we didn't have to create a remote called `origin`: Git uses this name by default when we clone a repository.
+(This is why `origin` was a sensible choice earlier when we were setting up remotes by hand.)
 
-Take a look at the Owner's repository on GitLab again, and you should be
-able to see the new commit made by the Collaborator. You may need to refresh
-your browser to see the new commit.
-
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-## Some more about remotes
-
-In this episode and the previous one, our local repository has had
-a single "remote", called `origin`. A remote is a copy of the repository
-that is hosted somewhere else, that we can push to and pull from, and
-there's no reason that you have to work with only one. For example,
-on some large projects you might have your own copy in your own GitLab
-account (you'd probably call this `origin`) and also the main "upstream"
-project repository (let's call this `upstream` for the sake of examples).
-You would pull from `upstream` from time to
-time to get the latest updates that other people have committed.
-
-Remember that the name you give to a remote only exists locally. It's
-an alias that you choose - whether `origin`, or `upstream`, or `alfred` -
-and not something intrinsic to the remote repository.
-
-The `git remote` family of commands is used to set up and alter the remotes
-associated with a repository. Here are some of the most useful ones:
-
-- `git remote -v` lists all the remotes that are configured (we already used
-  this in the last episode)
-- `git remote add [name] [url]` is used to add a new remote
-- `git remote remove [name]` removes a remote. Note that it doesn't affect the
-  remote repository at all - it just removes the link to it from the local repo.
-- `git remote set-url [name] [newurl]` changes the URL that is associated
-  with the remote. This is useful if it has moved, e.g. to a different GitLab
-  account, or from GitLab to a different hosting service. Or, if we made a typo when
-  adding it!
-- `git remote rename [oldname] [newname]` changes the local alias by which a remote
-  is known - its name. For example, one could use this to change `upstream` to `alfred`.
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
+Take a look at the Owner's repository on GitLab again, and you should be able to see the new commit made by the
+Collaborator. You may need to refresh your browser to see the new commit.
 
 ### Sync-ing changes made by collaborators
 
@@ -229,23 +188,15 @@ Switch roles and repeat the whole process.
 ### Review Changes
 
 The Owner pushed commits to the repository without giving any information
-to the Collaborator. How can the Collaborator find out what has changed with
-command line? And on GitLab?
+to the Collaborator. How can the Collaborator find out what has changed using GitLab?
 
 :::::::::::::::  solution
 
 ### Solution
 
-On the command line, the Collaborator can use `git fetch origin main`
-to get the remote changes into the local repository, but without merging
-them. Then by running `git diff main origin/main` the Collaborator
-will see the changes output in the terminal.
-
-On GitLab, the Collaborator can go to the project and click on the "Code" menu
-on the left panel, and from there select the "Commits" option.
-This will open a new page on the right panel, showing the commits history
-for that project. By clicking on such a commit, the user can see the
-changes made per file, which will be highlighted by GitLab as shown below.
+On GitLab, the Collaborator can go to the project and click on the "Code" menu on the left panel, and from there select
+the "Commits" option. This will open a new page on the right panel, showing the commits history for that project. By
+clicking on such a commit, the user can see the changes made per file, which will be highlighted by GitLab as shown below.
 
 ![](fig/commit_changes_gitlab.jpg){alt='Reviewing commit changes in GitLab'}
 
@@ -272,16 +223,6 @@ and then the author can address the comment using the same GitLab web interface.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-## Version History, Backup, and Version Control
-
-Some backup software can keep a history of the versions of your files. They also
-allows you to recover specific versions. How is this functionality different from version control?
-What are some of the benefits of using version control, Git and GitLab?
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Solving Conflicts
 
@@ -438,6 +379,11 @@ Then attempt the pull again.
 ```bash
 $ git pull origin main
 ```
+```output
+Auto-merging guacamole.md
+CONFLICT (content): Merge conflict in guacamole.md
+Automatic merge failed; fix conflicts and then commit the result.
+```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -469,11 +415,25 @@ $ cat guacamole.md
 Our change is preceded by `<<<<<<< HEAD`.
 Git has then inserted `=======` as a separator between the conflicting changes
 and marked the end of the content downloaded from GitLab with `>>>>>>>`.
-(The string of letters and digits after that marker
-identifies the commit we've just downloaded.)
+(The string of letters and digits after that marker identifies the commit we've just downloaded.)
 
-It is now up to us to edit this file to remove these markers
-and reconcile the changes.
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+##### Practice using graphical Git tools
+
+Try to solve the conflicts in the *guacamole.md* file using the Git visual tools in PyCharm
+
+:::::::::::::::  solution
+
+##### Solution
+
+![](fig/pycharm_git_conflicts.jpg){alt='Solving merge conflicts using PyCharm'}
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+It is now up to us to edit this file to remove these markers and reconcile the changes.
 We can do anything we want: keep the change made in the local repository, keep
 the change made in the remote repository, write something new to replace both,
 or get rid of the change entirely.
@@ -617,167 +577,6 @@ then resolve it.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-## Conflicts on Non-textual files
-
-What does Git do
-when there is a conflict in an image or some other non-textual file
-that is stored in version control?
-
-:::::::::::::::  solution
-
-## Solution
-
-Let's try it. Suppose Alfredo takes a picture of its guacamole and
-calls it `guacamole.jpg`.
-
-If you do not have an image file of guacamole available, you can create
-a dummy binary file like this:
-
-```bash
-$ head --bytes 1024 /dev/urandom > guacamole.jpg
-$ ls -lh guacamole.jpg
-```
-
-```output
--rw-r--r-- 1 alflin 57095 1.0K Mar  8 20:24 guacamole.jpg
-```
-
-`ls` shows us that this created a 1-kilobyte file. It is full of
-random bytes read from the special file, `/dev/urandom`.
-
-Now, suppose Alfredo adds `guacamole.jpg` to his repository:
-
-```bash
-$ git add guacamole.jpg
-$ git commit -m "Add picture of guacamole"
-```
-
-```output
-[main 8e4115c] Add picture of guacamole
- 1 file changed, 0 insertions(+), 0 deletions(-)
- create mode 100644 guacamole.jpg
-```
-
-Suppose that Jimmy has added a similar picture in the meantime.
-His is a picture of a guacamole with nachos, but it is *also* called `guacamole.jpg`.
-When Alfredo tries to push, he gets a familiar message:
-
-```bash
-$ git push origin main
-```
-
-```output
-To https://gitlab.tudelft.nl/alflin/recipes.git
- ! [rejected]        main -> main (fetch first)
-error: failed to push some refs to 'https://gitlab.tudelft.nl:alflin/recipes.git'
-hint: Updates were rejected because the remote contains work that you do
-hint: not have locally. This is usually caused by another repository pushing
-hint: to the same ref. You may want to first integrate the remote changes
-hint: (e.g., 'git pull ...') before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-```
-
-We've learned that we must pull first and resolve any conflicts:
-
-```bash
-$ git pull origin main
-```
-
-When there is a conflict on an image or other binary file, git prints
-a message like this:
-
-```output
-$ git pull origin main
-remote: Counting objects: 3, done.
-remote: Compressing objects: 100% (3/3), done.
-remote: Total 3 (delta 0), reused 0 (delta 0)
-Unpacking objects: 100% (3/3), done.
-From https://gitlab.tudelft.nl:alflin/recipes.git
- * branch            main     -> FETCH_HEAD
-   6a67967..439dc8c  main     -> origin/main
-warning: Cannot merge binary files: guacamole.jpg (HEAD vs. 439dc8c08869c342438f6dc4a2b615b05b93c76e)
-Auto-merging guacamole.jpg
-CONFLICT (add/add): Merge conflict in guacamole.jpg
-Automatic merge failed; fix conflicts and then commit the result.
-```
-
-The conflict message here is mostly the same as it was for `guacamole.md`, but
-there is one key additional line:
-
-```output
-warning: Cannot merge binary files: guacamole.jpg (HEAD vs. 439dc8c08869c342438f6dc4a2b615b05b93c76e)
-```
-
-Git cannot automatically insert conflict markers into an image as it does
-for text files. So, instead of editing the image file, we must check out
-the version we want to keep. Then we can add and commit this version.
-
-On the key line above, Git has conveniently given us commit identifiers
-for the two versions of `guacamole.jpg`. Our version is `HEAD`, and Jimmy's
-version is `439dc8c0...`. If we want to use our version, we can use
-`git checkout`:
-
-```bash
-$ git checkout HEAD guacamole.jpg
-$ git add guacamole.jpg
-$ git commit -m "Use image of just guacamole instead of with nachos"
-```
-
-```output
-[main 21032c3] Use image of just guacamole instead of with nachos
-```
-
-If instead we want to use Jimmy's version, we can use `git checkout` with
-Jimmy's commit identifier, `439dc8c0`:
-
-```bash
-$ git checkout 439dc8c0 guacamole.jpg
-$ git add guacamole.jpg
-$ git commit -m "Use image of guacamole with nachos instead of just guacamole"
-```
-
-```output
-[main da21b34] Use image of guacamole with nachos instead of just guacamole
-```
-
-We can also keep *both* images. The catch is that we cannot keep them
-under the same name. But, we can check out each version in succession
-and *rename* it, then add the renamed versions. First, check out each
-image and rename it:
-
-```bash
-$ git checkout HEAD guacamole.jpg
-$ git mv guacamole.jpg guacamole-only.jpg
-$ git checkout 439dc8c0 guacamole.jpg
-$ mv guacamole.jpg guacamole-nachos.jpg
-```
-
-Then, remove the old `guacamole.jpg` and add the two new files:
-
-```bash
-$ git rm guacamole.jpg
-$ git add guacamole-only.jpg
-$ git add guacamole-nachos.jpg
-$ git commit -m "Use two images: just guacamole and with nachos"
-```
-
-```output
-[main 94ae08c] Use two images: just guacamole and with nachos
- 2 files changed, 0 insertions(+), 0 deletions(-)
- create mode 100644 guacamole-nachos.jpg
- rename guacamole.jpg => guacamole-only.jpg (100%)
-```
-
-Now both images of guacamole are checked into the repository, and `guacamole.jpg`
-no longer exists.
-
-
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -874,11 +673,22 @@ Branches are commonly used as part of a feature-branch workflow, shown in the di
 <p style="text-align: center;">Git feature branches<br>
 Adapted from <a href="https://sillevl.gitbooks.io/git/content/collaboration/workflows/gitflow/" target="_blank">Git Tutorial by sillevl</a> (Creative Commons Attribution 4.0 International License)</p>
 
-In the software development workflow, we typically have a main branch which is the version of the code that is
-tested, stable and reliable. Then, we normally have a development branch (called `develop` or `dev` by convention)
-that we use for work-in-progress code. As we work on adding new features to the code, we create new feature branches
-that first get merged into `develop` after a thorough testing process. After even more testing - `develop` branch will
-get merged into `main`. The points when feature branches are merged to `develop`,
+The *feature branch workflow* is mostly used for software development projects, and consists of the following:
+
+- The `main` branch - which corresponds to the version of the software currently in use. This
+main branch should only contain code that has been thoroughly tested, and is stable and reliable.
+- The `development` branch - which typically contains completed but not yet released code.
+This branch should only contain *working* code (thus - no half-finished features); however
+the code here has not yet been released, so it may be less tested and reliable compared to the `main` branch.
+- A number of `feature` branches - corresponding to various new features being developed for the
+project. Code on these branches does not have to be complete, and is not even expected to always work.
+- Developers work on new functionality on these `feature` branches, by making changes and commiting them
+(the typical modify-add-commit flow). Once a feature is completed, it is tested on its feature branch,
+and once testing is successful, the `feature` branch is *merged* to the `development` branch.
+- After even more testing on the development branch, this branch is then merged to the `main` branch,
+and from there the code is released to users or customers.
+
+It is important to understand that the points when feature branches are merged to `develop`,
 and `develop` to `main` depend entirely on the practice/strategy established in the team.
 For example, for smaller projects (e.g. if you are working alone on a project or in a very small team),
 feature branches sometimes get directly merged into `main` upon testing, skipping the `develop` branch step.
@@ -917,6 +727,18 @@ $ git switch develop
 ```output
 Switched to branch 'develop'
 ```
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### 'git switch' vs 'git checkout'
+
+The original way of switching branches in Git was using `git checkout <branch>` — and you may still find such examples
+online. However, `git checkout` had multiple roles (was also used to restore versions of a file for example), making it
+confusing. To simplify things, starting with version *2.23* Git has introduced the `git switch`, command
+which is dedicated for branch changes. Use `git switch <branch>` for switching branches and `git checkout -- <file>`
+to restore files.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -1026,26 +848,6 @@ After the initial push of the new branch, each next time we push to it in the us
 $ git push origin develop
 ```
 
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-##### What is the Relationship Between Originating and New Branches?
-
-It is natural to think that new branches have a parent/child relationship with their originating branch, but in actual
-Git terms, branches themselves do not have parents but single commits do. Any commit can have zero parents
-(a root, or initial, commit), one parent (a regular commit), or multiple parents (a merge commit),
-and using this structure, we can build a 'view' of branches from a set of commits and their relationships.
-A common way to look at it is that Git branches are really only
-[lightweight, movable pointers to commits](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell).
-So as a new commit is added to a branch, the branch pointer is moved to the new commit.
-
-What this means is that when you accomplish a merge between two branches, Git is able to determine the common
-'commit ancestor' through the commits in a 'branch', and use that common ancestor to determine which commits need to be
-merged onto the destination branch. It also means that, in theory, you could merge any branch with any other at any
-time... although it may not make sense to do so!
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
 &nbsp;
 
 ### Merging Into Main Branch
@@ -1135,7 +937,7 @@ For now, we advise you to setup informal review rules with your colleagues when 
 
 Once a merge request has been created, GitLab provides process controls for managing its lifecycle:
 
-![](fig/gitlab-merge-request-lifecycle.jpg){alt="Merge Request Lifecycle" .image-with-shadow width="600px"}
+![](fig/gitlab-merge-request-process.jpg){alt="Merge Request Lifecycle" .image-with-shadow width="600px"}
 
 This form can be accessed from the "Merge requests" menu on the left tab. On this form you can perform actions such as:
 - approve the merge request by clicking the "Approve" button.
@@ -1146,7 +948,52 @@ This form can be accessed from the "Merge requests" menu on the left tab. On thi
 merge request about the comment via email.
 
 
+:::::::::::::::::::::::::::::::::::::::  challenge
 
+##### Branch - Merge Request Cycle with Conflicts
+
+For this challenge, again work in Owner - Collaborator pairs
+
+- As the Collaborator - create a new feature branch - `feature_all_caps`
+- On this branch - change the spelling of all *guacamole* ingredients to all caps!
+- Create a merge request in GitLab - requesting to merge your new branch to `develop`
+- After that, as the Owner change the *guacamole* recipe on the `develop` branch:
+    - all ingredients are capitalize (only the first letter!)
+    - commit and push your changes
+- As the Collaborator - check the status of your merge request on GitLab. Is merging still possible?
+- Together fix the `feature_all_caps` branch so merging to develop IS possible
+- Complete the merge request!
+
+:::::::::::::::  solution
+
+##### Solution
+
+After the Owner has made changes to the `develop` branch completing the merge request
+in GitLab is no longer possible - as GitLab notices there is a conflict between `develop`
+and the `feature_all_caps` branches:
+
+![](fig/gitlab_mr_conflicts.jpg){alt='Merge Request blocked because of conflicts'}
+
+The trick to solving these conflicts is to manually merge the `develop` branch into
+the `feature_all_caps` branch:
+
+```bash
+$ git merge develop
+```
+
+Once you have done that, git will indicate there are merge conflicts - which you can
+solve the same way you did earlier - for example using the PyCharm git interface.
+
+Once conflicts have been solved, commit them (on the `feature_all_caps` branch)
+and push everything to GitLab.
+
+Now, if you refresh the Merge Request page on GitLab you should see that merging is
+possible!
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
@@ -1172,18 +1019,6 @@ merge request about the comment via email.
 &nbsp;
 &nbsp;
 
-
-
-## Hands-on Project
-
-- Work in groups of two
-- Create a GitLab project on the TUD GitLab server
-- Assign project roles to each team member
-- Create a shared (text) document representing a joint research paper.
-- Each member works independently on different sections of the document in separate branches.
-- Show how merging can be done without conflicts
-- Start working on the same section creating a conflict
-- show how it can be solved using GitLab merge requests and Git conflict resolution
 
 &nbsp;
 &nbsp;

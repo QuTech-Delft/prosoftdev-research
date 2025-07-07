@@ -187,26 +187,6 @@ become cluttered (and so that we can't accidentally edit or delete an old versio
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-#### Practice using graphical Git tools
-
-Using the graphical Git tools in PyCharm repeat the basic Git commands explained so far:
-
-- Add a new file to the "recipes" repo
-- Check which files are not yet committed
-- Commit the file
-
-:::::::::::::::  solution
-
-#### Solution
-
-![](fig/pycharm_git_add.jpg){alt='Adding a file to a Git repo using PyCharm'}
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ### Modifying tracked files
 
@@ -706,34 +686,6 @@ $ git commit -m "Write prices for ingredients and their source"
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-##### Practice using graphical Git tools
-
-Using the graphical Git tools in PyCharm repeat the basic Git commands explained so far:
-
-- In the "recipes" repo, modify the `guacamole.md` recipe.
-- Visually inspect what has been changed in the file.
-- Commit the file, and visually inspect the Git commit log.
-
-:::::::::::::::  solution
-
-##### Solution
-
-Visually diff-ing in PyCharm:
-&nbsp;
-![](fig/pycharm_git_diff.jpg){alt='Git diff using PyCharm'}
-
-&nbsp;
-&nbsp;
-Visually inspecting commit logs:
-
-![](fig/pycharm_git_hist.jpg){alt='Exploring Git repo history using PyCharm'}
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
@@ -1216,52 +1168,6 @@ nothing to commit, working tree clean
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-##### Practice using graphical Git tools
-
-Using the graphical Git tools in PyCharm repeat the basic Git commands explained so far:
-
-1. Revert un-staged changes in the `guacamole.md` recipe.
-2. Revert the `guacamole.md` recipe to an earlier commit - `HEAD~2`.
-3. Examine changes between `HEAD~1` and `HEAD~5`.
-
-:::::::::::::::  solution
-
-##### Solution
-
-1. Discarding un-staged changes with PyCharm:
-&nbsp;
-![](fig/pycharm_git_rollback.jpg){alt='Git rollback using PyCharm'}
-
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-
-2. "Revert the `guacamole.md` recipe to an earlier commit - `HEAD~2`":
-
-```bash
-$ git restore -s HEAD~2 guacamole.md
-```
-
-This was actually a tricky question! PyCharm does not provide a direct GUI option to revert a file to a specific
-Git revision. This is one example of GUI tools limitations, which shows the importance of understanding and mastering
-Git from the command line.
-
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-
-3. Comparing two Git revisions:
-
-![](fig/pycharm_git_compare_revisions.jpg){alt='Comparing two Git revisions using PyCharm'}
-
-:::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
@@ -1455,7 +1361,7 @@ receipts/plots
 ```
 
 What's the shortest `.gitignore` rule you could write to ignore all `.dat`
-files in `result/data/market_position/gps`? Do not ignore the `info.txt`.
+files in `receipts/data/market_position/gps`? Do not ignore the `info.txt`.
 
 :::::::::::::::  solution
 
@@ -1507,6 +1413,32 @@ You can still include some specific exception with the exclamation point operato
 
 
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+#### Practice using graphical Git tools - ignore PyCharm internal files
+
+Open your `recipes` repo in PyCharm.
+
+- does PyCharm create any additional files/directories in your repo?
+- configure Git to ignore this additional PyCharm content
+
+
+:::::::::::::::  solution
+
+#### Solution
+
+- PyCharm creates a `.idea/` sub-directory in your repo directory
+- To exclude it from Git, you can add this line to your `.gitignore`:
+
+```output
+.idea/
+```
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 
 
@@ -1519,4 +1451,87 @@ You can still include some specific exception with the exclamation point operato
 - You can list specific files or folders to be ignored by Git, or you can include files that would normally be ignored.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+##### Practice using graphical Git tools
+
+Using the graphical Git tools in PyCharm repeat the basic Git commands explained so far:
+
+- In the "recipes" repo, modify the `guacamole.md` recipe.
+- Visually inspect what has been changed in the file.
+- Commit the file, and visually inspect the Git commit log.
+
+:::::::::::::::  solution
+
+##### Solution
+
+Visually diff-ing in PyCharm:
+&nbsp;
+![](fig/pycharm_git_diff.jpg){alt='Git diff using PyCharm'}
+
+&nbsp;
+&nbsp;
+Visually inspecting commit logs:
+
+![](fig/pycharm_git_hist.jpg){alt='Exploring Git repo history using PyCharm'}
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+##### Practice using graphical Git tools
+
+Using the graphical Git tools in PyCharm repeat the basic Git commands explained so far:
+
+1. Revert un-staged changes in the `guacamole.md` recipe.
+2. Revert the `guacamole.md` recipe to an earlier commit - `HEAD~2`.
+3. Examine changes between `HEAD~1` and `HEAD~5`.
+
+:::::::::::::::  solution
+
+##### Solution
+
+1. Discarding un-staged changes with PyCharm:
+&nbsp;
+![](fig/pycharm_git_rollback.jpg){alt='Git rollback using PyCharm'}
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+2. "Revert the `guacamole.md` recipe to an earlier commit - `HEAD~2`":
+
+```bash
+$ git restore -s HEAD~2 guacamole.md
+```
+
+This was actually a tricky question! PyCharm does not provide a direct GUI option to revert a file to a specific
+Git revision. This is one example of GUI tools limitations, which shows the importance of understanding and mastering
+Git from the command line.
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+3. Comparing two Git revisions:
+
+![](fig/pycharm_git_compare_revisions.jpg){alt='Comparing two Git revisions using PyCharm'}
+
+:::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+
 
