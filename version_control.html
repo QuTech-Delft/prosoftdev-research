@@ -366,7 +366,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Version Control</h1>
-        <p>Last updated on 2025-07-01 |
+        <p>Last updated on 2025-07-07 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/version_control.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -548,7 +548,7 @@ changes?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul><li><p>Recovering the excellent version is only possible if you created
 a copy of the old version of the paper. The danger of losing good
@@ -606,7 +606,7 @@ experience with the shell is expected, <em>but isn’t
 mandatory</em>.</li>
 <li>It is also assumed that you have already installed <em>Git</em> on
 your system. If this is not the case, please do this now, by following
-the download/installation instructions <a href="https://https://git-scm.com/" class="external-link">here</a>
+the download/installation instructions <a href="https://git-scm.com/" class="external-link">here</a>
 </li>
 </ul></div>
 </div>
@@ -705,25 +705,8 @@ table:</p>
 </tr><tr class="odd"><td align="left">VS Code</td>
 <td align="left"><code>$ git config --global core.editor "code --wait"</code></td>
 </tr></tbody></table><p>It is possible to reconfigure the text editor for Git whenever you
-want to change it. For now, let’s select <code>vim</code> as our editor,
-unless you have a strong preference for something else.</p>
-<div id="exiting-vim" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div id="exiting-vim" class="callout-inner">
-<h3 class="callout-title">Exiting Vim</h3>
-<div class="callout-content">
-<p>Note that Vim is the default editor for many programs. If you haven’t
-used Vim before and wish to exit a session without saving your changes,
-press <kbd>Esc</kbd> then type <code>:q!</code> and press
-<kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd>. If you
-want to save your changes and quit, press <kbd>Esc</kbd> then type
-<code>:wq</code> and press <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs,
-<kbd>Return</kbd>.</p>
-</div>
-</div>
-</div>
+want to change it. To keep the presentation uniform, we will use
+<code>nano</code> as our default editor for this workshop.</p>
 <p>Git (2.28+) allows configuration of the name of the branch created
 when you initialize any new repository. Alfredo decides to use that
 feature to set it to <code>main</code> so it matches the cloud service
@@ -870,6 +853,13 @@ need to create separate repositories nested within the
 the beginning or added later. Also, note that the creation of the
 <code>recipes</code> directory and its initialization as a repository
 are completely separate processes.</p>
+<p>It is also important to understand that the Git repositories that you
+will create and use in this episode and the next one are all
+<code>local</code> - meaning they only exists on your computer, and can
+only be used by you. In the next workshop we will show you how to
+transition from a local repository to an online one - which will enable
+you to collaborate with multiple colleagues working on the same
+project.</p>
 <p>If we use <code>ls</code> to show the directory’s contents, it
 appears that nothing has changed:</p>
 <div class="codewrapper sourceCode" id="cb12">
@@ -949,7 +939,7 @@ in the <code>desserts</code> subdirectory?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>No. Alfredo does not need to make the <code>desserts</code>
 subdirectory a Git repository because the <code>recipes</code>
@@ -998,7 +988,7 @@ single git repository. How can Alfredo undo his last
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Solution – USE WITH CAUTION! </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="section level3">
 <h3 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a></h3>
@@ -1112,7 +1102,7 @@ following episodes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>Accessing the Git visual tools in PyCharm is done by right-clicking
 on a file/folder in the left navigation panel, then selecting
@@ -1197,7 +1187,7 @@ any links that you are not going to use.
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/version_control.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/version_control.html",
   "dateCreated": "2025-07-07",
-  "dateModified": "2025-07-01",
+  "dateModified": "2025-07-07",
   "datePublished": "2025-07-07"
 }
 

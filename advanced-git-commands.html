@@ -264,7 +264,6 @@
         <ul><li><a href="#collaborating">Collaborating</a></li>
 <li><a href="#solving-conflicts">Solving Conflicts</a></li>
 <li><a href="#git-branches">Git Branches</a></li>
-<li><a href="#hands-on-project">Hands-on Project</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -365,7 +364,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Advanced Git Commands</h1>
-        <p>Last updated on 2025-07-01 |
+        <p>Last updated on 2025-07-07 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/advanced-git-commands.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -394,10 +393,12 @@
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul><li>Clone a remote repository.</li>
-<li>Collaborate by pushing to a common repository.</li>
-<li>Describe the basic collaborative workflow.</li>
-<li>Explain what conflicts are and when they can occur.</li>
-<li>Resolve conflicts resulting from a merge.</li>
+<li>Describe the basic collaborative workflow: pushing changes to a
+common repository.</li>
+<li>Explain what conflicts are, when they can occur, and how we can sole
+them.</li>
+<li>Look at Git branches, and show how they can be managed/merged
+through GitLab <em>merge requests</em>.</li>
 </ul></div>
 </div>
 </div>
@@ -424,14 +425,11 @@ access on GitLab, because both ‘partners’ are you.</p>
 </div>
 <div class="section level3">
 <h3 id="adding-collaborators-to-your-gitlab-repo">Adding collaborators to your GitLab repo<a class="anchor" aria-label="anchor" href="#adding-collaborators-to-your-gitlab-repo"></a></h3>
-<p>The Owner needs to give the Collaborator access. In your project page
-on GitLab, click the “Manage” menu on the left panel, then select the
-“Members” option. On the new “Project members” page (see screenshot
-below), click on the “Invite members” button, and then fill in the
-Collaborator’s details as shown below.</p>
-<figure><img src="fig/gitlab_add_member.jpg" alt="Adding a new member to your GitLab project" class="figure mx-auto d-block"></figure><p>Once the Collaborator has been added to the project, they will
-receive an email instructing them how to accept the invitation and
-access the project</p>
+<p>In case you have not done this already, revisit what you have just
+learned in the last hour and add your Collaborator to your GitLab
+recipes project, giving them a “Maintainer” role, which should give them
+enough rights to complete all the collaborative workflows we will
+practice today.</p>
 </div>
 <div class="section level3">
 <h3 id="cloning-a-remote-gitlab-repo">Cloning a remote GitLab repo<a class="anchor" aria-label="anchor" href="#cloning-a-remote-gitlab-repo"></a></h3>
@@ -447,6 +445,17 @@ Collaborator enters:</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> git clone git@gitlab.tudelft.nl:alflin/recipes.git ~/projects/alflin-recipes</span></code></pre>
 </div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Cloning into 'recipes'...
+remote: Enumerating objects: 18, done.
+remote: Counting objects: 100% (18/18), done.
+remote: Compressing objects: 100% (15/15), done.
+remote: Total 18 (delta 4), reused 0 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (18/18), 4.17 KiB | 2.09 MiB/s, done.
+Resolving deltas: 100% (4/4), done.</code></pre>
+</div>
 <p>Replace ‘alflin’ with the Owner’s username.</p>
 <p>If you choose to clone without the clone path
 (<code>~/projects/alflin-recipes</code>) specified at the end, you will
@@ -457,12 +466,12 @@ clone inside your own recipes folder! Make sure to navigate to the
 <h3 id="making-changes">Making changes<a class="anchor" aria-label="anchor" href="#making-changes"></a></h3>
 <p>The Collaborator can now make a change in her clone of the Owner’s
 repository, exactly the same way as we’ve been doing before:</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">$</span> cd ~/projects/alflin-recipes</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">$</span> nano hummus.md</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="ex">$</span> cat hummus.md</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> cd ~/projects/alflin-recipes</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">$</span> nano hummus.md</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="ex">$</span> cat hummus.md</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -474,11 +483,11 @@ repository, exactly the same way as we’ve been doing before:</p>
 * olive oil
 * salt</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">$</span> git add hummus.md</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Add ingredients for hummus"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">$</span> git add hummus.md</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Add ingredients for hummus"</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -488,10 +497,10 @@ repository, exactly the same way as we’ve been doing before:</p>
 </div>
 <p>Then push the change to the <em>Owner’s repository</em> on
 GitLab:</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -512,61 +521,15 @@ earlier when we were setting up remotes by hand.)</p>
 <p>Take a look at the Owner’s repository on GitLab again, and you should
 be able to see the new commit made by the Collaborator. You may need to
 refresh your browser to see the new commit.</p>
-<div id="some-more-about-remotes" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div id="some-more-about-remotes" class="callout-inner">
-<h3 class="callout-title">Some more about remotes</h3>
-<div class="callout-content">
-<p>In this episode and the previous one, our local repository has had a
-single “remote”, called <code>origin</code>. A remote is a copy of the
-repository that is hosted somewhere else, that we can push to and pull
-from, and there’s no reason that you have to work with only one. For
-example, on some large projects you might have your own copy in your own
-GitLab account (you’d probably call this <code>origin</code>) and also
-the main “upstream” project repository (let’s call this
-<code>upstream</code> for the sake of examples). You would pull from
-<code>upstream</code> from time to time to get the latest updates that
-other people have committed.</p>
-<p>Remember that the name you give to a remote only exists locally. It’s
-an alias that you choose - whether <code>origin</code>, or
-<code>upstream</code>, or <code>alfred</code> - and not something
-intrinsic to the remote repository.</p>
-<p>The <code>git remote</code> family of commands is used to set up and
-alter the remotes associated with a repository. Here are some of the
-most useful ones:</p>
-<ul><li>
-<code>git remote -v</code> lists all the remotes that are configured
-(we already used this in the last episode)</li>
-<li>
-<code>git remote add [name] [url]</code> is used to add a new
-remote</li>
-<li>
-<code>git remote remove [name]</code> removes a remote. Note that it
-doesn’t affect the remote repository at all - it just removes the link
-to it from the local repo.</li>
-<li>
-<code>git remote set-url [name] [newurl]</code> changes the URL that
-is associated with the remote. This is useful if it has moved, e.g. to a
-different GitLab account, or from GitLab to a different hosting service.
-Or, if we made a typo when adding it!</li>
-<li>
-<code>git remote rename [oldname] [newname]</code> changes the local
-alias by which a remote is known - its name. For example, one could use
-this to change <code>upstream</code> to <code>alfred</code>.</li>
-</ul></div>
-</div>
-</div>
 </div>
 <div class="section level3">
 <h3 id="sync-ing-changes-made-by-collaborators">Sync-ing changes made by collaborators<a class="anchor" aria-label="anchor" href="#sync-ing-changes-made-by-collaborators"></a></h3>
 <p>To download the Collaborator’s changes from GitLab, the Owner now
 enters:</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">$</span> git pull origin main</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">$</span> git pull origin main</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -630,7 +593,7 @@ review.</p>
 <div class="callout-content">
 <p>The Owner pushed commits to the repository without giving any
 information to the Collaborator. How can the Collaborator find out what
-has changed with command line? And on GitLab?</p>
+has changed using GitLab?</p>
 </div>
 </div>
 </div>
@@ -639,13 +602,8 @@ has changed with command line? And on GitLab?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<p>On the command line, the Collaborator can use
-<code>git fetch origin main</code> to get the remote changes into the
-local repository, but without merging them. Then by running
-<code>git diff main origin/main</code> the Collaborator will see the
-changes output in the terminal.</p>
 <p>On GitLab, the Collaborator can go to the project and click on the
 “Code” menu on the left panel, and from there select the “Commits”
 option. This will open a new page on the right panel, showing the
@@ -674,20 +632,6 @@ web interface.</p>
 <figure><img src="fig/commit_changes_comment_gitlab.jpg" alt="Commenting on commit changes in GitLab" class="figure mx-auto d-block"></figure></div>
 </div>
 </div>
-<div id="version-history-backup-and-version-control" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<div id="version-history-backup-and-version-control" class="callout-inner">
-<h3 class="callout-title">Version History, Backup, and Version Control</h3>
-<div class="callout-content">
-<p>Some backup software can keep a history of the versions of your
-files. They also allows you to recover specific versions. How is this
-functionality different from version control? What are some of the
-benefits of using version control, Git and GitLab?</p>
-</div>
-</div>
-</div>
 </div>
 </section><section><h2 class="section-heading" id="solving-conflicts">Solving Conflicts<a class="anchor" aria-label="anchor" href="#solving-conflicts"></a></h2>
 <hr class="half-width"><p>As soon as people can work in parallel, they’ll likely step on each
@@ -700,10 +644,10 @@ overlapping changes.</p>
 <p>To see how we can resolve conflicts, we must first create one. The
 file <code>guacamole.md</code> currently looks like this in both
 partners’ copies of our <code>recipes</code> repository:</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">$</span> cat guacamole.md</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">$</span> cat guacamole.md</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -716,11 +660,11 @@ partners’ copies of our <code>recipes</code> repository:</p>
 ## Instructions</code></pre>
 </div>
 <p>Let’s add a line to the collaborator’s copy only:</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="ex">$</span> nano guacamole.md</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="ex">$</span> cat guacamole.md</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">$</span> nano guacamole.md</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="ex">$</span> cat guacamole.md</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -734,11 +678,11 @@ partners’ copies of our <code>recipes</code> repository:</p>
 * put one avocado into a bowl.</code></pre>
 </div>
 <p>and then push the change to GitLab:</p>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">$</span> git add guacamole.md</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"First step on the instructions"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">$</span> git add guacamole.md</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"First step on the instructions"</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -746,10 +690,10 @@ partners’ copies of our <code>recipes</code> repository:</p>
 <pre class="output" tabindex="0"><code>[main 5ae9631] First step on the instructions
  1 file changed, 1 insertion(+)</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -766,11 +710,11 @@ To gitlab.tudelft.nl:alflin/recipes.git
 </div>
 <p>Now let’s have the owner make a different change to their copy
 <em>without</em> updating from GitLab:</p>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">$</span> nano guacamole.md</span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="ex">$</span> cat guacamole.md</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">$</span> nano guacamole.md</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="ex">$</span> cat guacamole.md</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -784,11 +728,11 @@ To gitlab.tudelft.nl:alflin/recipes.git
 * peel the avocados</code></pre>
 </div>
 <p>We can commit the change locally:</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">$</span> git add guacamole.md</span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Add first step"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">$</span> git add guacamole.md</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Add first step"</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -797,10 +741,10 @@ To gitlab.tudelft.nl:alflin/recipes.git
  1 file changed, 1 insertion(+)</code></pre>
 </div>
 <p>but Git won’t let us push it to GitLab:</p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -843,16 +787,23 @@ hint: invocation.</code></pre>
 different behaviours when a pull would merge divergent branches. In our
 case we want ‘the default strategy’. To use this strategy run the
 following command to select it as the default thing git should do.</p>
-<div class="codewrapper sourceCode" id="cb25">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="ex">$</span> git config pull.rebase false</span></code></pre>
-</div>
-<p>Then attempt the pull again.</p>
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="ex">$</span> git pull origin main</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="ex">$</span> git config pull.rebase false</span></code></pre>
+</div>
+<p>Then attempt the pull again.</p>
+<div class="codewrapper sourceCode" id="cb27">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="ex">$</span> git pull origin main</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Auto-merging guacamole.md
+CONFLICT (content): Merge conflict in guacamole.md
+Automatic merge failed; fix conflicts and then commit the result.</code></pre>
 </div>
 </div>
 </div>
@@ -864,10 +815,10 @@ changes made to the local copy overlap with those made to the remote
 repository, and therefore refuses to merge the two versions to stop us
 from trampling on our previous work. The conflict is marked in in the
 affected file:</p>
-<div class="codewrapper sourceCode" id="cb27">
+<div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="ex">$</span> cat guacamole.md</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="ex">$</span> cat guacamole.md</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -891,15 +842,38 @@ marked the end of the content downloaded from GitLab with
 <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. (The string of letters and
 digits after that marker identifies the commit we’ve just
 downloaded.)</p>
+<div id="practice-using-graphical-git-tools" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="practice-using-graphical-git-tools" class="callout-inner">
+<h3 class="callout-title">Practice using graphical Git tools</h3>
+<div class="callout-content">
+<p>Try to solve the conflicts in the <em>guacamole.md</em> file using
+the Git visual tools in PyCharm</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<figure><img src="fig/pycharm_git_conflicts.jpg" alt="Solving merge conflicts using PyCharm" class="figure mx-auto d-block"></figure></div>
+</div>
+</div>
+</div>
 <p>It is now up to us to edit this file to remove these markers and
 reconcile the changes. We can do anything we want: keep the change made
 in the local repository, keep the change made in the remote repository,
 write something new to replace both, or get rid of the change entirely.
 Let’s replace both so that the file looks like this:</p>
-<div class="codewrapper sourceCode" id="cb29">
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="ex">$</span> cat guacamole.md</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="ex">$</span> cat guacamole.md</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -914,11 +888,11 @@ Let’s replace both so that the file looks like this:</p>
 </div>
 <p>To finish merging, we add <code>guacamole.md</code> to the changes
 being made by the merge and then commit:</p>
-<div class="codewrapper sourceCode" id="cb31">
+<div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="ex">$</span> git add guacamole.md</span>
-<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="ex">$</span> git add guacamole.md</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -932,10 +906,10 @@ Changes to be committed:
 	modified:   guacamole.md
 </code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb33">
+<div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Merge changes from GitLab"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Merge changes from GitLab"</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -943,10 +917,10 @@ Changes to be committed:
 <pre class="output" tabindex="0"><code>[main 2abf2b1] Merge changes from GitLab</code></pre>
 </div>
 <p>Now we can push our changes to GitLab:</p>
-<div class="codewrapper sourceCode" id="cb35">
+<div class="codewrapper sourceCode" id="cb37">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -964,10 +938,10 @@ To https://gitlab.tudelft.nl:alflin/recipes.git
 <p>Git keeps track of what we’ve merged with what, so we don’t have to
 fix things by hand again when the collaborator who made the first change
 pulls again:</p>
-<div class="codewrapper sourceCode" id="cb37">
+<div class="codewrapper sourceCode" id="cb39">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="ex">$</span> git pull origin main</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="ex">$</span> git pull origin main</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -986,10 +960,10 @@ Fast-forward
  1 file changed, 1 insertion(+), 1 deletion(-)</code></pre>
 </div>
 <p>We get the merged file:</p>
-<div class="codewrapper sourceCode" id="cb39">
+<div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="ex">$</span> cat guacamole.md</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="ex">$</span> cat guacamole.md</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1044,182 +1018,6 @@ tools (e.g. <code>htmltidy</code>, <code>perltidy</code>,
 it, and modify an existing file (your instructor will tell you which
 one). When asked by your instructor, pull her changes from the
 repository to create a conflict, then resolve it.</p>
-</div>
-</div>
-</div>
-<div id="conflicts-on-non-textual-files" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="conflicts-on-non-textual-files" class="callout-inner">
-<h3 class="callout-title">Conflicts on Non-textual files</h3>
-<div class="callout-content">
-<p>What does Git do when there is a conflict in an image or some other
-non-textual file that is stored in version control?</p>
-</div>
-</div>
-</div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
-</button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
-<div class="accordion-body">
-<p>Let’s try it. Suppose Alfredo takes a picture of its guacamole and
-calls it <code>guacamole.jpg</code>.</p>
-<p>If you do not have an image file of guacamole available, you can
-create a dummy binary file like this:</p>
-<div class="codewrapper sourceCode" id="cb41">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="ex">$</span> head <span class="at">--bytes</span> 1024 /dev/urandom <span class="op">&gt;</span> guacamole.jpg</span>
-<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-lh</span> guacamole.jpg</span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>-rw-r--r-- 1 alflin 57095 1.0K Mar  8 20:24 guacamole.jpg</code></pre>
-</div>
-<p><code>ls</code> shows us that this created a 1-kilobyte file. It is
-full of random bytes read from the special file,
-<code>/dev/urandom</code>.</p>
-<p>Now, suppose Alfredo adds <code>guacamole.jpg</code> to his
-repository:</p>
-<div class="codewrapper sourceCode" id="cb43">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="ex">$</span> git add guacamole.jpg</span>
-<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Add picture of guacamole"</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[main 8e4115c] Add picture of guacamole
- 1 file changed, 0 insertions(+), 0 deletions(-)
- create mode 100644 guacamole.jpg</code></pre>
-</div>
-<p>Suppose that Jimmy has added a similar picture in the meantime. His
-is a picture of a guacamole with nachos, but it is <em>also</em> called
-<code>guacamole.jpg</code>. When Alfredo tries to push, he gets a
-familiar message:</p>
-<div class="codewrapper sourceCode" id="cb45">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>To https://gitlab.tudelft.nl/alflin/recipes.git
- ! [rejected]        main -&gt; main (fetch first)
-error: failed to push some refs to 'https://gitlab.tudelft.nl:alflin/recipes.git'
-hint: Updates were rejected because the remote contains work that you do
-hint: not have locally. This is usually caused by another repository pushing
-hint: to the same ref. You may want to first integrate the remote changes
-hint: (e.g., 'git pull ...') before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.</code></pre>
-</div>
-<p>We’ve learned that we must pull first and resolve any conflicts:</p>
-<div class="codewrapper sourceCode" id="cb47">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="ex">$</span> git pull origin main</span></code></pre>
-</div>
-<p>When there is a conflict on an image or other binary file, git prints
-a message like this:</p>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>$ git pull origin main
-remote: Counting objects: 3, done.
-remote: Compressing objects: 100% (3/3), done.
-remote: Total 3 (delta 0), reused 0 (delta 0)
-Unpacking objects: 100% (3/3), done.
-From https://gitlab.tudelft.nl:alflin/recipes.git
- * branch            main     -&gt; FETCH_HEAD
-   6a67967..439dc8c  main     -&gt; origin/main
-warning: Cannot merge binary files: guacamole.jpg (HEAD vs. 439dc8c08869c342438f6dc4a2b615b05b93c76e)
-Auto-merging guacamole.jpg
-CONFLICT (add/add): Merge conflict in guacamole.jpg
-Automatic merge failed; fix conflicts and then commit the result.</code></pre>
-</div>
-<p>The conflict message here is mostly the same as it was for
-<code>guacamole.md</code>, but there is one key additional line:</p>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>warning: Cannot merge binary files: guacamole.jpg (HEAD vs. 439dc8c08869c342438f6dc4a2b615b05b93c76e)</code></pre>
-</div>
-<p>Git cannot automatically insert conflict markers into an image as it
-does for text files. So, instead of editing the image file, we must
-check out the version we want to keep. Then we can add and commit this
-version.</p>
-<p>On the key line above, Git has conveniently given us commit
-identifiers for the two versions of <code>guacamole.jpg</code>. Our
-version is <code>HEAD</code>, and Jimmy’s version is
-<code>439dc8c0...</code>. If we want to use our version, we can use
-<code>git checkout</code>:</p>
-<div class="codewrapper sourceCode" id="cb50">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="ex">$</span> git checkout HEAD guacamole.jpg</span>
-<span id="cb50-2"><a href="#cb50-2" tabindex="-1"></a><span class="ex">$</span> git add guacamole.jpg</span>
-<span id="cb50-3"><a href="#cb50-3" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Use image of just guacamole instead of with nachos"</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[main 21032c3] Use image of just guacamole instead of with nachos</code></pre>
-</div>
-<p>If instead we want to use Jimmy’s version, we can use
-<code>git checkout</code> with Jimmy’s commit identifier,
-<code>439dc8c0</code>:</p>
-<div class="codewrapper sourceCode" id="cb52">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="ex">$</span> git checkout 439dc8c0 guacamole.jpg</span>
-<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a><span class="ex">$</span> git add guacamole.jpg</span>
-<span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Use image of guacamole with nachos instead of just guacamole"</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[main da21b34] Use image of guacamole with nachos instead of just guacamole</code></pre>
-</div>
-<p>We can also keep <em>both</em> images. The catch is that we cannot
-keep them under the same name. But, we can check out each version in
-succession and <em>rename</em> it, then add the renamed versions. First,
-check out each image and rename it:</p>
-<div class="codewrapper sourceCode" id="cb54">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="ex">$</span> git checkout HEAD guacamole.jpg</span>
-<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a><span class="ex">$</span> git mv guacamole.jpg guacamole-only.jpg</span>
-<span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a><span class="ex">$</span> git checkout 439dc8c0 guacamole.jpg</span>
-<span id="cb54-4"><a href="#cb54-4" tabindex="-1"></a><span class="ex">$</span> mv guacamole.jpg guacamole-nachos.jpg</span></code></pre>
-</div>
-<p>Then, remove the old <code>guacamole.jpg</code> and add the two new
-files:</p>
-<div class="codewrapper sourceCode" id="cb55">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" tabindex="-1"></a><span class="ex">$</span> git rm guacamole.jpg</span>
-<span id="cb55-2"><a href="#cb55-2" tabindex="-1"></a><span class="ex">$</span> git add guacamole-only.jpg</span>
-<span id="cb55-3"><a href="#cb55-3" tabindex="-1"></a><span class="ex">$</span> git add guacamole-nachos.jpg</span>
-<span id="cb55-4"><a href="#cb55-4" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Use two images: just guacamole and with nachos"</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[main 94ae08c] Use two images: just guacamole and with nachos
- 2 files changed, 0 insertions(+), 0 deletions(-)
- create mode 100644 guacamole-nachos.jpg
- rename guacamole.jpg =&gt; guacamole-only.jpg (100%)</code></pre>
-</div>
-<p>Now both images of guacamole are checked into the repository, and
-<code>guacamole.jpg</code> no longer exists.</p>
-</div>
 </div>
 </div>
 </div>
@@ -1282,7 +1080,7 @@ started.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <table class="table"><colgroup><col width="6%"><col width="34%"><col width="59%"></colgroup><thead><tr class="header"><th>order</th>
 <th>action . . . . . .</th>
@@ -1318,10 +1116,10 @@ contain its own set of commits. We can create a new branch, make changes
 to the code which we then commit to the branch, and, once we are happy
 with those changes, merge them back to the main branch. To see what
 other branches are available, do:</p>
-<div class="codewrapper sourceCode" id="cb57">
+<div class="codewrapper sourceCode" id="cb43">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a><span class="ex">$</span> git branch</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="ex">$</span> git branch</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1365,15 +1163,31 @@ Git feature branches<br> Adapted from
 Tutorial by sillevl</a> (Creative Commons Attribution 4.0 International
 License)
 </p>
-<p>In the software development workflow, we typically have a main branch
-which is the version of the code that is tested, stable and reliable.
-Then, we normally have a development branch (called <code>develop</code>
-or <code>dev</code> by convention) that we use for work-in-progress
-code. As we work on adding new features to the code, we create new
-feature branches that first get merged into <code>develop</code> after a
-thorough testing process. After even more testing - <code>develop</code>
-branch will get merged into <code>main</code>. The points when feature
-branches are merged to <code>develop</code>, and <code>develop</code> to
+<p>The <em>feature branch workflow</em> is mostly used for software
+development projects, and consists of the following:</p>
+<ul><li>The <code>main</code> branch - which corresponds to the version of
+the software currently in use. This main branch should only contain code
+that has been thoroughly tested, and is stable and reliable.</li>
+<li>The <code>development</code> branch - which typically contains
+completed but not yet released code. This branch should only contain
+<em>working</em> code (thus - no half-finished features); however the
+code here has not yet been released, so it may be less tested and
+reliable compared to the <code>main</code> branch.</li>
+<li>A number of <code>feature</code> branches - corresponding to various
+new features being developed for the project. Code on these branches
+does not have to be complete, and is not even expected to always
+work.</li>
+<li>Developers work on new functionality on these <code>feature</code>
+branches, by making changes and commiting them (the typical
+modify-add-commit flow). Once a feature is completed, it is tested on
+its feature branch, and once testing is successful, the
+<code>feature</code> branch is <em>merged</em> to the
+<code>development</code> branch.</li>
+<li>After even more testing on the development branch, this branch is
+then merged to the <code>main</code> branch, and from there the code is
+released to users or customers.</li>
+</ul><p>It is important to understand that the points when feature branches
+are merged to <code>develop</code>, and <code>develop</code> to
 <code>main</code> depend entirely on the practice/strategy established
 in the team. For example, for smaller projects (e.g. if you are working
 alone on a project or in a very small team), feature branches sometimes
@@ -1388,19 +1202,19 @@ release. Whichever is the case for you, a good rule of thumb is -
 <div class="section level3">
 <h3 id="creating-branches">Creating Branches<a class="anchor" aria-label="anchor" href="#creating-branches"></a></h3>
 <p>Let us create a <code>develop</code> branch to work on:</p>
-<div class="codewrapper sourceCode" id="cb59">
+<div class="codewrapper sourceCode" id="cb45">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a><span class="ex">$</span> git branch develop</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a><span class="ex">$</span> git branch develop</span></code></pre>
 </div>
 <p>This command does not give any output, but if we run
 <code>git branch</code> again, without giving it a new branch name, we
 can see the list of branches we have - including the new one we have
 just made.</p>
-<div class="codewrapper sourceCode" id="cb60">
+<div class="codewrapper sourceCode" id="cb46">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a><span class="ex">$</span> git branch</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a><span class="ex">$</span> git branch</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1411,15 +1225,34 @@ just made.</p>
 <p>The <code>*</code> indicates the currently active branch. So how do
 we switch to our new branch? We use the <code>git switch</code> command
 with the name of the branch:</p>
-<div class="codewrapper sourceCode" id="cb62">
+<div class="codewrapper sourceCode" id="cb48">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb62-1"><a href="#cb62-1" tabindex="-1"></a><span class="ex">$</span> git switch develop</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="ex">$</span> git switch develop</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Switched to branch 'develop'</code></pre>
+</div>
+<div id="git-switch-vs-git-checkout" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="git-switch-vs-git-checkout" class="callout-inner">
+<h3 class="callout-title">‘git switch’ vs ‘git checkout’</h3>
+<div class="callout-content">
+<p>The original way of switching branches in Git was using
+<code>git checkout &lt;branch&gt;</code> — and you may still find such
+examples online. However, <code>git checkout</code> had multiple roles
+(was also used to restore versions of a file for example), making it
+confusing. To simplify things, starting with version <em>2.23</em> Git
+has introduced the <code>git switch</code>, command which is dedicated
+for branch changes. Use <code>git switch &lt;branch&gt;</code> for
+switching branches and <code>git checkout -- &lt;file&gt;</code> to
+restore files.</p>
+</div>
+</div>
 </div>
 <div id="create-and-switch-to-branch-shortcut" class="callout">
 <div class="callout-square">
@@ -1429,10 +1262,10 @@ with the name of the branch:</p>
 <h3 class="callout-title">Create and Switch to Branch Shortcut</h3>
 <div class="callout-content">
 <p>A shortcut to create a new branch and immediately switch to it:</p>
-<div class="codewrapper sourceCode" id="cb64">
+<div class="codewrapper sourceCode" id="cb50">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb64-1"><a href="#cb64-1" tabindex="-1"></a><span class="ex">$</span> git switch <span class="at">-c</span> develop</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="ex">$</span> git switch <span class="at">-c</span> develop</span></code></pre>
 </div>
 </div>
 </div>
@@ -1450,10 +1283,10 @@ version of the code in <code>main</code>. We add and commit things to
 say, change <em>“peel the avocados”</em> to <em>“Peel the avocados”</em>
 to see updating branches in action.</p>
 <p>If we do:</p>
-<div class="codewrapper sourceCode" id="cb65">
+<div class="codewrapper sourceCode" id="cb51">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a><span class="ex">$</span> git status</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1471,11 +1304,11 @@ to see updating branches in action.</p>
 which tracked files have been modified in our working directory.</p>
 <p>We can now <code>add</code> and <code>commit</code> the changes in
 the usual way.</p>
-<div class="codewrapper sourceCode" id="cb67">
+<div class="codewrapper sourceCode" id="cb53">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a><span class="ex">$</span> git add guacamole.md</span>
-<span id="cb67-2"><a href="#cb67-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Capitalization fix"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a><span class="ex">$</span> git add guacamole.md</span>
+<span id="cb53-2"><a href="#cb53-2" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Capitalization fix"</span></span></code></pre>
 </div>
 <div id="currently-active-branch" class="callout">
 <div class="callout-square">
@@ -1504,10 +1337,10 @@ branches.</p>
 <figure><img src="fig/gitlab-main-branch.jpg" class="image-with-shadow figure mx-auto d-block" alt="Software project's main branch" width="600"></figure><p>To push a new local branch remotely for the first time, you could use
 the <code>-u</code> flag and the name of the branch you are creating and
 pushing to:</p>
-<div class="codewrapper sourceCode" id="cb68">
+<div class="codewrapper sourceCode" id="cb54">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a><span class="ex">$</span> git push <span class="at">-u</span> origin develop</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="ex">$</span> git push <span class="at">-u</span> origin develop</span></code></pre>
 </div>
 <div id="git-push-with--u-flag" class="callout">
 <div class="callout-square">
@@ -1539,36 +1372,10 @@ and branches drop-down menu.</p>
 continue to develop code on it.</p>
 <p>After the initial push of the new branch, each next time we push to
 it in the usual manner (i.e. without the <code>-u</code> switch):</p>
-<div class="codewrapper sourceCode" id="cb69">
+<div class="codewrapper sourceCode" id="cb55">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1" tabindex="-1"></a><span class="ex">$</span> git push origin develop</span></code></pre>
-</div>
-<div id="what-is-the-relationship-between-originating-and-new-branches" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div id="what-is-the-relationship-between-originating-and-new-branches" class="callout-inner">
-<h3 class="callout-title">What is the Relationship Between Originating and New Branches?</h3>
-<div class="callout-content">
-<p>It is natural to think that new branches have a parent/child
-relationship with their originating branch, but in actual Git terms,
-branches themselves do not have parents but single commits do. Any
-commit can have zero parents (a root, or initial, commit), one parent (a
-regular commit), or multiple parents (a merge commit), and using this
-structure, we can build a ‘view’ of branches from a set of commits and
-their relationships. A common way to look at it is that Git branches are
-really only <a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell" class="external-link">lightweight,
-movable pointers to commits</a>. So as a new commit is added to a
-branch, the branch pointer is moved to the new commit.</p>
-<p>What this means is that when you accomplish a merge between two
-branches, Git is able to determine the common ‘commit ancestor’ through
-the commits in a ‘branch’, and use that common ancestor to determine
-which commits need to be merged onto the destination branch. It also
-means that, in theory, you could merge any branch with any other at any
-time… although it may not make sense to do so!</p>
-</div>
-</div>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" tabindex="-1"></a><span class="ex">$</span> git push origin develop</span></code></pre>
 </div>
 <p> </p>
 </div>
@@ -1578,10 +1385,10 @@ time… although it may not make sense to do so!</p>
 you will want to merge them onto the <code>main</code> branch. To do so,
 make sure you have committed all your changes on the
 <code>develop</code> branch and then switch to <code>main</code>:</p>
-<div class="codewrapper sourceCode" id="cb70">
+<div class="codewrapper sourceCode" id="cb56">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a><span class="ex">$</span> git switch main</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1" tabindex="-1"></a><span class="ex">$</span> git switch main</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1591,10 +1398,10 @@ Your branch is up to date with 'origin/main'.</code></pre>
 </div>
 <p>To merge the <code>develop</code> branch on top of <code>main</code>
 do:</p>
-<div class="codewrapper sourceCode" id="cb72">
+<div class="codewrapper sourceCode" id="cb58">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a><span class="ex">$</span> git merge develop</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1" tabindex="-1"></a><span class="ex">$</span> git merge develop</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1613,10 +1420,10 @@ files with conflicts will be marked and you will need to resolve those
 conflicts and commit the changes before attempting to merge again. Since
 we have no conflicts, we can now push the <code>main</code> branch to
 the remote repository:</p>
-<div class="codewrapper sourceCode" id="cb74">
+<div class="codewrapper sourceCode" id="cb60">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
 </div>
 <div id="all-branches-are-equal" class="callout">
 <div class="callout-square">
@@ -1677,7 +1484,7 @@ to setup informal review rules with your colleagues when working on a
 joint project.</p>
 <p>Once a merge request has been created, GitLab provides process
 controls for managing its lifecycle:</p>
-<figure><img src="fig/gitlab-merge-request-lifecycle.jpg" class="image-with-shadow figure mx-auto d-block" alt="Merge Request Lifecycle" width="600"></figure><p>This form can be accessed from the “Merge requests” menu on the left
+<figure><img src="fig/gitlab-merge-request-process.jpg" class="image-with-shadow figure mx-auto d-block" alt="Merge Request Lifecycle" width="600"></figure><p>This form can be accessed from the “Merge requests” menu on the left
 tab. On this form you can perform actions such as: - approve the merge
 request by clicking the “Approve” button. - do the actual (Git) merge by
 clicking the “Merge” button. - review the commits part of this merge
@@ -1685,6 +1492,65 @@ request in the “Commits” tab - review the code changes part of this
 merge request in the “Changes” tab - comment on code changes, also from
 the “Changes” tab. When making a comment, GitLab notifies the asignee
 for the merge request about the comment via email.</p>
+<div id="branch---merge-request-cycle-with-conflicts" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="branch---merge-request-cycle-with-conflicts" class="callout-inner">
+<h3 class="callout-title">Branch - Merge Request Cycle with Conflicts</h3>
+<div class="callout-content">
+<p>For this challenge, again work in Owner - Collaborator pairs</p>
+<ul><li>As the Collaborator - create a new feature branch -
+<code>feature_all_caps</code>
+</li>
+<li>On this branch - change the spelling of all <em>guacamole</em>
+ingredients to all caps!</li>
+<li>Create a merge request in GitLab - requesting to merge your new
+branch to <code>develop</code>
+</li>
+<li>After that, as the Owner change the <em>guacamole</em> recipe on the
+<code>develop</code> branch:
+<ul><li>all ingredients are capitalize (only the first letter!)</li>
+<li>commit and push your changes</li>
+</ul></li>
+<li>As the Collaborator - check the status of your merge request on
+GitLab. Is merging still possible?</li>
+<li>Together fix the <code>feature_all_caps</code> branch so merging to
+develop IS possible</li>
+<li>Complete the merge request!</li>
+</ul></div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div class="accordion-body">
+<p>After the Owner has made changes to the <code>develop</code> branch
+completing the merge request in GitLab is no longer possible - as GitLab
+notices there is a conflict between <code>develop</code> and the
+<code>feature_all_caps</code> branches:</p>
+<figure><img src="fig/gitlab_mr_conflicts.jpg" alt="Merge Request blocked because of conflicts" class="figure mx-auto d-block"></figure><p>The trick to solving these conflicts is to manually merge the
+<code>develop</code> branch into the <code>feature_all_caps</code>
+branch:</p>
+<div class="codewrapper sourceCode" id="cb61">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a><span class="ex">$</span> git merge develop</span></code></pre>
+</div>
+<p>Once you have done that, git will indicate there are merge conflicts
+- which you can solve the same way you did earlier - for example using
+the PyCharm git interface.</p>
+<p>Once conflicts have been solved, commit them (on the
+<code>feature_all_caps</code> branch) and push everything to GitLab.</p>
+<p>Now, if you refresh the Merge Request page on GitLab you should see
+that merging is possible!</p>
+</div>
+</div>
+</div>
+</div>
 <p>   </p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -1712,24 +1578,12 @@ branch merging</li>
 </div>
 </div>
 <p>   </p>
-</div>
-</section><section><h2 class="section-heading" id="hands-on-project">Hands-on Project<a class="anchor" aria-label="anchor" href="#hands-on-project"></a></h2>
-<hr class="half-width"><ul><li>Work in groups of two</li>
-<li>Create a GitLab project on the TUD GitLab server</li>
-<li>Assign project roles to each team member</li>
-<li>Create a shared (text) document representing a joint research
-paper.</li>
-<li>Each member works independently on different sections of the
-document in separate branches.</li>
-<li>Show how merging can be done without conflicts</li>
-<li>Start working on the same section creating a conflict</li>
-<li>show how it can be solved using GitLab merge requests and Git
-conflict resolution</li>
-</ul><p>   </p>
+<p>   </p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="gitlab.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -1788,7 +1642,7 @@ any links that you are not going to use.
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/advanced-git-commands.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/advanced-git-commands.html",
   "dateCreated": "2025-07-07",
-  "dateModified": "2025-07-01",
+  "dateModified": "2025-07-07",
   "datePublished": "2025-07-07"
 }
 
