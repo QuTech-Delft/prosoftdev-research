@@ -68,9 +68,11 @@ episodes:
 - qsmm.Rmd
 - version_control.Rmd
 - basic-git-commands.Rmd
+- workshop2intro.Rmd
 - gitlab.Rmd
 - advanced-git-commands.Rmd
 - python-virtual-environmants.Rmd
+- workshop3intro.Rmd
 - clean-code.Rmd
 - credits.Rmd
 
