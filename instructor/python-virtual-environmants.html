@@ -277,7 +277,7 @@ Packages</a></li>
 <li><a href="#a-motivating-example">A Motivating Example</a></li>
 <li><a href="#creating-virtual-environments-using-venv">Creating Virtual Environments Using <code>venv</code></a></li>
 <li><a href="#installing-external-packages-using-pip">Installing External Packages Using <code>pip</code></a></li>
-<li><a href="#running-python-scripts-from-command-line">Running Python Scripts From Command Line</a></li>
+<li><a href="#putting-it-all-together">Putting it All Together</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -369,7 +369,7 @@ Packages</a></li>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Python Virtual Environments</h1>
-        <p>Last updated on 2025-07-01 |
+        <p>Last updated on 2025-07-08 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/python-virtual-environmants.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -390,10 +390,10 @@ Packages</a></li>
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>“What are virtual environments in software development and why you
-should use them?”</li>
-<li>“How can we manage Python virtual environments and external
-(third-party) libraries?”</li>
+<ul><li>What are virtual environments in software development and why you
+should use them?</li>
+<li>How can we manage Python virtual environments and external
+(third-party) libraries?</li>
 </ul></div>
 </div>
 </div>
@@ -401,37 +401,41 @@ should use them?”</li>
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>“Set up a Python virtual environment for our software project using
-<code>venv</code> and <code>pip</code>.”</li>
-<li>“Run our software from the command line.”</li>
+<ul><li>Understand the problems Python virtual environments help solve</li>
+<li>Set up a Python virtual environment for our software project using
+<code>venv</code> and <code>pip</code>.</li>
+<li>Managing external packages with <code>pip</code>
+</li>
+<li>Exporting/Importing Virtual Environments</li>
 </ul></div>
 </div>
 </div>
 </div>
 </div>
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
-<hr class="half-width"><p>Python applications often use external libraries that don’t come as
-part of the standard Python distribution. This means that you will have
-to use a <em>package manager</em> tool to install them on your system.
-Applications will also sometimes need a specific version of an external
-library (e.g. because they were written to work with feature, class, or
-function that may have been updated in more recent versions), or a
-specific version of Python interpreter. This means that each Python
-application you work with may require a different setup and a set of
-dependencies so it is useful to be able to keep these configurations
-separate to avoid confusion between projects. The solution for this
-problem is to create a self-contained <strong>virtual
-environment</strong> per project, which contains a particular version of
-Python installation plus a number of additional external libraries.</p>
-<p>Virtual environments are not just a feature of Python - most modern
-programming languages use a similar mechanism to isolate libraries or
-dependencies for a specific project, making it easier to develop, run,
-test and share code with others. Some examples include Bundler for Ruby,
-Conan for C++, or Maven with classpath for Java. This can also be
-achieved with more generic package managers like Spack, which is used
-extensively in HPC settings to resolve complex dependencies. In this
-episode, we learn how to set up a virtual environment to develop our
-code and manage our external dependencies.</p>
+<hr class="half-width"><p>Up to now in this course we have focused on version control and
+<code>git</code>. We have seen how these tools provide isolation,
+reproducibility, and control over changes at the <em>source code</em>
+level.</p>
+<p>However a running program is more than just its source code; the
+environment/OS where it runs, the version of the programming language,
+as well as the external libraries it is using can also have a
+significant influence over its results.</p>
+<p>In this episode we will pivot away from version control, and start
+looking at these other “externalities” that influence program behaviour.
+The goal, as with version control is to provide tools that allow us to
+control how these “externalities” influence our running programs, and
+provide the same isolation, reproducibility, and control over changes
+that version control can provide over our source code.</p>
+<p>We will focus our discussion on Python and its tools ecosystem, as
+this is the language mostly used at QuTech and in the broader scientific
+community.</p>
+<p>In the context of Python, the widely used solution to managing all
+the externalities mention above is <em>Python virtual environments</em>.
+For the rest of this episode we will explore ways to use these virtual
+environments so we can manage our running program “externalities” pretty
+much the same way we manage its source code via version control and
+git.</p>
 </section><section><h2 class="section-heading" id="python-virtual-environments">Python Virtual Environments<a class="anchor" aria-label="anchor" href="#python-virtual-environments"></a></h2>
 <hr class="half-width"><p>So what exactly are virtual environments, and why use them?</p>
 <p>A Python virtual environment helps us create an <strong>isolated
@@ -459,12 +463,12 @@ Python 3. You have to start another project under Python 3. The best way
 to do this on a single machine is to set up two separate Python virtual
 environments.</li>
 <li>One of your Python 3 projects is locked to use a particular older
-version of a third party dependency. You cannot use the latest version
-of the dependency as it breaks things in your project. In a separate
-branch of your project, you want to try and fix problems introduced by
-the new version of the dependency without affecting the working version
-of your project. You need to set up a separate virtual environment for
-your branch to ‘isolate’ your code while testing the new feature.</li>
+version of a third party library. You cannot use the latest version of
+the dependency as it breaks things in your project. In a separate branch
+of your project, you want to try and fix problems introduced by the new
+version of the dependency without affecting the working version of your
+project. You need to set up a separate virtual environment for your
+branch to ‘isolate’ your code while testing the new feature.</li>
 </ul><p>You do not have to worry too much about specific versions of external
 libraries that your project depends on most of the time. Virtual
 environments also enable you to always use the latest available version
@@ -486,8 +490,8 @@ virtual environments.</p>
 </div>
 </section><section><h2 class="section-heading" id="tools-for-managing-python-virtual-environments-and-external-packages">Tools for Managing Python Virtual Environments and External
 Packages<a class="anchor" aria-label="anchor" href="#tools-for-managing-python-virtual-environments-and-external-packages"></a></h2>
-<hr class="half-width"><p>There are several commonly used command line tools for managing
-Python virtual environments:</p>
+<hr class="half-width"><p>There are several commonly used command line tools for creating and
+managing Python virtual environments:</p>
 <ul><li>
 <code>venv</code>, available by default from the standard
 <code>Python</code> distribution from <code>Python 3.3+</code>
@@ -507,45 +511,29 @@ scientific community)</li>
 <li>
 <code>poetry</code>, a modern Python packaging tool which handles
 virtual environments automatically</li>
-</ul><p>While there are pros and cons for using each of the above, all will
-do the job of managing Python virtual environments for you and it may be
-a matter of personal preference which one you go for. In this course, we
-will use <code>venv</code> to create and manage our virtual environment
-(which is the preferred way for Python 3.3+). The upside is that
-<code>venv</code> virtual environments created from the command line are
-also recognised and picked up automatically by PyCharm IDE, as we will
-see in the next episode.</p>
-<p>Part of managing your (virtual) working environment involves
-installing, updating and removing external packages on your system. The
-Python package manager tool <code>pip</code> is most commonly used for
-this - it interacts and obtains the packages from the central repository
-called <a href="https://pypi.org/" class="external-link">Python Package Index (PyPI)</a>.
-<code>pip</code> can now be used with all Python distributions
-(including Anaconda).</p>
-<div id="a-note-on-anaconda-and-conda" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div id="a-note-on-anaconda-and-conda" class="callout-inner">
-<h3 class="callout-title">A Note on <code>Anaconda</code> and
-<code>conda</code>
-</h3>
-<div class="callout-content">
-<p>Anaconda is an open source Python distribution commonly used for
-scientific programming - it conveniently installs Python, package and
-environment management <code>conda</code>, and a number of commonly used
-scientific computing packages so you do not have to obtain them
-separately. <code>conda</code> is an independent command line tool
-(available separately from the Anaconda distribution too) with dual
-functionality: (1) it is a package manager that helps you find Python
-packages from remote package repositories and install them on your
-system, and (2) it is also a virtual environment manager. So, you can
-use <code>conda</code> for both tasks instead of using <code>venv</code>
-and <code>pip</code>.</p>
-</div>
-</div>
-</div>
-<div class="section level3">
+</ul><p>Part of managing your (virtual) working environment involves
+installing, updating and removing external packages on your system. Here
+as well there are plenty of tools and technologies to choose from:</p>
+<ul><li>
+<code>pip</code> - the most commonly used Python package manager -
+it interacts and obtains the packages from the central repository called
+<a href="https://pypi.org/" class="external-link">Python Package Index (PyPI)</a>
+</li>
+<li>
+<code>easy_install</code> - a legacy package manager now largely
+replaced by <code>pip</code>
+</li>
+<li>
+<code>pdm</code> - a modern Python package manager that follows the
+latest Python community guidelines, but doesn’t enforce virtual
+environments</li>
+<li>
+<code>uv</code> - a new and very fast Python package manager
+intended to eventually replace <code>pip</code>
+</li>
+<li><code>conda</code></li>
+<li><code>poetry</code></li>
+</ul><div class="section level3">
 <h3 id="many-tools-for-the-job">Many Tools for the Job<a class="anchor" aria-label="anchor" href="#many-tools-for-the-job"></a></h3>
 <p>Installing and managing Python distributions, external libraries and
 virtual environments is, well, complex. There is an abundance of tools
@@ -556,26 +544,32 @@ its own version of <code>pip</code> - and if you have several Python
 versions installed you have to be extra careful to use the correct
 <code>pip</code> to manage external packages for that Python
 version.</p>
-<p><code>venv</code> and <code>pip</code> are considered the <em>de
-facto</em> standards for virtual environment and package management for
-Python 3. However, the advantages of using Anaconda and
-<code>conda</code> are that you get (most of the) packages needed for
-scientific code development included with the distribution. If you are
-only collaborating with others who are also using Anaconda, you may find
-that <code>conda</code> satisfies all your needs. It is good, however,
-to be aware of all these tools, and use them accordingly. As you become
-more familiar with them you will realise that equivalent tools work in a
-similar way even though the command syntax may be different (and that
-there are equivalent tools for other programming languages too to which
-your knowledge can be ported).</p>
+<p>For a novice in this area it is very easy to quickly get overwhelmed,
+leading to situation like this:</p>
 <img src="../fig/python-environment-hell.png" class="figure"><p style="text-align: center;">
 Python Environment Hell <br> From
 <a href="https://xkcd.com/1987/" target="_blank" class="external-link">XKCD</a> (Creative
 Commons Attribution-NonCommercial 2.5 License)
 </p>
-<p>In the next sections we will look at how to manage virtual
-environments from the command line using <code>venv</code> and manage
-packages using <code>pip</code>.</p>
+<p>In order to avoid this “Python environment hell” problem, in this
+course we will only focus on <code>venv</code> and <code>pip</code>.
+Only focusing on these has several advantages, especially for novice
+users:</p>
+<ul><li>
+<code>venv</code> and <code>pip</code> have been around for quite a
+while, they are widely used, are very stable, and there is ample online
+documentation for both of them.</li>
+<li>
+<code>venv</code> and <code>pip</code> are quite low-level, and
+minimalistic, so you do not have to deal with the feature explosion and
+bloatware that other tools may experience.</li>
+<li>finally, many of the more high-level tools use the functionality
+provided by <code>venv</code> and <code>pip</code> as building blocks,
+so having a good understanding of these provides a solid foundation to
+expand to more sophisticated tools.</li>
+</ul><p>In the next sections we will look at how to use <code>venv</code> and
+<code>pip</code> from the command line, similar to the approach we took
+when learning <code>git</code></p>
 <div id="making-sure-you-can-invoke-python" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -590,11 +584,34 @@ packages using <code>pip</code>.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> python3 <span class="at">--version</span> <span class="co"># on Mac/Linux</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">$</span> python <span class="at">--version</span> <span class="co"># on Windows — Windows installation comes with a python.exe file rather than a python3.exe file</span></span></code></pre>
 </div>
+</div>
+</div>
+</div>
+<div id="python-hangs-in-git-bash-on-windows" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="python-hangs-in-git-bash-on-windows" class="callout-inner">
+<h3 class="callout-title">Python Hangs in Git Bash on Windows</h3>
+<div class="callout-content">
 <p>If you are using Windows and invoking <code>python</code> command
 causes your Git Bash terminal to hang with no error message or output,
-you may need to create an alias for the python executable
-<code>python.exe</code>, as explained in the <a href="../common-issues/index.html#python-hangs-in-git-bash">troubleshooting
-section</a>.</p>
+you may have to use <code>winpty</code> - a Windows software package
+providing an interface similar to a Unix pty-master for communicating
+with Windows command line tools. Inside the shell type:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="bu">alias</span> python=<span class="st">"winpty python.exe"</span></span></code></pre>
+</div>
+<p>This alias will be valid for the duration of the shell session. For a
+more permanent solution, from the shell do:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> echo <span class="st">"alias python='winpty python.exe'"</span> <span class="op">&gt;&gt;</span> ~/.bashrc</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">$</span> source ~/.bashrc</span></code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -603,38 +620,38 @@ section</a>.</p>
 <hr class="half-width"><p>For the rest of this episode, we will use the following (simple)
 Python program as a motivation on where virtual environments may be
 useful:</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="im">from</span> dateutil <span class="im">import</span> parser</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> timedelta</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co"># Generate time data using python-dateutil and timedelta</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>start_time <span class="op">=</span> parser.parse(<span class="st">"2025-01-01T00:00:00"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>time_steps <span class="op">=</span> [start_time <span class="op">+</span> timedelta(minutes<span class="op">=</span><span class="dv">10</span> <span class="op">*</span> i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>)]</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>time_values <span class="op">=</span> [t.strftime(<span class="st">"%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S"</span>) <span class="cf">for</span> t <span class="kw">in</span> time_steps]</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Plotting a sine wave starting at </span><span class="sc">{</span>start_time<span class="sc">}</span><span class="ss"> in 100 steps of 10 minutes"</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co"># Create the sine wave data using numpy</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>x_values <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span> <span class="op">*</span> np.pi, <span class="dv">100</span>)  <span class="co"># 100 points from 0 to 10*pi</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>y_values <span class="op">=</span> np.sin(x_values)</span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co"># Plot the data</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>plt.plot(time_values, y_values, label<span class="op">=</span><span class="st">"Sine Wave"</span>)</span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>tick_step <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>plt.xticks(<span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(time_values), tick_step), time_values[::tick_step], rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>plt.xlabel(<span class="st">"Time"</span>)</span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>plt.ylabel(<span class="st">"Sine Value"</span>)</span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>plt.title(<span class="st">"Sine Wave Over Time"</span>)</span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>plt.legend()</span>
-<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="im">from</span> dateutil <span class="im">import</span> parser</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> timedelta</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># Generate time data using python-dateutil and timedelta</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>start_time <span class="op">=</span> parser.parse(<span class="st">"2025-01-01T00:00:00"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>time_steps <span class="op">=</span> [start_time <span class="op">+</span> timedelta(minutes<span class="op">=</span><span class="dv">10</span> <span class="op">*</span> i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>)]</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>time_values <span class="op">=</span> [t.strftime(<span class="st">"%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S"</span>) <span class="cf">for</span> t <span class="kw">in</span> time_steps]</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Plotting a sine wave starting at </span><span class="sc">{</span>start_time<span class="sc">}</span><span class="ss"> in 100 steps of 10 minutes"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co"># Create the sine wave data using numpy</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>x_values <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span> <span class="op">*</span> np.pi, <span class="dv">100</span>)  <span class="co"># 100 points from 0 to 10*pi</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>y_values <span class="op">=</span> np.sin(x_values)</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co"># Plot the data</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>plt.plot(time_values, y_values, label<span class="op">=</span><span class="st">"Sine Wave"</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>tick_step <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>plt.xticks(<span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(time_values), tick_step), time_values[::tick_step], rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>plt.xlabel(<span class="st">"Time"</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>plt.ylabel(<span class="st">"Sine Value"</span>)</span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>plt.title(<span class="st">"Sine Wave Over Time"</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>plt.legend()</span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 <p>On your system, create a new directory <em>sine_wave</em>, and copy
 the above code in a file <em>plot_sine_wave.py</em>. We want to see what
@@ -645,30 +662,30 @@ environment.</p>
 <a class="anchor" aria-label="anchor" href="#creating-virtual-environments-using-venv"></a></h2>
 <hr class="half-width"><p>Creating a virtual environment with <code>venv</code> is done by
 executing the following command:</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> python3 <span class="at">-m</span> venv /path/to/new/virtual/environment</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">$</span> python <span class="at">-m</span> venv /path/to/new/virtual/environment</span></code></pre>
 </div>
 <p>In Windows (GitBash), you can do the same with the following
 command:</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">$</span>  py <span class="at">-3</span> <span class="at">-m</span> venv /path/to/new/virtual/environment</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span>  py <span class="at">-3</span> <span class="at">-m</span> venv /path/to/new/virtual/environment</span></code></pre>
 </div>
 <p>where <code>/path/to/new/virtual/environment</code> is a path to a
 directory where you want to place it - conventionally within your
 software project so they are co-located. This will create the target
 directory for the virtual environment (and any parent directories that
 don’t exist already).</p>
-<div id="what-is--m-flag-in-python3-command" class="callout">
+<div id="what-is--m-flag-in-python-command" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="what-is--m-flag-in-python3-command" class="callout-inner">
+<div id="what-is--m-flag-in-python-command" class="callout-inner">
 <h3 class="callout-title">What is <code>-m</code> Flag in
-<code>python3</code> Command?</h3>
+<code>python</code> Command?</h3>
 <div class="callout-content">
 <p>The Python <code>-m</code> flag means “module” and tells the Python
 interpreter to treat what follows <code>-m</code> as the name of a
@@ -678,30 +695,30 @@ points and the <code>-m</code> flag can be used to invoke them on the
 command line via the <code>python</code> command. The main difference
 between running such modules as standalone programs (e.g. executing
 “venv” by running the <code>venv</code> command directly) versus using
-<code>python3 -m</code> command seems to be that with latter you are in
-full control of which Python module will be invoked (the one that came
-with your environment’s Python interpreter vs. some other version you
-may have on your system). This makes it a more reliable way to set
-things up correctly and avoid issues that could prove difficult to trace
-and debug.</p>
+<code>python -m</code> command is that with the latter you are in full
+control of which Python module will be invoked (the one that came with
+your environment’s Python interpreter vs. some other version you may
+have on your system). This makes it a more reliable way to set things up
+correctly and avoid issues that could prove difficult to trace and
+debug.</p>
 </div>
 </div>
 </div>
 <p>For our project let us create a virtual environment called “venv”.
 First, ensure you are within the project root directory
 (<em>sine_wave</em>), then:</p>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">$</span> python3 <span class="at">-m</span> venv venv</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">$</span> python <span class="at">-m</span> venv venv</span></code></pre>
 </div>
 <p>If you list the contents of the newly created directory “venv”, on a
 Mac or Linux system (slightly different on Windows as explained below)
 you should see something like:</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-l</span> venv</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-l</span> venv</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -712,7 +729,7 @@ drwxr-xr-x   2 alex  staff   64  5 Oct 11:47 include
 drwxr-xr-x   3 alex  staff   96  5 Oct 11:47 lib
 -rw-r--r--   1 alex  staff   90  5 Oct 11:47 pyvenv.cfg</code></pre>
 </div>
-<p>So, running the <code>python3 -m venv venv</code> command created the
+<p>So, running the <code>python -m venv venv</code> command created the
 target directory called “venv” containing:</p>
 <ul><li>
 <code>pyvenv.cfg</code> configuration file with a home key pointing
@@ -746,11 +763,10 @@ context of the path you are currently located in. A (non-conventional)
 alternative is to use your project name for the name of the virtual
 environment, with the downside that there is nothing to indicate that
 such a directory contains a virtual environment.</p>
-<p>In our case, we have settled to use the name “venv” instead of
-“.venv” since it is not a hidden directory and we want it to be
-displayed by the command line when listing directory contents (the “.”
-in its name that would, by convention, make it hidden). In the future,
-you will decide what naming convention works best for you. Here are some
+<p>For this episode we will use the name “venv” instead of “.venv” since
+it is not a hidden directory and we want it to be displayed by the
+command line when listing directory contents. In the future, you should
+decide what naming convention works best for you. Here are some
 references for each of the naming conventions:</p>
 <ul><li>
 <a href="https://docs.python-guide.org/dev/virtualenvs/" class="external-link">The
@@ -767,20 +783,20 @@ vs “.venv” discussion</a></li>
 <p>Once you’ve created a virtual environment, you will need to activate
 it.</p>
 <p>On Mac or Linux, it is done as:</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">$</span> source venv/bin/activate</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">$</span> source venv/bin/activate</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span></span></code></pre>
 </div>
 <p>On Windows, recall that we have <code>Scripts</code> directory
 instead of <code>bin</code> and activating a virtual environment is done
 as:</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">$</span> source venv/Scripts/activate</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">$</span> source venv/Scripts/activate</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span></span></code></pre>
 </div>
 <p>Activating the virtual environment will change your command line’s
 prompt to show what virtual environment you are currently using
@@ -789,30 +805,30 @@ and modify the environment so that running Python will get you the
 particular version of Python configured in your virtual environment.</p>
 <p>You can now verify you are using your virtual environment’s version
 of Python:</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span>  python <span class="at">--version</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span>  python <span class="at">--version</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>Python 3.12.0</code></pre>
+<pre class="output" tabindex="0"><code>Python 3.12.9</code></pre>
 </div>
 <p>When you’re done working on your project, you can exit the
 environment with:</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> deactivate</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> deactivate</span></code></pre>
 </div>
 <p>If you have just done the <code>deactivate</code>, ensure you
 reactivate the environment ready for the next part:</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">$</span> source venv/bin/activate</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">$</span> source venv/bin/activate</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span></span></code></pre>
 </div>
 <div id="python-within-a-virtual-environment" class="callout">
 <div class="callout-square">
@@ -821,19 +837,22 @@ reactivate the environment ready for the next part:</p>
 <div id="python-within-a-virtual-environment" class="callout-inner">
 <h3 class="callout-title">Python Within A Virtual Environment</h3>
 <div class="callout-content">
-<p>Within an active virtual environment, commands <code>python3</code>
-and <code>python</code> should both refer to the version of Python 3 you
-created the environment with (note you may have multiple Python 3
-versions installed).</p>
+<p>Within an active virtual environment, commands like
+<code>python3</code> and <code>python</code> should both refer to the
+version of Python 3 you created the environment with (note you may have
+multiple Python 3 versions installed).</p>
 <p>However, on some machines with Python 2 installed,
 <code>python</code> command may still be hardwired to the copy of Python
 2 installed outside of the virtual environment - this can cause errors
 and confusion.</p>
+<p>To make it even more confusing, <code>python3</code> may also not
+work on newer versions of Windows (where Python 2 is deemed obsolete -
+hence <code>python</code> deemed to be sufficient)</p>
 <p>You can always check which version of Python you are using in your
 virtual environment with the command <code>which python</code> to be
-absolutely sure. We continue using <code>python3</code> in this material
-to avoid mistakes, but the command <code>python</code> may work for you
-as expected.</p>
+absolutely sure. We will be using <code>python</code> in this material
+since this should work on most modern systems, but if this points to
+Python 2 on your system you may have to use <code>python3</code>.</p>
 </div>
 </div>
 </div>
@@ -841,10 +860,10 @@ as expected.</p>
 <a class="anchor" aria-label="anchor" href="#installing-external-packages-using-pip"></a></h2>
 <hr class="half-width"><p>Now that we have a virtual environment, let us try to run the
 <em>plot_sine_wave.py</em> program:</p>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">python</span> plot_sine_wave.py</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">python</span> plot_sine_wave.py</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -857,66 +876,59 @@ ModuleNotFoundError: No module named 'numpy'</code></pre>
 <p>As we can see in the code (‘includes’), our code depends on a number
 of external libraries - <code>numpy</code>, <code>matplotlib</code>, and
 <code>python-dateutil</code>. In order for the code to run on your
-machine, you need to install these two dependencies into your virtual
+machine, you need to install these three dependencies into your virtual
 environment.</p>
 <p>To install the latest version of a package with <code>pip</code> you
 use pip’s <code>install</code> command and specify the package’s name,
 e.g.:</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python3 <span class="at">-m</span> pip install numpy</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python3 <span class="at">-m</span> pip install matplotlib</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python3 <span class="at">-m</span> pip install python-dateutil</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python <span class="at">-m</span> pip install numpy</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python <span class="at">-m</span> pip install matplotlib</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python <span class="at">-m</span> pip install python-dateutil</span></code></pre>
 </div>
 <p>or like this to install multiple packages at once for short:</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python3 <span class="at">-m</span> pip install numpy matplotlib python-dateutil</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python <span class="at">-m</span> pip install numpy matplotlib python-dateutil</span></code></pre>
 </div>
-<div id="how-about-pip3-install-package-name-command" class="callout">
+<div id="how-about-pip-install-package-name-command" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="how-about-pip3-install-package-name-command" class="callout-inner">
+<div id="how-about-pip-install-package-name-command" class="callout-inner">
 <h3 class="callout-title">How About
-<code>pip3 install &lt;package-name&gt;</code> Command?</h3>
+<code>pip install &lt;package-name&gt;</code> Command?</h3>
 <div class="callout-content">
 <p>You may have seen or used the
-<code>pip3 install &lt;package-name&gt;</code> command in the past,
-which is shorter and perhaps more intuitive than
-<code>python3 -m pip install</code>. However, the <a href="https://pip.pypa.io/en/stable/user_guide/#running-pip" class="external-link">official
-Pip documentation</a> recommends <code>python3 -m pip install</code> and
+<code>pip install &lt;package-name&gt;</code> command in the past, which
+is shorter and perhaps more intuitive than
+<code>python -m pip install</code>. However, the <a href="https://pip.pypa.io/en/stable/user_guide/#running-pip" class="external-link">official
+Pip documentation</a> recommends <code>python -m pip install</code> and
 core Python developer Brett Cannon offers a <a href="https://snarky.ca/why-you-should-use-python-m-pip/" class="external-link">more detailed
 explanation</a> of edge cases when the two commands may produce
-different results and why <code>python3 -m pip install</code> is
-recommended. In this material, we will use <code>python3 -m</code>
+different results and why <code>python -m pip install</code> is
+recommended. In this material, we will use <code>python -m</code>
 whenever we have to invoke a Python module from command line.</p>
 </div>
 </div>
 </div>
-<p>If you run the <code>python3 -m pip install</code> command on a
+<p>If you run the <code>python -m pip install</code> command on a
 package that is already installed, <code>pip</code> will notice this and
 do nothing.</p>
-<p>To install a specific version of a Python package give the package
-name followed by <code>==</code> and the version number,
-e.g. <code>python3 -m pip install numpy==1.21.1</code>.</p>
-<p>To specify a minimum version of a Python package, you can do
-<code>python3 -m pip install numpy&gt;=1.20</code>.</p>
-<p>To upgrade a package to the latest version,
-e.g. <code>python3 -m pip install --upgrade numpy</code>.</p>
 <p>To display information about a particular installed package do:</p>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python3 <span class="at">-m</span> pip show numpy</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python <span class="at">-m</span> pip show numpy</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Name: numpy
-Version: 2.2.1
+Version: 2.2.3
 Summary: Fundamental package for array computing in Python
 Home-page:
 Author: Travis E. Oliphant et al.
@@ -925,12 +937,34 @@ License: Copyright (c) 2005-2024, NumPy Developers.
  All rights reserved.
 ...</code></pre>
 </div>
-<p>To list all packages installed with <code>pip</code> (in your current
-virtual environment):</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div id="pip-install-flags" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="pip-install-flags" class="callout-inner">
+<h3 class="callout-title">
+<code>pip install</code> Flags</h3>
+<div class="callout-content">
+<p><code>pip install</code> allows you to precisely control the version
+of the library it will install through its command flags. Some of the
+most commonly-used flags are shown here:</p>
+<ul><li>To install a specific version of a Python package give the package
+name followed by <code>==</code> and the version number,
+e.g. <code>python -m pip install numpy==2.2.3</code>.</li>
+<li>To specify a minimum version of a Python package, you can do
+<code>python -m pip install numpy&gt;=1.20</code>.</li>
+<li>To upgrade a package to the latest version,
+e.g. <code>python3 -m pip install --upgrade numpy</code>.</li>
+</ul></div>
+</div>
+</div>
+<p>Once packages have been installed, it is often useful to get an
+overview of everything present in a virtual environment. For this,
+<code>pip</code> provides a handy command called <code>list</code>:</p>
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python3 <span class="at">-m</span> pip list</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python <span class="at">-m</span> pip list</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -950,9 +984,71 @@ pyparsing       3.2.1
 python-dateutil 2.9.0.post0
 six             1.17.0</code></pre>
 </div>
-<p>To uninstall a package installed in the virtual environment do:
-<code>python3 -m pip uninstall &lt;package-name&gt;</code>. You can also
+<p>Finally, installed packages can be un-installed using the
+<code>uninstall</code> command:
+<code>python -m pip uninstall &lt;package-name&gt;</code>. You can also
 supply a list of packages to uninstall at the same time.</p>
+<div id="practice-various-pip-operations" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="practice-various-pip-operations" class="callout-inner">
+<h3 class="callout-title">Practice various <code>pip</code>
+operations</h3>
+<div class="callout-content">
+<p>For this challenge create a new virtual environment
+<code>venv-scratch</code> on your working directory</p>
+<ul><li>Activate the new virtual environment</li>
+<li>Install numpy version 1.0.3</li>
+<li>Upgrade numpy to version 1.6.1</li>
+<li>Upgrade numpy to version 1.26.1</li>
+<li>Upgrade numpy to version 1.26.3</li>
+<li>Upgrade numpy to the latest version</li>
+<li>Uninstall numpy from <code>venv-scratch</code>
+</li>
+<li>Remove the <code>venv-scratch</code> virtual environment</li>
+</ul></div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<ul><li>Numpy version 1.0.3 does not exist - when you try to install it
+<code>pip</code> will give an error message This shows you that
+<code>pip</code> is robust - it will not mess up if you try to uninstall
+non-existing package versions.</li>
+<li>Numpy version 1.6.1 <em>does</em> exist, but it will not install
+with the Python 3.12 version that you are using. <code>pip</code> will
+attempt the installation, and fail in the process. This again shows that
+<code>pip</code> is robust even when it fails in the middle of an
+installation it is able to successfully rollback.</li>
+<li>
+<code>python -m pip install numpy==1.26.1</code> - should
+succeed</li>
+<li>
+<code>python -m pip install numpy==1.26.3</code> - should
+succeed</li>
+<li>
+<code>python -m pip install --upgrade numpy</code> - should succeed
+- and upgrade <em>numpy</em> to its latest version (2.2.3)</li>
+<li>
+<code>python -m pip uninstall numpy</code> - should succeed</li>
+<li>removing a Python virtual environment is as easy as removing its
+root folder, so:</li>
+</ul><div class="codewrapper sourceCode" id="cb24">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv-scratch</span><span class="kw">)</span> <span class="ex">$</span> deactivate</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-rf</span> venv-scratch</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="section level3">
 <h3 id="exportingimporting-virtual-environments-using-pip">Exporting/Importing Virtual Environments Using <code>pip</code>
 <a class="anchor" aria-label="anchor" href="#exportingimporting-virtual-environments-using-pip"></a></h3>
@@ -966,11 +1062,11 @@ sharing virtual environments.</p>
 <code>python3 -m pip freeze</code> command to produce a list of packages
 installed in the virtual environment. A common convention is to put this
 list in a <code>requirements.txt</code> file:</p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python3 <span class="at">-m</span> pip freeze <span class="op">&gt;</span> requirements.txt</span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> cat requirements.txt</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python <span class="at">-m</span> pip freeze <span class="op">&gt;</span> requirements.txt</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> cat requirements.txt</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -992,16 +1088,33 @@ six==1.17.0</code></pre>
 look a little different, depending on the version of the packages you
 have installed, as well as any differences in the packages that they
 themselves use.</p>
-<p>The <code>requirements.txt</code> file can then be committed to a
-version control system (we will see how to do this using Git in one of
-the following episodes) and get shipped as part of your software and
-shared with collaborators and/or users. They can then replicate your
-environment and install all the necessary packages from the project root
-as follows:</p>
-<div class="codewrapper sourceCode" id="cb24">
+<p>The <code>requirements.txt</code> file can then be added/committed to
+the Git repo for your project and get shipped as part of your software
+and shared with collaborators and/or users.</p>
+<p>To see how this <code>requirements.txt</code> can be used to
+re-create a virtual environment, let us practice creating an identical
+copy of our first virtual environment in a different directory. Let us
+first create a new virtual environment - <code>venv_copy</code> - like
+this:</p>
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python3 <span class="at">-m</span> pip install <span class="at">-r</span> requirements.txt</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="ex">$</span> deactivate</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="ex">$</span> cd ..</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="ex">$</span> mkdir venv_copy</span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="ex">$</span> cd venv_copy</span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a><span class="ex">$</span> python <span class="at">-m</span> venv venv_copy</span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a><span class="ex">$</span> source venv_copy/bin/activate</span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv_copy</span><span class="kw">)</span> <span class="ex">$</span></span></code></pre>
+</div>
+<p>They can then replicate your original environment and install all the
+original packages by first copying the <code>requirements.txt</code> to
+the new virtual environment root directory, and then running a version
+of the <code>pip install</code> command:</p>
+<div class="codewrapper sourceCode" id="cb28">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv_copy</span><span class="kw">)</span> <span class="ex">$</span> python <span class="at">-m</span> pip install <span class="at">-r</span> requirements.txt</span></code></pre>
 </div>
 <p>As your project grows - you may need to update your environment for a
 variety of reasons. For example, one of your project’s dependencies has
@@ -1014,7 +1127,7 @@ longer needed from your virtual environment) is update the contents of
 the <code>requirements.txt</code> file accordingly by re-issuing
 <code>pip freeze</code> command and propagate the updated
 <code>requirements.txt</code> file to your collaborators via your code
-sharing platform (e.g. GitHub).</p>
+sharing platform (e.g. GitLab).</p>
 <div id="official-documentation" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -1031,16 +1144,16 @@ packages using <code>pip</code> and virtual environments”</a>.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="running-python-scripts-from-command-line">Running Python Scripts From Command Line<a class="anchor" aria-label="anchor" href="#running-python-scripts-from-command-line"></a></h2>
+</section><section><h2 class="section-heading" id="putting-it-all-together">Putting it All Together<a class="anchor" aria-label="anchor" href="#putting-it-all-together"></a></h2>
 <hr class="half-width"><p>Congratulations! Your environment is now activated and set up to run
 our <code>plot_sine_wave.py</code> program from the command line.</p>
 <p>You should already be located in the root of the
 <code>sine_wave</code> directory (if not, please navigate to it from the
-command line now). To run the program, type the following command:</p>
-<div class="codewrapper sourceCode" id="cb25">
+command line now). When you run this program from the command line:</p>
+<div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python plot_sine_wave.py</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span> python plot_sine_wave.py</span></code></pre>
 </div>
 <p>You should now see the following plot:</p>
 <figure><img src="../fig/sine_wave.jpg" class="image-with-shadow figure mx-auto d-block" alt="Sine Wave Plot" width="600"></figure><div id="multiple-python-versions-on-the-same-machine" class="callout discussion">
@@ -1077,9 +1190,9 @@ environments.”</li>
 project in a separate file (by convention called
 <code>requirements.txt</code>) which can be shared with
 collaborators/users and used to replicate a virtual environment.”</li>
-<li>“Use <code>python3 -m pip freeze &gt; requirements.txt</code> to
-take snapshot of your project’s dependencies.”</li>
-<li>“Use <code>python3 -m pip install -r requirements.txt</code> to
+<li>“Use <code>python -m pip freeze &gt; requirements.txt</code> to take
+snapshot of your project’s dependencies.”</li>
+<li>“Use <code>python -m pip install -r requirements.txt</code> to
 replicate someone else’s virtual environment on your machine from the
 <code>requirements.txt</code> file.”</li>
 </ul></div>
@@ -1146,8 +1259,8 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/python-virtual-environmants.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/instructor/python-virtual-environmants.html",
-  "dateCreated": "2025-07-07",
-  "dateModified": "2025-07-01",
+  "dateCreated": "2025-07-08",
+  "dateModified": "2025-07-08",
   "datePublished": "2025-07-08"
 }
 

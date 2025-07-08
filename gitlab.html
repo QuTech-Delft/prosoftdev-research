@@ -254,9 +254,9 @@
       <div class="accordion-body">
         <ul><li><a href="#introduction">Introduction</a></li>
 <li><a href="#navigation">Navigation</a></li>
-<li><a href="#gitlab-projects">GitLab Projects</a></li>
+<li><a href="#gitlab-projects-1">GitLab Projects</a></li>
 <li><a href="#connecting-gitlab-projects-with-local-git-repositories">Connecting GitLab Projects with Local Git Repositories</a></li>
-<li><a href="#adding-project-members">Adding Project Members</a></li>
+<li><a href="#addingremoving-project-members">Adding/Removing Project Members</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -366,7 +366,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>GitLab</h1>
-        <p>Last updated on 2025-07-01 |
+        <p>Last updated on 2025-07-08 |
 
         <a href="https://github.com/QuTech-Delft/prosoftdev-research/edit/main/episodes/gitlab.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -396,13 +396,12 @@
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>Use GitLab’s interface to find a project.</li>
-<li>Use GitLab’s interface to find groups.</li>
-<li>Create a project.</li>
-<li>Change name, description, visibility, and avatar of a project.</li>
+<ul><li>Use GitLab’s interface to find a projects/groups.</li>
+<li>Create and customize a project.</li>
 <li>Archive (or delete) a project.</li>
-<li>Explain the concepts of members and roles.</li>
-<li>Add a member to a project.</li>
+<li>Connecting a GitLab project with a Git repository.</li>
+<li>Explain the concepts of members and roles and adding members to a
+GitLab project.</li>
 <li>Contribute to a project that you are a member of.</li>
 </ul></div>
 </div>
@@ -426,7 +425,26 @@ login to it with your NetID:</p>
 <figure><img src="fig/tud_gitlab.jpg" alt="TUD GitLab Login Page" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="navigation">Navigation<a class="anchor" aria-label="anchor" href="#navigation"></a></h2>
 <hr class="half-width"><p>When we log into GitLab for the first time, we are greeted by a
 welcome page:</p>
-<figure><img src="fig/gitlab_login.jpg" alt="TUD GitLab Login Page" class="figure mx-auto d-block"></figure><p>The “Explore projects” page looks like this:</p>
+<figure><img src="fig/gitlab_login.jpg" alt="TUD GitLab Login Page" class="figure mx-auto d-block"></figure><div id="gitlab-projects" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="gitlab-projects" class="callout-inner">
+<h3 class="callout-title">GitLab Projects</h3>
+<div class="callout-content">
+<p>The “project” is essentially GitLab’s “collaboration unit”. A GitLab
+project is the central hub where everything related to a specific piece
+of work (code, discussions, automation, documentation, and tracking)
+comes together. GitLab projects can be “public” - visible to everyone
+who can access a given GitLab platform, or “private” - only visible to
+you (the project owner) and to people you have specifically invited to
+collaborate on that project. Each GitLab project is associated with a
+Git repo, which is stored internally by the GitLab platform.</p>
+</div>
+</div>
+</div>
+<p>You can browse/explore projects accessible from your GitLab portal,
+by following the “Explore projects” link:</p>
 <figure><img src="fig/project-explore.png" alt="Explore projects page with tab “Most starred” open. The tab shows a list of projects with icon, name, descriptions, and four statistical values for each entry." class="figure mx-auto d-block"><div class="figcaption">Project overview page</div>
 </figure><p>The first tab, “All”, lists all projects that are visible to you in
 most recently updated order.</p>
@@ -438,9 +456,31 @@ will see shortly.</p>
 ordered by activity during the previous months.</p>
 <p>You can use the filter field next to the tab names to search through
 all projects that are visible to you.</p>
-<p>In the next section we will explain how you can create new GitLab
-projects</p>
-</section><section><h2 class="section-heading" id="gitlab-projects">GitLab Projects<a class="anchor" aria-label="anchor" href="#gitlab-projects"></a></h2>
+<p>Finally, by following the “Groups” link on the left of your portal,
+you can see the GitLab project groups you have access to.</p>
+<div id="gitlab-groups" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="gitlab-groups" class="callout-inner">
+<h3 class="callout-title">GitLab Groups</h3>
+<div class="callout-content">
+<p>A GitLab ‘group’ is a collection of related projects that share the
+same members, permissions, and settings. Such groups can be used to
+organize and manage projects related to the same organization, such as a
+faculty, department, or research group. As an analogy, you can think of
+GitLab projects as individual files, while the GitLab groups correspond
+to the folders/directories containing these files. In this course we
+will not deal directly with such groups, but you should be aware they
+exist - as your research team may make use of them to organize their
+projects.</p>
+</div>
+</div>
+</div>
+<p>With the basic GitLab concepts now covered, in the next section we
+will explain how you can create new GitLab projects and link them to the
+Git concepts we have covered in the previous episodes.</p>
+</section><section><h2 class="section-heading" id="gitlab-projects-1">GitLab Projects<a class="anchor" aria-label="anchor" href="#gitlab-projects-1"></a></h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="creating-a-project">Creating a Project<a class="anchor" aria-label="anchor" href="#creating-a-project"></a></h3>
 <p>After knowing how to find groups and projects, we want to go from
@@ -547,7 +587,7 @@ of menu entries may seem overwhelming, in particular when one notices
 that the entries have sub-entries. However, it is not necessary to know
 what hides behind all these entries to use GitLab. Following this
 lesson, we will get to know parts of what lies behind the entries
-“Manage”, “Plan”, “Code”, “Build”, and “Settings”.</p>
+“Manage”, “Code”, and “Settings”.</p>
 <p>The project overview shows (from the top): The project’s avatar (or
 icon) and name; a prompt to invite team members (we will cover members
 later on); a statement that our repository is currently empty with
@@ -754,9 +794,6 @@ email):</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span> ssh-keygen <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"a.linguini@ratatouille.fr"</span></span></code></pre>
 </div>
-<p>If you are using a legacy system that doesn’t support the Ed25519
-algorithm, use:
-<code>$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</code></p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -770,20 +807,13 @@ Enter file in which to save the key (/c/Users/Alfredo/.ssh/id_ed25519):</code></
 <pre class="output" tabindex="0"><code>Created directory '/c/Users/Alfredo/.ssh'.
 Enter passphrase (empty for no passphrase):</code></pre>
 </div>
-<p>Now, it is prompting Alfredo for a passphrase. Since he is using his
-kitchen’s laptop that other people sometimes have access to, he wants to
-create a passphrase. Be sure to use something memorable or save your
-passphrase somewhere, as there is no “reset my password” option. Note
-that, when typing a passphrase on a terminal, there won’t be any visual
-feedback of your typing. This is normal: your passphrase will be
-recorded even if you see nothing changing on your screen.</p>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>Enter same passphrase again:</code></pre>
-</div>
-<p>After entering the same passphrase a second time, we receive the
-confirmation</p>
+<p>Now, it is prompting Alfredo for a passphrase. Alfredo will be using
+this key from his own laptop, from his password-protected account, so
+this extra security layer of having a passkey for this SSH key is not
+necessary at this point, so he can leave it empty - by pressing
+<kbd>Enter</kbd> twice.</p>
+<p>At this point we should receive the confirmation that the key has
+been created:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -809,10 +839,10 @@ share it. The public key is appropriately named. The “key fingerprint”
 is a shorter version of a public key.</p>
 <p>Now that we have generated the SSH keys, we will find the SSH files
 when we check.</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> ~/.ssh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> ~/.ssh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -829,17 +859,16 @@ drwxr-xr-x 1 Alfredo   197121   0 Jul 16 14:48 ../
 <h3 id="copy-the-public-key-to-gitlab">Copy the public key to GitLab<a class="anchor" aria-label="anchor" href="#copy-the-public-key-to-gitlab"></a></h3>
 <p>Now we have a SSH key pair and we can run this command to check if
 GitLab can read our authentication.</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-T</span> git@gitlab.tudelft.nl</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-T</span> git@gitlab.tudelft.nl</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>The authenticity of host 'gitlab.tudelft.nl (192.30.255.112)' can't be established.
-RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
-This key is not known by any other names
+<pre class="output" tabindex="0"><code>The authenticity of host 'gitlab.tudelft.nl (192.30.255.112)' can't be established. RSA key fingerprint
+is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8. This key is not known by any other names
 Are you sure you want to continue connecting (yes/no/[fingerprint])? y
 Please type 'yes', 'no' or the fingerprint: yes
 Warning: Permanently added 'gitlab.tudelft.nl' (RSA) to the list of known hosts.
@@ -849,10 +878,10 @@ git@gitlab.tudelft.nl: Permission denied (publickey).</code></pre>
 <p>First, we need to copy the public key. Be sure to include the
 <code>.pub</code> at the end, otherwise you’re looking at the private
 key.</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">cat</span> ~/.ssh/id_ed25519.pub</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">cat</span> ~/.ssh/id_ed25519.pub</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -860,7 +889,8 @@ key.</p>
 <pre class="output" tabindex="0"><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmRA3d51X0uu9wXek559gfn6UFNF69yZjChyBIU2qKI a.linguini@ratatouille.fr</code></pre>
 </div>
 <p>Now, going to the GitLab page in your browser, click on your profile
-icon in the top right corner of the left panel, then click on the
+icon in the top right corner of the left panel, select
+<code>Edit profile</code> from the menu, then click on the
 <code>SSH Keys</code> link under <code>User Settings</code> in the same
 panel:</p>
 <figure><img src="fig/gitlab_ssh_keys.jpg" alt="The SSH Keys page in GitLab" class="figure mx-auto d-block"></figure><p>Click on the <code>Add new key</code> button, which will take you to
@@ -870,10 +900,10 @@ a title, and set an expiration date. Once everything is filled in, you
 can click the <code>Add key</code> button.</p>
 <p>Now that we’ve set that up, let’s check our authentication again from
 the command line.</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="ex">$</span> ssh <span class="at">-T</span> git@gitlab.tudelft.nl</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">$</span> ssh <span class="at">-T</span> git@gitlab.tudelft.nl</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -889,14 +919,11 @@ now ready to push our work to the remote repository.</p>
 <p>Now that authentication is setup, we can return to the remote. This
 command will push the changes from our local repository to the
 repository on GitLab:</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code></pre>
 </div>
-<p>Since Alfredo set up a passphrase, it will prompt him for it. If you
-completed advanced settings for your authentication, it will not prompt
-for a passphrase.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -910,41 +937,13 @@ remote: Resolving deltas: 100% (2/2), done.
 To https://gitlab.tudelft.nl/alflin/recipes.git
  * [new branch]      main -&gt; main</code></pre>
 </div>
-<div id="password-managers" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div id="password-managers" class="callout-inner">
-<h3 class="callout-title">Password Managers</h3>
-<div class="callout-content">
-<p>If your operating system has a password manager configured,
-<code>git push</code> will try to use it when it needs your username and
-password. For example, this is the default behavior for Git Bash on
-Windows. If you want to type your username and password at the terminal
-instead of using a password manager, type:</p>
-<div class="codewrapper sourceCode" id="cb21">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">$</span> unset SSH_ASKPASS</span></code></pre>
-</div>
-<p>in the terminal, before you run <code>git push</code>. Despite the
-name, <a href="https://git-scm.com/docs/gitcredentials#_requesting_credentials" class="external-link">Git
-uses <code>SSH_ASKPASS</code> for all credential entry</a>, so you may
-want to unset <code>SSH_ASKPASS</code> whether you are using Git via SSH
-or https.</p>
-<p>You may also want to add <code>unset SSH_ASKPASS</code> at the end of
-your <code>~/.bashrc</code> to make Git default to using the terminal
-for usernames and passwords.</p>
-</div>
-</div>
-</div>
 <p>Our local and remote repositories are now in this state:</p>
 <figure><img src="fig/github-repo-after-first-push.svg" alt="GitLab repo after first push" class="figure mx-auto d-block"></figure><p>We can pull changes from the remote repository to the local one as
 well:</p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">$</span> git pull origin main</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">$</span> git pull origin main</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -958,7 +957,7 @@ already synchronized. If someone else had pushed some changes to the
 repository on GitLab, though, this command would download them to our
 local repository.</p>
 </div>
-</section><section><h2 class="section-heading" id="adding-project-members">Adding Project Members<a class="anchor" aria-label="anchor" href="#adding-project-members"></a></h2>
+</section><section><h2 class="section-heading" id="addingremoving-project-members">Adding/Removing Project Members<a class="anchor" aria-label="anchor" href="#addingremoving-project-members"></a></h2>
 <hr class="half-width"><p>So far, each of you has created a GitLab project that no one but you
 can contribute to; depending on the visibility setting, no one but you
 might be able to even see it.</p>
@@ -970,7 +969,7 @@ any other project page), we navigate to the project members page
 hovering over or clicking on “Manage” and then clicking on “Members” in
 the submenu. The project member page should look similar to the
 following screenshot:</p>
-<figure><img src="fig/initial-members.png" alt="Project Members page" class="figure mx-auto d-block"><div class="figcaption">Project members page</div>
+<figure><img src="fig/gitlab-initial-members.jpg" alt="Project Members page" class="figure mx-auto d-block"><div class="figcaption">Project members page</div>
 </figure><p>On the page we can see the page title, “Project members”, three
 buttons to the left of the title, and a filterable table of members,
 currently only listing ourselves.</p>
@@ -979,34 +978,68 @@ of this project, what our maximum role is–more on that in a bit–, when
 we got access—at the moment we created the project—, a disabled
 membership expiration date widget, and three dates on our activity.</p>
 <p>For practice we will all add an instructor to our project and remove
-them again right away. Click the button labeled “Invite members”, type
-in the username your instructors provided you with into the search
-field, make sure that “Guest” is selected as a role, and click the
-button labeled “Invite”.</p>
+them again right away, as shown in the picture below:</p>
+<figure><img src="fig/gitlab_add_member.jpg" alt="Adding a new member to your GitLab project" class="figure mx-auto d-block"></figure><p>Click the button labeled “Invite members”, type in the username your
+instructors provided you with into the search field, make sure that
+“Guest” is selected as a role, and click the button labeled
+“Invite”.</p>
 <p>Your instructor should now be listed next to you in the table. Unlike
-in your row, you can change the role and the expiration date of this new
-entry.</p>
-<p>The role determines what the member is allowed to do in the project.
-An owner has full rights, a guest almost none. GitLab’s handbook gives a
-detailed <a href="https://docs.gitlab.com/ee/user/permissions.html" class="external-link">overview</a> of
-the different roles’ permissions.</p>
-<p>Now, we are going to remove the instructor from your project’s
-members again. Click the three dots on the right in the instructor’s
-row, then click on “Remove member”, and finally click the button of the
-same name in the popup dialog. The page reloads itself and the entry
-vanishes from the table.</p>
-<div id="adding-members" class="callout discussion">
+in your own row, you can change the role and the expiration date of this
+new entry.</p>
+<div id="project-member-roles" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="project-member-roles" class="callout-inner">
+<h3 class="callout-title">Project member roles</h3>
+<div class="callout-content">
+<p>In GitLab, every project member is assigned a role that defines their
+level of access and available actions within the project. Common roles
+include <strong>Guest</strong>, <strong>Developer</strong>, and
+<strong>Owner</strong>. Each role comes with specific permissions — for
+example, <strong>Maintainers</strong> can push code, while
+<strong>Owners</strong> have full control over the project. Choosing the
+right role ensures proper collaboration while protecting critical
+project settings. You can consult GitLab’s handbook for a detailed <a href="https://docs.gitlab.com/ee/user/permissions.html" class="external-link">overview</a> of
+the different roles’ permissions. The following roles are commonly used
+in GitLab software projects:</p>
+<ul><li>
+<strong>Guest</strong>
+<ul><li>Can view project files, and read issues and comments</li>
+<li>Cannot push git commits</li>
+<li>Ideal for external stakeholders or casual viewers</li>
+</ul></li>
+<li>
+<strong>Maintainer</strong>
+<ul><li>Can push git commits</li>
+<li>Can manage advanced git and project workflows, such as branches and
+pipelines</li>
+<li>Cannot delete the project</li>
+</ul></li>
+<li>
+<strong>Owner</strong>
+<ul><li>Full control over everything in the project</li>
+<li>Can manage settings, members, and even delete the project</li>
+</ul></li>
+</ul></div>
+</div>
+</div>
+<p>The owner of the project can add as well as remove project members.
+Removing project members is done from the members list like this:</p>
+<figure><img src="fig/gitlab_remove_member.jpg" alt="Removing project members" class="figure mx-auto d-block"><div class="figcaption">Removing project members</div>
+</figure><div id="adding-project-members" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="adding-members" class="callout-inner">
-<h3 class="callout-title">Adding Members</h3>
+<div id="adding-project-members" class="callout-inner">
+<h3 class="callout-title">Adding project members</h3>
 <div class="callout-content">
 <p>Get into pairs and add each other with the role “Maintainer” to your
-projects.</p>
+projects, and set the expiration for this membership to one month from
+now.</p>
 <p>The “Maintainer” role grants just enough permissions for all the
 collaborative tasks we will practice in this lesson.</p>
-<p>This exercise should take about 5 minutes.</p>
+<p>This exercise should take about 3 minutes.</p>
 </div>
 </div>
 </div>
@@ -1096,8 +1129,8 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://QuTech-Delft.github.io/prosoftdev-research/gitlab.html",
   "identifier": "https://QuTech-Delft.github.io/prosoftdev-research/gitlab.html",
-  "dateCreated": "2025-07-07",
-  "dateModified": "2025-07-01",
+  "dateCreated": "2025-07-08",
+  "dateModified": "2025-07-08",
   "datePublished": "2025-07-08"
 }
 
