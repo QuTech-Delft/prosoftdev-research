@@ -15,13 +15,11 @@ exercises: 20
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Use GitLab’s interface to find a project.
-- Use GitLab’s interface to find groups.
-- Create a project.
-- Change name, description, visibility, and avatar of a project.
+- Use GitLab’s interface to find a projects/groups.
+- Create and customize a project.
 - Archive (or delete) a project.
-- Explain the concepts of members and roles.
-- Add a member to a project.
+- Connecting a GitLab project with a Git repository.
+- Explain the concepts of members and roles and adding members to a GitLab project.
 - Contribute to a project that you are a member of.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -54,7 +52,21 @@ When we log into GitLab for the first time, we are greeted by a welcome page:
 
 ![](fig/gitlab_login.jpg){alt='TUD GitLab Login Page'}
 
-The “Explore projects” page looks like this:
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### GitLab Projects
+
+The "project" is essentially GitLab's "collaboration unit".
+A GitLab project is the central hub where everything related to a specific piece of work (code, discussions,
+automation, documentation, and tracking) comes together. GitLab projects can be "public" - visible to everyone
+who can access a given GitLab platform, or "private" - only visible to you (the project owner) and to
+people you have specifically invited to collaborate on that project. Each GitLab project is associated with
+a Git repo, which is stored internally by the GitLab platform.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+You can browse/explore projects accessible from your GitLab portal, by following the “Explore projects” link:
 
 ![Project overview page](fig/project-explore.png){alt="Explore projects page with tab “Most starred” open.
 The tab shows a list of projects with icon, name, descriptions, and four statistical values for each entry."}
@@ -71,7 +83,24 @@ the previous months.
 You can use the filter field next to the tab names to search through all projects that
 are visible to you.
 
-In the next section we will explain how you can create new GitLab projects
+Finally, by following the "Groups" link on the left of your portal, you can see the GitLab project groups you
+have access to.
+
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### GitLab Groups
+
+A GitLab 'group' is a collection of related projects that share the same members, permissions, and settings. Such
+groups can be used to organize and manage projects related to the same organization, such as a faculty, department,
+or research group. As an analogy, you can think of GitLab projects as individual files, while the GitLab groups
+correspond to the folders/directories containing these files. In this course we will not deal directly with such
+groups, but you should be aware they exist - as your research team may make use of them to organize their projects.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+With the basic GitLab concepts now covered, in the next section we will explain how you can create new GitLab projects
+and link them to the Git concepts we have covered in the previous episodes.
 
 ## GitLab Projects
 
@@ -143,17 +172,16 @@ something to the whole internet.
 We choose “Private” for our project’s visibility.
 
 If, as per default, the checkbox “Initialize repository with a README” is checked, the project’s
-repository will be initialized with a commit that adds a file called `README.md`.
-Otherwise, a the project will start with an empty repository.
-We will add such a file later ourselves, so we uncheck the box.
+repository will be initialized with a commit that adds a file called `README.md`. Otherwise, a the project will start
+with an empty repository. We will add such a file later ourselves, so we uncheck the box.
 
 ::: callout
 
 ##### README
 
-A project’s README file usually contains basic information about the project: what it contains,
-how it can be used (for example built or installed, if it is a software project), how to contribute,
-how to get help, and licensing information.
+A project’s README file usually contains basic information about the project: what it contains, how it can be used
+(for example built or installed, if it is a software project), how to contribute, how to get help, and licensing
+information.
 
 It is common to write README files in Markdown format, indicated by the
 filename suffix `.md`.
@@ -163,46 +191,39 @@ homepage; if it is in Markdown format, in its rendered form.
 
 :::
 
-We will ignore any other fields that may be visible depending on the GitLab
-instances configuration.
+We will ignore any other fields that may be visible depending on the GitLab instances configuration.
 
-After clicking the “Create project” button, GitLab creates the project and
-redirects us to the project’s homepage, which looks similar to this:
+After clicking the “Create project” button, GitLab creates the project and redirects us to the project’s homepage,
+which looks similar to this:
 
 ![Fresh project homepage](fig/new_project.jpg){alt='Project homepage for a new project'}
 
 The page is split into the menu on the left and the project overview on the
 right.
 
-The menu leads to pages related to various properties, processes, and content of
-the project. It is visible on each of these pages. The number of menu entries
-may seem overwhelming, in particular when one notices that the entries have
-sub-entries. However, it is not necessary to know what hides behind all these
-entries to use GitLab. Following this lesson, we will get to know parts of what
-lies behind the entries “Manage”, “Plan”, "Code", “Build”, and “Settings”.
+The menu leads to pages related to various properties, processes, and content of the project. It is visible on each of
+these pages. The number of menu entries may seem overwhelming, in particular when one notices that the entries have
+sub-entries. However, it is not necessary to know what hides behind all these entries to use GitLab. Following this
+lesson, we will get to know parts of what lies behind the entries “Manage”, "Code", and “Settings”.
 
-The project overview shows (from the top): The project’s avatar (or icon) and name;
-a prompt to invite team members (we will cover members later on);
-a statement that our repository is currently empty with buttons for
-several options to add content to it; and finally the beginning of the
-instructions on how to push a local repository to this project’s repository to
-fill it with content. We will follow them in just a bit.
+The project overview shows (from the top): The project’s avatar (or icon) and name; a prompt to invite team members
+(we will cover members later on); a statement that our repository is currently empty with buttons for several options
+to add content to it; and finally the beginning of the instructions on how to push a local repository to this project’s
+repository to fill it with content. We will follow them in just a bit.
 
-The project overview page will look slightly different, once we have content in
-its repository. We will have another look at the page then.
+The project overview page will look slightly different, once we have content in its repository. We will have another
+look at the page then.
 
 ::: challenge
 
 ##### Change Name, Description, Visibility, or Avatar
 
-Click on the “Settings” sub-menu and select its “General” entry.
-Set the description to something meaningful, such as “A collection of simple recipes”.
+Click on the “Settings” sub-menu and select its “General” entry. Set the description to something meaningful, such as
+“A collection of simple recipes”.
 
-The project description appears in many lists and on some pages under the
-project’s name.
+The project description appears in many lists and on some pages under the project’s name.
 
-Then change any of the project’s name, visibility, or avatar.
-Do not forget to click the “Save changes” button once you are done.
+Then change any of the project’s name, visibility, or avatar. Do not forget to click the “Save changes” button once you are done.
 
 This exercise should take about 5 minutes.
 
@@ -212,11 +233,9 @@ This exercise should take about 5 minutes.
 
 ##### Markdown
 
-Markdown is a markup language like HTML, on which the World Wide Web is based, or wikitext,
-which is used to write Wikipedia’s content.
-Its markup directives, indicating
-for example that something is a headline or a list item, are such that they
-serve their purpose even in the plain text form.
+Markdown is a markup language like HTML, on which the World Wide Web is based, or wikitext, which is used to write
+Wikipedia’s content. Its markup directives, indicating for example that something is a headline or a list item, are
+such that they serve their purpose even in the plain text form.
 
 :::
 
@@ -227,31 +246,25 @@ directly in GitLab. We will add our first file to the project repository in the 
 
 ### Archiving a Project
 
-We just went through the beginning of a GitLab project’s life cycle.
-At its end, if it has one, a project gets archived (or deleted).
-We will now go through the process of archiving a project, without completing the procedure.
+We just went through the beginning of a GitLab project’s life cycle. At its end, if it has one, a project gets
+archived (or deleted). We will now go through the process of archiving a project, without completing the procedure.
 
 Using the menu on the left, we navigate to the project’s “General” settings.
 
 At the bottom of the page, we find a section named “Advanced”.
 We click on the “Expand” button right next to it and scroll down the page.
 
-Notice that some of buttons here are not the usual blue or white, but rather red.
-This indicates that we should be careful about clicking them.
-Things might break or get deleted.
+Notice that some of buttons here are not the usual blue or white, but rather red. This indicates that we should be
+careful about clicking them. Things might break or get deleted.
 
-Scrolling back up, we find a section labeled “Archive Project”. Clicking the
-button will not delete the project. Instead it will be placed in a read-only
-mode. Everything will be preserved but nothing can be changed anymore. In
-addition, the project no longer shows up in search results and on the page for
-exploring projects.
+Scrolling back up, we find a section labeled “Archive Project”. Clicking the button will not delete the project.
+Instead it will be placed in a read-only mode. Everything will be preserved but nothing can be changed anymore. In
+addition, the project no longer shows up in search results and on the page for exploring projects.
 
-Most of the time archiving a project is preferable to deleting it, in particular
-when it comes to research projects. **Do not archive the project now! We will
-work with it throughout this lesson.**
+Most of the time archiving a project is preferable to deleting it, in particular when it comes to research projects.
+**Do not archive the project now! We will work with it throughout this lesson.**
 
-At the bottom of the page is also a section for deleting a project, in case you
-ever think that is the right thing to do.
+At the bottom of the page is also a section for deleting a project, in case you ever think that is the right thing to do.
 
 
 ## Connecting GitLab Projects with Local Git Repositories
@@ -261,10 +274,9 @@ that looked like this:
 
 ![](fig/git-staging-area.svg){alt='Local repository with staging area'}
 
-Now we want to have a GitLab project that will be coupled with this local Git repo.
-The first step here is to follow the steps described in the previous section,
-and create a new GitLab project called 'recipes'. Initially the Git repo for
-this GitLab project will be empty, as shown in the diagram below:
+Now we want to have a GitLab project that will be coupled with this local Git repo. The first step here is to follow
+the steps described in the previous section, and create a new GitLab project called 'recipes'. Initially the Git repo
+for this GitLab project will be empty, as shown in the diagram below:
 
 ![](fig/git-freshly-made-gitlab-repo.svg){alt='The local and remote Git repos'}
 
@@ -272,10 +284,9 @@ this GitLab project will be empty, as shown in the diagram below:
 
 ### Connecting the local to remote repository
 
-Now we connect the two repositories.  We do this by making the
-GitLab repository a [remote](../learners/reference.md#remote) for the local repository.
-Go to the home page of the repository on GitLab, click on the blue `Code` button,
-and copy the string below the `Clone with SSH`
+Now we connect the two repositories.  We do this by making the GitLab repository a
+[remote](../learners/reference.md#remote) for the local repository. Go to the home page of the repository on GitLab,
+click on the blue `Code` button, and copy the string below the `Clone with SSH`
 
 ![](fig/gitlab_ssh_repo.jpg){alt='Accessing a GitLab repo via SSH'}
 
@@ -283,10 +294,8 @@ and copy the string below the `Clone with SSH`
 
 ##### HTTPS vs. SSH
 
-We use SSH here because, while it requires some additional configuration, it is a
-security protocol widely used by many applications.  The steps below describe SSH at a
-minimum level for GitLab.
-
+We use SSH here because, while it requires some additional configuration, it is a security protocol widely used by many
+applications. The steps below describe SSH at a minimum level for GitLab.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -297,8 +306,8 @@ With the `Clone with SSH` string you copied from the GitLab page, go into the lo
 $ git remote add origin git@gitlab.tudelft.nl:alflin/recipes.git
 ```
 
-Make sure to use the URL for your repository rather than Alfredo's: the only
-difference should be your username instead of `alflin`.
+Make sure to use the URL for your repository rather than Alfredo's: the only difference should be your username
+instead of `alflin`.
 
 `origin` is a local name used to refer to the remote repository. It could be called
 anything, but `origin` is a convention that is often used by default in git
@@ -322,23 +331,19 @@ origin   git@gitlab.tudelft.nl:alflin/recipes.git (push)
 Before Alfredo can connect to a remote repository, he needs to set up a way for his computer
 to authenticate with GitLab so it knows it's him trying to connect to his remote repository.
 
-We are going to set up the method that is commonly used by many different services to authenticate
-access on the command line. This method is called Secure Shell Protocol (SSH). SSH is a cryptographic
-network protocol that allows secure communication between computers using an otherwise insecure
-network.
+We are going to set up the method that is commonly used by many different services to authenticate access on the
+command line. This method is called Secure Shell Protocol (SSH). SSH is a cryptographic network protocol that allows
+secure communication between computers using an otherwise insecure network.
 
-SSH uses what is called a key pair. This is two keys that work together to validate access. One key
-is publicly known and called the public key, and the other key called the private key is kept private.
-Very descriptive names.
+SSH uses what is called a key pair. This is two keys that work together to validate access. One key is publicly known
+and called the public key, and the other key called the private key is kept private. Very descriptive names.
 
-You can think of the public key as a padlock, and only you have the key (the private key) to open it.
-You use the public key where you want a secure method of communication, such as your GitLab account.
-You give this padlock, or public key, to GitLab and say "lock the communications to my account with
-this so that only computers that have my private key can unlock communications and send git commands
-as my GitLab account."
+You can think of the public key as a padlock, and only you have the key (the private key) to open it. You use the public
+key where you want a secure method of communication, such as your GitLab account. You give this padlock, or public key,
+to GitLab and say "lock the communications to my account with this so that only computers that have my private key can
+unlock communications and send git commands as my GitLab account."
 
-What we will do now is the minimum required to set up the SSH keys and add the public key to a GitLab
-account.
+What we will do now is the minimum required to set up the SSH keys and add the public key to a GitLab account.
 
 The first thing we are going to do is check if this has already been done on the computer you're on.
 Because generally speaking, this setup only needs to happen once and then you can forget about it.
@@ -382,9 +387,6 @@ algorithm to use and `-C` attaches a comment to the key (here, Alfredo's email):
 $ ssh-keygen -t ed25519 -C "a.linguini@ratatouille.fr"
 ```
 
-If you are using a legacy system that doesn't support the Ed25519 algorithm, use:
-`$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`
-
 ```output
 Generating public/private ed25519 key pair.
 Enter file in which to save the key (/c/Users/Alfredo/.ssh/id_ed25519):
@@ -397,17 +399,12 @@ Created directory '/c/Users/Alfredo/.ssh'.
 Enter passphrase (empty for no passphrase):
 ```
 
-Now, it is prompting Alfredo for a passphrase. Since he is using his kitchen's laptop that other
-people sometimes have access to, he wants to create a passphrase. Be sure to use something memorable
-or save your passphrase somewhere, as there is no "reset my password" option.
-Note that, when typing a passphrase on a terminal, there won't be any visual feedback of your typing.
-This is normal: your passphrase will be recorded even if you see nothing changing on your screen.
+Now, it is prompting Alfredo for a passphrase. Alfredo will be using this key from his own laptop, from his
+password-protected account, so this extra security layer of having a passkey for this SSH key is not necessary
+at this point, so he can leave it empty - by pressing <kbd>Enter</kbd> twice.
 
-```output
-Enter same passphrase again:
-```
 
-After entering the same passphrase a second time, we receive the confirmation
+At this point we should receive the confirmation that the key has been created:
 
 ```output
 Your identification has been saved in /c/Users/Alfredo/.ssh/id_ed25519
@@ -455,9 +452,8 @@ ssh -T git@gitlab.tudelft.nl
 ```
 
 ```output
-The authenticity of host 'gitlab.tudelft.nl (192.30.255.112)' can't be established.
-RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
-This key is not known by any other names
+The authenticity of host 'gitlab.tudelft.nl (192.30.255.112)' can't be established. RSA key fingerprint
+is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8. This key is not known by any other names
 Are you sure you want to continue connecting (yes/no/[fingerprint])? y
 Please type 'yes', 'no' or the fingerprint: yes
 Warning: Permanently added 'gitlab.tudelft.nl' (RSA) to the list of known hosts.
@@ -477,8 +473,8 @@ cat ~/.ssh/id_ed25519.pub
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmRA3d51X0uu9wXek559gfn6UFNF69yZjChyBIU2qKI a.linguini@ratatouille.fr
 ```
 
-Now, going to the GitLab page in your browser, click on your profile icon in the top right corner
-of the left panel, then click on the `SSH Keys` link under `User Settings` in the same panel:
+Now, going to the GitLab page in your browser, click on your profile icon in the top right corner of the left panel,
+select `Edit profile` from the menu, then click on the `SSH Keys` link under `User Settings` in the same panel:
 
 ![](fig/gitlab_ssh_keys.jpg){alt='The SSH Keys page in GitLab'}
 
@@ -513,9 +509,6 @@ our local repository to the repository on GitLab:
 $ git push origin main
 ```
 
-Since Alfredo set up a passphrase, it will prompt him for it. If you completed advanced settings
-for your authentication, it will not prompt for a passphrase.
-
 ```output
 Enumerating objects: 16, done.
 Counting objects: 100% (16/16), done.
@@ -527,33 +520,6 @@ remote: Resolving deltas: 100% (2/2), done.
 To https://gitlab.tudelft.nl/alflin/recipes.git
  * [new branch]      main -> main
 ```
-
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-
-## Password Managers
-
-If your operating system has a password manager configured, `git push` will
-try to use it when it needs your username and password.  For example, this
-is the default behavior for Git Bash on Windows. If you want to type your
-username and password at the terminal instead of using a password manager,
-type:
-
-```bash
-$ unset SSH_ASKPASS
-```
-
-in the terminal, before you run `git push`.  Despite the name, [Git uses
-`SSH_ASKPASS` for all credential
-entry](https://git-scm.com/docs/gitcredentials#_requesting_credentials), so
-you may want to unset `SSH_ASKPASS` whether you are using Git via SSH or
-https.
-
-You may also want to add `unset SSH_ASKPASS` at the end of your `~/.bashrc`
-to make Git default to using the terminal for usernames and passwords.
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Our local and remote repositories are now in this state:
 
@@ -571,69 +537,86 @@ From https://gitlab.tudelft.nl/alflin/recipes
 Already up-to-date.
 ```
 
-Pulling has no effect in this case because the two repositories are already
-synchronized.  If someone else had pushed some changes to the repository on
-GitLab, though, this command would download them to our local repository.
+Pulling has no effect in this case because the two repositories are already synchronized. If someone else had pushed
+some changes to the repository on GitLab, though, this command would download them to our local repository.
 
 
-## Adding Project Members
+## Adding/Removing Project Members
 
-So far, each of you has created a GitLab project that no one but you can
-contribute to; depending on the visibility setting, no one but you might be able
-to even see it.
+So far, each of you has created a GitLab project that no one but you can contribute to; depending on the visibility
+setting, no one but you might be able to even see it.
 
-Git and GitLab can be and is used for one-person projects. But we want our
-colleagues to contribute to our recipes collection. To achieve this, we will grant others access
-to our GitLab project.
+Git and GitLab can be and is used for one-person projects. But we want our colleagues to contribute to our recipes
+collection. To achieve this, we will grant others access to our GitLab project.
 
-Using the menu on the left side of the project homepage (or nearly any other
-project page), we navigate to the project members page hovering over or clicking
-on "Manage" and then clicking on "Members" in the submenu. The
+Using the menu on the left side of the project homepage (or nearly any other project page), we navigate to the project
+members page hovering over or clicking on "Manage" and then clicking on "Members" in the submenu. The
 project member page should look similar to the following screenshot:
 
-![Project members page](fig/initial-members.png){alt='Project Members page'}
+![Project members page](fig/gitlab-initial-members.jpg){alt='Project Members page'}
 
-On the page we can see the page title, "Project members", three buttons to the
-left of the title, and a filterable table of members, currently only listing
-ourselves.
+On the page we can see the page title, "Project members", three buttons to the left of the title, and a filterable
+table of members, currently only listing ourselves.
 
-The table shows our full name and account name, why we are a member of this project,
-what our maximum role is–more on that in a bit–, when we got access—at the moment we
-created the project—, a disabled membership expiration date widget, and three dates on
-our activity.
+The table shows our full name and account name, why we are a member of this project, what our maximum role is–more on
+that in a bit–, when we got access—at the moment we created the project—, a disabled membership expiration date widget,
+and three dates on our activity.
 
-For practice we will all add an instructor to our project and remove them again
-right away. Click the button labeled "Invite members", type in the username your
-instructors provided you with into the search field, make sure that "Guest" is
-selected as a role, and click the button labeled "Invite".
+For practice we will all add an instructor to our project and remove them again right away, as shown in the picture below:
 
-Your instructor should now be listed next to you in the table.
-Unlike in your row, you can change the role and the expiration date of this new entry.
+![](fig/gitlab_add_member.jpg){alt='Adding a new member to your GitLab project'}
 
-The role determines what the member is allowed to do in the project.
-An owner has full rights, a guest almost none.
-GitLab’s handbook gives a detailed [overview](https://docs.gitlab.com/ee/user/permissions.html) of
-the different roles’ permissions.
+Click the button labeled "Invite members", type in the username your instructors provided you with into the search
+field, make sure that "Guest" is selected as a role, and click the button labeled "Invite".
 
-Now, we are going to remove the instructor from your project’s members again.
-Click the three dots on the right in the instructor’s row, then click on "Remove member", and
-finally click the button of the same name in the popup dialog.
-The page reloads itself and the entry vanishes from the table.
+Your instructor should now be listed next to you in the table. Unlike in your own row, you can change the role and
+the expiration date of this new entry.
+
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+##### Project member roles
+
+In GitLab, every project member is assigned a role that defines their level of access and available actions within the
+project. Common roles include **Guest**, **Developer**, and **Owner**. Each role comes with specific permissions —
+for example, **Maintainers** can push code, while **Owners** have full control over the project. Choosing the right role
+ensures proper collaboration while protecting critical project settings. You can consult GitLab’s handbook for a
+detailed [overview](https://docs.gitlab.com/ee/user/permissions.html) of the different roles’ permissions.
+The following roles are commonly used in GitLab software projects:
+
+- **Guest**
+  - Can view project files, and read issues and comments
+  - Cannot push git commits
+  - Ideal for external stakeholders or casual viewers
+- **Maintainer**
+  - Can push git commits
+  - Can manage advanced git and project workflows, such as branches and pipelines
+  - Cannot delete the project
+- **Owner**
+  - Full control over everything in the project
+  - Can manage settings, members, and even delete the project
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+The owner of the project can add as well as remove project members. Removing project members is done from the members
+list like this:
+
+![Removing project members](fig/gitlab_remove_member.jpg){alt='Removing project members'}
 
 
 ::: challenge
 
-##### Adding Members
+##### Adding project members
 
-Get into pairs and add each other with the role "Maintainer" to your projects.
+Get into pairs and add each other with the role "Maintainer" to your projects, and set the
+expiration for this membership to one month from now.
 
 The "Maintainer" role grants just enough permissions for all the collaborative
 tasks we will practice in this lesson.
 
-This exercise should take about 5 minutes.
+This exercise should take about 3 minutes.
 
 :::
-
 
 
 

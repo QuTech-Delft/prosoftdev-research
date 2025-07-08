@@ -6,37 +6,45 @@ exercises: 20
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- "Set up a Python virtual environment for our software project using `venv` and `pip`."
-- "Run our software from the command line."
+- Understand the problems Python virtual environments help solve
+- Set up a Python virtual environment for our software project using `venv` and `pip`.
+- Managing external packages with `pip`
+- Exporting/Importing Virtual Environments
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- "What are virtual environments in software development and why you should use them?"
-- "How can we manage Python virtual environments and external (third-party) libraries?"
+- What are virtual environments in software development and why you should use them?
+- How can we manage Python virtual environments and external (third-party) libraries?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
 ## Introduction
-Python applications often use external libraries that don’t come as part of the standard Python distribution.
-This means that you will have to use a *package manager* tool to install them on your system.
-Applications will also sometimes need a specific version of an external library (e.g. because they were written to
-work with feature, class, or function that may have been updated in more recent versions), or a specific version of
-Python interpreter. This means that each Python application you work with may require a different setup
-and a set of dependencies so it is useful to be able to keep these configurations
-separate to avoid confusion between projects. The solution for this problem is to create a self-contained
-**virtual environment** per project, which contains a particular version of Python installation
-plus a number of additional external libraries.
 
-Virtual environments are not just a feature of Python -
-most modern programming languages use a similar mechanism to isolate libraries or dependencies for a specific project,
-making it easier to develop, run, test and share code with others. Some examples include Bundler for Ruby, Conan for
-C++, or Maven with classpath for Java. This can also be achieved with more generic package managers like Spack,
-which is used extensively in HPC settings to resolve complex dependencies. In this episode, we learn how to set up a
-virtual environment to develop our code and manage our external dependencies.
+Up to now in this course we have focused on version control and `git`. We have seen how these
+tools provide isolation, reproducibility, and control over changes at the *source code* level.
+
+However a running program is more than just its source code; the environment/OS where it runs,
+the version of the programming language, as well as the external libraries it is using can also
+have a significant influence over its results.
+
+In this episode we will pivot away from version control, and start looking at these other "externalities"
+that influence program behaviour. The goal, as with version control is to provide tools that
+allow us to control how these "externalities" influence our running programs, and provide
+the same isolation, reproducibility, and control over changes that version control can
+provide over our source code.
+
+We will focus our discussion on Python and its tools ecosystem, as this is the language
+mostly used at QuTech and in the broader scientific community.
+
+In the context of Python, the widely used solution to managing all the externalities mention above
+is *Python virtual environments*. For the rest of this episode we will explore ways to
+use these virtual environments so we can manage our running program "externalities" pretty much
+the same way we manage its source code via version control and git.
+
 
 ## Python Virtual Environments
 
@@ -50,26 +58,19 @@ projects on your machine that may require different versions of Python or extern
 
 As more external libraries are added to your Python project over time, you can add them to its specific virtual
 environment and avoid a great deal of confusion by having separate (smaller) virtual environments for each project
-rather than one huge global environment with potential package version clashes.
-Another big motivator for using virtual environments is that they make sharing your code with others much easier
-(as we will see shortly). Here are some typical scenarios where
-the use of virtual environments is highly recommended (almost unavoidable):
+rather than one huge global environment with potential package version clashes. Another big motivator for using
+virtual environments is that they make sharing your code with others much easier (as we will see shortly). Here
+are some typical scenarios where the use of virtual environments is highly recommended (almost unavoidable):
 
-- You have an older project that only works under Python 2.
-  You do not have the time to migrate the project to Python 3
+- You have an older project that only works under Python 2. You do not have the time to migrate the project to Python 3
   or it may not even be possible as some of the third party dependencies
-  are not available under Python 3.
-  You have to start another project under Python 3.
-  The best way to do this on a single machine is
-  to set up two separate Python virtual environments.
-- One of your Python 3 projects is locked to use
-  a particular older version of a third party dependency.
-  You cannot use the latest version of the dependency as it breaks things in your project.
-  In a separate branch of your project,
-  you want to try and fix problems introduced by the new version of the dependency
-  without affecting the working version of your project.
-  You need to set up a separate virtual environment for your branch to
-  'isolate' your code while testing the new feature.
+  are not available under Python 3. You have to start another project under Python 3.
+  The best way to do this on a single machine is to set up two separate Python virtual environments.
+- One of your Python 3 projects is locked to use a particular older version of a third party library.
+  You cannot use the latest version of the dependency as it breaks things in your project. In a separate branch of
+  your project, you want to try and fix problems introduced by the new version of the dependency
+  without affecting the working version of your project. You need to set up a separate virtual environment for
+  your branch to 'isolate' your code while testing the new feature.
 
 You do not have to worry too much about specific versions of external libraries
 that your project depends on most of the time. Virtual environments also enable you to always use
@@ -85,7 +86,7 @@ from different virtual environments.
 
 ## Tools for Managing Python Virtual Environments and External Packages
 
-There are several commonly used command line tools for managing Python virtual environments:
+There are several commonly used command line tools for creating and managing Python virtual environments:
 
 - `venv`, available by default from the standard `Python` distribution from `Python 3.3+`
 - `virtualenv`, needs to be installed separately but supports both `Python 2.7+` and `Python 3.3+`versions
@@ -94,53 +95,43 @@ There are several commonly used command line tools for managing Python virtual e
   (also included as part of the Anaconda Python distribution often used by the scientific community)
 - `poetry`, a modern Python packaging tool which handles virtual environments automatically
 
-While there are pros and cons for using each of the above, all will do the job of managing Python virtual environments
-for you and it may be a matter of personal preference which one you go for. In this course, we will use `venv` to
-create and manage our virtual environment (which is the preferred way for Python 3.3+).
-The upside is that `venv` virtual environments created from the command line are
-also recognised and picked up automatically by PyCharm IDE, as we will see in the next episode.
-
 Part of managing your (virtual) working environment involves installing, updating and removing external packages on
-your system. The Python package manager tool `pip` is most commonly used for this -
-it interacts and obtains the packages from the central repository called
-[Python Package Index (PyPI)](https://pypi.org/).
-`pip` can now be used with all Python distributions (including Anaconda).
+your system. Here as well there are plenty of tools and technologies to choose from:
 
-::: callout
-### A Note on `Anaconda` and `conda`
-Anaconda is an open source Python distribution commonly used for scientific programming -
-it conveniently installs Python, package and environment management `conda`,
-and a  number of commonly used scientific computing packages so you do not have to obtain them separately.
-`conda` is an independent command line tool
-(available separately from the Anaconda distribution too) with dual functionality:
-(1) it is a package manager that helps you find Python packages
-from remote package repositories and install them on your system, and
-(2) it is also a virtual environment manager. So, you can use `conda` for both tasks instead of using `venv` and `pip`.
-:::
+- `pip` - the most commonly used Python package manager - it interacts and obtains the
+packages from the central repository called [Python Package Index (PyPI)](https://pypi.org/)
+- `easy_install` - a legacy package manager now largely replaced by `pip`
+- `pdm` - a modern Python package manager that follows the latest Python community guidelines, but doesn't enforce virtual environments
+- `uv` - a new and very fast Python package manager intended to eventually replace `pip`
+- `conda`
+- `poetry`
 
 ### Many Tools for the Job
 
 Installing and managing Python distributions, external libraries and virtual environments is, well, complex.
 There is an abundance of tools for each task, each with its advantages and disadvantages,
 and there are different ways to achieve the same effect (and even different ways to install the same tool!).
-Note that each Python distribution comes with its own version of `pip` -
-and if you have several Python versions installed you have to be extra careful to
-use the correct `pip` to manage external packages for that Python version.
+Note that each Python distribution comes with its own version of `pip` - and if you have several Python versions
+installed you have to be extra careful to use the correct `pip` to manage external packages for that Python version.
 
-`venv` and `pip` are considered the *de facto* standards for virtual environment
-and package management for Python 3. However, the advantages of using Anaconda and `conda` are that
-you get (most of the) packages needed for scientific code development included with the distribution.
-If you are only collaborating with others who are also using Anaconda, you may find that `conda` satisfies all your
-needs. It is good, however, to be aware of all these tools, and use them accordingly. As you become more familiar with
-them you will realise that equivalent tools work in a similar way even though the command syntax may be different
-(and that there are equivalent tools for other programming languages too to which your knowledge can be ported).
+For a novice in this area it is very easy to quickly get overwhelmed, leading to situation like this:
 
 ![](../fig/python-environment-hell.png)
 <p style="text-align: center;"> Python Environment Hell <br>
 From <a href="https://xkcd.com/1987/" target="_blank">XKCD</a> (Creative Commons Attribution-NonCommercial 2.5 License)</p>
 
-In the next sections we will look at how to manage virtual environments from the command line
-using `venv` and manage packages using `pip`.
+In order to avoid this "Python environment hell" problem, in this course we will only focus on `venv` and `pip`.
+Only focusing on these has several advantages, especially for novice users:
+
+- `venv` and `pip` have been around for quite a while, they are widely used, are very stable, and there is ample online
+documentation for both of them.
+- `venv` and `pip` are quite low-level, and minimalistic, so you do not have to deal with
+the feature explosion and bloatware that other tools may experience.
+- finally, many of the more high-level tools use the functionality provided by `venv` and `pip` as building blocks,
+so having a good understanding of these provides a solid foundation to expand to more sophisticated tools.
+
+In the next sections we will look at how to use `venv` and `pip` from the command line, similar to the approach
+we took when learning `git`
 
 ::: callout
 ### Making Sure You Can Invoke Python
@@ -151,8 +142,27 @@ $ python3 --version # on Mac/Linux
 $ python --version # on Windows — Windows installation comes with a python.exe file rather than a python3.exe file
 ```
 
-If you are using Windows and invoking `python` command causes your Git Bash terminal to hang with no error message or output, you may
-need to create an alias for the python executable `python.exe`, as explained in the [troubleshooting section](../common-issues/index.html#python-hangs-in-git-bash).
+:::
+
+::: callout
+
+### Python Hangs in Git Bash on Windows
+
+If you are using Windows and invoking `python` command causes your Git Bash terminal to hang with no error
+message or output, you may have to use `winpty` - a Windows software package providing an interface similar to a
+Unix pty-master for communicating with Windows command line tools. Inside the shell type:
+
+```bash
+alias python="winpty python.exe"
+```
+
+This alias will be valid for the duration of the shell session. For a more permanent solution, from the shell do:
+
+```bash
+$ echo "alias python='winpty python.exe'" >> ~/.bashrc
+$ source ~/.bashrc
+```
+
 :::
 
 ## A Motivating Example
@@ -201,7 +211,7 @@ and for this, we will create a new Python virtual environment.
 Creating a virtual environment with `venv` is done by executing the following command:
 
 ```bash
-$ python3 -m venv /path/to/new/virtual/environment
+$ python -m venv /path/to/new/virtual/environment
 ```
 
 In Windows (GitBash), you can do the same with the following command:
@@ -216,23 +226,21 @@ your software project so they are co-located. This will create the target direct
 (and any parent directories that don’t exist already).
 
 ::: callout
-### What is `-m` Flag in `python3` Command?
-The Python `-m` flag means "module" and tells the Python interpreter to treat what follows `-m`
-as the name of a module and not as a single, executable program with the same name.
-Some modules (such as `venv` or `pip`) have main entry points and the `-m` flag can be used to invoke them on the
-command line via the `python` command. The main difference between running such modules as standalone programs
-(e.g. executing "venv" by running the `venv` command directly) versus using `python3 -m` command seems to be that
-with latter you are in full control of which Python module will be invoked
-(the one that came with your environment's Python interpreter vs.
-some other version you may have on your system). This makes it a more reliable way to set things up correctly
-and avoid issues that could prove difficult to trace and debug.
+### What is `-m` Flag in `python` Command?
+The Python `-m` flag means "module" and tells the Python interpreter to treat what follows `-m` as the name of a module
+and not as a single, executable program with the same name. Some modules (such as `venv` or `pip`) have main entry
+points and the `-m` flag can be used to invoke them on the command line via the `python` command. The main difference
+between running such modules as standalone programs (e.g. executing "venv" by running the `venv` command directly)
+versus using `python -m` command is that with the latter you are in full control of which Python module will be invoked
+(the one that came with your environment's Python interpreter vs. some other version you may have on your system).
+This makes it a more reliable way to set things up correctly and avoid issues that could prove difficult to trace and debug.
 :::
 
 For our project let us create a virtual environment called "venv".
 First, ensure you are within the project root directory (*sine_wave*), then:
 
 ```bash
-$ python3 -m venv venv
+$ python -m venv venv
 ```
 
 If you list the contents of the newly created directory "venv", on a Mac or Linux system
@@ -250,14 +258,11 @@ drwxr-xr-x   3 alex  staff   96  5 Oct 11:47 lib
 -rw-r--r--   1 alex  staff   90  5 Oct 11:47 pyvenv.cfg
 ```
 
-So, running the `python3 -m venv venv` command created the target directory called "venv"
-containing:
+So, running the `python -m venv venv` command created the target directory called "venv" containing:
 
-- `pyvenv.cfg` configuration file
-  with a home key pointing to the Python installation from which the command was run,
-- `bin` subdirectory (called `Scripts` on Windows)
-  containing a symlink of the Python interpreter binary used to create the environment
-  and the standard Python library,
+- `pyvenv.cfg` configuration file with a home key pointing to the Python installation from which the command was run,
+- `bin` subdirectory (called `Scripts` on Windows) containing a symlink of the Python interpreter binary used to
+   create the environment and the standard Python library,
 - `lib/pythonX.Y/site-packages` subdirectory (called `Lib\site-packages` on Windows)
   to contain its own independent set of installed Python packages isolated from other projects, and
 - various other configuration and supporting files and subdirectories.
@@ -275,10 +280,9 @@ then use the same name and the current one is determined by the context of the p
 A (non-conventional) alternative is to use your project name for the name of the virtual environment,
 with the downside that there is nothing to indicate that such a directory contains a virtual environment.
 
-In our case, we have settled to use the name "venv" instead of ".venv" since it is not a hidden directory and we want
-it to be displayed by the command line when listing directory contents (the "." in its name that would, by convention,
-make it hidden). In the future, you will decide what naming convention works best for you.
-Here are some references for each of the naming conventions:
+For this episode we will use the name "venv" instead of ".venv" since it is not a hidden directory and we want
+it to be displayed by the command line when listing directory contents. In the future, you should decide what naming
+convention works best for you. Here are some references for each of the naming conventions:
 
 - [The Hitchhiker's Guide to Python](https://docs.python-guide.org/dev/virtualenvs/)
   notes that "venv" is the general convention used globally
@@ -314,7 +318,7 @@ You can now verify you are using your virtual environment's version of Python:
 ```
 
 ```output
-Python 3.12.0
+Python 3.12.9
 ```
 
 When you’re done working on your project, you can exit the environment with:
@@ -323,8 +327,7 @@ When you’re done working on your project, you can exit the environment with:
 (venv) $ deactivate
 ```
 
-If you have just done the `deactivate`,
-ensure you reactivate the environment ready for the next part:
+If you have just done the `deactivate`, ensure you reactivate the environment ready for the next part:
 
 ```bash
 $ source venv/bin/activate
@@ -334,18 +337,18 @@ $ source venv/bin/activate
 ::: callout
 ### Python Within A Virtual Environment
 
-Within an active virtual environment,
-commands `python3` and `python` should both refer to the version of Python 3
-you created the environment with (note you may have multiple Python 3 versions installed).
+Within an active virtual environment, commands like `python3` and `python` should both refer to the
+version of Python 3 you created the environment with (note you may have multiple Python 3 versions installed).
 
-However, on some machines with Python 2 installed,
-`python` command may still be hardwired to the copy of Python 2
-installed outside of the virtual environment - this can cause errors and confusion.
+However, on some machines with Python 2 installed, `python` command may still be hardwired to the
+copy of Python 2 installed outside of the virtual environment - this can cause errors and confusion.
 
-You can always check which version of Python you are using in your virtual environment
-with the command `which python` to be absolutely sure.
-We continue using `python3` in this material to avoid mistakes,
-but the command `python` may work for you as expected.
+To make it even more confusing, `python3` may also not work on newer versions of Windows (where
+Python 2 is deemed obsolete - hence `python` deemed to be sufficient)
+
+You can always check which version of Python you are using in your virtual environment with the
+command `which python` to be absolutely sure. We will be using `python` in this material since this should work
+on most modern systems, but if this points to Python 2 on your system you may have to use `python3`.
 :::
 
 
@@ -364,54 +367,48 @@ ModuleNotFoundError: No module named 'numpy'
 ```
 
 As we can see in the code ('includes'), our code depends on a number of external libraries -
-`numpy`, `matplotlib`, and `python-dateutil`.
-In order for the code to run on your machine, you need to install these two dependencies into your virtual environment.
+`numpy`, `matplotlib`, and `python-dateutil`. In order for the code to run on your machine, you need to
+install these three dependencies into your virtual environment.
 
-To install the latest version of a package with `pip` you use pip's `install` command and specify the package’s name, e.g.:
+To install the latest version of a package with `pip` you use pip's `install` command and specify the
+package’s name, e.g.:
 
 ```bash
-(venv) $ python3 -m pip install numpy
-(venv) $ python3 -m pip install matplotlib
-(venv) $ python3 -m pip install python-dateutil
+(venv) $ python -m pip install numpy
+(venv) $ python -m pip install matplotlib
+(venv) $ python -m pip install python-dateutil
 ```
 
 or like this to install multiple packages at once for short:
 
 ```bash
-(venv) $ python3 -m pip install numpy matplotlib python-dateutil
+(venv) $ python -m pip install numpy matplotlib python-dateutil
 ```
 
 ::: callout
-#### How About `pip3 install <package-name>` Command?
-You may have seen or used the `pip3 install <package-name>` command in the past, which is shorter
-and perhaps more intuitive than `python3 -m pip install`. However, the
+#### How About `pip install <package-name>` Command?
+You may have seen or used the `pip install <package-name>` command in the past, which is shorter
+and perhaps more intuitive than `python -m pip install`. However, the
 [official Pip documentation](https://pip.pypa.io/en/stable/user_guide/#running-pip) recommends
-`python3 -m pip install` and core Python developer Brett Cannon offers a
+`python -m pip install` and core Python developer Brett Cannon offers a
 [more detailed explanation](https://snarky.ca/why-you-should-use-python-m-pip/)
-of edge cases when the two commands may produce different results and why `python3 -m pip install`
-is recommended. In this material, we will use `python3 -m` whenever we have to invoke a Python
+of edge cases when the two commands may produce different results and why `python -m pip install`
+is recommended. In this material, we will use `python -m` whenever we have to invoke a Python
 module from command line.
 :::
 
-If you run the `python3 -m pip install` command on a package that is already installed,
+If you run the `python -m pip install` command on a package that is already installed,
 `pip` will notice this and do nothing.
-
-To install a specific version of a Python package give the package name followed by `==` and the version number,
-e.g. `python3 -m pip install numpy==1.21.1`.
-
-To specify a minimum version of a Python package, you can do `python3 -m pip install numpy>=1.20`.
-
-To upgrade a package to the latest version, e.g. `python3 -m pip install --upgrade numpy`.
 
 To display information about a particular installed package do:
 
 ```bash
-(venv) $ python3 -m pip show numpy
+(venv) $ python -m pip show numpy
 ```
 
 ```output
 Name: numpy
-Version: 2.2.1
+Version: 2.2.3
 Summary: Fundamental package for array computing in Python
 Home-page:
 Author: Travis E. Oliphant et al.
@@ -421,10 +418,25 @@ License: Copyright (c) 2005-2024, NumPy Developers.
 ...
 ```
 
-To list all packages installed with `pip` (in your current virtual environment):
+::: callout
+
+#### `pip install` Flags
+
+`pip install` allows you to precisely control the version of the library it will install through its command flags.
+Some of the most commonly-used flags are shown here:
+
+- To install a specific version of a Python package give the package name followed by `==` and the version number,
+e.g. `python -m pip install numpy==2.2.3`.
+- To specify a minimum version of a Python package, you can do `python -m pip install numpy>=1.20`.
+- To upgrade a package to the latest version, e.g. `python3 -m pip install --upgrade numpy`.
+
+:::
+
+Once packages have been installed, it is often useful to get an overview of everything present in a virtual environment.
+For this, `pip` provides a handy command called `list`:
 
 ```bash
-(venv) $ python3 -m pip list
+(venv) $ python -m pip list
 ```
 
 ```output
@@ -444,21 +456,63 @@ python-dateutil 2.9.0.post0
 six             1.17.0
 ```
 
-To uninstall a package installed in the virtual environment do: `python3 -m pip uninstall <package-name>`.
+Finally, installed packages can be un-installed using the `uninstall` command: `python -m pip uninstall <package-name>`.
 You can also supply a list of packages to uninstall at the same time.
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+##### Practice various `pip` operations
+
+For this challenge create a new virtual environment `venv-scratch` on your working directory
+
+- Activate the new virtual environment
+- Install numpy version 1.0.3
+- Upgrade numpy to version 1.6.1
+- Upgrade numpy to version 1.26.1
+- Upgrade numpy to version 1.26.3
+- Upgrade numpy to the latest version
+- Uninstall numpy from `venv-scratch`
+- Remove the `venv-scratch` virtual environment
+
+
+:::::::::::::::  solution
+
+##### Solution
+
+- Numpy version 1.0.3 does not exist - when you try to install it `pip` will give an error message
+  This shows you that `pip` is robust - it will not mess up if you try to uninstall non-existing package versions.
+- Numpy version 1.6.1 *does* exist, but it will not install with the Python 3.12 version that you are using.
+  `pip` will attempt the installation, and fail in the process. This again shows that `pip` is robust
+  even when it fails in the middle of an installation it is able to successfully rollback.
+- `python -m pip install numpy==1.26.1` - should succeed
+- `python -m pip install numpy==1.26.3` - should succeed
+- `python -m pip install --upgrade numpy` - should succeed - and upgrade *numpy* to its latest version (2.2.3)
+- `python -m pip uninstall numpy` - should succeed
+- removing a Python virtual environment is as easy as removing its root folder, so:
+
+```bash
+(venv-scratch) $ deactivate
+$ rm -rf venv-scratch
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 
 ### Exporting/Importing Virtual Environments Using `pip`
 
-You are collaborating on a project with a team so, naturally, you will want to share your environment with your collaborators
-so they can easily 'clone' your software project with all of its dependencies and everyone can replicate equivalent virtual environments on their machines.
-`pip` has a handy way of exporting, saving and sharing virtual environments.
+You are collaborating on a project with a team so, naturally, you will want to share your environment with your
+collaborators so they can easily 'clone' your software project with all of its dependencies and everyone can replicate
+equivalent virtual environments on their machines. `pip` has a handy way of exporting, saving and sharing
+virtual environments.
 
-To export your active environment -
-use `python3 -m pip freeze` command to produce a list of packages installed in the virtual environment.
-A common convention is to put this list in a `requirements.txt` file:
+To export your active environment - use `python3 -m pip freeze` command to produce a list of packages installed in the
+virtual environment. A common convention is to put this list in a `requirements.txt` file:
 
 ```bash
-(venv) $ python3 -m pip freeze > requirements.txt
+(venv) $ python -m pip freeze > requirements.txt
 (venv) $ cat requirements.txt
 ```
 
@@ -476,30 +530,42 @@ python-dateutil==2.9.0.post0
 six==1.17.0
 ```
 
-The first of the above commands will create a `requirements.txt` file in your current directory.
-Yours may look a little different, depending on the version of the packages you have installed,
-as well as any differences in the packages that they themselves use.
+The first of the above commands will create a `requirements.txt` file in your current directory. Yours may look a little
+different, depending on the version of the packages you have installed, as well as any differences in the packages
+that they themselves use.
 
-The `requirements.txt` file can then be committed to a version control system
-(we will see how to do this using Git in one of the following episodes)
-and get shipped as part of your software and shared with collaborators and/or users.
-They can then replicate your environment
-and install all the necessary packages from the project root as follows:
+The `requirements.txt` file can then be added/committed to the Git repo for your project and get shipped as part of
+your software and shared with collaborators and/or users.
+
+To see how this `requirements.txt` can be used to re-create a virtual environment, let us practice creating an
+identical copy of our first virtual environment in a different directory. Let us first create a new
+virtual environment - `venv_copy` - like this:
 
 ```bash
-(venv) $ python3 -m pip install -r requirements.txt
+$ deactivate
+$ cd ..
+$ mkdir venv_copy
+$ cd venv_copy
+$ python -m venv venv_copy
+$ source venv_copy/bin/activate
+(venv_copy) $
 ```
 
-As your project grows - you may need to update your environment for a variety of reasons.
-For example, one of your project's dependencies has just released a new version
-(dependency version number update),
-you need an additional package for data analysis (adding a new dependency)
-or you have found a better package and no longer need the older package
-(adding a new and removing an old dependency). What you need to do in this case
-(apart from installing the new and removing the packages that are no longer needed
-from your virtual environment) is update the contents of the `requirements.txt` file accordingly
-by re-issuing `pip freeze` command and propagate the updated `requirements.txt` file to your collaborators
-via your code sharing platform (e.g. GitHub).
+They can then replicate your original environment and install all the original packages by first
+copying the `requirements.txt` to the new virtual environment root directory, and then running
+a version of the `pip install` command:
+
+```bash
+(venv_copy) $ python -m pip install -r requirements.txt
+```
+
+As your project grows - you may need to update your environment for a variety of reasons. For example, one of your
+project's dependencies has just released a new version (dependency version number update), you need an additional
+package for data analysis (adding a new dependency) or you have found a better package and no longer need the older
+package (adding a new and removing an old dependency). What you need to do in this case (apart from installing the new
+and removing the packages that are no longer needed from your virtual environment) is update the contents of the
+`requirements.txt` file accordingly by re-issuing `pip freeze` command and propagate the updated `requirements.txt`
+file to your collaborators via your code sharing platform (e.g. GitLab).
 
 ::: callout
 #### Official Documentation
@@ -510,11 +576,11 @@ Also check out the guide
 ["Installing packages using `pip` and virtual environments"](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/#installing-packages-using-pip-and-virtual-environments).
 :::
 
-## Running Python Scripts From Command Line
+## Putting it All Together
 Congratulations! Your environment is now activated and set up to run our `plot_sine_wave.py` program from the command line.
 
 You should already be located in the root of the `sine_wave` directory (if not, please navigate to it from the command line now).
-To run the program, type the following command:
+When you run this program from the command line:
 
 ```bash
 (venv) $ python plot_sine_wave.py
@@ -548,8 +614,8 @@ Then try to run *plot_sine_wave.py* in this new environment. Does it work? Modif
 - "Use `pip` to install and manage Python external (third-party) libraries."
 - "`pip` allows you to declare all dependencies for a project in a separate
 file (by convention called `requirements.txt`) which can be shared with collaborators/users and used to replicate a virtual environment."
-- "Use `python3 -m pip freeze > requirements.txt` to take snapshot of your project's dependencies."
-- "Use `python3 -m pip install -r requirements.txt` to replicate someone else's virtual environment on your machine from
+- "Use `python -m pip freeze > requirements.txt` to take snapshot of your project's dependencies."
+- "Use `python -m pip install -r requirements.txt` to replicate someone else's virtual environment on your machine from
 the `requirements.txt` file."
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
