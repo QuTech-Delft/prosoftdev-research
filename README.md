@@ -1,15 +1,18 @@
 # The Carpentries Workbench Template R Markdown Lesson
 
+hello
+
 This lesson is a template lesson that uses [The Carpentries Workbench][workbench].
 
 ## Note about lesson life cycle stage
+
 Although the `config.yaml` states the life cycle stage as pre-alpha, **the template is stable and ready to use**. The life cycle stage is preset to `"pre-alpha"` as this setting is appropriate for new lessons initialised using the template.
 
 ## Create a new repository from this template
 
-To use this template to start a new lesson repository, 
-make sure you're logged into Github.   
-Visit https://github.com/carpentries/workbench-template-rmd/generate
+To use this template to start a new lesson repository,
+make sure you're logged into Github.
+Visit <https://github.com/carpentries/workbench-template-rmd/generate>
 and follow the instructions.
 Checking the 'Include all branches' option will save some time waiting for the first website build
 when your new repository is initialised.
@@ -39,7 +42,7 @@ complete the initial configuration of a new lesson repository built from this te
    - `contact`
 1. **Annotate the repository** with site URL and topic tags:
    navigate back to the repository landing page and
-   click on the gear wheel/cog icon (similar to ⚙️) 
+   click on the gear wheel/cog icon (similar to ⚙️)
    at the top-right of the _About_ box.
    Check the "Use your GitHub Pages website" option,
    and [add some keywords and other annotations to describe your lesson](https://cdh.carpentries.org/the-carpentries-incubator.html#topic-tags)
@@ -50,24 +53,24 @@ complete the initial configuration of a new lesson repository built from this te
    - the human language the lesson is written in (e.g. `deutsch`)
 1. **Adjust the name of the `.Rproj` file.**
    It is simplest to make this match the name of the repository.
-1. **Adjust the 
+1. **Adjust the
    `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `LICENSE.md` files**
    as appropriate for your project.
-   -  `CODE_OF_CONDUCT.md`: 
+   - `CODE_OF_CONDUCT.md`:
       if you are using this template for a project outside The Carpentries,
-      you should adjust this file to describe 
+      you should adjust this file to describe
       who should be contacted with Code of Conduct reports,
       and how those reports will be handled.
-   -  `CONTRIBUTING.md`:
+   - `CONTRIBUTING.md`:
       depending on the current state and maturity of your project,
       the contents of the template Contributing Guide may not be appropriate.
       You should adjust the file to help guide contributors on how best
       to get involved and make an impact on your lesson.
-   -  `LICENSE.md`:
+   - `LICENSE.md`:
       in line with the terms of the CC-BY license,
-      you should ensure that the copyright information 
+      you should ensure that the copyright information
       provided in the license file is accurate for your project.
-1. **Update this README with 
+1. **Update this README with
    [relevant information about your lesson](https://carpentries.github.io/lesson-development-training/collaborating-newcomers.html#readme)**
    and delete this section.
 
